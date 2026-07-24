@@ -8,7 +8,7 @@ license: MIT
 
 ## 目标
 
-把已对齐的界面契约实现为符合项目约定、状态完整且可在真实浏览器验证的前端代码。优先复用现有组件、token 和数据契约；不重新发明视觉方向，也不把局部实现升级成长设计流程。
+把已对齐的界面契约实现为符合项目约定、状态完整且可在浏览器验证的前端代码。优先复用现有组件、token 和数据契约，不重新发明视觉方向。
 
 ## BRT interface
 
@@ -21,25 +21,28 @@ license: MIT
 
 ## 统一调用契约
 
-- 只处理 BRT interface 范围；不匹配时回 `ccdawn-brt` 或最具体 owner，不吞并产品设计、PR 审查或后端任务。
+- 只处理 BRT interface 范围；不匹配时回 `ccdawn-brt` 或最具体 owner。
 - 用户可见内容默认中文，只报告关键实现、证据和剩余风险；代码、命令、路径、错误原文、API/协议、skill 名和枚举保留原样；Route Out 仅以 BRT interface 为准，末行写 `下一步建议: <一个具体动作>`。
 
 ## 实施边界
 
 - 只在进入时已有用户 `APPROVED`，或有依据的 `PREVIEW_SKIPPED`，或收到包含该证据的独立 handoff 时主责。设计 owner 正在同一上下文执行“设计并实现”时不叠加本 skill。
-- `FAST_PATH`：既有模式下的文案、单组件小样式、明确状态或响应式修复，记录 `PREVIEW_SKIPPED` 依据后直接实现和验证。
-- `COMPACT_FLOW`：一个页面或多个紧密相关组件，必须消费已批准预览/设计；批准证据缺失时不自行猜测并修改正式 surface。
-- 出现跨页面信息架构、品牌方向或设计系统治理时停止扩张，转给对应设计 owner；不要在本 skill 内生成多套视觉提案。
+- `FAST_PATH`：既有模式下的明确小修，记录 `PREVIEW_SKIPPED` 依据后直接实现；`COMPACT_FLOW` 必须消费已批准预览/设计。
+- 出现跨页面信息架构、品牌方向或设计系统治理时停止扩张，转对应 owner。
 
 ## 预览证据闸门
 
-生产写入前检查：
+- 新页面或未确认的布局、交互、视觉、响应式、跨组件结果：`PREVIEW_REQUIRED`，转设计 owner 生成隔离网页。
+- 明确小修或既有模式机械改动：记录 `PREVIEW_SKIPPED`；用户已明确批准具体预览或设计稿：记录 `APPROVED` 对象与边界。
+- 截图、测试、UI Review 或一般“继续实现”不能替代对具体预览的用户批准；实现偏离时重新预览。
 
-- 新页面，或布局、交互、视觉方向、响应式结果、跨组件 UI 结果尚未确认：`PREVIEW_REQUIRED`，按主要未知量转 `ccdawn-ui-design` 或 `ccdawn-visual-design` 生成隔离网页。
-- 文案、明确小修、既有模式机械改动：`PREVIEW_SKIPPED`，保留一句可复核依据。
-- 用户已明确批准具体预览或设计稿：`APPROVED`，记录批准对象与关键边界后继续。
+## 条件操作指南
 
-UI Review 的 `READY_FOR_USER_APPROVAL`、截图存在、测试通过或一般“继续实现”不能替代对具体预览的用户批准。批准后实现偏离已确认结果时，重新进入预览闸门。
+先用依赖、样式入口和组件配置确认技术栈：
+
+- 使用 Tailwind CSS：实施前读取 [references/tailwind.md](references/tailwind.md)。
+- 使用 shadcn/ui 或存在 `components.json`：实施前读取 [references/shadcn.md](references/shadcn.md)；两者命中则都读取。
+- 指南不新增 owner、依赖、迁移权限或预览豁免。版本、项目定制或 CLI 冲突以项目事实和官方当前文档为准；解决方案若改变依赖、主题、组件 API、兼容性或批准结果，停止受影响写入并与用户讨论。
 
 ## 生产实现
 
@@ -54,7 +57,7 @@ UI Review 的 `READY_FOR_USER_APPROVAL`、截图存在、测试通过或一般�
 
 ## 验证
 
-- 浏览器验收由最终写入 owner 执行一次；不因先前经过设计 owner 而重复同一 route、状态和视口检查。
+- 浏览器验收由最终写入 owner 执行一次，不重复同一 route、状态和视口检查。
 - 先运行与改动最接近的测试、类型检查或构建检查；不机械运行全仓命令。
 - 可运行时使用本轮 Available skills 中的浏览器能力验证目标 route。至少检查主路径、受影响状态、相关桌面/移动视口、console 和明显溢出。
 - 截图只证明当时的视觉状态；交互、网络和状态同步需要对应运行证据。无法启动应用时明确列出未验证面。
