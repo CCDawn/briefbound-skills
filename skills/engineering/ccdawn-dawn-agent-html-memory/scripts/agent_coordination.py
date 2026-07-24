@@ -27,6 +27,7 @@ from coordination_model import (
     registry_path,
     register_agent,
     release_claim,
+    resolve_agent_id,
     resolve_coordination,
     respond_coordination,
     resume_agent,
@@ -276,12 +277,16 @@ def command_preflight(project_root: Path, args: argparse.Namespace) -> int:
 
 
 def command_join(project_root: Path, args: argparse.Namespace) -> int:
-    agent_id = args.agent_id or f"agent-{slugify(args.agent)}"
     agent = mutate_registry(
         project_root,
         lambda registry: register_agent(
             registry,
-            agent_id,
+            resolve_agent_id(
+                registry,
+                args.agent_id,
+                args.agent,
+                thread_id=args.thread_id,
+            ),
             args.agent,
             thread_id=args.thread_id,
             task=args.task,
@@ -320,7 +325,20 @@ def command_update(project_root: Path, args: argparse.Namespace) -> int:
         "thread_id": args.thread_id,
         "ttl_minutes": args.ttl_minutes,
     }
-    agent = mutate_registry(project_root, lambda registry: update_agent(registry, args.agent_id, **changes))
+    def apply_update(registry: dict) -> dict:
+        if args.state != "completed":
+            return update_agent(registry, args.agent_id, **changes)
+        non_state_changes = {
+            key: value
+            for key, value in changes.items()
+            if key != "state" and value is not None
+        }
+        if non_state_changes:
+            update_agent(registry, args.agent_id, **non_state_changes)
+        summary = args.last_checkpoint or args.current_action or args.task or ""
+        return complete_agent(registry, args.agent_id, summary)
+
+    agent = mutate_registry(project_root, apply_update)
     if args.json:
         print_json(agent)
     else:
@@ -342,9 +360,8 @@ def command_check(project_root: Path, args: argparse.Namespace) -> int:
 
 
 def command_claim(project_root: Path, args: argparse.Namespace) -> int:
-    agent_id = args.agent_id or f"agent-{slugify(args.agent)}"
-
     def create(registry: dict) -> dict:
+        agent_id = resolve_agent_id(registry, args.agent_id, args.agent)
         if not any(item.get("id") == agent_id for item in registry.get("agents", [])):
             register_agent(registry, agent_id, args.agent, task=args.task, scopes=args.scope)
         return create_claim(

@@ -68,6 +68,174 @@ def run_coordination(
 
 
 class AgentCoordinationTests(unittest.TestCase):
+    def test_implicit_agent_id_does_not_add_a_second_agent_prefix(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            project = Path(temp) / "project"
+            codex_home = Path(temp) / "codex-home"
+            project.mkdir()
+
+            joined = json.loads(
+                run_coordination(
+                    project,
+                    codex_home,
+                    "join",
+                    "--agent",
+                    "agent-root-source-search-brief-production",
+                    "--thread-id",
+                    "thread-source-search",
+                    "--task",
+                    "Implement source search brief",
+                    "--json",
+                ).stdout
+            )
+            claimed = json.loads(
+                run_coordination(
+                    project,
+                    codex_home,
+                    "claim",
+                    "--lane",
+                    "challenge-cup-frontend",
+                    "--scope",
+                    "web/src/routes/TeamsRoute.tsx",
+                    "--agent",
+                    "agent-root-source-search-brief-production",
+                    "--task",
+                    "Implement source search brief",
+                    "--json",
+                ).stdout
+            )["claim"]
+
+            self.assertEqual("agent-root-source-search-brief-production", joined["id"])
+            self.assertEqual(joined["id"], claimed["agentId"])
+
+    def test_join_reuses_the_active_agent_identity_for_the_same_thread(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            project = Path(temp) / "project"
+            codex_home = Path(temp) / "codex-home"
+            project.mkdir()
+
+            first = json.loads(
+                run_coordination(
+                    project,
+                    codex_home,
+                    "join",
+                    "--agent",
+                    "Source search brief owner",
+                    "--agent-id",
+                    "agent-root-source-search-brief-production",
+                    "--thread-id",
+                    "thread-source-search",
+                    "--task",
+                    "Implement source search brief",
+                    "--json",
+                ).stdout
+            )
+            second = json.loads(
+                run_coordination(
+                    project,
+                    codex_home,
+                    "join",
+                    "--agent",
+                    "Codex source search brief production",
+                    "--thread-id",
+                    "thread-source-search",
+                    "--task",
+                    "Continue source search brief",
+                    "--json",
+                ).stdout
+            )
+            explicit_alias = json.loads(
+                run_coordination(
+                    project,
+                    codex_home,
+                    "join",
+                    "--agent",
+                    "Another label for the same task",
+                    "--agent-id",
+                    "agent-source-search-alias",
+                    "--thread-id",
+                    "thread-source-search",
+                    "--task",
+                    "Continue source search brief",
+                    "--json",
+                ).stdout
+            )
+            registry = json.loads(
+                run_coordination(
+                    project,
+                    codex_home,
+                    "status",
+                    "--include-completed",
+                    "--json",
+                ).stdout
+            )
+
+            self.assertEqual(first["id"], second["id"])
+            self.assertEqual(first["id"], explicit_alias["id"])
+            self.assertEqual(
+                [first["id"]],
+                [item["id"] for item in registry["agents"]],
+            )
+
+    def test_update_completed_closes_owned_claims(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            project = Path(temp) / "project"
+            codex_home = Path(temp) / "codex-home"
+            project.mkdir()
+
+            run_coordination(
+                project,
+                codex_home,
+                "join",
+                "--agent",
+                "Agent A",
+                "--agent-id",
+                "agent-a",
+                "--task",
+                "Frontend task",
+            )
+            claim = json.loads(
+                run_coordination(
+                    project,
+                    codex_home,
+                    "claim",
+                    "--lane",
+                    "frontend",
+                    "--scope",
+                    "web/src",
+                    "--agent-id",
+                    "agent-a",
+                    "--task",
+                    "Frontend task",
+                    "--json",
+                ).stdout
+            )["claim"]
+
+            run_coordination(
+                project,
+                codex_home,
+                "update",
+                "--agent-id",
+                "agent-a",
+                "--state",
+                "completed",
+                "--last-checkpoint",
+                "Merged and verified",
+            )
+            registry = json.loads(
+                run_coordination(
+                    project,
+                    codex_home,
+                    "status",
+                    "--include-completed",
+                    "--json",
+                ).stdout
+            )
+            stored_claim = next(item for item in registry["claims"] if item["id"] == claim["id"])
+
+            self.assertEqual("completed", stored_claim["status"])
+            self.assertEqual("completed", registry["agents"][0]["state"])
+
     def test_preflight_blocks_development_on_primary_main_but_allows_linked_worktree(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp) / "project"
