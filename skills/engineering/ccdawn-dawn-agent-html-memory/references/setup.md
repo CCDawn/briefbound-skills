@@ -1,5 +1,13 @@
 # Setup
 
+## Contents
+
+- System purpose and boundaries
+- First-use decisions
+- Project type, dashboard preset, visual mode, and density
+- Section layout review
+- Initialization, first lane, and first sync
+
 Read this file on first initialization, or when the right project-memory shape is unclear.
 
 ## What this system is

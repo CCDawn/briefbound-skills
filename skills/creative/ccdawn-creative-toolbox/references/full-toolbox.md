@@ -1,9 +1,12 @@
----
-name: ccdawn-creative-toolbox
-description: "Use when the user wants context-aware concept collision, unknown concept generation, divergent thinking, creative ideation, concept invention, paradigm exploration, unusual alternatives, product ideas, research concepts, strategy concepts, story concepts, or surprising but useful options."
----
-
 # Creative Toolbox
+
+## 目录
+
+- 目标与快速流程
+- 创意调用语法与编排模式
+- 工具箱算子
+- 收敛评分与未知概念标准
+- 输出格式、防平庸规则与提问闸门
 
 ## 目标
 

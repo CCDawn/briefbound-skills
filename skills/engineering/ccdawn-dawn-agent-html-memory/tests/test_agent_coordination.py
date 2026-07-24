@@ -68,6 +68,176 @@ def run_coordination(
 
 
 class AgentCoordinationTests(unittest.TestCase):
+    def test_preflight_blocks_development_on_primary_main_but_allows_linked_worktree(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp) / "project"
+            worker = Path(temp) / "worker"
+            codex_home = Path(temp) / "codex-home"
+            root.mkdir()
+            run_git("init", "-b", "main", cwd=root)
+            (root / "README.md").write_text("baseline\n", encoding="utf-8")
+            run_git("add", "README.md", cwd=root)
+            run_git(
+                "-c",
+                "user.name=CCDawn Test",
+                "-c",
+                "user.email=ccdawn@example.invalid",
+                "commit",
+                "-m",
+                "baseline",
+                cwd=root,
+            )
+            run_git("worktree", "add", "-b", "worker", str(worker), cwd=root)
+
+            blocked = run_coordination(
+                root,
+                codex_home,
+                "preflight",
+                "--agent-id",
+                "agent-a",
+                "--scope",
+                "src",
+                "--json",
+                check=False,
+            )
+            self.assertEqual(2, blocked.returncode)
+            blocked_payload = json.loads(blocked.stdout)
+            self.assertEqual("ISOLATION_REQUIRED", blocked_payload["state"])
+            self.assertTrue(blocked_payload["primaryWorktree"])
+            self.assertEqual("main", blocked_payload["branch"])
+
+            allowed = json.loads(
+                run_coordination(
+                    worker,
+                    codex_home,
+                    "preflight",
+                    "--agent-id",
+                    "agent-a",
+                    "--scope",
+                    "src",
+                    "--json",
+                ).stdout
+            )
+            self.assertEqual("CLEAR", allowed["state"])
+            self.assertFalse(allowed["primaryWorktree"])
+
+    def test_preflight_allows_explicit_mechanical_write_on_primary_main(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp) / "project"
+            codex_home = Path(temp) / "codex-home"
+            root.mkdir()
+            run_git("init", "-b", "main", cwd=root)
+
+            payload = json.loads(
+                run_coordination(
+                    root,
+                    codex_home,
+                    "preflight",
+                    "--agent-id",
+                    "agent-a",
+                    "--scope",
+                    "README.md",
+                    "--write-kind",
+                    "mechanical",
+                    "--json",
+                ).stdout
+            )
+
+            self.assertEqual("CLEAR", payload["state"])
+            self.assertEqual("mechanical", payload["writeKind"])
+
+    def test_preflight_requires_integration_claim_and_clean_primary_main(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp) / "project"
+            codex_home = Path(temp) / "codex-home"
+            root.mkdir()
+            run_git("init", "-b", "main", cwd=root)
+            (root / "README.md").write_text("baseline\n", encoding="utf-8")
+            run_git("add", "README.md", cwd=root)
+            run_git(
+                "-c",
+                "user.name=CCDawn Test",
+                "-c",
+                "user.email=ccdawn@example.invalid",
+                "commit",
+                "-m",
+                "baseline",
+                cwd=root,
+            )
+
+            missing = run_coordination(
+                root,
+                codex_home,
+                "preflight",
+                "--agent-id",
+                "agent-a",
+                "--write-kind",
+                "integration",
+                "--json",
+                check=False,
+            )
+            self.assertEqual(2, missing.returncode)
+            self.assertEqual("INTEGRATION_CLAIM_REQUIRED", json.loads(missing.stdout)["state"])
+
+            run_coordination(
+                root,
+                codex_home,
+                "join",
+                "--agent",
+                "Agent A",
+                "--agent-id",
+                "agent-a",
+                "--task",
+                "integrate main",
+                "--branch",
+                "main",
+                "--worktree",
+                str(root),
+                "--json",
+            )
+            run_coordination(
+                root,
+                codex_home,
+                "claim",
+                "--lane",
+                "integration/main",
+                "--agent-id",
+                "agent-a",
+                "--task",
+                "integrate main",
+                "--json",
+            )
+
+            allowed = json.loads(
+                run_coordination(
+                    root,
+                    codex_home,
+                    "preflight",
+                    "--agent-id",
+                    "agent-a",
+                    "--write-kind",
+                    "integration",
+                    "--json",
+                ).stdout
+            )
+            self.assertEqual("CLEAR", allowed["state"])
+            self.assertTrue(allowed["integrationClaim"])
+
+            (root / "README.md").write_text("dirty\n", encoding="utf-8")
+            dirty = run_coordination(
+                root,
+                codex_home,
+                "preflight",
+                "--agent-id",
+                "agent-a",
+                "--write-kind",
+                "integration",
+                "--json",
+                check=False,
+            )
+            self.assertEqual(2, dirty.returncode)
+            self.assertEqual("DIRTY_TARGET", json.loads(dirty.stdout)["state"])
+
     def test_cli_preflight_is_silent_without_registry_and_routes_only_overlap(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
             project = Path(temp) / "project"

@@ -12,11 +12,11 @@ license: MIT
 
 ## BRT interface
 
-- Context Boundary: 已对齐的用户结果、目标页面或组件、现有设计系统与相邻实现、技术栈、数据契约和可运行环境。
+- Context Boundary: 已对齐的用户结果、目标页面或组件、`APPROVED/PREVIEW_SKIPPED` 证据、现有设计系统与相邻实现、技术栈、数据契约和可运行环境。
 - Output Contract: 最小生产实现、关键状态覆盖、响应式与无障碍处理，以及与声明相称的运行时证据。
 - Allowed Action: 在 BRT 授权 surface 内修改前端组件、样式和必要测试；不改变无关后端协议、品牌方向或全局设计系统。
 - Success Evidence: 目标测试、类型或构建检查，以及真实浏览器中的主路径、关键状态、目标视口和 console 检查。
-- Stop Condition: 界面结果仍有高影响歧义、需要新的产品/视觉方向、数据契约不可用、修改越过授权边界，或运行环境阻止关键验收。
+- Stop Condition: 命中 `PREVIEW_REQUIRED` 但缺少用户 `APPROVED`、界面结果仍有高影响歧义、需要新的产品/视觉方向、数据契约不可用、修改越过授权边界，或运行环境阻止关键验收。
 - Route Out: 产品或交互分叉转 `ccdawn-ui-design`；跨消费者 token、主题或共享组件治理转 `ccdawn-design-system`；复杂外部组件决策转 `ccdawn-feature-reuse-research`；验证后的真实残留转 `ccdawn-development-cleanup`；阻塞回 `ccdawn-brt`。
 
 ## 统一调用契约
@@ -26,10 +26,20 @@ license: MIT
 
 ## 实施边界
 
-- 只在进入时界面契约或项目模式已经足够明确，或收到独立 handoff 时主责。设计 owner 正在同一上下文执行“设计并实现”时不叠加本 skill。
-- `FAST_PATH`：既有模式下的单组件、样式、状态或响应式修复，直接实现并做目标验证。
-- `COMPACT_FLOW`：一个页面或多个紧密相关组件，内部确认短契约后连续实现和验证，不逐组件询问。
+- 只在进入时已有用户 `APPROVED`，或有依据的 `PREVIEW_SKIPPED`，或收到包含该证据的独立 handoff 时主责。设计 owner 正在同一上下文执行“设计并实现”时不叠加本 skill。
+- `FAST_PATH`：既有模式下的文案、单组件小样式、明确状态或响应式修复，记录 `PREVIEW_SKIPPED` 依据后直接实现和验证。
+- `COMPACT_FLOW`：一个页面或多个紧密相关组件，必须消费已批准预览/设计；批准证据缺失时不自行猜测并修改正式 surface。
 - 出现跨页面信息架构、品牌方向或设计系统治理时停止扩张，转给对应设计 owner；不要在本 skill 内生成多套视觉提案。
+
+## 预览证据闸门
+
+生产写入前检查：
+
+- 新页面，或布局、交互、视觉方向、响应式结果、跨组件 UI 结果尚未确认：`PREVIEW_REQUIRED`，按主要未知量转 `ccdawn-ui-design` 或 `ccdawn-visual-design` 生成隔离网页。
+- 文案、明确小修、既有模式机械改动：`PREVIEW_SKIPPED`，保留一句可复核依据。
+- 用户已明确批准具体预览或设计稿：`APPROVED`，记录批准对象与关键边界后继续。
+
+UI Review 的 `READY_FOR_USER_APPROVAL`、截图存在、测试通过或一般“继续实现”不能替代对具体预览的用户批准。批准后实现偏离已确认结果时，重新进入预览闸门。
 
 ## 生产实现
 

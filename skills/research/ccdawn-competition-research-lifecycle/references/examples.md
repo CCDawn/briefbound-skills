@@ -1,5 +1,12 @@
 # 竞赛科研全流程示例（Competition Research Lifecycle Examples）
 
+## 目录
+
+- AI 与数学建模竞赛
+- Workshop benchmark 与论文后期
+- 数据泄漏和并行推进
+- 榜单回退与 smoke 筛选
+
 ## 示例 1：AI 竞赛
 
 用户请求：

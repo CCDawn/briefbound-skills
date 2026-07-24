@@ -1,5 +1,13 @@
 # Troubleshooting
 
+## Contents
+
+- Memory scope and loading failures
+- Wrong-file edits and stale HTML
+- Visual mode, density, and hierarchy issues
+- Lane structure and noise
+- Memory-system conflicts and health checks
+
 Read this file when the memory system feels stale, noisy, misplaced, or inconsistent.
 
 ## The wrong kind of memory is going into the system

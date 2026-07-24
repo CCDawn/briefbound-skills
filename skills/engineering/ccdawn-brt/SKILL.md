@@ -8,9 +8,9 @@ license: MIT
 
 ## 目标
 
-BRT 默认适配每句输入：理解意图、选 owner 并推进验证。用户无需输入 `/brt`。
+BRT 默认适配输入：理解意图、选 owner、推进验证，无需 `/brt`。
 
-简单且只有一个合理行为的任务直接完成；用户答案会改变行为或改动边界时主动对齐。约束用于防错。
+仅有一个合理行为的任务直接完成；用户答案会改变行为或改动边界时主动对齐。约束用于防错。
 
 ## 决策核心
 
@@ -27,13 +27,15 @@ BRT 默认适配每句输入：理解意图、选 owner 并推进验证。用户
 
 ## 讨论式意图收敛
 
-开发、规划或高影响审查前，内部锁定结果、owning surface、非目标和证据，并执行 `Alignment Value Gate`：先用一次窄范围只读 probe 查现有行为、测试和规范；证据无法裁决且用户答案会改变行为、交互、数据、兼容性、验收或修改范围时，使用 `One-Turn Alignment`。答案不改变实现，或唯一合理行为可安全回退时直接行动。低置信度不得带着未确认的高影响假设写入。
+开发、规划或高影响审查前，锁定结果、owning surface、非目标和证据，执行 `Alignment Value Gate`：用一次窄范围只读 probe 查现有行为、测试和规范。证据仍不足且用户答案会改变行为、交互、数据、兼容性、验收或范围时，使用 `One-Turn Alignment`；否则直接行动。低置信度不得带着未确认的高影响假设写入。
 
 - agent 先给推荐，不让用户重写需求。
 - 一次集中提出 2-4 个彼此相关的高影响问题；每项给推荐答案、行为差异和错判影响。
 - 主动暴露最可能造成误改的分叉；不得静默替用户决定产品行为，也不得询问本地证据已经回答的问题。
 - 用户可回复“按推荐”或纠错；信息足够即结束追问。
-- 自然闸门仅包括：意图变化、范围扩大、不可安全恢复的失败、高风险/破坏性/权限/迁移/发布动作、冲突或真实取舍。
+- 自然闸门：意图/范围变化、不可安全恢复的失败、高风险/破坏性/权限/迁移/发布、冲突或真实取舍。
+
+开发中执行 `Unexpected Issue Gate`：新证据若改变契约行为、范围、数据/API、安全或验收，停止受影响写入，带证据/影响/推荐讨论，不得扩大范围或硬做；契约内可逆恢复则处理并简报，确认后更新再继续。
 
 展示 `ALIGN/FULL` 或破坏性菜单时才读 `references/output-forms.md`。
 
@@ -43,6 +45,7 @@ BRT 默认适配每句输入：理解意图、选 owner 并推进验证。用户
 
 - bug/失败测试：`ccdawn-bug-review`；PR/diff：`ccdawn-pr-review`；整仓/架构：`ccdawn-project-review`。
 - UI/UX 与交互方向：`ccdawn-ui-design`；品牌表达或视觉语言：`ccdawn-visual-design`；契约明确后的生产前端实现：`ccdawn-frontend-engineering`；已有界面或截图审查：`ccdawn-ui-review`；跨组件 token、主题或组件治理：`ccdawn-design-system`。
+- 请求包含前端写入时，若最终界面尚未获用户确认，先读取 `references/ui-preview-approval.md`，判定 `PREVIEW_REQUIRED / PREVIEW_SKIPPED`。`PREVIEW_REQUIRED` 必须先交付隔离网页并等待用户 `APPROVED / REVISE / ABANDON`；批准前不得修改正式 UI owning surface。
 - 当前 diff 过度设计：`ccdawn-simplification-review`；整仓冗余治理：`ccdawn-simplification-audit`。
 - 开发中出现多职责巨型文件、难导航/测试或反复结构冲突：`ccdawn-code-structure-guard`；行数本身不触发拆分。
 - AI/ML 研究：`ccdawn-ai-research-loop`；单条 metric lane：`ccdawn-score-loop`；重要 claim：`ccdawn-research-rigor-review`。
@@ -87,7 +90,7 @@ BRT 默认适配每句输入：理解意图、选 owner 并推进验证。用户
 - `COMPACT_FLOW`：多个相关单元可在一个上下文连续完成；只有拆分会改变依赖、owner、风险或验证时，才让 `ccdawn-planning` 在同一方案内生成 `TASK_GRAPH`。
 - `FULL_FLOW`：仍有真实设计分叉或状态/API/安全/数据/迁移/权限/发布风险；只生成解决这些风险所需的 artifact。
 
-BDD/TDD 按子任务判断，只给确定性行为回归或重大契约风险；metric 未提升属于实验结果。新 worktree 只用于并行、冲突/高风险隔离或用户明确要求。
+BDD/TDD 按子任务判断，只给确定性行为回归或重大契约风险；metric 未提升属于实验结果。
 
 多会话 pause 会产生 `resumePendingAgentIds`；owner 只有在 coordination resolve 且恢复债务清零后结束，失活先路由 `ccdawn-thread-coordination` 接管。
 
@@ -110,7 +113,7 @@ Superpowers 默认不参与自动路由；显式恢复时也不继承其 brainst
 
 Wrong-Edit Guard：定位 owning surface、预计文件、相关测试和已有用户/Agent 改动；只改完成契约所需范围。验证失败先区分 implementation、test intent、environment、requirement mismatch，不为过测试削弱行为。
 
-首次写入、scope 扩大或合并前，有 registry 才运行 `preflight`。`CLEAR/PEERS_NO_OVERLAP` 继续；`OVERLAP` 进入 Silent Conflict Triage。优先缩 scope、做安全工作或等待；需共同决定时协商。只有继续写会立即覆盖/回归且无法拆分的最大冲突才暂停。无 registry 不初始化 Memory、claim 或 coordination。
+首次写入、scope 扩大或合并前运行 `preflight --write-kind`；无 registry 也检查 Git 隔离但不初始化协调。根 `main/master` 的 `development` 收到 `ISOLATION_REQUIRED` 后转 task worktree，`mechanical` 显式声明，`integration` 需有效 claim 且 clean。`OVERLAP` 进入 Silent Conflict Triage；只有不可拆且立即覆盖/回归才暂停。
 
 当前 owner 用风险相称的新鲜证据收口。普通任务无需 `ccdawn-completion-summary`；只有跨阶段/会话、恢复、正式交接或 Deferred 风险才使用。只有已知产生临时产物、branch/worktree/claim 等真实残留时才路由 cleanup；没有候选不扫描、不汇报。
 

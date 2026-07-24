@@ -1,5 +1,13 @@
 # 竞赛科研全流程参考（Competition Research Lifecycle Reference）
 
+## 目录
+
+- 运行模型与事实源
+- Active 状态、实验晋升和 smoke/proxy gate
+- 并行 lane、外部反馈与共享 artifact
+- 任务、数据、研究、baseline、实验、消融、写作和提交阶段
+- 默认响应骨架与范围约束
+
 这份 reference 定义了面向竞赛型科研工作的阶段模型、证据账本、逐阶段 BRT gates、checklists、并行 lane 和路由规则。
 
 ## 运行模型
@@ -20,7 +28,7 @@
 - `recover`：回退到上游阶段，因为依赖项失效了。
 - `stop`：因为时间、算力、访问权限或证据不足而暂停。
 
-优先使用 [TEMPLATES.md](TEMPLATES.md)，避免每次从零发明 artifact 格式。
+优先使用 [templates.md](templates.md)，避免每次从零发明 artifact 格式。
 
 ## Source of Truth 层
 
@@ -183,7 +191,7 @@ Artifacts：
 - `metric-definition.md`
 - `submission-checklist.md`
 - 最小 research ledger 或 project status 记录
-- 使用 [TEMPLATES.md](TEMPLATES.md) 中的任务定义模板
+- 使用 [templates.md](templates.md) 中的任务定义模板
 
 退出标准：
 - metric 和 ranking logic 已明确
@@ -226,7 +234,7 @@ Artifacts：
 - `data-manifest.json`
 - `preprocessing-report.md`
 - `split-strategy.md`
-- 使用 [TEMPLATES.md](TEMPLATES.md) 中的数据就绪模板
+- 使用 [templates.md](templates.md) 中的数据就绪模板
 
 退出标准：
 - dataset 版本可识别
@@ -269,7 +277,7 @@ Artifacts：
 - `literature-matrix.md`
 - `method-candidates.md`
 - `experiment-hypotheses.md`
-- 使用 [TEMPLATES.md](TEMPLATES.md) 中的 research evidence 和 hypothesis 模板
+- 使用 [templates.md](templates.md) 中的 research evidence 和 hypothesis 模板
 
 退出标准：
 - 已经有排好序的方法 shortlist
@@ -312,7 +320,7 @@ Artifacts：
 - `baseline-run.md`
 - `reproducibility-log.md`
 - baseline config files
-- 使用 [TEMPLATES.md](TEMPLATES.md) 中的 baseline 运行模板
+- 使用 [templates.md](templates.md) 中的 baseline 运行模板
 
 退出标准：
 - 训练和推理链路可运行
@@ -360,7 +368,7 @@ Artifacts：
 - `training-decisions.md`
 - experiment ledger 或 attempt cards
 - smoke run records 或 proxy ranking table
-- 使用 [TEMPLATES.md](TEMPLATES.md) 中的 experiment card 模板
+- 使用 [templates.md](templates.md) 中的 experiment card 模板
 
 退出标准：
 - 实验可归因、可比较
@@ -401,7 +409,7 @@ Artifacts：
 - `ablation-table.md`
 - `error-analysis.md`
 - `final-model-selection.md`
-- 使用 [TEMPLATES.md](TEMPLATES.md) 中的 ablation 和最终选择模板
+- 使用 [templates.md](templates.md) 中的 ablation 和最终选择模板
 
 退出标准：
 - 主要 claims 有证据支撑
@@ -446,7 +454,7 @@ Artifacts：
 - `figures/`
 - `tables/`
 - manuscript draft
-- 使用 [TEMPLATES.md](TEMPLATES.md) 中的 paper evidence map 模板
+- 使用 [templates.md](templates.md) 中的 paper evidence map 模板
 
 退出标准：
 - draft 结构完整
@@ -486,7 +494,7 @@ Artifacts：
 - `submission-notes.md`
 - `environment-lock.md`
 - final bundle manifest
-- 使用 [TEMPLATES.md](TEMPLATES.md) 中的 submission checklist 模板
+- 使用 [templates.md](templates.md) 中的 submission checklist 模板
 
 退出标准：
 - 必需 deliverables 已齐备

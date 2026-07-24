@@ -27,8 +27,11 @@ Good additions include:
 
 ## Skill guidelines
 
-- Keep `SKILL.md` concise and easy to route from description text.
-- Move detailed procedures into `REFERENCE.md` or `EXAMPLES.md` when needed.
+- Keep `SKILL.md` concise, easy to route from description text, and at or below 500 lines.
+- Put supplemental Markdown under `references/`; do not leave `REFERENCE.md`, `EXAMPLES.md`, improvement logs, or other maintenance documents at the skill root.
+- Give reference files over 100 lines a top-level `## Contents`, `## Table of Contents`, or `## 目录` section.
+- Keep reference files focused and free of duplicated `SKILL.md` frontmatter.
+- Keep `agents/openai.yaml` to the minimal `interface` fields used by this repository. Write Chinese-first `short_description` values between 25 and 64 characters, and make every `default_prompt` explicitly invoke `$<skill-name>`.
 - Prefer stable instructions over time-sensitive guidance.
 - Make artifacts and expected outputs explicit.
 - Separate search, synthesis, and validation responsibilities when possible.
@@ -37,7 +40,7 @@ Good additions include:
 
 1. Create a new folder under the appropriate bucket in `skills/`.
 2. Add `SKILL.md` with a precise trigger description and a narrow job statement.
-3. Add `REFERENCE.md`, `EXAMPLES.md`, `references/`, or `agents/` only when they materially help the skill.
+3. Add `references/`, `scripts/`, `assets/`, or `agents/` only when they materially help the skill; place supplemental Markdown inside `references/`.
 4. Update [README.md](README.md), [README.zh-CN.md](README.zh-CN.md), bucket-level listings, and `.claude-plugin/plugin.json` when the catalog changes. If install behavior changes, also update [INSTALL_PROMPTS.md](INSTALL_PROMPTS.md).
 5. Run `python scripts/install_codex_library.py --dry-run` to preview the install plan, then `python scripts/install_codex_library.py` to install the local Codex copy. Use `--agent codex-agents` only when you explicitly need both copies.
 6. Validate the installed live Codex skill with `python scripts/install_codex_library.py --verify-only` when the local Codex validator is available, then restart Codex and confirm the slash-command entry reloads.

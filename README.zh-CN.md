@@ -73,6 +73,7 @@ sh ./install.sh
 | Skill 很多但不会自动选 | BRT 选择最具体 owner，并可动态组合多个意图 |
 | 已安装 GitHub、浏览器、Figma 或文档工具却不会用 | BRT 按当前可用能力直接路由，CCDawn owner 只保留目标与验收 |
 | 简单修改被流程拖慢 | 按子任务风险控制重量，默认优先直接实现和验证 |
+| 高影响前端改动难以提前评估 | 先制作隔离的可交互预览网页，用户批准后再修改正式页面；明确小修可跳过 |
 | 新功能可能引入低效代码 | 普通功能静默检查明显低效；只有真实热路径或指标问题才测量和优化 |
 | 开发不断堆出巨型单文件 | 对本轮手写源码使用 `STAY/CHECK/SPLIT`；只有职责边界可分时才做最小拆分 |
 | 审查只给结论、不继续推进 | 形成按依赖排序的行动队列，在边界内连续处理 |
@@ -92,11 +93,11 @@ sh ./install.sh
 - [`ccdawn-performance-engineering`](skills/engineering/ccdawn-performance-engineering/SKILL.md)：只在性能目标、回归或关键热路径需要测量时定位瓶颈并验证最小优化。
 - [`ccdawn-code-structure-guard`](skills/engineering/ccdawn-code-structure-guard/SKILL.md)：在开发中识别多职责巨型文件，只在维护收益明确时执行最小拆分。
 - [`ccdawn-pr-review`](skills/engineering/ccdawn-pr-review/SKILL.md)：按风险排序审查 PR、diff、分支和合并准备度。
-- [`ccdawn-ui-design`](skills/engineering/ccdawn-ui-design/SKILL.md)：处理 UI/UX、响应式、无障碍和浏览器视觉验证。
-- [`ccdawn-visual-design`](skills/engineering/ccdawn-visual-design/SKILL.md)：建立符合产品语境的品牌表达、视觉方向和可实施界面语言。
-- [`ccdawn-ui-review`](skills/engineering/ccdawn-ui-review/SKILL.md)：使用用户任务和浏览器证据审查已有界面，并输出按影响排序的 findings。
+- [`ccdawn-ui-design`](skills/engineering/ccdawn-ui-design/SKILL.md)：处理 UI/UX、响应式和无障碍；高影响结果先制作隔离网页供用户预审。
+- [`ccdawn-visual-design`](skills/engineering/ccdawn-visual-design/SKILL.md)：建立品牌与视觉方向，并在正式落地前提供可交互预览。
+- [`ccdawn-ui-review`](skills/engineering/ccdawn-ui-review/SKILL.md)：审查已有界面或隔离预览，输出 findings 与预审建议，但不替用户批准。
 - [`ccdawn-design-system`](skills/engineering/ccdawn-design-system/SKILL.md)：治理跨组件 token、主题、variants、共享组件和 Figma/code 一致性。
-- [`ccdawn-frontend-engineering`](skills/engineering/ccdawn-frontend-engineering/SKILL.md)：把已确定的界面契约实现为生产级前端代码并做运行时验证。
+- [`ccdawn-frontend-engineering`](skills/engineering/ccdawn-frontend-engineering/SKILL.md)：消费已批准或明确跳过预览的界面契约，实施生产代码并做运行时验证。
 - [`ccdawn-ai-research-loop`](skills/research/ccdawn-ai-research-loop/SKILL.md)：复现 baseline，推进假设、实验、消融与研究方向收敛。
 - [`ccdawn-feature-reuse-research`](skills/engineering/ccdawn-feature-reuse-research/SKILL.md)：为复杂功能评估项目内外可复用方案。
 
@@ -150,19 +151,19 @@ sh ./install.sh
   只在已知产生临时残留、branch/worktree/claim，或用户明确要求时加载；安全清理可证明无用且已吸收的开发噪音。
 
 - **`ccdawn-ui-design`**
-  UI/UX 专项 owner，负责信息层级、交互状态、响应式、无障碍和浏览器视觉验证；机械前端小改不会自动升级成设计流程。
+  UI/UX 专项 owner，负责信息层级、交互状态、响应式和无障碍；高影响结果先交付隔离预览并等待用户批准，机械前端小改可明确跳过。
 
 - **`ccdawn-visual-design`**
-  视觉方向 owner，根据产品、品牌和受众决定字体、色彩、构图、图像、图标和动效语言，避免脱离语境的模板化 UI。
+  视觉方向 owner，根据产品、品牌和受众决定字体、色彩、构图、图像、图标和动效语言，并在正式落地前提供隔离网页预审。
 
 - **`ccdawn-ui-review`**
-  已有界面审查 owner，以真实用户任务和浏览器证据检查体验、视觉层级、状态、响应式、无障碍和设计系统一致性。
+  已有界面与隔离预览审查 owner，以真实用户任务和浏览器证据给出 findings 及预审建议；只有用户可以批准预览。
 
 - **`ccdawn-design-system`**
   设计系统治理 owner，只处理跨消费者的 token、主题、组件 API、variants、Figma/code 映射和渐进迁移。
 
 - **`ccdawn-frontend-engineering`**
-  前端生产实现 owner，在界面结果明确后负责组件、状态、响应式和无障碍实现，并使用真实浏览器证据收口。
+  前端生产实现 owner，只消费用户已批准或有依据跳过预览的界面契约，负责组件、状态、响应式和无障碍实现，并使用真实浏览器证据收口。
 
 - **`ccdawn-feature-reuse-research`**
   只在复用候选会实质改变复杂功能的架构、依赖或实现范围时调研现有项目、库、标准、示例和项目内模块。

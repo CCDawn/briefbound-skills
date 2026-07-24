@@ -1,5 +1,15 @@
 # Testing Anti-Patterns
 
+## Contents
+
+- Overview and iron laws
+- Testing mock behavior
+- Test-only production methods
+- Dependency-aware mocking
+- Complete mock data
+- Integration coverage and mock complexity
+- Quick reference and red flags
+
 **Load this reference when:** writing or changing tests, adding mocks, or tempted to add test-only methods to production code.
 
 ## Overview

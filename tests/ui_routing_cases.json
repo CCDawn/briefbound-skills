@@ -7,6 +7,13 @@
     "forbidden_primary": ["ccdawn-visual-design", "ccdawn-frontend-engineering"]
   },
   {
+    "id": "new-ui-preview-first",
+    "prompt": "设计并实现新的审批页面，但不要先改正式页面；先制作可交互网页让我预审，批准后再落地",
+    "primary": "ccdawn-ui-design",
+    "support": [],
+    "forbidden_primary": ["ccdawn-frontend-engineering", "ccdawn-ui-review"]
+  },
+  {
     "id": "brand-visual-direction",
     "prompt": "让这个产品官网更有辨识度，重新确定字体、色彩、构图和动效语言",
     "primary": "ccdawn-visual-design",
@@ -14,11 +21,32 @@
     "forbidden_primary": ["ccdawn-ui-design", "ccdawn-design-system"]
   },
   {
+    "id": "brand-preview-first",
+    "prompt": "重做官网品牌视觉，先用隔离网页展示字体、色彩、构图和动效让我批准，不要直接改生产页面",
+    "primary": "ccdawn-visual-design",
+    "support": [],
+    "forbidden_primary": ["ccdawn-ui-design", "ccdawn-frontend-engineering"]
+  },
+  {
     "id": "accepted-ui-implementation",
     "prompt": "设计稿和交互已经确认，按现有组件库把页面实现并验证响应式状态",
     "primary": "ccdawn-frontend-engineering",
     "support": [],
     "forbidden_primary": ["ccdawn-ui-design", "ccdawn-ui-review"]
+  },
+  {
+    "id": "approved-preview-implementation",
+    "prompt": "我已 APPROVED 这个具体预览，按已确认的布局和交互实现正式页面并完成浏览器验收",
+    "primary": "ccdawn-frontend-engineering",
+    "support": [],
+    "forbidden_primary": ["ccdawn-ui-design", "ccdawn-ui-review"]
+  },
+  {
+    "id": "unapproved-interface-handoff",
+    "prompt": "这个新页面的布局和交互还没有用户批准，但请直接进入生产前端实现",
+    "primary": "ccdawn-ui-design",
+    "support": [],
+    "forbidden_primary": ["ccdawn-frontend-engineering", "ccdawn-ui-review"]
   },
   {
     "id": "shared-token-migration",
@@ -30,6 +58,13 @@
   {
     "id": "existing-ui-review",
     "prompt": "审查这个已运行页面和截图，找出响应式、状态和无障碍问题，不修改代码",
+    "primary": "ccdawn-ui-review",
+    "support": [],
+    "forbidden_primary": ["ccdawn-ui-design", "ccdawn-frontend-engineering"]
+  },
+  {
+    "id": "isolated-preview-review",
+    "prompt": "只读审查这个隔离预览网页的桌面、移动端和关键状态，给出 READY_FOR_USER_APPROVAL 或 REVISE_RECOMMENDED，不要替我批准",
     "primary": "ccdawn-ui-review",
     "support": [],
     "forbidden_primary": ["ccdawn-ui-design", "ccdawn-frontend-engineering"]

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import subprocess
 from pathlib import Path
 
 from coordination_model import (
@@ -49,6 +50,43 @@ def print_conflicts(conflicts: list[dict]) -> None:
             f"agent={claim.get('agentId') or claim.get('agent', '-')} "
             f"scopes={','.join(claim.get('scopes', [])) or '-'} ({reasons})"
         )
+
+
+def git_write_context(project_root: Path) -> dict:
+    def git(*args: str) -> str | None:
+        result = subprocess.run(
+            ["git", *args],
+            cwd=project_root,
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+        return result.stdout.strip() if result.returncode == 0 else None
+
+    git_dir_value = git("rev-parse", "--git-dir")
+    common_dir_value = git("rev-parse", "--git-common-dir")
+    branch = git("symbolic-ref", "--quiet", "--short", "HEAD")
+    if git_dir_value is None or common_dir_value is None or branch is None:
+        return {
+            "gitRepository": False,
+            "branch": "",
+            "primaryWorktree": False,
+            "protectedTarget": False,
+            "dirty": False,
+        }
+
+    def resolve_git_path(value: str) -> Path:
+        path = Path(value)
+        return (project_root / path).resolve() if not path.is_absolute() else path.resolve()
+
+    status = git("status", "--porcelain=v1", "--untracked-files=normal")
+    return {
+        "gitRepository": True,
+        "branch": branch,
+        "primaryWorktree": resolve_git_path(git_dir_value) == resolve_git_path(common_dir_value),
+        "protectedTarget": branch in {"main", "master"},
+        "dirty": bool(status),
+    }
 
 
 def command_status(project_root: Path, args: argparse.Namespace) -> int:
@@ -104,13 +142,79 @@ def command_status(project_root: Path, args: argparse.Namespace) -> int:
 
 
 def command_preflight(project_root: Path, args: argparse.Namespace) -> int:
+    context = git_write_context(project_root)
     path = registry_path(project_root)
+    registry = load_registry(project_root) if path.exists() else None
+    integration_claim = None
+    if registry is not None:
+        mark_expired_claims(registry)
+        lane_id = slugify(f"integration/{context['branch']}")
+        integration_claim = next(
+            (
+                item
+                for item in registry.get("claims", [])
+                if item.get("agentId") == args.agent_id
+                and item.get("laneId") == lane_id
+                and item.get("status") in ACTIVE_CLAIM_STATUSES
+            ),
+            None,
+        )
+
+    guard = {
+        **context,
+        "writeKind": args.write_kind,
+        "integrationClaim": bool(integration_claim),
+    }
+    if context["primaryWorktree"] and context["protectedTarget"]:
+        if args.write_kind == "development":
+            payload = {
+                "state": "ISOLATION_REQUIRED",
+                "registryExists": path.exists(),
+                "activePeers": [],
+                "overlaps": [],
+                **guard,
+            }
+            print_json(payload) if args.json else print(
+                f"ISOLATION_REQUIRED: create a task worktree before writing to {context['branch']}."
+            )
+            return 2
+        if args.write_kind == "integration" and integration_claim is None:
+            payload = {
+                "state": "INTEGRATION_CLAIM_REQUIRED",
+                "registryExists": path.exists(),
+                "activePeers": [],
+                "overlaps": [],
+                **guard,
+            }
+            print_json(payload) if args.json else print(
+                f"INTEGRATION_CLAIM_REQUIRED: claim integration/{context['branch']} before writing."
+            )
+            return 2
+        if args.write_kind == "integration" and context["dirty"]:
+            payload = {
+                "state": "DIRTY_TARGET",
+                "registryExists": True,
+                "activePeers": [],
+                "overlaps": [],
+                **guard,
+            }
+            print_json(payload) if args.json else print(
+                f"DIRTY_TARGET: clean {context['branch']} before integration."
+            )
+            return 2
+
     if not path.exists():
-        payload = {"state": "CLEAR", "registryExists": False, "activePeers": [], "overlaps": []}
+        payload = {
+            "state": "CLEAR",
+            "registryExists": False,
+            "activePeers": [],
+            "overlaps": [],
+            **guard,
+        }
         print_json(payload) if args.json else print("CLEAR: no coordination registry.")
         return 0
 
-    registry = load_registry(project_root)
+    assert registry is not None
     peers = [
         item
         for item in registry.get("agents", [])
@@ -165,6 +269,7 @@ def command_preflight(project_root: Path, args: argparse.Namespace) -> int:
             for item in peers
         ],
         "overlaps": overlaps,
+        **guard,
     }
     print_json(payload) if args.json else print(f"{state}: peers={len(peers)} overlaps={len(overlaps)}")
     return 1 if overlaps else 0
@@ -483,9 +588,14 @@ def parse_args() -> argparse.Namespace:
     status.add_argument("--include-expired", action="store_true", help="Compatibility flag; expired claims remain excluded.")
     add_json_flag(status)
 
-    preflight = subparsers.add_parser("preflight", help="Check active peers and scope overlap before writing.")
+    preflight = subparsers.add_parser("preflight", help="Check worktree isolation and scope overlap before writing.")
     preflight.add_argument("--agent-id", default="")
     preflight.add_argument("--scope", action="append", default=[])
+    preflight.add_argument(
+        "--write-kind",
+        choices=["development", "mechanical", "integration"],
+        default="development",
+    )
     add_json_flag(preflight)
 
     join = subparsers.add_parser("join", help="Register or refresh an agent in this project.")

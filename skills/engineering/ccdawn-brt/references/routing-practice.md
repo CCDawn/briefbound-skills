@@ -19,10 +19,10 @@
 | 审 PR、diff、branch、commit、merge readiness | `ccdawn-pr-review` | COMPACT | findings-first 审阅结论 |
 | 审整仓、架构、技术债、测试体系、接手摸底 | `ccdawn-project-review` | COMPACT | 风险排序 findings 与执行队列 |
 | 评价流程、方案、skill、输出质量，且无更具体 owner | `ccdawn-evaluation` | MICRO/COMPACT | 证据化判断与高 ROI 建议 |
-| 新建或重定 UI/UX、信息层级、交互模型、响应式或无障碍决策 | `ccdawn-ui-design` | FAST/COMPACT | 可实施 UI 契约 |
-| 品牌表达、视觉方向、字体、色彩、构图、图像或动效语言 | `ccdawn-visual-design` | COMPACT | 语境化视觉契约 |
-| 已有 UI 契约或项目模式，需要组件、状态、响应式和无障碍生产实现 | `ccdawn-frontend-engineering` | FAST/COMPACT | 前端代码与浏览器运行证据 |
-| 审查已有页面、截图、UI 流程、视觉回归、响应式或无障碍 | `ccdawn-ui-review` | COMPACT | findings 与浏览器证据 |
+| 新建或重定 UI/UX、信息层级、交互模型、响应式或无障碍决策 | `ccdawn-ui-design` | FAST/COMPACT | 必要时先交付隔离预览，再形成可实施 UI 契约 |
+| 品牌表达、视觉方向、字体、色彩、构图、图像或动效语言 | `ccdawn-visual-design` | COMPACT | 必要时先交付隔离预览，再形成语境化视觉契约 |
+| 已获 `APPROVED` 或有依据的 `PREVIEW_SKIPPED`，需要组件、状态、响应式和无障碍生产实现 | `ccdawn-frontend-engineering` | FAST/COMPACT | 前端代码与浏览器运行证据 |
+| 审查已有页面、隔离预览、截图、UI 流程、视觉回归、响应式或无障碍 | `ccdawn-ui-review` | COMPACT | findings、预审建议与浏览器证据 |
 | 跨组件 token、主题、variants、共享组件 API 或 Figma/code 一致性 | `ccdawn-design-system` | COMPACT/FULL | 系统契约、渐进迁移与消费者证据 |
 | 复杂功能存在实质性的外部复用决策 | `ccdawn-feature-reuse-research` | COMPACT | 复用/借鉴/自建判断 |
 | 目标已对齐且需要真实设计选择、迁移、跨边界契约或独立任务图 | `ccdawn-planning` | COMPACT/FULL | 最小实施方案；必要时内含 TASK_GRAPH |
@@ -50,7 +50,8 @@
 - UI PR 仍由 PR review 主责；只有需要真实界面证据时才把 UI review 作为 support，不重复审查同一代码风险。
 - 单页面或单组件问题不升级为 design system；只有共享事实源、多个消费者或迁移契约成为主要问题时才进入该 owner。
 - UI design 决定任务、结构和交互；visual design 决定品牌与视觉表达。普通产品 UI 不因“更好看”自动加载两个 owner。
-- “设计并实现”由主要设计 owner 贯穿落地和一次浏览器验收，不再串联 Frontend Engineering；只有方案单独交付、跨 owner handoff，或进入时契约已确定才由 Frontend Engineering 主责。
+- 前端写入先按 `ui-preview-approval.md` 判定 `PREVIEW_REQUIRED / PREVIEW_SKIPPED`。新页面、布局/交互/视觉方向或跨组件 UI 结果尚未确认时必须先生成隔离网页；文案、明确小修或已批准设计可跳过。
+- “设计并实现”由主要设计 owner 先交付预览并等待用户批准；收到 `APPROVED` 后继续落地和一次正式浏览器验收，不再串联 Frontend Engineering。只有方案单独交付、跨 owner handoff，或进入时已有批准证据才由 Frontend Engineering 主责。
 - Design System 负责契约和代表性消费者，不把同一迁移机械拆给页面 owner；只有剩余页面形成独立交付边界时才切换。
 - 具体 bug 交给 bug owner；整仓测试健康度和架构风险交给 project review。
 - Bug Review 持有从根因到修复的完整闭环；必要 RED/GREEN 是其内部测试锚点，不再二次加载 TDD skill。TDD 只主责已明确的新行为或实现契约。
@@ -58,7 +59,7 @@
 - BRT 负责对齐后的有界会话发现；现有平级会话的持续协商和共同集成由 multi-agent orchestration 主责；单次建议、冲突或恢复只用 thread coordination。
 - orchestration 不创建子 Agent、不接管任何会话任务；每个 Agent 保留 bug、UI、研究或测试专项 owner，没有双向正收益时各自继续。
 - 实验 metric 未提升不是 TDD RED；确定性 harness/parser/schema bug 才进入工程 TDD。
-- UI 文件的机械修改可留在 FAST_PATH；产品、交互或视觉结果未定时由 UI design 主责，结果已定且主要工作是生产实现时由 frontend engineering 主责。
+- UI 文件的机械修改可用 `PREVIEW_SKIPPED` 留在 FAST_PATH；产品、交互或视觉结果未定时由 UI design/visual design 主责并先预览，结果已获 `APPROVED` 且主要工作是生产实现时由 frontend engineering 主责。
 - 普通完成由当前 owner 收口；正式跨阶段证据包才进入 completion summary。
 
 ## 多动作推进

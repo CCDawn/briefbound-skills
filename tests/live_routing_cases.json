@@ -33,6 +33,39 @@
     "timeout_seconds": 120
   },
   {
+    "id": "unexpected-contract-change-pauses-for-discussion",
+    "prompt": "当前仅测试行为，不修改文件。开发中发现数据库没有软删除能力，但已对齐契约要求批量删除可恢复；继续实现会改变数据行为。请说明现在应如何处理。",
+    "smoke": false,
+    "expected_skill_reads": ["ccdawn-brt"],
+    "forbidden_skill_reads": ["ccdawn-planning", "ccdawn-bug-review"],
+    "max_commands": 4,
+    "expected_final_any": ["发现意外问题", "影响", "按推荐"],
+    "forbidden_final_any": ["直接继续实现", "已经修改"],
+    "timeout_seconds": 120
+  },
+  {
+    "id": "unexpected-safe-recovery-does-not-interrupt",
+    "prompt": "当前仅测试行为，不修改文件。开发中遇到一个可通过重新生成本地缓存安全恢复的构建错误，不改变行为、范围或验收。请说明是否需要暂停询问用户。",
+    "smoke": false,
+    "expected_skill_reads": ["ccdawn-brt"],
+    "forbidden_skill_reads": ["ccdawn-planning", "ccdawn-bug-review"],
+    "max_commands": 4,
+    "expected_final_any": ["直接", "安全恢复", "继续"],
+    "forbidden_final_any": ["按推荐", "需要你决定"],
+    "timeout_seconds": 120
+  },
+  {
+    "id": "unexpected-issue-decision-resumes-contract",
+    "prompt": "当前仅测试行为，不修改文件。上轮已就意外兼容性问题完成讨论，我回复了“按推荐”；请说明接下来是否还要重新询问，还是更新契约并恢复开发。",
+    "smoke": false,
+    "expected_skill_reads": ["ccdawn-brt"],
+    "forbidden_skill_reads": ["ccdawn-planning"],
+    "max_commands": 4,
+    "expected_final_any": ["更新契约", "恢复", "继续"],
+    "forbidden_final_any": ["重新确认", "再次选择"],
+    "timeout_seconds": 120
+  },
+  {
     "id": "feature-local-n-plus-one",
     "prompt": "这个列表接口存在 N+1 查询。请在不改变返回行为的前提下改为一次批量查询，并补查询次数回归测试。当前仅测试路由，不执行实际写入；说明 owner 和处理方式。",
     "smoke": false,

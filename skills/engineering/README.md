@@ -2,11 +2,11 @@
 
 - **[ccdawn-brt](./ccdawn-brt/SKILL.md)** - Capability-aware entrypoint that trusts model reasoning and adds only the constraints, artifacts, and routes that prevent concrete errors.
 - **[ccdawn-autonomous-collaboration-loop](./ccdawn-autonomous-collaboration-loop/SKILL.md)** - Opt-in closed loop that keeps peer threads progressing, recovers coordination, integrates verified work into local main, and closes residue without repeated gates.
-- **[ccdawn-ui-design](./ccdawn-ui-design/SKILL.md)** - UI/UX design, interaction-state, responsive, accessibility, and browser-based visual QA owner.
-- **[ccdawn-visual-design](./ccdawn-visual-design/SKILL.md)** - Context-aware brand expression, typography, color, composition, imagery, iconography, and motion direction.
-- **[ccdawn-ui-review](./ccdawn-ui-review/SKILL.md)** - Findings-first review of existing UI flows, visual hierarchy, states, responsive behavior, accessibility, and runtime evidence.
+- **[ccdawn-ui-design](./ccdawn-ui-design/SKILL.md)** - UI/UX owner that previews high-impact interaction and responsive outcomes before production changes.
+- **[ccdawn-visual-design](./ccdawn-visual-design/SKILL.md)** - Brand and visual direction owner with isolated webpage preview approval before implementation.
+- **[ccdawn-ui-review](./ccdawn-ui-review/SKILL.md)** - Findings-first review of existing UI or isolated previews without replacing explicit user approval.
 - **[ccdawn-design-system](./ccdawn-design-system/SKILL.md)** - Cross-consumer design token, theme, component API, variant, and Figma-to-code governance with staged migration.
-- **[ccdawn-frontend-engineering](./ccdawn-frontend-engineering/SKILL.md)** - Production frontend implementation owner for aligned UI contracts, interaction states, responsive behavior, accessibility, and runtime evidence.
+- **[ccdawn-frontend-engineering](./ccdawn-frontend-engineering/SKILL.md)** - Production frontend owner for approved or explicitly preview-exempt UI contracts and runtime evidence.
 - **[ccdawn-performance-engineering](./ccdawn-performance-engineering/SKILL.md)** - Evidence-driven profiling and minimal optimization for explicit performance goals, regressions, hot paths, and resource budgets; routine features stay with their current owner.
 - **[ccdawn-code-structure-guard](./ccdawn-code-structure-guard/SKILL.md)** - Lightweight STAY/CHECK/SPLIT guard that prevents multi-responsibility giant files without mechanical line-count splitting.
 - **[ccdawn-dawn-agent-html-memory](./ccdawn-dawn-agent-html-memory/SKILL.md)** - Opt-in durable cross-session decisions and handoffs; it does not own the active execution loop.

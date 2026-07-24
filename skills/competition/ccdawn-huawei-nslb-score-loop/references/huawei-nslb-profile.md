@@ -1,9 +1,13 @@
----
-name: ccdawn-huawei-nslb-score-loop
-description: Use when optimizing, benchmarking, packaging, comparing baselines, handling online score feedback, or coordinating parallel agents for a Huawei Algorithm Challenge 37 NSLB workspace identified by its solver and score-loop artifacts.
----
-
 # Huawei NSLB Score Loop
+
+## Contents
+
+- BRT interface and harness boundaries
+- Context and mutation matrix
+- Worker execution and validation
+- Search, recovery, and online calibration
+- Epoch loop and promotion gate
+- Feedback, packaging, command routing, and memory updates
 
 This file is the full Huawei NSLB project profile for the generic `ccdawn-score-loop` model.
 
