@@ -67,7 +67,7 @@ BRT 默认适配输入：理解意图、选 owner、推进验证，无需 `/brt`
 
 非简单共同目标适合持续并行和本地集成时，询问一次“是否开启自动化协作开发闭环？”。确认后路由 `ccdawn-autonomous-collaboration-loop`，继承本地写入、提交、集成、验证和收尾许可；新建会话和远程动作仍单独授权。
 
-`MERGE_READY[_CONDITIONAL]` 时查一次 `integration/<target>`：有许可且空缺即认领；已有 owner 只交证据。dirty main/baseline 不取消责任，仅释放、失活或交接后接管。同一 dirty-target blocker 第二次出现即转 `ccdawn-thread-coordination`，不得累积新实现。
+`MERGE_READY[_CONDITIONAL]` + dirty target：读取 `ccdawn-thread-coordination` 的 integration ownership，查 `integration/<target>`；有许可且空缺即认领，已有 owner 只交证据，dirty main/baseline 不免责。同一 dirty-target blocker 第二次出现时，未启自动闭环也须读取，不累积新实现。
 
 ## 最小充分方案
 
