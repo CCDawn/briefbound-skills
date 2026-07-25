@@ -67,7 +67,7 @@ BRT 默认适配输入：理解意图、选 owner、推进验证，无需 `/brt`
 
 非简单共同目标适合持续并行和本地集成时，询问一次“是否开启自动化协作开发闭环？”。确认后路由 `ccdawn-autonomous-collaboration-loop`，继承本地写入、提交、集成、验证和收尾许可；新建会话和远程动作仍单独授权。
 
-出现 `MERGE_READY[_CONDITIONAL]` 时查一次 `integration/<target>`：有本地许可且空缺就认领队列，baseline/dirty main 不取消责任；已有负责人则只交证据。释放、失活或交接后才接管。
+`MERGE_READY[_CONDITIONAL]` 时查一次 `integration/<target>`：有许可且空缺即认领；已有 owner 只交证据。dirty main/baseline 不取消责任，仅释放、失活或交接后接管。同一 dirty-target blocker 第二次出现即转 `ccdawn-thread-coordination`，不得累积新实现。
 
 ## 最小充分方案
 
@@ -113,7 +113,7 @@ Superpowers 默认不参与自动路由；显式恢复时也不继承其 brainst
 
 Wrong-Edit Guard：定位 owning surface、预计文件、相关测试和已有用户/Agent 改动；只改完成契约所需范围。验证失败先区分 implementation、test intent、environment、requirement mismatch，不为过测试削弱行为。
 
-首次写入、scope 扩大或合并前运行 `preflight --write-kind`；无 registry 也检查 Git 隔离但不初始化协调。根 `main/master` 的 `development` 收到 `ISOLATION_REQUIRED` 后转 task worktree，`mechanical` 显式声明，`integration` 需有效 claim 且 clean。`OVERLAP` 进入 Silent Conflict Triage；只有不可拆且立即覆盖/回归才暂停。
+首次写入、scope 扩大或合并前运行 `preflight --write-kind`；规划文档属于 development 写入，须先隔离。无 registry 仍检查 Git。根 `main/master` 的 `development` 收到 `ISOLATION_REQUIRED` 后转 task worktree；`mechanical` 显式声明；`integration` 需有效 claim 且 clean。`OVERLAP` 进入 Silent Conflict Triage，仅不可拆且立即覆盖/回归时暂停。
 
 当前 owner 用风险相称的新鲜证据收口。普通任务无需 `ccdawn-completion-summary`；只有跨阶段/会话、恢复、正式交接或 Deferred 风险才使用。只有已知产生临时产物、branch/worktree/claim 等真实残留时才路由 cleanup；没有候选不扫描、不汇报。
 

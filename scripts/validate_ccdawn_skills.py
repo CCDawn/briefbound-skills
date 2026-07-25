@@ -62,6 +62,8 @@ BRT_CORE_MARKERS = [
     "STAY / CHECK / SPLIT",
     "preflight --write-kind",
     "ISOLATION_REQUIRED",
+    "同一 dirty-target blocker 第二次出现",
+    "规划文档属于 development 写入",
 ]
 
 UNIFIED_CONTRACT_MARKERS = [
@@ -1259,6 +1261,8 @@ def validate_skill(
             "不定时轮询",
             "ACCEPT / ADAPT / DECLINE",
             "无 finding 不发消息",
+            "SELF_OWNED / PEER_OWNED / UNOWNED / UNKNOWN",
+            "不得以“等待 main 清理”继续累积新的实现批次",
         ]:
             if marker not in thread_contract_text:
                 errors.append(f"{label}: thread coordination contract missing marker '{marker}'")

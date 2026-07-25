@@ -45,5 +45,8 @@
   {"id":"creative-concepts","prompt":"围绕这个产品问题进行概念碰撞，生成几个有新意且可比较的方案","primary":"ccdawn-creative-toolbox","support":[],"forbidden_primary":["ccdawn-visual-design","ccdawn-evaluation"]},
   {"id":"ui-pr-composite","prompt":"审查前端 PR 的代码和合并风险，并打开真实页面检查视觉回归","primary":"ccdawn-pr-review","support":["ccdawn-ui-review"],"forbidden_primary":["ccdawn-ui-review"]},
   {"id":"performance-pr-composite","prompt":"审查这个声称吞吐提升 30% 的 PR，并复核 profiling、baseline 和 benchmark 是否可比较","primary":"ccdawn-pr-review","support":["ccdawn-performance-engineering"],"forbidden_primary":["ccdawn-project-review"]},
-  {"id":"research-promotion-composite","prompt":"审查候选是否达到 metric 晋升线，并核验这个关键研究结论是否可信","primary":"ccdawn-score-loop","support":["ccdawn-research-rigor-review"],"forbidden_primary":["ccdawn-ai-research-loop"]}
+  {"id":"research-promotion-composite","prompt":"审查候选是否达到 metric 晋升线，并核验这个关键研究结论是否可信","primary":"ccdawn-score-loop","support":["ccdawn-research-rigor-review"],"forbidden_primary":["ccdawn-ai-research-loop"]},
+  {"id":"merge-ready-dirty-main","prompt":"任务分支已提交并通过聚焦验证，但根 main 有其他任务的未跟踪文件；认领集成队列、识别 owner 并协商恢复，不要只等待 main 变干净","primary":"ccdawn-thread-coordination","support":[],"forbidden_primary":["ccdawn-autonomous-collaboration-loop","ccdawn-development-cleanup"]},
+  {"id":"self-created-untracked-plan","prompt":"我先在根 main 写了规划文档，随后任务 worktree 已 MERGE_READY；请把自己创建的未跟踪规划迁移到任务交付并恢复集成，不要把它误报成无关阻塞","primary":"ccdawn-thread-coordination","support":[],"forbidden_primary":["ccdawn-planning","ccdawn-development-cleanup"]},
+  {"id":"repeated-integration-blocker","prompt":"同一个 dirty main 阻塞已连续两轮出现，任务却继续累积新的已提交批次；停止重复延期，进入 integration ownership 并与现有任务协商处理","primary":"ccdawn-thread-coordination","support":[],"forbidden_primary":["ccdawn-autonomous-collaboration-loop","ccdawn-planning"]}
 ]
