@@ -107,6 +107,47 @@ def stop_process_tree(process: subprocess.Popen[str]) -> None:
         process.kill()
 
 
+def evaluate_final_response(case: dict, final_message: str) -> list[str]:
+    failures: list[str] = []
+    expected_any = case.get("expected_final_any", [])
+    if expected_any and not any(term in final_message for term in expected_any):
+        failures.append(f"final response lacks one of {expected_any}")
+    missing_all = [term for term in case.get("expected_final_all", []) if term not in final_message]
+    if missing_all:
+        failures.append(f"final response lacks required terms: {missing_all}")
+    forbidden_final = [term for term in case.get("forbidden_final_any", []) if term in final_message]
+    if forbidden_final:
+        failures.append(f"final response contains forbidden terms: {forbidden_final}")
+    delegation = [
+        term for term in case.get("forbidden_delegation_phrases", []) if term in final_message
+    ]
+    if delegation:
+        failures.append(f"final response contains delegation phrases: {delegation}")
+
+    question_count = final_message.count("?") + final_message.count("？")
+    if question_count == 0 and any(
+        term in final_message for term in ("请确认", "请回复", "等待校准")
+    ):
+        question_count = len(re.findall(r"(?m)^\s*\d+[.、)]\s+", final_message))
+    min_questions = case.get("min_questions")
+    max_questions = case.get("max_questions")
+    if min_questions is not None and question_count < min_questions:
+        failures.append(f"question count {question_count} is below {min_questions}")
+    if max_questions is not None and question_count > max_questions:
+        failures.append(f"question count {question_count} exceeds {max_questions}")
+    if case.get("require_recommendation") and "推荐" not in final_message:
+        failures.append("final response lacks a recommendation")
+    if case.get("require_wrong_decision_impact") and not any(
+        term in final_message for term in ("错判影响", "错误决策影响", "误判影响")
+    ):
+        failures.append("final response lacks a wrong-decision impact")
+    if case.get("require_wait_for_calibration") and not any(
+        term in final_message for term in ("按推荐", "请回复", "等待", "确认后")
+    ):
+        failures.append("final response lacks a calibration wait")
+    return failures
+
+
 def run_case(
     codex_cli: Path,
     repo_root: Path,
@@ -190,11 +231,9 @@ def run_case(
         failures.append(f"forbidden skill reads: {forbidden_reads}")
     if command_count > case["max_commands"]:
         failures.append(f"command count {command_count} exceeds {case['max_commands']}")
-    if not any(term in final_message for term in case["expected_final_any"]):
-        failures.append(f"final response lacks one of {case['expected_final_any']}")
-    forbidden_final = [term for term in case.get("forbidden_final_any", []) if term in final_message]
-    if forbidden_final:
-        failures.append(f"final response contains forbidden terms: {forbidden_final}")
+    if command_count < case.get("min_commands", 0):
+        failures.append(f"command count {command_count} is below {case['min_commands']}")
+    failures.extend(evaluate_final_response(case, final_message))
 
     result = {
         "id": case["id"],

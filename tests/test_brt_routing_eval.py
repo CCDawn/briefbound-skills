@@ -48,6 +48,64 @@ class RoutingEvalTests(unittest.TestCase):
             with mock.patch.dict(os.environ, {"CODEX_CLI_PATH": str(executable)}):
                 self.assertEqual(ROUTING_EVAL.find_codex_cli(), executable)
 
+    def test_evaluate_response_enforces_structural_alignment_contract(self) -> None:
+        case = {
+            "expected_final_any": ["当前理解"],
+            "expected_final_all": ["行为差异", "错判影响"],
+            "forbidden_final_any": ["已经修改"],
+            "forbidden_delegation_phrases": ["请提供页面路径"],
+            "min_questions": 1,
+            "max_questions": 2,
+            "require_recommendation": True,
+            "require_wrong_decision_impact": True,
+            "require_wait_for_calibration": True,
+        }
+        final_message = (
+            "当前理解：为已选成员增加低风险批量操作。\n"
+            "请确认：\n"
+            "1. 仅支持停用。推荐：是；行为差异：不会批量删除；错判影响：可能误删。\n"
+            "请回复“按推荐”或纠正。"
+        )
+
+        self.assertEqual(ROUTING_EVAL.evaluate_final_response(case, final_message), [])
+
+    def test_evaluate_response_reports_missing_alignment_structure(self) -> None:
+        case = {
+            "expected_final_any": [],
+            "expected_final_all": ["行为差异"],
+            "forbidden_final_any": [],
+            "forbidden_delegation_phrases": ["请选择一个明确目标"],
+            "min_questions": 1,
+            "max_questions": 2,
+            "require_recommendation": True,
+            "require_wrong_decision_impact": True,
+            "require_wait_for_calibration": True,
+        }
+
+        failures = ROUTING_EVAL.evaluate_final_response(
+            case,
+            "请选择一个明确目标，我就开始处理。",
+        )
+
+        self.assertTrue(any("lacks required terms" in failure for failure in failures))
+        self.assertTrue(any("question count" in failure for failure in failures))
+        self.assertTrue(any("recommendation" in failure for failure in failures))
+        self.assertTrue(any("wrong-decision impact" in failure for failure in failures))
+        self.assertTrue(any("calibration wait" in failure for failure in failures))
+        self.assertTrue(any("delegation phrases" in failure for failure in failures))
+
+    def test_evaluate_response_accepts_equivalent_wrong_decision_heading(self) -> None:
+        case = {
+            "expected_final_any": [],
+            "forbidden_final_any": [],
+            "require_wrong_decision_impact": True,
+        }
+
+        self.assertEqual(
+            ROUTING_EVAL.evaluate_final_response(case, "错误决策影响：可能造成误删。"),
+            [],
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

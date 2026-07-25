@@ -561,15 +561,37 @@ def validate_live_routing_cases(
         if not isinstance(max_commands, int) or not 0 <= max_commands <= 50:
             errors.append(f"{case_label}: max_commands must be an integer from 0 to 50")
         expected_final = case["expected_final_any"]
-        if not isinstance(expected_final, list) or not expected_final or not all(
+        if not isinstance(expected_final, list) or not all(
             isinstance(term, str) and term for term in expected_final
         ):
-            errors.append(f"{case_label}: expected_final_any must be a non-empty string list")
-        forbidden_final = case.get("forbidden_final_any", [])
-        if not isinstance(forbidden_final, list) or not all(
-            isinstance(term, str) and term for term in forbidden_final
+            errors.append(f"{case_label}: expected_final_any must be a string list")
+        for field in (
+            "expected_final_all",
+            "forbidden_final_any",
+            "forbidden_delegation_phrases",
         ):
-            errors.append(f"{case_label}: forbidden_final_any must be a string list")
+            terms = case.get(field, [])
+            if not isinstance(terms, list) or not all(
+                isinstance(term, str) and term for term in terms
+            ):
+                errors.append(f"{case_label}: {field} must be a string list")
+        min_commands = case.get("min_commands", 0)
+        if not isinstance(min_commands, int) or not 0 <= min_commands <= max_commands:
+            errors.append(f"{case_label}: min_commands must be an integer from 0 to max_commands")
+        for field in ("min_questions", "max_questions"):
+            value = case.get(field)
+            if value is not None and (not isinstance(value, int) or not 0 <= value <= 10):
+                errors.append(f"{case_label}: {field} must be an integer from 0 to 10")
+        if case.get("min_questions", 0) > case.get("max_questions", 10):
+            errors.append(f"{case_label}: min_questions must not exceed max_questions")
+        for field in (
+            "require_recommendation",
+            "require_wrong_decision_impact",
+            "require_wait_for_calibration",
+        ):
+            value = case.get(field)
+            if value is not None and not isinstance(value, bool):
+                errors.append(f"{case_label}: {field} must be boolean")
         timeout_seconds = case["timeout_seconds"]
         if not isinstance(timeout_seconds, int) or not 30 <= timeout_seconds <= 600:
             errors.append(f"{case_label}: timeout_seconds must be an integer from 30 to 600")
