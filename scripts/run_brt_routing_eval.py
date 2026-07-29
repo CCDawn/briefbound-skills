@@ -56,10 +56,27 @@ def find_codex_cli() -> Path:
     raise SystemExit("Codex CLI not found. Set CODEX_CLI_PATH to the current codex executable.")
 
 
+def child_environment(source: dict[str, str] | None = None) -> dict[str, str]:
+    environment = dict(os.environ if source is None else source)
+    environment["PYTHONIOENCODING"] = "utf-8"
+    if os.name != "nt":
+        return environment
+
+    path_separator = ";" if os.name == "nt" else os.pathsep
+    path_entries = environment.get("PATH", "").split(path_separator)
+    environment["PATH"] = path_separator.join(
+        entry
+        for entry in path_entries
+        if "\\windowsapps\\microsoft.powershell_" not in entry.lower()
+        and "\\microsoft\\windowsapps" not in entry.lower()
+    )
+    return environment
+
+
 def parse_events(text: str) -> tuple[list[dict], list[str], str]:
     events: list[dict] = []
-    command_ids: set[str] = set()
-    skill_reads: set[str] = set()
+    commands: dict[str, str] = {}
+    successful_command_ids: set[str] = set()
     last_message = ""
 
     for raw_line in text.splitlines():
@@ -77,12 +94,18 @@ def parse_events(text: str) -> tuple[list[dict], list[str], str]:
         if not isinstance(item, dict):
             continue
         if item.get("type") == "command_execution":
-            command_ids.add(str(item.get("id", "")))
-            command = str(item.get("command", ""))
-            skill_reads.update(match.group("name").lower() for match in SKILL_READ_RE.finditer(command))
+            command_id = str(item.get("id", ""))
+            commands[command_id] = str(item.get("command", ""))
+            if event.get("type") == "item.completed" and item.get("exit_code") == 0:
+                successful_command_ids.add(command_id)
         elif item.get("type") == "agent_message" and item.get("text"):
             last_message = str(item["text"])
 
+    skill_reads = {
+        match.group("name").lower()
+        for command_id in successful_command_ids
+        for match in SKILL_READ_RE.finditer(commands.get(command_id, ""))
+    }
     return events, sorted(skill_reads), last_message
 
 
@@ -125,10 +148,11 @@ def evaluate_final_response(case: dict, final_message: str) -> list[str]:
         failures.append(f"final response contains delegation phrases: {delegation}")
 
     question_count = final_message.count("?") + final_message.count("？")
-    if question_count == 0 and any(
-        term in final_message for term in ("请确认", "请回复", "等待校准")
+    if question_count == 0 and (
+        any(term in final_message for term in ("请确认", "请回复", "等待校准"))
+        or re.search(r"回复.{0,20}按推荐", final_message)
     ):
-        question_count = len(re.findall(r"(?m)^\s*\d+[.、)]\s+", final_message))
+        question_count = 1
     min_questions = case.get("min_questions")
     max_questions = case.get("max_questions")
     if min_questions is not None and question_count < min_questions:
@@ -138,7 +162,7 @@ def evaluate_final_response(case: dict, final_message: str) -> list[str]:
     if case.get("require_recommendation") and "推荐" not in final_message:
         failures.append("final response lacks a recommendation")
     if case.get("require_wrong_decision_impact") and not any(
-        term in final_message for term in ("错判影响", "错误决策影响", "误判影响")
+        term in final_message for term in ("错判影响", "错误决策影响", "误判影响", "选错影响")
     ):
         failures.append("final response lacks a wrong-decision impact")
     if case.get("require_wait_for_calibration") and not any(
@@ -191,6 +215,7 @@ def run_case(
         "encoding": "utf-8",
         "errors": "replace",
         "stdin": subprocess.DEVNULL,
+        "env": child_environment(),
     }
     if os.name == "nt":
         popen_kwargs["creationflags"] = subprocess.CREATE_NEW_PROCESS_GROUP
