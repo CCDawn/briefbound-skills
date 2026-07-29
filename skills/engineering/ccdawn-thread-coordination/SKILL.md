@@ -1,6 +1,6 @@
 ---
 name: ccdawn-thread-coordination
-description: "Use when existing independent Codex App threads work in the same project and need peer advice, collaboration proposals, shared progress awareness, ownership arbitration, conflict pause/resume, discussion, merge coordination, status exchange, or handoff through native thread tools without creating subagents."
+description: "Use when existing independent Codex App threads work in the same project and need peer advice, collaboration proposals, target/ACK validation, ownership arbitration, conflict pause/resume, discussion, merge coordination, status exchange, or handoff through native thread tools without creating subagents."
 license: MIT
 ---
 
@@ -34,7 +34,7 @@ owner 顺序：用户指定 > 有效 claim/registry > 更早 owner。非 owner �
 
 ## 主动协作
 
-协作或同行建议才读取 `references/proactive-collaboration.md`。提议不转移 owner，双方继续安全工作。
+消息投递或协作时读 `references/proactive-collaboration.md`，不转移 owner。
 
 skill 只提供协调原语。持续互助交 `ccdawn-multi-agent-orchestration`；自动闭环由 `ccdawn-autonomous-collaboration-loop` 驱动并继承恢复债务。不得建立主从关系。
 
@@ -50,7 +50,7 @@ Silent Conflict Triage 核验 claim、真实写入和替代工作；优先 `SELF
 
 修复后 `resolve` 并主动发送 `CONFLICT_RESOLVED`；对方重读状态，`resume` 后回复 `RESUMED`。不要随后调用 registry `respond --status RESUMED`。
 
-发送前读目标；忙于其他用户任务则留待 idle，禁发“继续”。消息不是抢占机制。
+三门禁：`Target Validity Gate` 与 `ACK Gate` 读主动协作参考；`Coordination Closeout Gate` 读集成责任参考。失败不发、不接管或不关闭。
 
 `main` 推进、合入排队或 gate 可能 stale 不属于 `PAUSE_REQUIRED`。Peer 完成聚焦验证并返回 `MERGE_READY`，由有效 integration claim 的 owner 串行应用交付；不要求 peer 等稳定窗口或重复 full gate。只有集成失败需要其独有判断时才唤醒原 owner。
 

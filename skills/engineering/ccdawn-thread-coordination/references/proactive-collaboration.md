@@ -1,6 +1,14 @@
 # 主动协作
 
-`send_message_to_thread` 前即时 `read_thread`；目标正处理不同用户任务时留待 idle，不发送泛化“继续”。
+## 投递门禁
+
+### Target Validity Gate
+
+`send_message_to_thread` 前即时 `read_thread`，确认目标存在，且当前任务、owner/claim 与 scope 匹配。历史 registry 映射、Agent ID 后缀或共享旧 thread 不是投递证据；无有效 threadId 或身份不匹配时不发，目标正处理不同用户任务时留待 idle，或转当前有效 owner，不发送泛化“继续”。
+
+### ACK Gate
+
+ownership、conflict、discussion、merge 请求写明目标 Agent/thread/claim/scope 和 `Reply To`，并要求一次 `ACK_OWNER / NOT_OWNER / DEFER_UNTIL <checkpoint>`。无 ACK 不等于送达、同意或取消；继续非冲突工作，不定时轮询。租约失活后仅做一次状态复核，再 `takeover` 或转当前有效 Integration Owner，不改投无关 thread。
 
 ## 平级协作提议
 

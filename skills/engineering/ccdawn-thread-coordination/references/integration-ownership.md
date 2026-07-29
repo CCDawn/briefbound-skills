@@ -14,6 +14,10 @@
 
 认领的是推进义务，不要求当下即可写入 `main`。dirty checkout、等待 peer 释放或已证明无关的 baseline failure 都是队列状态，不是放弃 owner 的理由。交付已提交后，将实现 claim 转为 ready/released，由 integration claim 承担后续责任。
 
+## Coordination Closeout Gate
+
+收到 `INTEGRATED` 或发现目标分支已包含交付时，立即用 Git 与 registry 对账；重基交付以最终吸收的 head 为准，并记录其替代关系。代码合入不等于协调完成：integration claim 必须覆盖约定内的 post-merge gate、Launcher/runtime 验收和 dirty-scene 恢复。全部完成后才广播 `INTEGRATED`、resolve 关联 merge coordination、释放 claim，并把已结束 Agent 标记 completed；不得保留假 open、假 active 或重复集成队列。
+
 ## Dirty target 分诊
 
 认领队列后，把阻塞文件一次分为 `SELF_OWNED / PEER_OWNED / UNOWNED / UNKNOWN`：
@@ -27,4 +31,4 @@
 
 若失败能在 clean base 复现且交付没有新增失败，标记 `MERGE_READY_CONDITIONAL`；默认不接管或要求用户授权修复无关基线。强制 gate 仍阻止合入时，owner 保留队列责任，只向现有基线 owner 发一次协调并等待可行动事件；只有产品、安全、迁移或真实范围取舍才询问用户。
 
-无法及时推进时发送 `INTEGRATION_HANDOFF` 并释放 claim，不得静默占位。只有明确释放、租约失活或 Git 已证明义务完成时，其他 Agent 才可 `takeover`。完成后广播一次 `INTEGRATED`，释放 claim 并关闭关联 merge coordination。
+无法及时推进时发送 `INTEGRATION_HANDOFF` 并释放 claim，不得静默占位。只有明确释放、租约失活或 Git 已证明义务完成时，其他 Agent 才可 `takeover`。
