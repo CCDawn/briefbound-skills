@@ -101,10 +101,10 @@ Run `py -3 scripts\run_brt_routing_eval.py` after installation for a low-cost, r
 - [`ccdawn-performance-engineering`](skills/engineering/ccdawn-performance-engineering/SKILL.md): measured bottleneck diagnosis and minimal optimization only for real performance targets, regressions, or hot paths.
 - [`ccdawn-code-structure-guard`](skills/engineering/ccdawn-code-structure-guard/SKILL.md): lightweight protection against multi-responsibility giant files without mechanical line-count splitting.
 - [`ccdawn-pr-review`](skills/engineering/ccdawn-pr-review/SKILL.md): risk-ranked PR and diff review with merge-readiness evidence.
-- [`ccdawn-ui-design`](skills/engineering/ccdawn-ui-design/SKILL.md): UI/UX direction, responsive behavior, accessibility, and browser visual QA.
-- [`ccdawn-visual-design`](skills/engineering/ccdawn-visual-design/SKILL.md): context-aware brand expression, typography, color, composition, imagery, and motion direction.
-- [`ccdawn-frontend-engineering`](skills/engineering/ccdawn-frontend-engineering/SKILL.md): production implementation of accepted UI contracts with runtime evidence.
-- [`ccdawn-ui-review`](skills/engineering/ccdawn-ui-review/SKILL.md): findings-first review of existing interfaces using user tasks and browser evidence.
+- [`ccdawn-ui-design`](skills/engineering/ccdawn-ui-design/SKILL.md): UI/UX direction with an isolated interactive preview before high-impact production changes.
+- [`ccdawn-visual-design`](skills/engineering/ccdawn-visual-design/SKILL.md): context-aware brand and visual direction with preview approval before implementation.
+- [`ccdawn-frontend-engineering`](skills/engineering/ccdawn-frontend-engineering/SKILL.md): production implementation of approved or explicitly preview-exempt UI contracts.
+- [`ccdawn-ui-review`](skills/engineering/ccdawn-ui-review/SKILL.md): findings-first review of existing interfaces or isolated previews without replacing user approval.
 - [`ccdawn-design-system`](skills/engineering/ccdawn-design-system/SKILL.md): shared token, theme, component API, variant, and Figma-to-code governance.
 - [`ccdawn-ai-research-loop`](skills/research/ccdawn-ai-research-loop/SKILL.md): baseline reproduction, hypotheses, experiments, ablations, and research synthesis.
 - [`ccdawn-feature-reuse-research`](skills/engineering/ccdawn-feature-reuse-research/SKILL.md): reuse research for complex feature decisions.

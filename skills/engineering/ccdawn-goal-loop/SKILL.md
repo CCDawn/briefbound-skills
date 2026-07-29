@@ -37,6 +37,8 @@ license: MIT
 
 Goal Loop 是控制策略，不是状态存储。对话内续接使用 BRT Runtime；只有用户/项目已启用跨会话 memory 且当前决定值得持久化时，才由 `ccdawn-dawn-agent-html-memory` 写一次 durable delta。不得逐轮生成 ledger、dashboard、完整尝试历史或重复 goal contract。
 
+需要校准正常推进、边界澄清或阻塞停止行为时，读取 `references/examples.md`。
+
 ## 输出
 
 普通轮次只给：`本轮结果 / 新证据 / 决策 / 下一动作`。只有 `BLOCKED` 才补已尝试的关键路径和一个不可约问题；只有用户明确要求正式交接时才路由 Completion Summary。

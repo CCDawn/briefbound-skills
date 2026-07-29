@@ -1,5 +1,5 @@
 interface:
   display_name: "CCDawn 竞赛科研全流程"
-  short_description: "端到端竞赛科研阶段、证据与提交闭环"
+  short_description: "协调竞赛科研的规则、数据、基线、实验、证据主张与提交阶段闭环"
   default_prompt: "使用 $ccdawn-competition-research-lifecycle 用中文判断当前竞赛科研阶段和证据，选择下一项必要动作，并说明推进、迭代、恢复或停止结论。"
 

@@ -1,5 +1,13 @@
 # 竞赛科研全流程模板（Competition Research Lifecycle Templates）
 
+## 目录
+
+- 阶段启动与项目状态
+- 任务、数据和研究证据
+- 假设、实验、smoke 与 proxy ranking
+- Baseline、消融、论文与提交
+- 并行 lane 和证据失效
+
 当用户需要快速落一个具体 artifact 形状时，优先使用这些模板。
 
 ## 阶段启动卡

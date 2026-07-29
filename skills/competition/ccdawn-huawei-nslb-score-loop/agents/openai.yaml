@@ -1,5 +1,5 @@
 interface:
   display_name: "CCDawn 华为 NSLB 评分循环"
-  short_description: "Huawei NSLB 项目适配层，基于通用 score loop 执行 epoch、gate、packaging 和 online feedback。"
+  short_description: "华为 NSLB 项目的评分迭代、候选晋升、打包与线上反馈适配"
   default_prompt: "使用 $ccdawn-huawei-nslb-score-loop 作为 $ccdawn-score-loop 的华为 NSLB 适配层：解析项目根目录，检查 status/doctor/drift，按 profile 推进 epoch、候选 gate、短包注册和 online score 校准。"
 

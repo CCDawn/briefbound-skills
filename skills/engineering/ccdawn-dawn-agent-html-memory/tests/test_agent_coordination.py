@@ -68,6 +68,344 @@ def run_coordination(
 
 
 class AgentCoordinationTests(unittest.TestCase):
+    def test_implicit_agent_id_does_not_add_a_second_agent_prefix(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            project = Path(temp) / "project"
+            codex_home = Path(temp) / "codex-home"
+            project.mkdir()
+
+            joined = json.loads(
+                run_coordination(
+                    project,
+                    codex_home,
+                    "join",
+                    "--agent",
+                    "agent-root-source-search-brief-production",
+                    "--thread-id",
+                    "thread-source-search",
+                    "--task",
+                    "Implement source search brief",
+                    "--json",
+                ).stdout
+            )
+            claimed = json.loads(
+                run_coordination(
+                    project,
+                    codex_home,
+                    "claim",
+                    "--lane",
+                    "challenge-cup-frontend",
+                    "--scope",
+                    "web/src/routes/TeamsRoute.tsx",
+                    "--agent",
+                    "agent-root-source-search-brief-production",
+                    "--task",
+                    "Implement source search brief",
+                    "--json",
+                ).stdout
+            )["claim"]
+
+            self.assertEqual("agent-root-source-search-brief-production", joined["id"])
+            self.assertEqual(joined["id"], claimed["agentId"])
+
+    def test_join_reuses_the_active_agent_identity_for_the_same_thread(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            project = Path(temp) / "project"
+            codex_home = Path(temp) / "codex-home"
+            project.mkdir()
+
+            first = json.loads(
+                run_coordination(
+                    project,
+                    codex_home,
+                    "join",
+                    "--agent",
+                    "Source search brief owner",
+                    "--agent-id",
+                    "agent-root-source-search-brief-production",
+                    "--thread-id",
+                    "thread-source-search",
+                    "--task",
+                    "Implement source search brief",
+                    "--json",
+                ).stdout
+            )
+            second = json.loads(
+                run_coordination(
+                    project,
+                    codex_home,
+                    "join",
+                    "--agent",
+                    "Codex source search brief production",
+                    "--thread-id",
+                    "thread-source-search",
+                    "--task",
+                    "Continue source search brief",
+                    "--json",
+                ).stdout
+            )
+            explicit_alias = json.loads(
+                run_coordination(
+                    project,
+                    codex_home,
+                    "join",
+                    "--agent",
+                    "Another label for the same task",
+                    "--agent-id",
+                    "agent-source-search-alias",
+                    "--thread-id",
+                    "thread-source-search",
+                    "--task",
+                    "Continue source search brief",
+                    "--json",
+                ).stdout
+            )
+            registry = json.loads(
+                run_coordination(
+                    project,
+                    codex_home,
+                    "status",
+                    "--include-completed",
+                    "--json",
+                ).stdout
+            )
+
+            self.assertEqual(first["id"], second["id"])
+            self.assertEqual(first["id"], explicit_alias["id"])
+            self.assertEqual(
+                [first["id"]],
+                [item["id"] for item in registry["agents"]],
+            )
+
+    def test_update_completed_closes_owned_claims(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            project = Path(temp) / "project"
+            codex_home = Path(temp) / "codex-home"
+            project.mkdir()
+
+            run_coordination(
+                project,
+                codex_home,
+                "join",
+                "--agent",
+                "Agent A",
+                "--agent-id",
+                "agent-a",
+                "--task",
+                "Frontend task",
+            )
+            claim = json.loads(
+                run_coordination(
+                    project,
+                    codex_home,
+                    "claim",
+                    "--lane",
+                    "frontend",
+                    "--scope",
+                    "web/src",
+                    "--agent-id",
+                    "agent-a",
+                    "--task",
+                    "Frontend task",
+                    "--json",
+                ).stdout
+            )["claim"]
+
+            run_coordination(
+                project,
+                codex_home,
+                "update",
+                "--agent-id",
+                "agent-a",
+                "--state",
+                "completed",
+                "--last-checkpoint",
+                "Merged and verified",
+            )
+            registry = json.loads(
+                run_coordination(
+                    project,
+                    codex_home,
+                    "status",
+                    "--include-completed",
+                    "--json",
+                ).stdout
+            )
+            stored_claim = next(item for item in registry["claims"] if item["id"] == claim["id"])
+
+            self.assertEqual("completed", stored_claim["status"])
+            self.assertEqual("completed", registry["agents"][0]["state"])
+
+    def test_preflight_blocks_development_on_primary_main_but_allows_linked_worktree(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp) / "project"
+            worker = Path(temp) / "worker"
+            codex_home = Path(temp) / "codex-home"
+            root.mkdir()
+            run_git("init", "-b", "main", cwd=root)
+            (root / "README.md").write_text("baseline\n", encoding="utf-8")
+            run_git("add", "README.md", cwd=root)
+            run_git(
+                "-c",
+                "user.name=CCDawn Test",
+                "-c",
+                "user.email=ccdawn@example.invalid",
+                "commit",
+                "-m",
+                "baseline",
+                cwd=root,
+            )
+            run_git("worktree", "add", "-b", "worker", str(worker), cwd=root)
+
+            blocked = run_coordination(
+                root,
+                codex_home,
+                "preflight",
+                "--agent-id",
+                "agent-a",
+                "--scope",
+                "src",
+                "--json",
+                check=False,
+            )
+            self.assertEqual(2, blocked.returncode)
+            blocked_payload = json.loads(blocked.stdout)
+            self.assertEqual("ISOLATION_REQUIRED", blocked_payload["state"])
+            self.assertTrue(blocked_payload["primaryWorktree"])
+            self.assertEqual("main", blocked_payload["branch"])
+
+            allowed = json.loads(
+                run_coordination(
+                    worker,
+                    codex_home,
+                    "preflight",
+                    "--agent-id",
+                    "agent-a",
+                    "--scope",
+                    "src",
+                    "--json",
+                ).stdout
+            )
+            self.assertEqual("CLEAR", allowed["state"])
+            self.assertFalse(allowed["primaryWorktree"])
+
+    def test_preflight_allows_explicit_mechanical_write_on_primary_main(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp) / "project"
+            codex_home = Path(temp) / "codex-home"
+            root.mkdir()
+            run_git("init", "-b", "main", cwd=root)
+
+            payload = json.loads(
+                run_coordination(
+                    root,
+                    codex_home,
+                    "preflight",
+                    "--agent-id",
+                    "agent-a",
+                    "--scope",
+                    "README.md",
+                    "--write-kind",
+                    "mechanical",
+                    "--json",
+                ).stdout
+            )
+
+            self.assertEqual("CLEAR", payload["state"])
+            self.assertEqual("mechanical", payload["writeKind"])
+
+    def test_preflight_requires_integration_claim_and_clean_primary_main(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp) / "project"
+            codex_home = Path(temp) / "codex-home"
+            root.mkdir()
+            run_git("init", "-b", "main", cwd=root)
+            (root / "README.md").write_text("baseline\n", encoding="utf-8")
+            run_git("add", "README.md", cwd=root)
+            run_git(
+                "-c",
+                "user.name=CCDawn Test",
+                "-c",
+                "user.email=ccdawn@example.invalid",
+                "commit",
+                "-m",
+                "baseline",
+                cwd=root,
+            )
+
+            missing = run_coordination(
+                root,
+                codex_home,
+                "preflight",
+                "--agent-id",
+                "agent-a",
+                "--write-kind",
+                "integration",
+                "--json",
+                check=False,
+            )
+            self.assertEqual(2, missing.returncode)
+            self.assertEqual("INTEGRATION_CLAIM_REQUIRED", json.loads(missing.stdout)["state"])
+
+            run_coordination(
+                root,
+                codex_home,
+                "join",
+                "--agent",
+                "Agent A",
+                "--agent-id",
+                "agent-a",
+                "--task",
+                "integrate main",
+                "--branch",
+                "main",
+                "--worktree",
+                str(root),
+                "--json",
+            )
+            run_coordination(
+                root,
+                codex_home,
+                "claim",
+                "--lane",
+                "integration/main",
+                "--agent-id",
+                "agent-a",
+                "--task",
+                "integrate main",
+                "--json",
+            )
+
+            allowed = json.loads(
+                run_coordination(
+                    root,
+                    codex_home,
+                    "preflight",
+                    "--agent-id",
+                    "agent-a",
+                    "--write-kind",
+                    "integration",
+                    "--json",
+                ).stdout
+            )
+            self.assertEqual("CLEAR", allowed["state"])
+            self.assertTrue(allowed["integrationClaim"])
+
+            (root / "README.md").write_text("dirty\n", encoding="utf-8")
+            dirty = run_coordination(
+                root,
+                codex_home,
+                "preflight",
+                "--agent-id",
+                "agent-a",
+                "--write-kind",
+                "integration",
+                "--json",
+                check=False,
+            )
+            self.assertEqual(2, dirty.returncode)
+            self.assertEqual("DIRTY_TARGET", json.loads(dirty.stdout)["state"])
+
     def test_cli_preflight_is_silent_without_registry_and_routes_only_overlap(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
             project = Path(temp) / "project"

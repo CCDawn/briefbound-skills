@@ -1,4 +1,4 @@
 interface:
   display_name: "CCDawn UI 设计"
-  short_description: "定义信息架构、交互模型和可实施的界面体验契约"
-  default_prompt: "使用 $ccdawn-ui-design 对齐当前 UI/UX 的信息架构和交互；用户要求设计并实现时由本 owner 直接落地并完成一次浏览器验收，不重复转交前端实现。"
+  short_description: "定义信息架构、交互模型、响应式行为和可实施的无障碍界面契约"
+  default_prompt: "使用 $ccdawn-ui-design 对齐当前 UI/UX；高影响界面先制作隔离网页供用户预审，批准后再正式实现并完成浏览器验收。"

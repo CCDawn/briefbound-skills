@@ -56,4 +56,4 @@ Smoke/proxy 只用于可运行性、淘汰和排序，不替代正式目标评�
 下一步建议: <一个具体动作>
 ```
 
-跨会话或正式交接时才读取 `REFERENCE.md`、`TEMPLATES.md` 或维护持久阶段 artifact；普通推进不输出完整 lifecycle 表、BRT gate 或阶段菜单。
+跨会话或正式交接时才读取 `references/lifecycle-reference.md` 和 `references/templates.md`；需要校准典型阶段切换时读取 `references/examples.md`。普通推进不输出完整 lifecycle 表、BRT gate 或阶段菜单。

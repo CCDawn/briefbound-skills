@@ -44,6 +44,9 @@ BRT_CORE_MARKERS = [
     "不得询问本地证据已经回答的问题",
     "低置信度不得带着未确认的高影响假设写入",
     "一次集中提出 2-4 个",
+    "Unexpected Issue Gate",
+    "停止受影响写入",
+    "不得扩大范围或硬做",
     "Collaboration Discovery",
     "PEER_READ_ONLY",
     "PEER_DISJOINT_WRITE",
@@ -57,6 +60,10 @@ BRT_CORE_MARKERS = [
     "FAST / CHECK / PROFILE",
     "不为每次开发建立 benchmark",
     "STAY / CHECK / SPLIT",
+    "preflight --write-kind",
+    "ISOLATION_REQUIRED",
+    "同一 dirty-target blocker 第二次出现",
+    "规划文档属于 development 写入",
 ]
 
 UNIFIED_CONTRACT_MARKERS = [
@@ -83,7 +90,7 @@ TOKEN_BUDGETS = {
     "ccdawn-ai-research-loop": 2200,
     "ccdawn-autonomous-collaboration-loop": 2200,
     "ccdawn-bdd-tdd-development": 1350,
-    "ccdawn-brt": 2700,
+    "ccdawn-brt": 2800,
     "ccdawn-bug-review": 1200,
     "ccdawn-code-structure-guard": 1100,
     "ccdawn-competition-research-lifecycle": 2500,
@@ -94,7 +101,7 @@ TOKEN_BUDGETS = {
     "ccdawn-design-system": 1500,
     "ccdawn-evaluation": 1000,
     "ccdawn-feature-reuse-research": 2100,
-    "ccdawn-frontend-engineering": 1500,
+    "ccdawn-frontend-engineering": 1550,
     "ccdawn-goal-loop": 1100,
     "ccdawn-huawei-nslb-score-loop": 1200,
     "ccdawn-multi-agent-orchestration": 1800,
@@ -107,17 +114,18 @@ TOKEN_BUDGETS = {
     "ccdawn-simplification-audit": 1000,
     "ccdawn-simplification-review": 1000,
     "ccdawn-thread-coordination": 1300,
-    "ccdawn-ui-design": 1650,
+    "ccdawn-ui-design": 2100,
     "ccdawn-ui-review": 1350,
-    "ccdawn-visual-design": 1500,
+    "ccdawn-visual-design": 1850,
 }
 
 BRT_REFERENCE_BUDGETS = {
     "collaboration-discovery.md": 900,
-    "routing-practice.md": 2400,
+    "routing-practice.md": 2550,
     "capability-routing.md": 1500,
     "runtime.md": 1800,
     "output-forms.md": 900,
+    "ui-preview-approval.md": 1600,
 }
 
 BRT_REFERENCE_REQUIRED_MARKERS = {
@@ -146,13 +154,26 @@ BRT_REFERENCE_REQUIRED_MARKERS = {
         "只有自然闸门才提供 2-3 个具体选项",
         "触发 `Alignment Value Gate` 时等待用户回复",
         "提问前先摘要已查到的项目惯例",
+        "## 意外问题讨论",
+        "原契约内可安全、可逆恢复的问题直接处理",
+        "## UI 预览预审",
+        "APPROVED / REVISE <反馈> / ABANDON",
+    ],
+    "ui-preview-approval.md": [
+        "PREVIEW_REQUIRED",
+        "PREVIEW_SKIPPED",
+        "WAITING_USER_REVIEW",
+        "APPROVED | REVISE | ABANDON",
+        "正式 UI owning surface",
+        "外部部署属于独立 `REMOTE_WRITE`",
+        "不能代替用户批准",
     ],
 }
 
 BRT_PROFILE_BUDGETS = {
-    "alignment": (["SKILL.md", "references/output-forms.md"], 3400),
+    "alignment": (["SKILL.md", "references/output-forms.md"], 3600),
     "collaboration": (["SKILL.md", "references/collaboration-discovery.md"], 3500),
-    "routing": (["SKILL.md", "references/routing-practice.md"], 5100),
+    "routing": (["SKILL.md", "references/routing-practice.md"], 5300),
     "long-task": (["SKILL.md", "references/runtime.md"], 4300),
     "maximum": (
         [
@@ -161,7 +182,7 @@ BRT_PROFILE_BUDGETS = {
             "references/routing-practice.md",
             "references/runtime.md",
         ],
-        7000,
+        7200,
     ),
 }
 
@@ -194,6 +215,42 @@ UI_METADATA_FORBIDDEN_TERMS = {
     "ccdawn-design-system": ["审查当前界面", "建立当前界面的视觉方向"],
     "ccdawn-ui-review": ["实现当前前端", "建立当前界面的视觉方向"],
 }
+
+UI_PREVIEW_REQUIRED_MARKERS = {
+    "ccdawn-ui-design": [
+        "## 预览批准闸门",
+        "PREVIEW_REQUIRED / PREVIEW_SKIPPED",
+        "WAITING_USER_REVIEW",
+        "APPROVED / REVISE <反馈> / ABANDON",
+        "批准前不进入正式实现",
+    ],
+    "ccdawn-visual-design": [
+        "## 预览批准闸门",
+        "PREVIEW_REQUIRED",
+        "PREVIEW_SKIPPED",
+        "WAITING_USER_REVIEW",
+        "UI Review 的通过建议不能代替用户批准",
+    ],
+    "ccdawn-frontend-engineering": [
+        "## 预览证据闸门",
+        "PREVIEW_REQUIRED",
+        "PREVIEW_SKIPPED",
+        "用户已明确批准具体预览或设计稿",
+        "不能替代对具体预览的用户批准",
+    ],
+    "ccdawn-ui-review": [
+        "## 预览预审",
+        "READY_FOR_USER_APPROVAL",
+        "REVISE_RECOMMENDED",
+        "只有用户对具体预览明确批准",
+    ],
+}
+
+MIN_SHORT_DESCRIPTION_CHARS = 25
+MAX_SHORT_DESCRIPTION_CHARS = 64
+MAX_SKILL_LINES = 500
+REFERENCE_TOC_THRESHOLD_LINES = 100
+REFERENCE_TOC_PATTERN = re.compile(r"(?m)^## (?:目录|Contents|Table of Contents)\s*$")
 
 
 def read_text(path: Path) -> str:
@@ -504,15 +561,37 @@ def validate_live_routing_cases(
         if not isinstance(max_commands, int) or not 0 <= max_commands <= 50:
             errors.append(f"{case_label}: max_commands must be an integer from 0 to 50")
         expected_final = case["expected_final_any"]
-        if not isinstance(expected_final, list) or not expected_final or not all(
+        if not isinstance(expected_final, list) or not all(
             isinstance(term, str) and term for term in expected_final
         ):
-            errors.append(f"{case_label}: expected_final_any must be a non-empty string list")
-        forbidden_final = case.get("forbidden_final_any", [])
-        if not isinstance(forbidden_final, list) or not all(
-            isinstance(term, str) and term for term in forbidden_final
+            errors.append(f"{case_label}: expected_final_any must be a string list")
+        for field in (
+            "expected_final_all",
+            "forbidden_final_any",
+            "forbidden_delegation_phrases",
         ):
-            errors.append(f"{case_label}: forbidden_final_any must be a string list")
+            terms = case.get(field, [])
+            if not isinstance(terms, list) or not all(
+                isinstance(term, str) and term for term in terms
+            ):
+                errors.append(f"{case_label}: {field} must be a string list")
+        min_commands = case.get("min_commands", 0)
+        if not isinstance(min_commands, int) or not 0 <= min_commands <= max_commands:
+            errors.append(f"{case_label}: min_commands must be an integer from 0 to max_commands")
+        for field in ("min_questions", "max_questions"):
+            value = case.get(field)
+            if value is not None and (not isinstance(value, int) or not 0 <= value <= 10):
+                errors.append(f"{case_label}: {field} must be an integer from 0 to 10")
+        if case.get("min_questions", 0) > case.get("max_questions", 10):
+            errors.append(f"{case_label}: min_questions must not exceed max_questions")
+        for field in (
+            "require_recommendation",
+            "require_wrong_decision_impact",
+            "require_wait_for_calibration",
+        ):
+            value = case.get(field)
+            if value is not None and not isinstance(value, bool):
+                errors.append(f"{case_label}: {field} must be boolean")
         timeout_seconds = case["timeout_seconds"]
         if not isinstance(timeout_seconds, int) or not 30 <= timeout_seconds <= 600:
             errors.append(f"{case_label}: timeout_seconds must be an integer from 30 to 600")
@@ -911,6 +990,36 @@ def validate_skill(
     license_id = frontmatter.get("license", "")
     label = str(skill_md.relative_to(repo_root))
 
+    skill_line_count = len(text.splitlines())
+    if skill_line_count > MAX_SKILL_LINES:
+        errors.append(
+            f"{label}: {skill_line_count} lines exceeds the {MAX_SKILL_LINES}-line progressive-disclosure limit"
+        )
+
+    extra_root_markdown = sorted(
+        path.name for path in skill_dir.glob("*.md") if path.name != "SKILL.md"
+    )
+    if extra_root_markdown:
+        errors.append(
+            f"{skill_dir.relative_to(repo_root)}: move root documentation into references/: {extra_root_markdown}"
+        )
+
+    references_dir = skill_dir / "references"
+    if references_dir.exists():
+        for reference_path in sorted(references_dir.rglob("*.md")):
+            reference_text = read_text(reference_path)
+            reference_label = str(reference_path.relative_to(repo_root))
+            if reference_text.startswith("---\n") or reference_text.startswith("---\r\n"):
+                errors.append(f"{reference_label}: reference files must not duplicate SKILL.md frontmatter")
+            reference_line_count = len(reference_text.splitlines())
+            if (
+                reference_line_count > REFERENCE_TOC_THRESHOLD_LINES
+                and not REFERENCE_TOC_PATTERN.search(reference_text)
+            ):
+                errors.append(
+                    f"{reference_label}: {reference_line_count} lines requires a top-level contents section"
+                )
+
     if not name:
         errors.append(f"{label}: missing frontmatter name")
     elif name != skill_dir.name:
@@ -939,6 +1048,17 @@ def validate_skill(
                 errors.append(f"{metadata_label}: missing interface field '{field}'")
             elif name.startswith("ccdawn-") and not contains_cjk(value):
                 errors.append(f"{metadata_label}: '{field}' must be Chinese-first")
+        short_description = interface.get("short_description", "")
+        if short_description and not (
+            MIN_SHORT_DESCRIPTION_CHARS
+            <= len(short_description)
+            <= MAX_SHORT_DESCRIPTION_CHARS
+        ):
+            errors.append(
+                f"{metadata_label}: short_description must be "
+                f"{MIN_SHORT_DESCRIPTION_CHARS}-{MAX_SHORT_DESCRIPTION_CHARS} characters, "
+                f"found {len(short_description)}"
+            )
         prompt = interface.get("default_prompt", "")
         if name and f"${name}" not in prompt:
             errors.append(f"{metadata_label}: default_prompt must invoke '${name}'")
@@ -979,6 +1099,11 @@ def validate_skill(
         for marker in BRT_CORE_MARKERS:
             if marker not in text:
                 errors.append(f"{label}: BRT missing core marker '{marker}'")
+
+    if name in UI_PREVIEW_REQUIRED_MARKERS:
+        for marker in UI_PREVIEW_REQUIRED_MARKERS[name]:
+            if marker not in text:
+                errors.append(f"{label}: UI preview approval contract missing marker '{marker}'")
 
     if name == "ccdawn-autonomous-collaboration-loop":
         for marker in [
@@ -1109,6 +1234,8 @@ def validate_skill(
         for marker in [
             "CONFLICT_PAUSE_REQUEST",
             "`preflight`",
+            "--write-kind development|mechanical|integration",
+            "`ISOLATION_REQUIRED`",
             "`CLEAR/PEERS_NO_OVERLAP`",
             "`PAUSE_REQUEST` 不等于 `PAUSED`",
             "主动发送 `CONFLICT_RESOLVED`",
@@ -1156,6 +1283,8 @@ def validate_skill(
             "不定时轮询",
             "ACCEPT / ADAPT / DECLINE",
             "无 finding 不发消息",
+            "SELF_OWNED / PEER_OWNED / UNOWNED / UNKNOWN",
+            "不得以“等待 main 清理”继续累积新的实现批次",
         ]:
             if marker not in thread_contract_text:
                 errors.append(f"{label}: thread coordination contract missing marker '{marker}'")
@@ -1244,6 +1373,11 @@ def validate_skill(
             "静默清理检查",
             "不扫描全仓寻找可能的噪音",
             "DEFERRED_INTEGRATION",
+            "Post-PR Closeout Gate",
+            "PR_OPEN",
+            "PR_MERGED",
+            "PR_CLOSED_UNMERGED",
+            "同一任务",
             "git clean -fdx",
             "git branch -d",
             "git worktree remove",

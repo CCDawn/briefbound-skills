@@ -64,6 +64,45 @@ def slugify(value: str) -> str:
     return f"id-{digest}"
 
 
+def canonical_agent_id(label: str) -> str:
+    normalized = slugify(label)
+    return normalized if normalized.startswith("agent-") else f"agent-{normalized}"
+
+
+def resolve_agent_id(
+    registry: dict,
+    requested_agent_id: str | None,
+    label: str,
+    *,
+    thread_id: str = "",
+) -> str:
+    if thread_id:
+        active_matches = [
+            item
+            for item in registry.get("agents", [])
+            if item.get("threadId") == thread_id
+            and item.get("state") not in {"completed", "stale"}
+        ]
+        if len(active_matches) == 1:
+            return str(active_matches[0]["id"])
+        if len(active_matches) > 1:
+            preferred = requested_agent_id or canonical_agent_id(label)
+            exact = [item for item in active_matches if item.get("id") == preferred]
+            if len(exact) == 1:
+                return str(exact[0]["id"])
+            raise CoordinationConflict(
+                f"Thread {thread_id} already has multiple active Agent identities; pass --agent-id explicitly.",
+                [
+                    {
+                        "kind": "duplicate-thread-agent",
+                        "threadId": thread_id,
+                        "agentIds": [str(item.get("id") or "") for item in active_matches],
+                    }
+                ],
+            )
+    return requested_agent_id or canonical_agent_id(label)
+
+
 def _git_common_dir(project_root: Path) -> Path | None:
     result = subprocess.run(
         ["git", "-C", str(project_root), "rev-parse", "--git-common-dir"],
@@ -166,7 +205,7 @@ def ensure_registry_shape(registry: dict, project_root: Path) -> dict:
 
 
 def _legacy_agent_id(label: str) -> str:
-    return f"agent-{slugify(label)}"
+    return canonical_agent_id(label)
 
 
 def migrate_legacy_claims(registry: dict, project_root: Path) -> dict:

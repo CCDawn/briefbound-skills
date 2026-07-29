@@ -1,5 +1,13 @@
 # HTML Design
 
+## Contents
+
+- Design stance and reusable influences
+- Project-memory adaptation and anti-patterns
+- Visual direction and dashboard presets
+- Visual modes, density, and section layouts
+- Implementation constraints
+
 Read this file when editing `scripts/render_overview.py` or when the user explicitly wants a more polished `overview.html`.
 
 ## Design stance

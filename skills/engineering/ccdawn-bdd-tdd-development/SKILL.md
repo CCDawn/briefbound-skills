@@ -43,7 +43,7 @@ Bug、异常、失败测试或构建失败由 `ccdawn-bug-review` 主责；可�
 5. 重跑得到 GREEN，再运行受影响的相关测试；全量 gate 留给集成风险。
 6. 只有已产生重复或复杂度时才重构，并保持 GREEN。
 
-围绕可观察行为组织测试，不为每个函数/分支建测试，不默认创建 `.feature`、矩阵或长 Gherkin。优先复用 fixture/helper；测试基础设施成本过高时改用最小集成测试、结构检查或可逆 probe，并说明缺口。出现 mock/test-only API 风险时才读取 `testing-anti-patterns.md`，正式 Gherkin 才读取 `references/gherkin.md`。
+围绕可观察行为组织测试，不为每个函数/分支建测试，不默认创建 `.feature`、矩阵或长 Gherkin。优先复用 fixture/helper；测试基础设施成本过高时改用最小集成测试、结构检查或可逆 probe，并说明缺口。出现 mock/test-only API 风险时才读取 `references/testing-anti-patterns.md`，正式 Gherkin 才读取 `references/gherkin.md`。
 
 ## 子代理
 

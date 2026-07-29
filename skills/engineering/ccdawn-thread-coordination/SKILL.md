@@ -8,7 +8,7 @@ license: MIT
 
 ## 目标
 
-以 registry/thread 协调 scope、冲突和合并；代码/Git 为事实源，无价值不通信。
+以 registry/thread 协调 scope、冲突和合并；Git 为事实源。
 
 ## BRT interface
 
@@ -26,7 +26,7 @@ license: MIT
 
 ## 接入与所有权
 
-BRT 首次写入前调用 `preflight`；`CLEAR/PEERS_NO_OVERLAP` 返回 owner，`OVERLAP` 静默分诊；只 claim 最小 scope。
+`preflight` 传 `--write-kind development|mechanical|integration`：根 `main/master` 开发返回 `ISOLATION_REQUIRED`，集成需 claim + clean；其余按 `CLEAR/PEERS_NO_OVERLAP` 或 `OVERLAP` 分诊，只 claim 最小 scope。
 
 owner 顺序：用户指定 > 有效 claim/registry > 更早 owner。非 owner 停止自身冲突写入，不要求既有 owner 暂停；争议面只读。
 
@@ -36,9 +36,9 @@ owner 顺序：用户指定 > 有效 claim/registry > 更早 owner。非 owner �
 
 协作或同行建议才读取 `references/proactive-collaboration.md`。提议不转移 owner，双方继续安全工作。
 
-本 skill 只提供协调原语。持续互助交 `ccdawn-multi-agent-orchestration`；已开启自动闭环则由 `ccdawn-autonomous-collaboration-loop` 驱动并继承恢复债务。不得建立主从关系。
+skill 只提供协调原语。持续互助交 `ccdawn-multi-agent-orchestration`；自动闭环由 `ccdawn-autonomous-collaboration-loop` 驱动并继承恢复债务。不得建立主从关系。
 
-新会话收益明确时才询问是否创建；未授权不创建，也不停止当前工作。
+新会话有收益才询问是否创建；未授权不创建，也不停止当前工作。
 
 ## 冲突恢复
 
