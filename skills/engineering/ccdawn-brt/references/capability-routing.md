@@ -9,7 +9,7 @@
 | GitHub 仓库、issue、PR 元信息与一般分诊 | `github:github` | primary；缺失时用 `gh`/git 做最窄读取 |
 | 处理 PR review comments | `github:gh-address-comments` | primary；不要退化成重新做整份 PR review |
 | GitHub Actions/PR checks 失败 | `github:gh-fix-ci` | primary，`ccdawn-bug-review` 仅承接已定位的代码缺陷 |
-| 提交、push、创建 draft PR | `github:yeet` | primary；远程写入仍遵守授权和 scope |
+| 提交、push、创建 draft PR | `github:yeet` | primary；远程写入仍遵守授权和 scope；随后由 BRT 执行 `Post-PR Closeout Gate` |
 | 操作或检查 in-app Browser | `browser:control-in-app-browser` | 工具 owner；UI/bug owner 保留行为判断与最终结论 |
 | OpenAI API、Codex、ChatGPT 使用与最新官方说明 | `openai-docs` | primary；只采用官方来源 |
 | 生成或编辑位图资产 | `imagegen` | primary；UI/Visual owner 提供用途和验收边界 |

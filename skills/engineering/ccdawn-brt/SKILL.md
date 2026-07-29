@@ -109,6 +109,6 @@ Wrong-Edit Guard：定位 owning surface、预计文件、相关测试和已有�
 
 首次写入、scope 扩大或合并前运行 `preflight --write-kind`；规划文档属于 development 写入，须先隔离。无 registry 仍检查 Git。根 `main/master` 的 `development` 收到 `ISOLATION_REQUIRED` 后转 task worktree；`mechanical` 显式声明；`integration` 需有效 claim 且 clean。`OVERLAP` 进入 Silent Conflict Triage，仅不可拆且立即覆盖/回归时暂停。
 
-当前 owner 用风险相称的新鲜证据收口。仅跨阶段/会话、恢复、正式交接或 Deferred 风险使用 `ccdawn-completion-summary`；仅已知存在临时产物、branch/worktree/claim 时路由 cleanup。
+仅跨阶段/会话、恢复、正式交接或 Deferred 风险使用 `ccdawn-completion-summary`；已知残留才 cleanup。同一任务 PR 后按 `PR_OPEN / PR_MERGED / PR_CLOSED_UNMERGED` 路由 `ccdawn-development-cleanup`；仅验证 base 吸收 published head 后收尾本地资源，远程分支删除仍单独授权。
 
 用户可见内容默认中文，保留代码、命令、路径、错误原文、API/协议、skill 名和枚举。每个阶段只给短 checkpoint；正文最后一行（Next Action）写 `下一步建议: <一个具体动作>`，只有自然闸门才给选项。

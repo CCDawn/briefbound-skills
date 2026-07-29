@@ -78,6 +78,42 @@
     "timeout_seconds": 120
   },
   {
+    "id": "pr-open-defers-local-closeout",
+    "prompt": "当前只测试路由，不执行 Git 写入。本任务 branch 已 push 并创建 draft PR，但 PR 仍为 open；现在是否应删除本地 branch、worktree 和 claim？",
+    "smoke": false,
+    "expected_skill_reads": ["ccdawn-development-cleanup"],
+    "forbidden_skill_reads": ["ccdawn-pr-review", "ccdawn-completion-summary"],
+    "max_commands": 5,
+    "expected_final_any": ["PR_OPEN", "DEFERRED_INTEGRATION"],
+    "expected_final_all": ["DEFERRED_INTEGRATION", "保留", "claim", "关闭"],
+    "forbidden_final_any": ["已经删除", "已清理完成", "保留 claim"],
+    "timeout_seconds": 120
+  },
+  {
+    "id": "pr-merged-triggers-safe-local-closeout",
+    "prompt": "当前只测试行为，不执行 Git 写入。本任务 PR 已确认 merged，base 已包含 published head；本地 task branch、clean worktree 和 completed claim 仍存在。说明应如何收尾，远程分支没有删除授权。",
+    "smoke": false,
+    "expected_skill_reads": ["ccdawn-development-cleanup"],
+    "forbidden_skill_reads": ["ccdawn-pr-review", "ccdawn-thread-coordination"],
+    "max_commands": 5,
+    "expected_final_any": ["PR_MERGED", "CLEAN"],
+    "expected_final_all": ["worktree", "git branch -d", "远程分支"],
+    "forbidden_final_any": ["已删除远程分支", "git branch -D"],
+    "timeout_seconds": 120
+  },
+  {
+    "id": "pr-closed-unmerged-preserves-work",
+    "prompt": "当前只测试行为，不执行 Git 写入。本任务 PR 已关闭但没有合并，base 未包含 published head；本地 branch 和 worktree 仍保存唯一实现。说明如何收尾。",
+    "smoke": false,
+    "expected_skill_reads": ["ccdawn-development-cleanup"],
+    "forbidden_skill_reads": ["ccdawn-pr-review", "ccdawn-completion-summary"],
+    "max_commands": 5,
+    "expected_final_any": ["PR_CLOSED_UNMERGED", "KEEP"],
+    "expected_final_all": ["保留"],
+    "forbidden_final_any": ["已经删除", "git branch -D"],
+    "timeout_seconds": 120
+  },
+  {
     "id": "single-outcome-small-change-skips-questions",
     "prompt": "当前仅测试路由，不修改文件。把按钮文案从‘提交’改成‘保存’，目标位置和验收都已明确；说明应采用的流程重量。",
     "smoke": false,

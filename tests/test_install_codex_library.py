@@ -67,6 +67,9 @@ class BrtActivationTests(unittest.TestCase):
         self.assertIn("must not load `ccdawn-autonomous-collaboration-loop`", block)
         self.assertIn("must not continue accumulating implementation batches", block)
         self.assertIn("do not independently chase main", block)
+        self.assertIn("Post-PR Closeout Gate", block)
+        self.assertIn("PR_OPEN / PR_MERGED / PR_CLOSED_UNMERGED", block)
+        self.assertIn("remote branch deletion", block)
         self.assertIn("read the live local `SKILL.md`", block)
         self.assertIn("Do not auto-load generic process frameworks", block)
 
