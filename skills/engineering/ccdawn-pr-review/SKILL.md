@@ -21,19 +21,22 @@ license: MIT
 
 ## 统一调用契约
 
-- 只处理 BRT interface 范围；不匹配时回 `ccdawn-brt` 或更具体 owner，复合任务不吞其他 owner。
-- 用户可见内容默认中文；保留技术字面量；只报结论、证据、风险和产出；Route Out 仅以 BRT interface 为准，末行写 `下一步建议: <一个具体动作>`。
+只处理 BRT interface 范围；不匹配时回 `ccdawn-brt` 或更具体 owner。用户可见内容默认中文，只报结论、证据、风险和产出；Route Out 仅以 BRT interface 为准，末行写 `下一步建议: <一个具体动作>`。
 
 ## 审阅流程
 
 1. 定位 PR、base/head、merge-base 和实际 diff；检查工作区/分支是否漂移。
-2. 从用户要求、PR body、issue/spec、现有行为和项目规则中取得需求来源。只有高影响目标无法推断时才回 BRT 集中对齐，不能只做 owner 路由。
+2. 从用户要求、PR body、issue/spec、现有行为和项目规则中取得需求来源；关键验收项标注 `COVERED / PARTIAL / UNVERIFIED / OUT_OF_SCOPE`，`PARTIAL/UNVERIFIED` 必须进入 finding 或证据缺口。只有高影响目标无法推断时才回 BRT 对齐。
 3. 阅读变更及必要上下文，核对状态/API/数据/配置/迁移/用户流程和保护边界。
-4. 检查最新测试、构建、lint、类型、运行时或手工验收证据；证据不足不能包装成通过。
+4. 检查最新测试、构建、lint、类型、运行时或手工验收；按 `CODE / LOCAL_CHECKS / LOCAL_RUNTIME / PACKAGED / REMOTE` 分别记录实际证据，不跨层推断。
 5. 按 diff 风险选择相关视角，不固定遍历完整清单；只输出由本次变更引入、暴露或会阻塞集成的问题。性能视角只在热路径、规模、查询/I/O、缓存/队列、并发、包体或既有性能契约被触及时启用。
-6. findings 优先；随后给 merge 结论和下一 route。
+6. findings 优先，再给 merge 结论和 route。
+
+效率标注 `FAST / CHECK / PROFILE`：`FAST` 无需新增验证，`CHECK` 用结构或确定性计数，`PROFILE` 需要测量；只为后两类展开。
 
 明显 `N+1`、循环 I/O、重复全量计算或无界资源增长可用结构/确定性计数形成 finding；声称“更快/回归”必须有可比较 baseline。需要实际 profiling 或 before/after 时以本 skill 为 primary、`ccdawn-performance-engineering` 为 support，不把每个 PR 变成性能审计。
+
+范围内的可操作 review feedback 标注 `OPEN / ADDRESSED / VERIFIED / DEFERRED`；回复或改动仅到 `ADDRESSED`，复验才到 `VERIFIED`。未关闭的 requested change 阻止 `READY`；advisory 延后写原因和 owner。
 
 ## Findings
 
@@ -42,9 +45,9 @@ license: MIT
 - `P2 SHOULD_FIX`：边界、错误处理、维护性或局部回归风险。
 - `P3 NICE_TO_HAVE`：默认省略；只有能明显降低近期误改或审阅成本时才保留。
 
-每条包含紧凑文件/行号或 diff 位置、问题、影响、建议方向和验证条件。纯风格偏好、无行为影响的命名建议、未被 diff 影响的既有问题不作为 finding；必要时用一句非阻塞备注。没有问题时明确“未发现阻塞性问题”，并说明尚未覆盖的证据边界。
+每条包含位置、问题、影响、建议和验证条件。纯风格、无行为影响的命名或未被 diff 影响的既有问题不算 finding。没有问题时明确“未发现阻塞性问题”及证据边界。
 
-多个问题按依赖和修复成本给执行顺序；用户已要求修复 review findings 时，回最具体 owner 连续处理所有 `SAFE_DIRECT` 项，不每项询问。设计分叉、高风险动作或 BLOCKED 才暂停。
+多个问题按依赖和成本排序；用户要求修复时回最具体 owner 连续处理 `SAFE_DIRECT` 项。设计分叉、高风险动作或 BLOCKED 才暂停。
 
 ## 结论
 
@@ -64,7 +67,10 @@ Findings:
 
 结论: READY / READY_WITH_FIXES / READY_CONDITIONAL / NEEDS_CHANGES / BLOCKED
 审阅范围与需求来源: ...
-验证证据/缺口: ...
+需求覆盖: COVERED / PARTIAL / UNVERIFIED / OUT_OF_SCOPE
+证据边界/缺口: CODE / LOCAL_CHECKS / LOCAL_RUNTIME / PACKAGED / REMOTE
+效率: FAST / CHECK / PROFILE；依据: ...
+Review feedback（适用时）: OPEN / ADDRESSED / VERIFIED / DEFERRED
 执行顺序（仅多个修复项时）: ...
 剩余风险: ...
 下一步建议: <一个具体动作>

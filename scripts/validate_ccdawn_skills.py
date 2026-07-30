@@ -1347,6 +1347,10 @@ def validate_skill(
             "READY_CONDITIONAL",
             "只做一次限时环境 probe",
             "不把每个 PR 变成性能审计",
+            "COVERED / PARTIAL / UNVERIFIED / OUT_OF_SCOPE",
+            "CODE / LOCAL_CHECKS / LOCAL_RUNTIME / PACKAGED / REMOTE",
+            "FAST / CHECK / PROFILE",
+            "OPEN / ADDRESSED / VERIFIED / DEFERRED",
         ],
     }
     for marker in compact_review_contracts.get(name, []):
