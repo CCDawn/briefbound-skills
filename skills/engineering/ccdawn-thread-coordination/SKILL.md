@@ -1,6 +1,6 @@
 ---
 name: ccdawn-thread-coordination
-description: "Use when existing independent Codex App threads work in the same project and need peer advice, collaboration proposals, target/ACK validation, ownership arbitration, conflict pause/resume, discussion, merge coordination, status exchange, or handoff through native thread tools without creating subagents."
+description: "Use when existing independent Codex App threads in one project need peer advice, target/ACK validation, file or runtime-process ownership and shared data-root arbitration, conflict recovery, discussion, merge coordination, status exchange, or native-thread handoff without creating subagents."
 license: MIT
 ---
 
@@ -12,9 +12,9 @@ license: MIT
 
 ## BRT interface
 
-- Context Boundary: 项目/thread/branch/worktree/scope/claim/coordination。
+- Context Boundary: 项目/thread/branch/worktree/scope/claim/coordination，以及共享 runtime 的 PID、listener、data root 和 owner。
 - Output Contract: ownership、决定、验证、恢复债务。
-- Allowed Action: 使用 `read_thread`、`send_message_to_thread` 与 `agent_coordination.py`；创建/归档或远程 Git 需授权。
+- Allowed Action: 使用 `read_thread`、`send_message_to_thread`、只读进程探针与 `agent_coordination.py`；不停止未知 owner 进程，创建/归档或远程 Git 需授权。
 - Success Evidence: registry revision、thread 回执、Git/测试及协调闭环。
 - Stop Condition: thread 不明、owner 争议、暂停未确认、状态漂移或未授权。
 - Route Out: 原 owner、`ccdawn-autonomous-collaboration-loop`、`ccdawn-multi-agent-orchestration`、`ccdawn-pr-review`、`ccdawn-development-cleanup`、`ccdawn-dawn-agent-html-memory`、`ccdawn-brt` 或 BLOCKED。
@@ -31,6 +31,8 @@ license: MIT
 owner 顺序：用户指定 > 有效 claim/registry > 更早 owner。非 owner 停止自身冲突写入，不要求既有 owner 暂停；争议面只读。
 
 文件/集成 owner 分开。`MERGE_READY` 时读 `references/integration-ownership.md`，按 claim 认领或退回交付者。
+
+共享进程、listener 或 data root 冲突时，读取 `references/proactive-collaboration.md` 的“运行进程归属”；端口不同不等于数据隔离。确认 owner 后，运行中仲裁仍由本 skill 负责，已知本任务进程的安全停止与释放转 `ccdawn-development-cleanup`。
 
 ## 主动协作
 
@@ -66,13 +68,7 @@ pause 产生 `resumePendingAgentIds`；债务清零才能 `complete`：
 
 各 Agent 返回 `MERGE_READY`（branch/base/head/scopes/dependency/tests/risks）。Integration Owner 用 Git 重验；无重叠成组，共享面串行，全部进入目标分支后只跑一次完整 gate。失败通知责任方，成功广播并释放 integration claim、关闭关联 merge coordination。standalone 不自动 push、发布或清理。
 
-### 条件合入快线
-
-hook/gate 失败分为 `CHANGE_FAILURE / BASELINE_FAILURE / ENVIRONMENT_FAILURE / POLICY_FAILURE / UNKNOWN`。窄验证通过、diff 可审、失败在 clean base 复现且不涉及高风险或强制 gate，才标记 `MERGE_READY_CONDITIONAL`。
-
-- 环境修复只做一次 2-5 分钟 probe；无新证据即停止。
-- 只跳过已证明无关的 hook；`--no-verify` 需策略或用户允许，并记录补验责任。
-- 条件提交需 integration owner 补跑 gate/CI；无法提交的 diff 必须有人接管。
+条件合入快线及失败分类读取 `references/integration-ownership.md`。
 
 影响未来行动的决定才执行 `sync_project_memory.py --coordination-id <id>`；普通并行会话不写 tracked memory。
 

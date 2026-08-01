@@ -1,4 +1,4 @@
 interface:
   display_name: "CCDawn 开发清理"
-  short_description: "清理开发残留，并按 PR 状态收尾本地分支、worktree 与 claim"
-  default_prompt: "使用 $ccdawn-development-cleanup 审计开发残留和 PR 生命周期：PR 未合并时保留恢复现场，确认 base 已吸收 published head 后安全收尾同任务本地分支、worktree 和 claim，同时保护未提交、未合并及用户拥有的内容。"
+  short_description: "清理开发残留，并安全收尾本任务进程、分支、worktree 与 claim"
+  default_prompt: "使用 $ccdawn-development-cleanup 审计开发残留、task-owned runtime 与 PR 生命周期：只停止已证明属于本任务的精确进程树；PR 未合并时保留恢复现场，确认 base 已吸收 published head 后安全收尾同任务本地分支、worktree 和 claim。"

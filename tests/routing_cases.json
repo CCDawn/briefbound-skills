@@ -51,5 +51,7 @@
   {"id":"research-promotion-composite","prompt":"审查候选是否达到 metric 晋升线，并核验这个关键研究结论是否可信","primary":"ccdawn-score-loop","support":["ccdawn-research-rigor-review"],"forbidden_primary":["ccdawn-ai-research-loop"]},
   {"id":"merge-ready-dirty-main","prompt":"任务分支已提交并通过聚焦验证，但根 main 有其他任务的未跟踪文件；认领集成队列、识别 owner 并协商恢复，不要只等待 main 变干净","primary":"ccdawn-thread-coordination","support":[],"forbidden_primary":["ccdawn-autonomous-collaboration-loop","ccdawn-development-cleanup"]},
   {"id":"self-created-untracked-plan","prompt":"我先在根 main 写了规划文档，随后任务 worktree 已 MERGE_READY；请把自己创建的未跟踪规划迁移到任务交付并恢复集成，不要把它误报成无关阻塞","primary":"ccdawn-thread-coordination","support":[],"forbidden_primary":["ccdawn-planning","ccdawn-development-cleanup"]},
-  {"id":"repeated-integration-blocker","prompt":"同一个 dirty main 阻塞已连续两轮出现，任务却继续累积新的已提交批次；停止重复延期，进入 integration ownership 并与现有任务协商处理","primary":"ccdawn-thread-coordination","support":[],"forbidden_primary":["ccdawn-autonomous-collaboration-loop","ccdawn-planning"]}
+  {"id":"repeated-integration-blocker","prompt":"同一个 dirty main 阻塞已连续两轮出现，任务却继续累积新的已提交批次；停止重复延期，进入 integration ownership 并与现有任务协商处理","primary":"ccdawn-thread-coordination","support":[],"forbidden_primary":["ccdawn-autonomous-collaboration-loop","ccdawn-planning"]},
+  {"id":"runtime-process-owner-arbitration","prompt":"发现未知 uvicorn 进程与正式服务共用 data root，并改写了另一个会话仍在执行的任务状态。请定位进程 owner、协商停止与恢复，不要按端口猜测并强杀。","primary":"ccdawn-thread-coordination","support":[],"forbidden_primary":["ccdawn-bug-review","ccdawn-development-cleanup"]},
+  {"id":"owned-runtime-process-cleanup","prompt":"本任务已验证完成，关闭自己启动且使用隔离 temp data root 的测试 server，确认 listener 和子进程释放后再关闭 claim。","primary":"ccdawn-development-cleanup","support":[],"forbidden_primary":["ccdawn-thread-coordination","ccdawn-bug-review"]}
 ]

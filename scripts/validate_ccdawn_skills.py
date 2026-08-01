@@ -1291,6 +1291,10 @@ def validate_skill(
             "无 finding 不发消息",
             "SELF_OWNED / PEER_OWNED / UNOWNED / UNKNOWN",
             "不得以“等待 main 清理”继续累积新的实现批次",
+            "端口不同不等于数据隔离",
+            "PROCESS_OWNER_QUERY",
+            "MODEL_RUNTIME_RELEASED",
+            "不刷新正式 Launcher",
         ]:
             if marker not in thread_contract_text:
                 errors.append(f"{label}: thread coordination contract missing marker '{marker}'")
@@ -1379,6 +1383,11 @@ def validate_skill(
                 errors.append(f"{label}: goal-loop ownership boundary missing marker '{marker}'")
 
     if name == "ccdawn-development-cleanup":
+        cleanup_contract_text = (
+            text
+            + "\n"
+            + read_text(skill_dir / "references" / "local-resource-closeout.md")
+        )
         for marker in [
             "静默清理检查",
             "不扫描全仓寻找可能的噪音",
@@ -1392,8 +1401,11 @@ def validate_skill(
             "git branch -d",
             "git worktree remove",
             "远程分支删除必须单独授权",
+            "只停止能证明由本任务启动或依赖的精确进程树",
+            "端口不同不等于数据隔离",
+            "MODEL_RUNTIME_RELEASED",
         ]:
-            if marker not in text:
+            if marker not in cleanup_contract_text:
                 errors.append(f"{label}: development cleanup safety contract missing marker '{marker}'")
 
     route_regressions = {

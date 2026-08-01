@@ -1,6 +1,6 @@
 ---
 name: ccdawn-development-cleanup
-description: "Use when a verified or integrated software change has concrete temporary artifacts, generated noise, stale claims, merged local branches, disposable worktrees, or a known PR lifecycle state that requires deferred or post-merge local closeout, or when the user explicitly asks to remove development residue or old branches."
+description: "Use when a verified or integrated software change has concrete temporary artifacts, generated noise, task-owned background processes or listeners, stale claims, merged local branches, disposable worktrees, or a known PR lifecycle state that requires deferred or post-merge local closeout, or when the user explicitly asks to remove development residue or old branches."
 license: MIT
 ---
 
@@ -14,11 +14,11 @@ license: MIT
 
 ## BRT interface
 
-- Context Boundary: 真实根目录、实现范围、验证、Git target/base/head、working tree、残留、worktree、claim 和清理授权。
+- Context Boundary: 真实根目录、实现范围、验证、Git target/base/head、working tree、残留、task-owned PID/listener、worktree、claim 和清理授权。
 - Output Contract: `CLEAN / NOOP / DEFERRED_INTEGRATION / BLOCKED`、已删除项、保留项、延后条件、清理后证据和 Route Out。
-- Allowed Action: 先只读审计；只删除已证明属于本轮且可重建的本地残留。删除本地 branch/worktree 需用户明确清理、项目长期策略，或同一任务“完成开发到 PR”许可且已验证 PR 合并。远程分支、push、合并、发布和无法归属的文件不自动处理。
+- Allowed Action: 先只读审计；只删除已证明属于本轮且可重建的本地残留，只停止已证明由本任务启动或依赖的精确进程树。删除本地 branch/worktree 需用户明确清理、项目长期策略，或同一任务“完成开发到 PR”许可且已验证 PR 合并。远程分支、push、合并、发布和无法归属的文件或进程不自动处理。
 - Success Evidence: 清理后 Git、worktree 和 registry 符合预期；源码、用户改动、未合并提交和必要证据仍在。
-- Stop Condition: 根目录或 integration target 不明、工作区 dirty 且归属不清、branch 未吸收、worktree 被占用、claim 仍 active、路径安全无法证明、删除需要远程或 force 动作。
+- Stop Condition: 根目录或 integration target 不明、工作区 dirty 且归属不清、process owner 或 data root 不明、branch 未吸收、worktree 被占用、claim 仍 active、路径安全无法证明、删除需要远程或 force 动作。
 - Route Out: 当前开发 owner、`ccdawn-autonomous-collaboration-loop`、`ccdawn-thread-coordination`、`ccdawn-pr-review`、`ccdawn-brt` 或 BLOCKED。
 
 ## 统一调用契约
@@ -28,7 +28,7 @@ license: MIT
 
 ## 进入时机
 
-- 只有当前任务已知创建了临时产物、任务专用缓存、scratch 文件、claim、feature branch/worktree，或用户明确要求清理时，才做静默清理检查并加载本 skill。
+- 只有当前任务已知创建了临时产物、任务专用缓存、scratch 文件、后台进程/listener、claim、feature branch/worktree，或用户明确要求清理时，才做静默清理检查并加载本 skill。
 - 没有已知候选时直接收口，不扫描全仓寻找可能的噪音，也不输出 `NOOP`。
 - 合并前清理开发残留，但保留仍用于 PR/合并的 branch/worktree，状态为 `DEFERRED_INTEGRATION`；合并后再次收尾这些 Git 资源。
 - 纯规划、只读审查、研究归档或未验证开发不进入删除阶段。
@@ -64,15 +64,9 @@ license: MIT
 - accepted plan、迁移、lockfile、fixture、snapshot、基准结果和失败复现不是噪音，除非已有替代且用户明确同意。
 - 不修改 `.gitignore` 来隐藏无法解释的残留；先判断它为何存在。
 
-## Branch、worktree 与 claim
+## 本地资源收尾
 
-本地分支只有同时满足以下条件才可删除：目标分支已包含 tip、没有 target 之外的提交、未被任何 worktree checkout、没有 active claim、不是当前或受保护分支。只用安全删除 `git branch -d`；拒绝时保留，不升级 `-D`，也不为通过删除而切换用户正在使用的 checkout。
-
-当前功能分支在用户授权、项目策略允许或满足同一任务 `PR_MERGED` 时可自动收尾。其他历史分支还须被当前请求或长期策略覆盖，否则只报告候选。远程分支删除必须单独授权。
-
-worktree 只有在 clean、branch 已吸收、claim 已关闭且不再承担恢复/运行职责时才移除。不要从目标 worktree 内删除自身；从已确认的稳定 repo/worktree 操作。Windows 上先验证绝对目标位于预期 worktree 父目录，检查 junction/reparse point；只移除已确认属于该 worktree 的链接本身，不递归进入共享目标，再使用 `git worktree remove`。禁止 force 删除 dirty worktree。
-
-claim 仅在实现确实完成或明确取消后标记 completed/released；存在 blocker 或交接时保留真实状态。需要多 Agent 裁决时路由 `ccdawn-thread-coordination`。
+关闭 branch、worktree、claim 或 task-owned runtime 时读取 `references/local-resource-closeout.md`；禁止 force 删除 dirty worktree。
 
 ## 执行与验证
 

@@ -10,6 +10,14 @@
 
 ownership、conflict、discussion、merge 请求写明目标 Agent/thread/claim/scope 和 `Reply To`，并要求一次 `ACK_OWNER / NOT_OWNER / DEFER_UNTIL <checkpoint>`。无 ACK 不等于送达、同意或取消；继续非冲突工作，不定时轮询。租约失活后仅做一次状态复核，再 `takeover` 或转当前有效 Integration Owner，不改投无关 thread。
 
+## 运行进程归属
+
+- 启动后台 server、worker 或 sidecar 时，owner 记录 `thread/claim、PID、命令、project/worktree、port、data/config root、用途、释放 checkpoint`；PID 启动后才能取得时立即补记。
+- 临时测试 runtime 同时使用 task worktree、隔离 temp data/config root 和非正式端口；端口不同不等于数据隔离。无法证明不触碰正式数据或现有 managed runtime 时不启动。
+- 发现未知进程影响正式 listener、data root 或活动任务时，停止受影响写入，做一次精确只读探针，再向候选 owner 发送 `PROCESS_OWNER_QUERY`；消息带 PID、启动时间、命令、父进程、port、data/config root、影响、`Reply To` 和期望 `ACK_OWNER / NOT_OWNER / DEFER_UNTIL`。
+- 确认 owner 且当前任务启动或依赖该进程时，由 owner 经项目正式停止路径关闭精确进程树，验证 listener 与数据 writer 已释放，再回复 `MODEL_RUNTIME_RELEASED`。非 owner 不按端口、进程名或猜测停止进程。
+- 无法确认 owner 时保持 `UNKNOWN`，不刷新正式 Launcher、不 broad kill、不改投无关 thread；转 Runtime Manager 或当前有效运行 owner 处理，其他 Agent 继续非冲突工作。
+
 ## 平级协作提议
 
 只向相关现有会话提出能帮助双方原任务的协作。发送前用一次 claim 原子占用 `lane=collaboration/<topic-key>`，并同时加入双方 `thread/<agent-id>` 与共享 scope；不要拆成多个 claim。消息带 collaboration id，并给出 `From Agent / Own Task / To Agent / Own Task / Reply To / Shared Surface / Mutual Benefit / Expected Evidence / Exit Condition`。

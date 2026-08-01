@@ -31,4 +31,12 @@
 
 若失败能在 clean base 复现且交付没有新增失败，标记 `MERGE_READY_CONDITIONAL`；默认不接管或要求用户授权修复无关基线。强制 gate 仍阻止合入时，owner 保留队列责任，只向现有基线 owner 发一次协调并等待可行动事件；只有产品、安全、迁移或真实范围取舍才询问用户。
 
+### 条件合入快线
+
+hook/gate 失败分为 `CHANGE_FAILURE / BASELINE_FAILURE / ENVIRONMENT_FAILURE / POLICY_FAILURE / UNKNOWN`。窄验证通过、diff 可审、失败在 clean base 复现且不涉及高风险或强制 gate，才标记 `MERGE_READY_CONDITIONAL`。
+
+- 环境修复只做一次 2-5 分钟 probe；无新证据即停止。
+- 只跳过已证明无关的 hook；`--no-verify` 需策略或用户允许，并记录补验责任。
+- 条件提交需 integration owner 补跑 gate/CI；无法提交的 diff 必须有人接管。
+
 无法及时推进时发送 `INTEGRATION_HANDOFF` 并释放 claim，不得静默占位。只有明确释放、租约失活或 Git 已证明义务完成时，其他 Agent 才可 `takeover`。
