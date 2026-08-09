@@ -126,6 +126,220 @@ class RoutingEvalTests(unittest.TestCase):
             [],
         )
 
+    def test_evaluate_response_accepts_semantic_wrong_decision_impact(self) -> None:
+        case = {
+            "expected_final_any": [],
+            "forbidden_final_any": [],
+            "require_wrong_decision_impact": True,
+        }
+
+        self.assertEqual(
+            ROUTING_EVAL.evaluate_final_response(
+                case,
+                "若直接实现删除或改角色，误判可能造成不可恢复的数据或权限变更。",
+            ),
+            [],
+        )
+
+    def test_evaluate_response_accepts_conditional_consequence(self) -> None:
+        case = {
+            "expected_final_any": [],
+            "forbidden_final_any": [],
+            "require_wrong_decision_impact": True,
+        }
+
+        self.assertEqual(
+            ROUTING_EVAL.evaluate_final_response(
+                case,
+                "推荐仅处理明确勾选的成员，否则可能误停用用户未看见的成员。",
+            ),
+            [],
+        )
+
+    def test_evaluate_response_rejects_unrelated_condition_and_failure_terms(self) -> None:
+        case = {
+            "expected_final_any": [],
+            "forbidden_final_any": [],
+            "require_wrong_decision_impact": True,
+        }
+
+        failures = ROUTING_EVAL.evaluate_final_response(
+            case,
+            "请直接确认当前范围。失败项会保留供重试。",
+        )
+
+        self.assertTrue(any("wrong-decision impact" in failure for failure in failures))
+
+    def test_case_turns_keeps_initial_contract_and_followups(self) -> None:
+        case = {
+            "id": "alignment-then-route",
+            "prompt": "先探查并对齐。",
+            "expected_skill_reads": ["ccdawn-brt"],
+            "forbidden_skill_reads": ["ccdawn-ui-design"],
+            "max_commands": 4,
+            "expected_final_any": ["推荐"],
+            "timeout_seconds": 120,
+            "followups": [
+                {
+                    "prompt": "按推荐，继续选择 owner。",
+                    "expected_skill_reads": ["ccdawn-ui-design"],
+                    "forbidden_skill_reads": ["ccdawn-brt"],
+                    "max_commands": 4,
+                    "expected_final_any": ["ccdawn-ui-design"],
+                }
+            ],
+        }
+
+        turns = ROUTING_EVAL.case_turns(case)
+
+        self.assertEqual([turn["prompt"] for turn in turns], ["先探查并对齐。", "按推荐，继续选择 owner。"])
+        self.assertEqual(turns[1]["timeout_seconds"], 120)
+        self.assertEqual(turns[1]["expected_skill_reads"], ["ccdawn-ui-design"])
+
+    def test_extract_thread_id_reads_started_event(self) -> None:
+        events = [
+            {"type": "thread.started", "thread_id": "019f-test-thread"},
+            {"type": "item.completed", "item": {"type": "agent_message", "text": "完成"}},
+        ]
+
+        self.assertEqual(ROUTING_EVAL.extract_thread_id(events), "019f-test-thread")
+
+    def test_build_turn_command_persists_multiturn_and_resumes_session(self) -> None:
+        codex_cli = Path("codex.exe")
+        repo_root = Path("repo")
+        output_path = Path("final.txt")
+
+        single_turn = ROUTING_EVAL.build_turn_command(
+            codex_cli,
+            repo_root,
+            "先对齐。",
+            output_path,
+            "medium",
+            persist_session=False,
+        )
+        initial_multiturn = ROUTING_EVAL.build_turn_command(
+            codex_cli,
+            repo_root,
+            "先对齐。",
+            output_path,
+            "medium",
+            persist_session=True,
+        )
+        followup = ROUTING_EVAL.build_turn_command(
+            codex_cli,
+            repo_root,
+            "按推荐。",
+            output_path,
+            "medium",
+            session_id="019f-test-thread",
+            persist_session=True,
+        )
+
+        self.assertIn("--ephemeral", single_turn)
+        self.assertNotIn("--ephemeral", initial_multiturn)
+        self.assertEqual(followup[:3], ["codex.exe", "exec", "resume"])
+        self.assertIn("019f-test-thread", followup)
+        self.assertNotIn("--ephemeral", followup)
+
+    def test_prepare_case_workspace_materializes_isolated_project_context(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            case_root = Path(temp_dir)
+            workspace = ROUTING_EVAL.prepare_case_workspace(
+                Path("repo"),
+                case_root,
+                {
+                    "workspace_files": {
+                        "docs/product.md": "现有批量停用 API 已返回逐项结果。",
+                    }
+                },
+            )
+
+            self.assertEqual(workspace, case_root / "workspace")
+            self.assertEqual(
+                (workspace / "docs" / "product.md").read_text(encoding="utf-8"),
+                "现有批量停用 API 已返回逐项结果。",
+            )
+
+    def test_prepare_case_workspace_rejects_path_escape(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            with self.assertRaises(ValueError):
+                ROUTING_EVAL.prepare_case_workspace(
+                    Path("repo"),
+                    Path(temp_dir),
+                    {"workspace_files": {"../outside.md": "escape"}},
+                )
+
+    def test_run_case_evaluates_initial_and_followup_turns(self) -> None:
+        class FakeProcess:
+            def __init__(self, output: str) -> None:
+                self.output = output
+                self.returncode = 0
+
+            def communicate(self, timeout: int) -> tuple[str, None]:
+                return self.output, None
+
+            def poll(self) -> int:
+                return 0
+
+        initial_output = "\n".join(
+            [
+                '{"type":"thread.started","thread_id":"019f-test-thread"}',
+                '{"type":"item.completed","item":{"id":"cmd-1","type":"command_execution",'
+                '"command":"Get-Content C:\\\\Users\\\\me\\\\.codex\\\\skills'
+                '\\\\ccdawn-brt\\\\SKILL.md","exit_code":0,"status":"completed"}}',
+                '{"type":"item.completed","item":{"id":"msg-1","type":"agent_message",'
+                '"text":"推荐先对齐；请回复按推荐。"}}',
+            ]
+        )
+        followup_output = "\n".join(
+            [
+                '{"type":"thread.started","thread_id":"019f-test-thread"}',
+                '{"type":"item.completed","item":{"id":"cmd-2","type":"command_execution",'
+                '"command":"Get-Content C:\\\\Users\\\\me\\\\.codex\\\\skills'
+                '\\\\ccdawn-ui-design\\\\SKILL.md","exit_code":0,"status":"completed"}}',
+                '{"type":"item.completed","item":{"id":"msg-2","type":"agent_message",'
+                '"text":"选择 ccdawn-ui-design 形成交互契约。"}}',
+            ]
+        )
+        case = {
+            "id": "alignment-then-route",
+            "prompt": "先对齐。",
+            "expected_skill_reads": ["ccdawn-brt"],
+            "forbidden_skill_reads": ["ccdawn-ui-design"],
+            "max_commands": 2,
+            "expected_final_any": ["推荐"],
+            "timeout_seconds": 120,
+            "followups": [
+                {
+                    "prompt": "按推荐。",
+                    "expected_skill_reads": ["ccdawn-ui-design"],
+                    "forbidden_skill_reads": ["ccdawn-brt"],
+                    "max_commands": 2,
+                    "expected_final_any": ["ccdawn-ui-design"],
+                }
+            ],
+        }
+
+        with mock.patch.object(
+            ROUTING_EVAL.subprocess,
+            "Popen",
+            side_effect=[FakeProcess(initial_output), FakeProcess(followup_output)],
+        ) as popen:
+            result = ROUTING_EVAL.run_case(
+                Path("codex.exe"),
+                Path("repo"),
+                case,
+                "medium",
+                None,
+            )
+
+        self.assertTrue(result["passed"], result["failures"])
+        self.assertEqual(len(result["turns"]), 2)
+        self.assertEqual(popen.call_count, 2)
+        followup_command = popen.call_args_list[1].args[0]
+        self.assertEqual(followup_command[:3], ["codex.exe", "exec", "resume"])
+        self.assertIn("019f-test-thread", followup_command)
+
     def test_evaluate_response_counts_grouped_calibration_as_one_question(self) -> None:
         case = {
             "expected_final_any": [],

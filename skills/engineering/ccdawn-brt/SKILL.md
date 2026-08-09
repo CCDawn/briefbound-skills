@@ -1,6 +1,6 @@
 ---
 name: ccdawn-brt
-description: "Use when a user message needs Chinese-first intent inference, low-confidence collaborative clarification, routing, workflow weight control, skill choice, review/testing/planning/debugging/evaluation routing, proactive multi-thread collaboration or conflict coordination, continuation handling, execution permission inference, or protection from process over-escalation."
+description: "Use when Chinese-first active intent discovery, local context probing, user calibration before downstream skill selection, owner/workflow routing, continuation, permission inference, or multi-thread/conflict coordination is needed."
 license: MIT
 ---
 
@@ -8,7 +8,7 @@ license: MIT
 
 ## 目标
 
-BRT 默认理解意图、选 owner、推进验证，无需 `/brt`。单一合理行为直接完成；答案改变行为或边界时主动对齐。约束用于防错。
+BRT 默认理解意图、选 owner、推进验证。单一合理行为直接完成；结果/边界会改变才主动对齐。约束用于防错。
 
 ## 决策核心
 
@@ -16,15 +16,16 @@ BRT 默认理解意图、选 owner、推进验证，无需 `/brt`。单一合理
 - 下游继承许可，切换 owner 不重问；仅范围扩大、高风险或真实取舍需确认。
 - `HIGH`：行动；`MEDIUM`：声明低风险假设后行动；`LOW`：probe/讨论；`BLOCKED`：只问不可约问题。
 - 输出用 `SILENT / MICRO / ALIGN / FULL`，默认最短；不展示内部账本。
-- “继续/确认/按推荐来”仅继承完整且仍有效的契约；先做 `Continuation Health Check`，缺失结果/surface/evidence，或新阶段引入用户可见分叉时，窄 probe/对齐后再继续。
+- “继续/确认/按推荐来”先做 `Continuation Health Check`，仅继承仍完整的契约；缺结果/surface/evidence 或新增可见分叉就 probe/对齐。
 - 声称刷新 skill 前必须重读本机 `SKILL.md`。
 
 ## 讨论式意图收敛
 
-开发、规划或高影响审查前执行 `Alignment Value Gate / Alignment Completeness Gate`，检查 `Desired Result / Owning Surface / Acceptance Evidence / Highest-impact Fork`。前三项缺失为 `MISSING_CONTEXT`：一次窄范围只读 probe 查行为、测试和规范，不索取本地可发现信息。最后一项有多个实质结果为 `PRODUCT_FORK`：执行 `One-Turn Alignment`；否则行动。低置信度不得带着未确认的高影响假设写入。
+开发、规划或高影响审查前以 `Alignment Value Gate / Alignment Completeness Gate` 检查 `Desired Result / Owning Surface / Acceptance Evidence / Highest-impact Fork`。前三项缺失为 `MISSING_CONTEXT`：一次窄范围只读 probe 查行为、测试和规范，不索取本地可发现信息。最后一项有多个实质结果为 `PRODUCT_FORK`：执行 `One-Turn Alignment`；否则行动。低置信度不得带着未确认的高影响假设写入。
 
-- agent 先推荐，不让用户重写需求。
-- 一次集中提出 2-4 个彼此相关的高影响问题；每项给推荐答案、行为差异和错判影响。
+`PRODUCT_FORK` 进入 `ALIGNMENT_PENDING`：只读 probe/BRT 对齐，不加载开发/planning owner、不写入。用户“按推荐”或纠正后进入 `CALIBRATED`，更新契约并重选/读取 owner，不重问已确认项。
+
+- agent 先推荐，不让用户重写需求；一次集中提出 2-4 个相关高影响问题，每项给推荐答案、行为差异和错判影响。
 - 主动暴露最可能造成误改的分叉；不得静默替用户决定产品行为，也不得询问本地证据已经回答的问题。
 - 回答按字段写 `当前理解 / 依据 / 推荐 / 行为差异 / 错判影响 / 等待校准`，末尾邀请回复“按推荐”或纠错。
 - 自然闸门：意图/范围变化、不可安全恢复的失败、高风险/破坏性/权限/迁移/发布、冲突或真实取舍。
@@ -95,11 +96,10 @@ BDD/TDD 按子任务判断，只给确定性行为回归或重大契约风险；
 高能力模型可内部完成局部规划、依赖排序和自审；同一 owner 且无自然闸门时可折叠对齐、实现和验证。
 
 - **Skill Budget**：默认一个 primary owner；support skill 只有补充独有知识、工具或独立证据时才加载。
-- artifact 只有会被审阅、交接、恢复或高风险决策复用时才生成。
-- 调用下游前确认它防止的具体错误和使用者；说不清就跳过。
+- artifact 仅在审阅、交接、恢复或高风险决策复用时生成；调用下游前说清其防止的错误和使用者，否则跳过。
 - 内部从 1-3 个相关视角检查需求覆盖、误改范围和验证；没有 finding 不输出矩阵。
 
-Superpowers 默认不参与自动路由；显式恢复时也不继承其 brainstorming、planning、worktree、严格 TDD、子代理或收尾链。当前协作路由不创建子 Agent；只连接用户已存在的同项目平级会话。
+Superpowers 默认不参与自动路由；显式恢复时也不继承其 brainstorming、planning、worktree、严格 TDD、子代理或收尾链。当前协作不创建子 Agent；只连接已有同项目平级会话。
 
 ## 执行与收口
 

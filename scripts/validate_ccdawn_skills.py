@@ -39,6 +39,8 @@ BRT_CORE_MARKERS = [
     "Superpowers 默认不参与自动路由",
     "## 讨论式意图收敛",
     "Alignment Value Gate",
+    "ALIGNMENT_PENDING",
+    "CALIBRATED",
     "一次窄范围只读 probe",
     "不得静默替用户决定产品行为",
     "不得询问本地证据已经回答的问题",
@@ -595,6 +597,101 @@ def validate_live_routing_cases(
         timeout_seconds = case["timeout_seconds"]
         if not isinstance(timeout_seconds, int) or not 30 <= timeout_seconds <= 600:
             errors.append(f"{case_label}: timeout_seconds must be an integer from 30 to 600")
+
+        workspace_files = case.get("workspace_files")
+        if workspace_files is not None:
+            if not isinstance(workspace_files, dict) or not workspace_files:
+                errors.append(f"{case_label}: workspace_files must be a non-empty object")
+            else:
+                for relative_name, content in workspace_files.items():
+                    normalized = relative_name.replace("\\", "/") if isinstance(relative_name, str) else ""
+                    if (
+                        not normalized
+                        or normalized.startswith("/")
+                        or re.match(r"^[A-Za-z]:", normalized)
+                        or ".." in normalized.split("/")
+                    ):
+                        errors.append(f"{case_label}: unsafe workspace fixture path '{relative_name}'")
+                    if not isinstance(content, str) or not content:
+                        errors.append(f"{case_label}: workspace fixture '{relative_name}' must be non-empty text")
+
+        followups = case.get("followups", [])
+        if not isinstance(followups, list):
+            errors.append(f"{case_label}: followups must be a list")
+            followups = []
+        for followup_index, followup in enumerate(followups, start=1):
+            followup_label = f"{case_label}.followups[{followup_index - 1}]"
+            followup_required = {
+                "prompt",
+                "expected_skill_reads",
+                "forbidden_skill_reads",
+                "max_commands",
+                "expected_final_any",
+            }
+            if not isinstance(followup, dict):
+                errors.append(f"{followup_label}: expected an object")
+                continue
+            followup_missing = sorted(followup_required - set(followup))
+            if followup_missing:
+                errors.append(f"{followup_label}: missing fields {followup_missing}")
+                continue
+            if not isinstance(followup["prompt"], str) or not contains_cjk(followup["prompt"]):
+                errors.append(f"{followup_label}: prompt must be Chinese-first")
+            followup_expected = followup["expected_skill_reads"]
+            followup_forbidden = followup["forbidden_skill_reads"]
+            if not isinstance(followup_expected, list):
+                errors.append(f"{followup_label}: expected_skill_reads must be a list")
+                followup_expected = []
+            if not isinstance(followup_forbidden, list) or not followup_forbidden:
+                errors.append(f"{followup_label}: forbidden_skill_reads must be a non-empty list")
+                followup_forbidden = []
+            for owner in followup_expected + followup_forbidden:
+                if not isinstance(owner, str) or owner not in skill_names:
+                    errors.append(f"{followup_label}: unknown skill read '{owner}'")
+            followup_overlap = sorted(set(followup_expected) & set(followup_forbidden))
+            if followup_overlap:
+                errors.append(
+                    f"{followup_label}: expected and forbidden skill reads overlap: {followup_overlap}"
+                )
+            followup_max = followup["max_commands"]
+            if not isinstance(followup_max, int) or not 0 <= followup_max <= 50:
+                errors.append(f"{followup_label}: max_commands must be an integer from 0 to 50")
+                followup_max = 0
+            followup_min = followup.get("min_commands", 0)
+            if not isinstance(followup_min, int) or not 0 <= followup_min <= followup_max:
+                errors.append(
+                    f"{followup_label}: min_commands must be an integer from 0 to max_commands"
+                )
+            for field in (
+                "expected_final_any",
+                "expected_final_all",
+                "forbidden_final_any",
+                "forbidden_delegation_phrases",
+            ):
+                terms = followup.get(field, [])
+                if not isinstance(terms, list) or not all(
+                    isinstance(term, str) and term for term in terms
+                ):
+                    errors.append(f"{followup_label}: {field} must be a string list")
+            for field in ("min_questions", "max_questions"):
+                value = followup.get(field)
+                if value is not None and (not isinstance(value, int) or not 0 <= value <= 10):
+                    errors.append(f"{followup_label}: {field} must be an integer from 0 to 10")
+            if followup.get("min_questions", 0) > followup.get("max_questions", 10):
+                errors.append(f"{followup_label}: min_questions must not exceed max_questions")
+            for field in (
+                "require_recommendation",
+                "require_wrong_decision_impact",
+                "require_wait_for_calibration",
+            ):
+                value = followup.get(field)
+                if value is not None and not isinstance(value, bool):
+                    errors.append(f"{followup_label}: {field} must be boolean")
+            followup_timeout = followup.get("timeout_seconds", timeout_seconds)
+            if not isinstance(followup_timeout, int) or not 30 <= followup_timeout <= 600:
+                errors.append(
+                    f"{followup_label}: timeout_seconds must be an integer from 30 to 600"
+                )
 
     if smoke_count != 1:
         errors.append(f"{label}: expected exactly one low-cost smoke case, found {smoke_count}")
