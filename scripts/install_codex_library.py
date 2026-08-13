@@ -30,7 +30,7 @@ BRT_ACTIVATION_BLOCK = f"""{BRT_ACTIVATION_START}
 ## CCDawn BRT Default Routing
 
 - Before the first tool call or skill choice, check `Desired Result / Owning Surface / Acceptance Evidence / Highest-impact Fork`.
-- For `MISSING_CONTEXT`, make one narrow read-only probe. For uncertainty or an unresolved behavior-changing `PRODUCT_FORK`, load `ccdawn-brt`, give one compact recommendation/alignment turn, and wait for calibration. Revalidate `continue`/`确认`/`按推荐`; if new evidence changes behavior, scope, data/API, compatibility, security, or acceptance, stop affected writes and realign.
+- For `MISSING_CONTEXT`, make one narrow read-only probe. For uncertainty or an unresolved behavior-changing `PRODUCT_FORK`, load `ccdawn-brt`, give one compact recommendation/alignment turn, and wait for calibration. Revalidate `continue`/`确认`/`按建议`/`按推荐`; if new evidence changes behavior, scope, data/API, compatibility, security, or acceptance, stop affected writes and realign.
 - An unresolved `PRODUCT_FORK` enters `ALIGNMENT_PENDING`: only narrow read-only discovery and BRT alignment are allowed; do not load a downstream implementation or planning owner and do not write. After `按推荐` or a correction, enter `CALIBRATED`, update the contract, recompute the owner from the accepted result, and load the most specific skill without re-asking confirmed items.
 - Select the most specific owner, preserve existing in-scope permission, and proceed until a natural gate.
 - Before the first write, scope expansion, or merge, run available project `preflight`. Plans are development writes; ordinary development on primary `main/master` must move to a task worktree; integration requires an active claim and clean target.
@@ -42,7 +42,7 @@ BRT_ACTIVATION_BLOCK = f"""{BRT_ACTIVATION_START}
 - For nontrivial same-project work, do bounded peer discovery. Route one-off coordination to `ccdawn-thread-coordination`, sustained collaboration to `ccdawn-multi-agent-orchestration`, and enable `ccdawn-autonomous-collaboration-loop` only after user confirmation; new threads and remote actions remain separately authorized.
 - On `MERGE_READY`, dirty-target, or PR closeout, load the owning coordination/cleanup skill and follow its current ownership and recovery gates; remote branch deletion remains separately authorized.
 - Do not auto-load generic frameworks or subagent workflows unless explicitly requested or uniquely required.
-- Keep user-visible output Chinese-first unless the user requests another language; do not expose internal routing ledgers or process narration.
+- Keep user-visible output Chinese-first unless the user requests another language. Lead with the result, stay concise, and use plain language. Explain a complex term in one sentence when it changes the user's decision or action; do not expose internal routing ledgers or unexplained enums.
 {BRT_ACTIVATION_END}"""
 
 

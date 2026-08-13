@@ -1,5 +1,5 @@
 interface:
   display_name: "CCDawn 创意工具箱"
-  short_description: "基于上下文执行概念碰撞、发散探索与可比较的新概念生成"
-  default_prompt: "使用 $ccdawn-creative-toolbox 从当前语境提取概念、张力、证据缺口和未命名需求，再选择最合适的创意方法生成 3-7 个可比较的中文概念卡。"
+  short_description: "按创意阶段选择一个方法，生成少量具体且非显而易见的方案"
+  default_prompt: "使用 $ccdawn-creative-toolbox 判断我是在生成、扩展、选择、解卡、颠覆、精炼、整理还是命名，再只用最合适的方法给出具体候选、失败方式和第一步。"
 

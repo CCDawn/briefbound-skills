@@ -1,100 +1,74 @@
 ---
 name: ccdawn-huawei-nslb-score-loop
-description: Use when optimizing, benchmarking, packaging, comparing baselines, handling online score feedback, or coordinating parallel agents for a Huawei Algorithm Challenge 37 NSLB workspace identified by its solver and score-loop artifacts.
+description: "Use when a Huawei Algorithm Challenge 37 NSLB workspace needs live status, adaptive solver search, comparable evaluation, packaging, or online-score feedback; it is a thin project adapter over ccdawn-score-loop."
 license: MIT
 ---
 
 # Huawei NSLB Score Loop
 
-This is the Huawei NSLB project adapter for `ccdawn-score-loop`.
+## 目标
 
-Use `ccdawn-score-loop` as the generic operating model, then apply the project-specific profile in `references/huawei-nslb-profile.md` when the request involves status, epoch work, workers, gate decisions, packaging, online feedback, failed-diff recovery, or project memory sync.
+这是 `ccdawn-score-loop` 的 Huawei NSLB 项目适配层。它补充项目识别、工具命令、solver 约束和线上反馈规则；候选搜索、淘汰和替换决定仍使用通用 score loop。
 
-## Profile
-
-```text
-Project root: resolve from explicit `--project`, `CCDawn_HUAWEI_NSLB_ROOT`, or the current repository markers
-Primary source: src/Solution.cpp
-Tool: <codex-home>\skills\ccdawn-huawei-nslb-score-loop\scripts\score_loop_tools.py
-Mutation space: references/mutation_space.json
-Main ledger: docs/optimization-ledger.json
-Online/offline weights: docs/online-offline-weights.json
-Search graph: docs/search-graph.json
-Attempt cards: docs/attempt-cards/
-Failed diffs: docs/failed-diffs-index.json and docs/failed_diffs/
-```
-
-Known online-best anchor unless the project ledger says otherwise:
-
-```text
-baseline: baseline-044-large-sparse-phase6-residual-target
-online score: 344736301
-source SHA256: 28b33d6d67d547fbc4415ec363a1c80db7a1f8e2fe1f308fd96a8a528a0441cb
-```
+不得把 skill 内的旧分数、hash 或聊天记忆当成当前事实。当前最好方案、源码 hash、活跃运行和提交映射必须从目标项目现场读取。
 
 ## BRT interface
 
-- Context Boundary: Huawei NSLB project root, current baseline hash, score-loop ledger/search graph, selected command/lane, and isolated worker workspace when applicable.
-- Output Contract: status, epoch, worker, gate, package, online feedback, or recovery artifact with machine-readable evidence.
-- Allowed Action: only profile-approved commands and lane workspaces; workers never mutate the main baseline, ledger, package map, or promotion state unless the parent gate explicitly does it.
-- Success Evidence: command output, `child_result.json`, attempt card, ledger/search-graph update, compiled diff, gate decision, or registered short submission package.
-- Stop Condition: source drift, stale baseline hash, overlapping ledger/pool write, missing child result, invalid package, ambiguous online feedback, or user pause.
-- Route Out: `ccdawn-score-loop`, project-specific command, launch/recover workers, parent promotion gate, online feedback wait, project memory sync, or BLOCKED with one required input.
+- Context Boundary: 项目根目录、当前 baseline/hash、评价协议、solver 写入面、工具状态和线上反馈。
+- Output Contract: 当前状态、下一候选、可比证据、替换决定、提交包或恢复结果。
+- Allowed Action: 只在项目授权范围内运行命令和修改隔离 workspace；不静默改主 baseline、ledger、提交映射或线上最佳记录。
+- Success Evidence: 当前命令输出、source hash、candidate diff/config、可复现指标、`child_result.json`、gate 或短名提交包。
+- Stop Condition: source drift 未解释、协议不可比、共享事实源写冲突、child result 无效、提交包无效、线上反馈归属不清或用户暂停。
+- Route Out: `ccdawn-score-loop`、项目工具、`ccdawn-bug-review`、online feedback wait、项目 memory 或 BLOCKED。
 
 ## 统一调用契约
 
-- 只处理 BRT interface 范围；不匹配时回 `ccdawn-brt` 或更具体 owner，复合任务不吞其他 owner。
-- 用户可见内容默认中文，完成只报状态、产出、证据和剩余风险；代码、命令、路径、错误原文、API/协议、skill 名和枚举保留原样；Route Out 仅以 BRT interface 为准，末行写 `下一步建议: <一个具体动作>`。
+- 只处理 BRT interface；Route Out 仅以 BRT interface 为准。
+- 用户可见内容默认中文，先说状态、原因和下一步，不先列 ledger、epoch 或内部枚举。
+- 首次出现代理测试时解释：它是用于快速淘汰候选的小测试，不能代替正式分数。
+- 只有复杂问题需要时才展开 hash、worker、校准或搜索图；末行写 `下一步建议: <一个具体动作>`。
 
-## Required context commands
+## Live-State Gate
 
-Before meaningful optimization, run or inspect the equivalent current outputs:
+从 `--project`、`CCDawn_HUAWEI_NSLB_ROOT` 或当前仓库解析根目录，确认 `src/Solution.cpp`，再定位工具。检查 `status`、`doctor`、`drift`，读取已有 baseline、ledger、online feedback 和 package map；缺失就说明，不新造事实源。协议或 baseline 漂移时先恢复可比性。
 
-```powershell
-$project = if ($env:CCDawn_HUAWEI_NSLB_ROOT) {
-  (Resolve-Path -LiteralPath $env:CCDawn_HUAWEI_NSLB_ROOT).Path
-} else {
-  (git rev-parse --show-toplevel 2>$null)
-}
-if (-not $project -or -not (Test-Path -LiteralPath (Join-Path $project "src\Solution.cpp"))) {
-  throw "请通过 --project、CCDawn_HUAWEI_NSLB_ROOT 或当前仓库提供 Huawei NSLB 项目根目录。"
-}
-$codexHome = if ($env:CODEX_HOME) { $env:CODEX_HOME } else { Join-Path $HOME ".codex" }
-$tool = Join-Path $codexHome "skills\ccdawn-huawei-nslb-score-loop\scripts\score_loop_tools.py"
+工具入口和完整命令分组见 `references/huawei-nslb-profile.md`。
 
-python $tool status --project $project
-python $tool doctor --project $project --min-score 0
-python $tool drift --project $project
-```
+## 自适应搜索
 
-Do not rely on chat memory as the source of truth for score, source hash, active workers, or package mapping.
+根据当前证据选择一个方向：
 
-## Command routing
+- 有稳定正向机制：`EXPLOIT`，只改一个邻近变量。
+- 连续候选重复或停滞：`EXPLORE`，从 `mutation_space.json` 选择机制不同的 family。
+- 本地与线上关系不清、失败原因不明：`DIAGNOSE`，先构造区分性 case/trace，不急着改 solver。
 
-Route these requests through the profile reference:
+候选写清 component、单一机制、预期指标、`smallestDecisiveEvaluation`、kill condition 和恢复产物。先查重，再跑合法性/编译和最小筛选；无晋升可能就淘汰。
 
-- status, doctor, drift, restore online best;
-- prepare/run/dispatch/collect/close epoch;
-- lane pool update, worker recovery, child result validation;
-- failed-diff furnace, risk resurrection, search graph, attempt cards;
-- online feedback/update, submission registration, package gate;
-- dataset/proxy lane status and validation.
+## 工作重量
 
-Use short upload names such as `sub053.zip`; store long metadata in `docs/submission-map.json`.
+- `QUICK`：单候选、单 workspace；无需 epoch、worker pool、attempt card 或 memory 更新。
+- `STANDARD`：多轮可比候选；复用项目当前 ledger/search history 记录必要结果。
+- `FULL`：真正独立的并行 lanes、昂贵验证、提交包或线上反馈；才启用 epoch/worker/校准工具。
+
+旧 ledger、search graph、attempt cards 和 failed diffs 是可选事实源，不是每轮流程。
 
 ## Worker rule
 
-Workers must follow the generic `ccdawn-score-loop` contract plus these Huawei constraints:
+并行收益明确时才创建 worker。worker 只改隔离 workspace，main project 只读；通常只改 `src/Solution.cpp` 的一个机制。先核对 baseline hash，再编译和最小筛选；命中 kill condition 后保留 diff、指标和原因并停止。完成前写有效 `child_result.json`，不能自行替换共享 baseline 或线上最佳。
 
-- main project is read-only for workers;
-- each lane edits only the assigned isolated workspace;
-- solver edits normally touch only `src/Solution.cpp`;
-- each edit lane must compile or return a concrete blocker;
-- each lane must run the smallest decisive first-kill before broad suites;
-- every worker must write `child_result.json` before completion.
+## 线上反馈与提交
 
-For the detailed worker prompt, command router, mutation families, risk-resurrection rules, online calibration rules, and memory sync commands, load `references/huawei-nslb-profile.md`.
+本地结果和线上分数分别记录。线上严格改善且对应唯一提交包时才更新线上最佳；中性或下降只调整搜索权重，不抹掉本地证据。
 
-## Completion
+zip 用短名如 `sub053.zip`；完整元数据写入已有 submission map。恢复 baseline、写 ledger、注册提交或更新权重继承项目 preflight、claim 和用户授权。
 
-After meaningful Huawei score-loop work, update project memory with the lane `competition-huawei-nslb` unless the user explicitly says to skip it.
+## 完成
+
+```text
+结论: <替换 / 淘汰 / 继续观察 / 暂时无法比较>
+当前依据: <baseline/hash、主指标、硬约束和线上反馈>
+产物: <diff、child_result、提交包或记录；没有则省略>
+下一步建议: <一个具体动作>
+```
+
+仅在跨会话恢复或项目规则要求时更新 `competition-huawei-nslb` memory；普通 QUICK 不为留痕而写 memory。

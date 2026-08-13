@@ -66,6 +66,8 @@ BRT_CORE_MARKERS = [
     "ISOLATION_REQUIRED",
     "同一 dirty-target blocker 第二次出现",
     "规划文档属于 development 写入",
+    "先说结果",
+    "复杂概念会改变用户判断或操作时",
 ]
 
 UNIFIED_CONTRACT_MARKERS = [
@@ -160,6 +162,9 @@ BRT_REFERENCE_REQUIRED_MARKERS = {
         "原契约内可安全、可逆恢复的问题直接处理",
         "## UI 预览预审",
         "APPROVED / REVISE <反馈> / ABANDON",
+        "我理解你要的结果是",
+        "换一种做法会",
+        "如果理解有误，可能",
     ],
     "ui-preview-approval.md": [
         "PREVIEW_REQUIRED",
@@ -577,6 +582,14 @@ def validate_live_routing_cases(
                 isinstance(term, str) and term for term in terms
             ):
                 errors.append(f"{case_label}: {field} must be a string list")
+        semantic_groups = case.get("expected_final_groups", [])
+        if not isinstance(semantic_groups, list) or not all(
+            isinstance(group, list)
+            and group
+            and all(isinstance(term, str) and term for term in group)
+            for group in semantic_groups
+        ):
+            errors.append(f"{case_label}: expected_final_groups must be a list of non-empty string lists")
         min_commands = case.get("min_commands", 0)
         if not isinstance(min_commands, int) or not 0 <= min_commands <= max_commands:
             errors.append(f"{case_label}: min_commands must be an integer from 0 to max_commands")
@@ -673,6 +686,16 @@ def validate_live_routing_cases(
                     isinstance(term, str) and term for term in terms
                 ):
                     errors.append(f"{followup_label}: {field} must be a string list")
+            followup_groups = followup.get("expected_final_groups", [])
+            if not isinstance(followup_groups, list) or not all(
+                isinstance(group, list)
+                and group
+                and all(isinstance(term, str) and term for term in group)
+                for group in followup_groups
+            ):
+                errors.append(
+                    f"{followup_label}: expected_final_groups must be a list of non-empty string lists"
+                )
             for field in ("min_questions", "max_questions"):
                 value = followup.get(field)
                 if value is not None and (not isinstance(value, int) or not 0 <= value <= 10):
@@ -1301,9 +1324,46 @@ def validate_skill(
                 errors.append(f"{label}: visual-design owner missing marker '{marker}'")
 
     if name == "ccdawn-score-loop":
-        for marker in ["## 实验 owner 独占", "不是 TDD RED", "smallestDecisiveEvaluation", "默认不创建 worker"]:
+        for marker in [
+            "## 实验 owner 独占",
+            "不是 TDD RED",
+            "## Protocol Freeze",
+            "## Search Policy",
+            "EXPLOIT",
+            "EXPLORE",
+            "DIAGNOSE",
+            "## ASK -> FILTER -> TELL",
+            "smallestDecisiveEvaluation",
+            "PRUNE",
+            "默认不创建 worker",
+        ]:
             if marker not in text:
                 errors.append(f"{label}: experiment/TDD boundary missing marker '{marker}'")
+
+    if name == "ccdawn-huawei-nslb-score-loop":
+        for marker in [
+            "不得把 skill 内的旧分数、hash",
+            "## Live-State Gate",
+            "EXPLOIT",
+            "EXPLORE",
+            "DIAGNOSE",
+            "代理测试",
+            "旧 ledger、search graph、attempt cards 和 failed diffs 是可选事实源",
+        ]:
+            if marker not in text:
+                errors.append(f"{label}: live adaptive NSLB contract missing marker '{marker}'")
+
+    if name == "ccdawn-creative-toolbox":
+        for marker in [
+            "## Method Router",
+            "一次默认只用一个方法",
+            "## Anti-Obvious Gate",
+            "拒绝前 3 个显而易见",
+            "真实失败方式",
+            "用户选中后停止继续发散",
+        ]:
+            if marker not in text:
+                errors.append(f"{label}: routed anti-obvious creative contract missing marker '{marker}'")
 
     if name == "ccdawn-ai-research-loop":
         for marker in ["## Baseline Gate", "## 内层实验循环", "## 外层综合与转向", "ccdawn-score-loop"]:

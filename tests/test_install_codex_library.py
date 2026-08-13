@@ -56,6 +56,10 @@ class BrtActivationTests(unittest.TestCase):
         self.assertIn("remote branch deletion", block)
         self.assertIn("Do not auto-load generic frameworks", block)
         self.assertIn("Chinese-first", block)
+        self.assertIn("Lead with the result", block)
+        self.assertIn("plain language", block)
+        self.assertIn("Explain a complex term", block)
+        self.assertIn("unexplained enums", block)
 
     def test_activation_defers_downstream_owner_until_calibrated(self) -> None:
         block = INSTALLER.BRT_ACTIVATION_BLOCK

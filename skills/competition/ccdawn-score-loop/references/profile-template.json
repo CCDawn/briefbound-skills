@@ -2,39 +2,45 @@
   "project": {
     "name": "",
     "root": "",
-    "metric": "",
-    "scoreDirection": "higher-is-better",
     "activeBaseline": "",
-    "bestKnownScore": null
+    "scoreDirection": "higher-is-better"
+  },
+  "protocol": {
+    "primaryMetric": "",
+    "minimumMeaningfulDelta": null,
+    "hardConstraints": [],
+    "secondaryMetrics": [],
+    "datasetOrCases": [],
+    "seeds": [],
+    "environment": "",
+    "evaluationCommand": ""
+  },
+  "search": {
+    "mode": "EXPLOIT",
+    "space": [],
+    "candidateBudget": null,
+    "totalBudget": null,
+    "duplicateFingerprints": [],
+    "plateauRule": "",
+    "stopRule": ""
+  },
+  "evaluation": {
+    "validityChecks": [],
+    "smallestDecisiveEvaluation": "",
+    "representativeEvaluation": "",
+    "fullEvaluation": "",
+    "pruneRule": ""
   },
   "surfaces": {
     "allowedWrites": [],
     "protectedFiles": [],
-    "ledgerPaths": [],
+    "existingFactSources": [],
     "artifactPaths": []
-  },
-  "commands": {
-    "status": "",
-    "drift": "",
-    "fastValidation": "",
-    "fullValidation": "",
-    "package": "",
-    "registerSubmission": ""
-  },
-  "promotionGate": {
-    "requiredChecks": [],
-    "secondarySignals": [],
-    "blockingFailures": []
-  },
-  "laneDefaults": {
-    "maxParallelWorkers": 1,
-    "resultArtifact": "child_result.json",
-    "firstKillRequired": true
   },
   "onlineFeedback": {
     "enabled": false,
     "submissionMap": "",
-    "calibrationLedger": "",
+    "calibrationRecord": "",
     "acceptBestOnlyOnStrictImprovement": true
   }
 }

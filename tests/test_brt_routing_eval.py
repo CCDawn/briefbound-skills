@@ -81,8 +81,8 @@ class RoutingEvalTests(unittest.TestCase):
 
     def test_evaluate_response_enforces_structural_alignment_contract(self) -> None:
         case = {
-            "expected_final_any": ["当前理解"],
-            "expected_final_all": ["行为差异", "错判影响"],
+            "expected_final_any": ["我理解你要的结果"],
+            "expected_final_all": ["换一种做法", "如果理解有误"],
             "forbidden_final_any": ["已经修改"],
             "forbidden_delegation_phrases": ["请提供页面路径"],
             "min_questions": 1,
@@ -92,10 +92,10 @@ class RoutingEvalTests(unittest.TestCase):
             "require_wait_for_calibration": True,
         }
         final_message = (
-            "当前理解：为已选成员增加低风险批量操作。\n"
+            "我理解你要的结果是：为已选成员增加低风险批量操作。\n"
             "请确认：\n"
-            "1. 仅支持停用。推荐：是；行为差异：不会批量删除；错判影响：可能误删。\n"
-            "请回复“按推荐”或纠正。"
+            "1. 仅支持停用。我建议这样做；换一种做法会包含批量删除；如果理解有误，可能误删。\n"
+            "请回复“按建议”或纠正。"
         )
 
         self.assertEqual(ROUTING_EVAL.evaluate_final_response(case, final_message), [])
@@ -103,7 +103,7 @@ class RoutingEvalTests(unittest.TestCase):
     def test_evaluate_response_reports_missing_alignment_structure(self) -> None:
         case = {
             "expected_final_any": [],
-            "expected_final_all": ["行为差异"],
+            "expected_final_all": ["换一种做法"],
             "forbidden_final_any": [],
             "forbidden_delegation_phrases": ["请选择一个明确目标"],
             "min_questions": 1,
@@ -125,6 +125,26 @@ class RoutingEvalTests(unittest.TestCase):
         self.assertTrue(any("calibration wait" in failure for failure in failures))
         self.assertTrue(any("delegation phrases" in failure for failure in failures))
 
+    def test_evaluate_response_accepts_one_term_from_each_semantic_group(self) -> None:
+        case = {
+            "expected_final_any": [],
+            "expected_final_groups": [
+                ["当前最好方案", "baseline"],
+                ["第一步", "今天试", "先试"],
+            ],
+            "forbidden_final_any": [],
+        }
+
+        self.assertEqual(
+            ROUTING_EVAL.evaluate_final_response(
+                case,
+                "保留 baseline。今天试一个机制不同的候选。",
+            ),
+            [],
+        )
+        failures = ROUTING_EVAL.evaluate_final_response(case, "继续尝试。")
+        self.assertEqual(len(failures), 2)
+
     def test_evaluate_response_accepts_equivalent_wrong_decision_heading(self) -> None:
         case = {
             "expected_final_any": [],
@@ -138,6 +158,23 @@ class RoutingEvalTests(unittest.TestCase):
         )
         self.assertEqual(
             ROUTING_EVAL.evaluate_final_response(case, "选错影响：可能造成误删。"),
+            [],
+        )
+
+    def test_evaluate_response_accepts_plain_language_recommendation(self) -> None:
+        case = {
+            "expected_final_any": [],
+            "forbidden_final_any": [],
+            "require_recommendation": True,
+            "require_wrong_decision_impact": True,
+            "require_wait_for_calibration": True,
+        }
+
+        self.assertEqual(
+            ROUTING_EVAL.evaluate_final_response(
+                case,
+                "我建议只停用已勾选成员；如果理解错了，可能误停用其他成员。请回复按建议或纠正。",
+            ),
             [],
         )
 

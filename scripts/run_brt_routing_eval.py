@@ -19,7 +19,7 @@ SKILL_NAME_RE = re.compile(
     r"^\s*name:\s*[\"']?(?P<name>ccdawn-[a-z0-9-]+)[\"']?\s*$",
     re.IGNORECASE | re.MULTILINE,
 )
-WRONG_DECISION_SUBJECTS = ("错判", "误判", "选错", "错误决策")
+WRONG_DECISION_SUBJECTS = ("错判", "误判", "选错", "错误决策", "理解错", "理解有误")
 WRONG_DECISION_EFFECTS = (
     "影响",
     "导致",
@@ -260,6 +260,9 @@ def evaluate_final_response(case: dict, final_message: str) -> list[str]:
     missing_all = [term for term in case.get("expected_final_all", []) if term not in final_message]
     if missing_all:
         failures.append(f"final response lacks required terms: {missing_all}")
+    for alternatives in case.get("expected_final_groups", []):
+        if not any(term in final_message for term in alternatives):
+            failures.append(f"final response lacks one of semantic group {alternatives}")
     forbidden_final = [term for term in case.get("forbidden_final_any", []) if term in final_message]
     if forbidden_final:
         failures.append(f"final response contains forbidden terms: {forbidden_final}")
@@ -281,7 +284,9 @@ def evaluate_final_response(case: dict, final_message: str) -> list[str]:
         failures.append(f"question count {question_count} is below {min_questions}")
     if max_questions is not None and question_count > max_questions:
         failures.append(f"question count {question_count} exceeds {max_questions}")
-    if case.get("require_recommendation") and "推荐" not in final_message:
+    if case.get("require_recommendation") and not any(
+        term in final_message for term in ("推荐", "建议")
+    ):
         failures.append("final response lacks a recommendation")
     has_labeled_wrong_decision_impact = any(
         subject in final_message for subject in WRONG_DECISION_SUBJECTS
@@ -293,7 +298,7 @@ def evaluate_final_response(case: dict, final_message: str) -> list[str]:
     if case.get("require_wrong_decision_impact") and not has_wrong_decision_impact:
         failures.append("final response lacks a wrong-decision impact")
     if case.get("require_wait_for_calibration") and not any(
-        term in final_message for term in ("按推荐", "请回复", "等待", "确认后")
+        term in final_message for term in ("按建议", "按推荐", "请回复", "等待", "确认后")
     ):
         failures.append("final response lacks a calibration wait")
     return failures

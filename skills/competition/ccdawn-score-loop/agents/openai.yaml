@@ -1,4 +1,4 @@
 interface:
   display_name: "CCDawn Score 评分循环"
-  short_description: "通用分数/榜单/benchmark 迭代模板：baseline、单因果变更、验证、晋升、反馈校准。"
-  default_prompt: "使用 $ccdawn-score-loop：仅处理反复 metric 晋升、榜单或提交 lane；确认 metric、active baseline 和 gate 后运行最小决定性 evaluation，给出 PROMOTE、REJECT 或 HOLD，QUICK 模式不强制 profile/ledger。"
+  short_description: "按当前证据主动搜索候选，尽早淘汰，并决定是否替换最佳方案"
+  default_prompt: "使用 $ccdawn-score-loop 冻结可比协议，按 EXPLOIT、EXPLORE 或 DIAGNOSE 选择候选，执行最小筛选和代表性评价，再用通俗中文说明是否替换当前最好方案。"

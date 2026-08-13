@@ -1,4 +1,4 @@
 # Competition Skills
 
-- **[ccdawn-score-loop](./ccdawn-score-loop/SKILL.md)** - Repeated metric promotion, leaderboard feedback, and submission iteration; one-off research checks stay with their research owner.
-- **[ccdawn-huawei-nslb-score-loop](./ccdawn-huawei-nslb-score-loop/SKILL.md)** - Huawei Algorithm Challenge 37 NSLB score loop, worker-lane routing, baseline promotion, package registration, and online score feedback calibration.
+- **[ccdawn-score-loop](./ccdawn-score-loop/SKILL.md)** - Adaptive candidate search with frozen comparison protocols, early pruning, evidence updates, and baseline replacement decisions.
+- **[ccdawn-huawei-nslb-score-loop](./ccdawn-huawei-nslb-score-loop/SKILL.md)** - Thin Huawei Algorithm Challenge 37 NSLB adapter that reads live baseline state and adds solver, packaging, worker, and online-feedback rules only when needed.

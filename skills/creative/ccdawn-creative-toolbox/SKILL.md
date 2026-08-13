@@ -1,122 +1,91 @@
 ---
 name: ccdawn-creative-toolbox
-description: "Use when the user wants context-aware concept collision, unknown concept generation, divergent thinking, creative ideation, concept invention, paradigm exploration, unusual alternatives, product ideas, research concepts, strategy concepts, story concepts, or surprising but useful options."
+description: "Use when the user wants non-obvious but useful ideas, concept invention, naming, reframing, variation, selection, creative unblocking, or synthesis grounded in the current context."
 license: MIT
 ---
 
 # Creative Toolbox
 
-## Goal
+## 目标
 
-Use current context to generate genuinely new, nameable concepts instead of ordinary suggestion lists.
-
-This skill should reduce creative noise: extract the useful tension, run a small set of high-yield operators, then return concept cards that can be judged, tested, or routed into planning.
-
-## Default behavior
-
-- Do not turn every creative request into a long ritual.
-- Do not ask whether to enable role collision by default.
-- Default `Collision Forum` is `skipped`.
-- Enable `Collision Forum` only when the user explicitly asks for it, the creative quality clearly depends on multi-role debate, or BRT routes the request as deep co-creation.
-- Use 3-5 operators, not the whole toolbox.
-- Every final new concept must have a name, a mechanism, a source collision, and a next experiment.
-
-## Minimal flow
-
-1. Identify the creative target: product idea, research direction, naming, story/world concept, strategy, interface, or problem reframing.
-2. Extract context materials: concept atoms, hidden tensions, evidence gaps, abnormal signals, unnamed needs, and hard boundaries.
-3. Choose 3-5 operators:
-   - required: `Context Collision`
-   - required for new concepts/names: `Naming Forge`
-   - at least one distant analogy or cross-domain mechanism
-   - at least one assumption breaker, reversal, extreme constraint, or contradiction solver
-4. Generate unnamed concept embryos before naming or judging.
-5. Name and refine the strongest embryos.
-6. Evaluate with 2-4 relevant perspectives; use top-talent role cards only when the task needs strong adversarial judgment.
-7. Return 3-7 concept cards plus one recommended next step.
-
-Load `references/full-toolbox.md` only when the user asks for a full creative run, needs detailed operator rules, wants Collision Forum, or the short flow is not enough.
-
-Load `references/role-deck.md` only when running `Perspective Jury` with top-talent role cards.
-
-## Operator menu
-
-| Operator | Use when | Output |
-|---|---|---|
-| Context Collision | Always | Source materials plus new mechanism |
-| Naming Forge | Naming or new concepts | Main name, alternatives, rejected names |
-| Assumption Breaker | Brief is conventional | Reversed assumptions and opportunities |
-| Cross-Domain Analogy | Need fresh structure | Borrowed mechanism, not surface style |
-| Extreme Constraint | Need sharper ideas | Designs that survive a hard limit |
-| Concept Fusion | Two ideas can combine | Third concept with a new mechanism |
-| Mutation | Existing idea is close | Variants with changed user, scale, medium, or interaction |
-| Contradiction Solver | Goals conflict | Layered or staged resolution |
-| Novelty Filter | Output feels generic | Removed obvious ideas and survivors |
-| Perspective Jury | Need self-review | Challenge, evidence, verdict |
-| Collision Forum | User wants debate | Short multi-role exchange and second-generation ideas |
-
-## Concept quality gate
-
-A concept is eligible only when it:
-
-- comes from at least two current context materials;
-- changes a mechanism or relationship, not just wording;
-- names something the user could not previously discuss clearly;
-- can generate a follow-up function, experiment, story beat, metric, or decision;
-- survives a usefulness check and at least one skeptical challenge.
-
-Downgrade it to a normal idea if it is only an existing feature with a prettier name.
-
-## Compact output
-
-```text
-创意调用:
-- Target: ...
-- Operators: ...
-- Collision Forum: skipped / enabled, because ...
-- Context Materials: ...
-
-概念胚胎:
-| Embryo | Source Collision | New Mechanism | Why It Is Not Generic |
-
-新概念卡:
-| Name | Definition | Source Collision | Mechanism | Newness | Next Experiment |
-
-筛选:
-- Safe:
-- Sharp:
-- Strange:
-- Recommended:
-
-Review:
-- Challenge:
-- Evidence:
-- Verdict:
-
-Route Out:
-- <从 BRT interface 的 Route Out 选择一个>
-```
-
-Use the full output contract in `references/full-toolbox.md` only for deep creative sessions.
+根据用户所处阶段选择一个合适的创意方法，产出少量具体、非显而易见且能继续行动的想法。重点是改变机制或观察角度，不是把普通建议包装成概念卡。
 
 ## BRT interface
 
-- Context Boundary: user brief, current conversation context, extracted concept materials, and any explicit domain constraints.
-- Output Contract: named concept cards, quality gate result, recommendation, and next route.
-- Allowed Action: generate and evaluate concepts only; implementation, external research, asset creation, or code changes require routing to the proper owner.
-- Success Evidence: each concept has source collision, mechanism, name, novelty reason, and testable next experiment.
-- Stop Condition: creative target unclear, insufficient context materials, user asks to converge into implementation, or safety/ownership constraints block the concept.
-- Route Out: `ccdawn-planning`, `ccdawn-feature-reuse-research`, `ccdawn-evaluation`, or back to `ccdawn-brt` for alignment.
+- Context Boundary: 用户目标、当前材料、创意阶段、领域、约束和明确非目标。
+- Output Contract: 选用的方法、少量具体候选、真实失败方式、推荐方向和第一步。
+- Allowed Action: 生成、改写、比较和筛选想法；外部调研、实现、资产或代码写入需路由对应 owner。
+- Success Evidence: 每个保留候选绑定当前情境，说明具体机制、适用原因、失败方式和可执行第一步。
+- Stop Condition: 创意阶段仍有高影响歧义、上下文不足以产生具体候选、用户已选择方向，或请求进入实现。
+- Route Out: `ccdawn-planning`、`ccdawn-feature-reuse-research`、`ccdawn-evaluation`、具体实现 owner，或 `ccdawn-brt`。
 
 ## 统一调用契约
 
-- 只处理 BRT interface 范围；不匹配时回 `ccdawn-brt` 或更具体 owner，复合任务不吞其他 owner。
-- 用户可见内容默认中文，完成只报状态、产出、证据和剩余风险；代码、命令、路径、错误原文、API/协议、skill 名和枚举保留原样；Route Out 仅以 BRT interface 为准，末行写 `下一步建议: <一个具体动作>`。
+- 用户可见内容默认中文，先给可用想法，不汇报内部路由过程；Route Out 仅以 BRT interface 为准。
+- 方法名会帮助复用时才展示，并用一句话解释它如何改变本轮思考；不列一串术语。
+- 默认给 3 个候选，不用空话凑数。末行写 `下一步建议: <一个具体动作>`。
 
-## Common mistakes
+## Method Router
 
-- Asking for permission to run a long debate when a compact creative answer would help more.
-- Producing a list of reasonable suggestions without new mechanisms.
-- Naming too early and letting the name hide a weak concept.
-- Using generic roles such as "user" and "engineer" when the task needs sharp expert evaluation.
-- Keeping all weird ideas or deleting all weird ideas; filter by mechanism and testability.
+先判断阶段，再选方法；一次默认只用一个方法：
+
+| 阶段 | 用户信号 | 默认方法 | 目的 |
+|---|---|---|---|
+| `GENERATE` | 还没有方向 | 约束碰撞 | 用真实材料和限制生成方向 |
+| `EXPAND` | 已有一个想法，想看变化 | 机制变异 | 改用户、触发、媒介、尺度或反馈 |
+| `SELECT` | 已有多个选项 | 事前验尸/反向检验 | 用失败原因拉开差异 |
+| `UNBLOCK` | 卡住或循环重复 | 反转 | 暂时颠倒关键假设以找新入口 |
+| `SUBVERT` | 太安全、太常规 | 挑衅约束 | 先制造不合理命题，再翻译成可用机制 |
+| `REFINE` | 方向可用但不够锋利 | 矛盾求解 | 明确冲突并重新安排关系 |
+| `SYNTHESIZE` | 有大量笔记或观察 | 聚类命名 | 找重复结构、异常项和未命名主题 |
+| `NAMING` | 需要命名 | 命名锻造 | 从机制、张力和记忆点生成名称 |
+
+若用户直接指定方法就使用它。只有两个信号确实冲突且单一方法无法处理时，最多组合两个，并说明各自作用。阶段不清且会改变方法时只问一个问题；否则基于当前材料直接开始。
+
+需要时才读 `references/full-toolbox.md`。`Perspective Jury` 和 `role-deck.md` 仅用于用户明确要求的深度对抗评估。
+
+## Anti-Obvious Gate
+
+内部先拒绝前 3 个显而易见的答案；AI、效率、习惯、旅行、健身等同质化主题拒绝前 5 个。废案通常不展示。
+
+保留候选必须同时满足：
+
+- 绑定用户的真实材料、限制或张力；
+- 描述具体机制，不用“平台、生态、AI 赋能”代替机制；
+- 与其他候选在核心做法上不同；
+- 至少一个今天就能开始验证；
+- 说明一个真实失败方式或不适用场景。
+
+“怪”不是质量。无法说明为什么现在有用、为谁有用或怎样开始的怪想法应淘汰。
+
+## 最小流程
+
+1. 提取阶段、领域、具体问题和硬约束。
+2. 选择一个方法，并用它生成足够多的内部草案。
+3. 运行 Anti-Obvious Gate，删除换皮、重复和只改命名的想法。
+4. 默认保留 3 个差异最大的候选，其中至少一个现实可做、一个打破常规。
+5. 每个候选说明机制、为什么适合、失败方式和第一步。
+6. 推荐一个方向并说明选择依据；用户选中后停止继续发散，路由到深化或实现。
+
+## 输出
+
+简单任务直接给候选。复杂任务可用：
+
+```text
+本轮方法: <方法；一句话解释>
+
+1. <候选名称或一句话定义>
+   - 怎么运作: <具体机制>
+   - 为什么适合: <与当前情境的连接>
+   - 可能失败在: <真实失败方式>
+   - 第一步: <可执行动作>
+
+我的建议: <一个候选及理由>
+下一步建议: <一个具体动作>
+```
+
+命名任务改为输出 `名称 / 词源或构成 / 传达的机制 / 容易误解之处`；选择任务允许只返回一个明确结论，不硬凑三个新想法。
+
+## 方法来源
+
+路由、单方法默认、反显而易见和具体机制优先的设计参考 [NousResearch Hermes Agent 的 Creative Ideation skill](https://github.com/NousResearch/hermes-agent/blob/main/optional-skills/creative/creative-ideation/SKILL.md)（MIT），并按 CCDawn 的中文意图路由和 owner 契约重新组织。

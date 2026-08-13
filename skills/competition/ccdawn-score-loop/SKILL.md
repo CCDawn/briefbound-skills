@@ -1,6 +1,6 @@
 ---
 name: ccdawn-score-loop
-description: "Use when repeated work is governed by an explicit metric, active baseline, candidate comparison, promotion gate, leaderboard feedback, or submission iteration; do not use for a one-off research check that its current owner can execute directly."
+description: "Use when repeated work is governed by an explicit metric, active baseline, candidate search, promotion rule, leaderboard feedback, or submission iteration; do not use for a one-off research check that its current owner can execute directly."
 license: MIT
 ---
 
@@ -8,60 +8,88 @@ license: MIT
 
 ## 目标
 
-围绕一个明确 metric 连续比较 baseline 与 candidate，并用可复现证据决定 `PROMOTE / REJECT / HOLD`。这是单条量化 lane owner，不负责整个研究方向或竞赛生命周期。
+围绕一个明确指标主动寻找候选，用可比较证据决定是否替换当前最好方案。它负责一条量化优化 lane，不负责整个研究方向或竞赛生命周期。
 
 ## BRT interface
 
-- Context Boundary: metric、active baseline、candidate/lane、评价命令、允许写入面、晋升条件和预算。
-- Output Contract: candidate 结果、delta、gate 决策、必要记录和下一 lane/回传。
-- Allowed Action: 在已确认范围内一次改变一个主要机制并评估；不静默改变 metric、数据、baseline 或提交目标。
-- Success Evidence: baseline/candidate 身份、命令、解析后的指标、diff/config、关键副指标和 artifact。
-- Stop Condition: baseline/协议漂移、metric 不明、结果不可解析、写入冲突、预算耗尽或继续无信息价值。
+- Context Boundary: 主指标、硬约束、当前最好方案、搜索空间、评价协议、预算和允许写入面。
+- Output Contract: 下一候选、可比结果、决定、可复用证据和停止/转向信号。
+- Allowed Action: 在已确认范围内提出并评估候选；不静默改变指标、数据、基线、预算或提交目标。
+- Success Evidence: 精确 baseline/candidate、参数或 diff、命令、数据/seed、主副指标、运行产物和可比性判断。
+- Stop Condition: 协议漂移、指标无法解析、候选重复、预算耗尽、连续结果不再提供新信息、写入冲突或安全边界变化。
 - Route Out: 继续当前 loop、返回 `ccdawn-ai-research-loop`、返回 `ccdawn-competition-research-lifecycle`、`ccdawn-bug-review`、`ccdawn-brt` 或 BLOCKED。
 
 ## 统一调用契约
 
-- 只处理 BRT interface 范围；不匹配时回 `ccdawn-brt` 或更具体 owner，复合任务不吞其他 owner。
-- 用户可见内容默认中文，完成只报状态、产出、证据和剩余风险；代码、命令、路径、错误原文、API/协议、skill 名和枚举保留原样；Route Out 仅以 BRT interface 为准，末行写 `下一步建议: <一个具体动作>`。
+- 只处理 BRT interface；复合任务不吞其他 owner；Route Out 仅以 BRT interface 为准。
+- 用户可见内容默认中文，先说结论，再给比较依据。默认使用“替换、淘汰、继续观察、暂时无法比较”等通俗说法；必须保留枚举时写成中文结论加括号，例如“替换当前最好方案（`PROMOTE`）”。
+- 复杂指标、代理测试或搜索策略会影响判断时，用一句话解释；不展示内部 trial 账本。末行写 `下一步建议: <一个具体动作>`。
 
 ## 实验 owner 独占
 
-只有主要未知量是“候选能否持续改善明确 metric，并需要晋升/淘汰循环”时进入。AI Research 中可在同一上下文完成的一次低成本实验由研究 owner 直接执行，不为一次比较加载本 skill。
+只有主要未知量是“怎样持续改善一个明确指标”时进入。AI Research 中一次低成本比较由原 owner 直接执行。
 
-分数下降、candidate reject 和 online neutral/worse 是实验结果，不是 TDD RED。确定性的 metric/parser/schema/seed/shape/NaN/打包 bug 临时路由 `ccdawn-bug-review`，修复后返回原 lane。
+分数下降、candidate reject 和 online neutral/worse 是实验结果，不是 TDD RED。metric/parser/schema/seed/shape/NaN/打包出现确定性错误时，临时路由 `ccdawn-bug-review`，修复后回到原 lane。
 
-## 自适应重量
+## Protocol Freeze
 
-- `QUICK`：已有 baseline、命令和 gate，直接比较一个 candidate；不创建 profile、ledger、worker 或独立 artifact。
-- `STANDARD`：反复候选、跨会话或需要晋升历史；维护最小记录。
-- `FULL`：leaderboard/online feedback、提交包、昂贵运行或并行 lane；使用项目 profile 和持久 artifact。
+比较前冻结以下协议；任何一项变化都先建立新 baseline，不能把前后结果直接相减：
 
-缺少正式 profile 不阻塞 QUICK；只要 metric、baseline、命令、范围和 gate 足以解释结果即可。STANDARD/FULL 才持久化这些字段，优先读取项目已有事实源，不创建平行 ledger。
+- 主指标、越大/越小更好和最小有效提升；
+- 硬约束与副指标，不能用主指标掩盖合法性、正确性或资源超限；
+- baseline 的 commit/hash/config；
+- 数据、case、seed、运行环境和评价命令；
+- 单候选预算、总预算和停止条件。
 
-## 最小循环
+若目标确实有多个指标，先指定主指标与硬约束；只有用户明确接受综合规则时才做加权，不临时拼一个总分。
 
-1. 确认当前 baseline、source/config、metric、数据/seed 和评价协议没有漂移。
-2. 定义一个主要机制、预期信号、`smallestDecisiveEvaluation` 和 kill condition。
-3. 先运行最小决定性检查；有希望时再扩到代表性检查或完整 gate。
-4. 解析 baseline/candidate/delta 与副作用，得到 `PROMOTE / REJECT / HOLD / BLOCKED`。
-5. 只有晋升、跨会话恢复、online feedback 或可复用失败教训才写记录；普通 QUICK 直接汇报。
-6. 有执行许可且下一 lane 明确时连续推进，不逐候选询问。
+## Search Policy
 
-一个 lane 只改变一个可归因机制。Smoke/proxy 用于淘汰和排序，不替代目标评估；online score 是稀疏外部证据，不覆盖干净本地协议。没有新的因果变量、诊断信号或校准价值时停止重复尝试。
+每轮先选择一种搜索意图，再生成候选：
 
-## 并行与回传
+- `EXPLOIT`：已有稳定正向信号时，在当前最好方案附近做小步改动。
+- `EXPLORE`：结果停滞或局部空间已重复时，尝试机制不同的方向。
+- `DIAGNOSE`：噪声、代理指标或失败原因不清时，先设计能区分原因的检查。
 
-默认不创建 worker、worktree 或 lane matrix。只有候选写入面独立、资源允许且并行收益明显时才隔离；worker 只返回 diff、命令、指标和 artifact，不能自行晋升共享 baseline。
+把变量写成可判断的搜索空间：类别、顺序、数值或结构变化。候选必须有一个主要因果机制和唯一指纹；已做过的同机制、同方向、同边界候选直接跳过。随机变化若不能回答问题，也不进入队列。
 
-由 AI Research 发起时只回传：`Candidate / Hypothesis outcome / Metric evidence / Mechanism evidence / Caveat / Reusable lesson / Pivot signal`，研究方向仍由研究 owner 决定。由 Competition Lifecycle 发起时回传 gate 与提交/榜单影响。
+## ASK -> FILTER -> TELL
+
+1. `ASK`：根据当前证据提出一个候选，写清机制、预期信号、`smallestDecisiveEvaluation` 和 kill condition。
+2. `FILTER`：先做构建、合法性、成本和最小决定性检查。即使最乐观也过不了替换标准时，立即 `PRUNE`；诊断候选则按是否回答问题判断。
+3. 通过初筛后跑代表性评价；昂贵完整评价只留给仍可能晋升的候选。
+4. `TELL`：记录结果、可比性、机制判断和副作用，再更新下一轮的 `EXPLOIT / EXPLORE / DIAGNOSE` 选择。
+5. 没有新变量、新证据或校准价值时停止，不用更多试验掩盖平台期。
+
+内部 trial 可标记 `ASKED / RUNNING / PRUNED / COMPLETE / FAILED`；用户通常只需要知道结果和原因。
+
+## 决定规则
+
+- `PROMOTE`：可比较，主指标超过有效提升线，硬约束通过，代表性结果支持替换 baseline。
+- `REJECT`：可比较但未过线，或副作用越过已确认边界。
+- `HOLD`：方向有信息价值，但样本、稳定性或代表性不足，下一项验证明确。
+- `BLOCKED`：协议漂移、证据缺失或结果不可解析，当前无法安全比较。
+
+代理测试只用于筛选；不能证明目标指标提升。线上分数是稀疏外部证据，应与本地可复现结果分别记录。
+
+## 自适应重量与并行
+
+- `QUICK`：已有协议，直接完成一个 `ASK -> FILTER -> TELL`，不创建 profile、ledger、worker 或独立 artifact。
+- `STANDARD`：反复候选或跨会话，维护最小 trial 历史与重复指纹。
+- `FULL`：昂贵评价、线上反馈、提交包或真正独立的并行候选，使用项目已有事实源。
+
+默认不创建 worker。只有写入面、资源和验证互相独立时才并行；worker 不能自行替换共享 baseline，只返回 diff、命令、指标和产物。
 
 ## 输出
 
 ```text
-Gate: PROMOTE / REJECT / HOLD / BLOCKED
-- Baseline / Candidate:
-- Metric delta 与关键副作用:
-- 机制判断与证据:
-- 记录/Artifact: <仅需要时>
+结论: 替换 / 淘汰 / 继续观察 / 暂时无法比较（必要时附内部枚举）
+比较: <baseline、candidate、主指标变化和硬约束>
+原因: <机制判断、关键副作用或证据缺口>
+记录: <仅跨会话、线上反馈或可复用教训需要时>
 下一步建议: <一个具体动作>
 ```
+
+## 方法来源
+
+搜索循环参考 [Optuna](https://github.com/optuna/optuna) 的 Ask-and-Tell 与 pruning 思路，证据记录参考 [MLflow](https://github.com/mlflow/mlflow) 的 run/metric/artifact 模型；这里只重写为无新增依赖的 skill 契约。

@@ -16,18 +16,18 @@ BRT 默认理解意图、选 owner、推进验证。单一合理行为直接完�
 - 下游继承许可，切换 owner 不重问；仅范围扩大、高风险或真实取舍需确认。
 - `HIGH`：行动；`MEDIUM`：声明低风险假设后行动；`LOW`：probe/讨论；`BLOCKED`：只问不可约问题。
 - 输出用 `SILENT / MICRO / ALIGN / FULL`，默认最短；不展示内部账本。
-- “继续/确认/按推荐来”先做 `Continuation Health Check`，仅继承仍完整的契约；缺结果/surface/evidence 或新增可见分叉就 probe/对齐。
+- “继续/确认/按建议/按推荐来”先做 `Continuation Health Check`，仅继承仍完整的契约；缺结果/surface/evidence 或新增可见分叉就 probe/对齐。
 - 声称刷新 skill 前必须重读本机 `SKILL.md`。
 
 ## 讨论式意图收敛
 
-开发、规划或高影响审查前以 `Alignment Value Gate / Alignment Completeness Gate` 检查 `Desired Result / Owning Surface / Acceptance Evidence / Highest-impact Fork`。前三项缺失为 `MISSING_CONTEXT`：一次窄范围只读 probe 查行为、测试和规范，不索取本地可发现信息。最后一项有多个实质结果为 `PRODUCT_FORK`：执行 `One-Turn Alignment`；否则行动。低置信度不得带着未确认的高影响假设写入。
+开发、规划或高影响审查前以 `Alignment Value Gate / Alignment Completeness Gate` 检查 `Desired Result / Owning Surface / Acceptance Evidence / Highest-impact Fork`。前三项缺失为 `MISSING_CONTEXT`：一次窄范围只读 probe，不索取本地可发现信息。存在多个实质结果为 `PRODUCT_FORK`：执行 `One-Turn Alignment`；否则行动。低置信度不得带着未确认的高影响假设写入。
 
 `PRODUCT_FORK` 进入 `ALIGNMENT_PENDING`：只读 probe/BRT 对齐，不加载开发/planning owner、不写入。用户“按推荐”或纠正后进入 `CALIBRATED`，更新契约并重选/读取 owner，不重问已确认项。
 
-- agent 先推荐，不让用户重写需求；一次集中提出 2-4 个相关高影响问题，每项给推荐答案、行为差异和错判影响。
+- agent 先给具体建议，不让用户重写需求；一次集中提出 2-4 个高影响问题，说明建议、替代结果和误解风险。
 - 主动暴露最可能造成误改的分叉；不得静默替用户决定产品行为，也不得询问本地证据已经回答的问题。
-- 回答按字段写 `当前理解 / 依据 / 推荐 / 行为差异 / 错判影响 / 等待校准`，末尾邀请回复“按推荐”或纠错。
+- 不强制套字段。对齐时用通俗话说明理解、依据、建议、替代结果和误解风险，末尾邀请回复“按建议”“按推荐”或直接纠错。
 - 自然闸门：意图/范围变化、不可安全恢复的失败、高风险/破坏性/权限/迁移/发布、冲突或真实取舍。
 
 开发中执行 `Unexpected Issue Gate`：新证据若改变契约行为、范围、数据/API、安全或验收，停止受影响写入，带证据/影响/推荐讨论，不得扩大范围或硬做；契约内可逆恢复则处理并简报，确认后更新再继续。
@@ -111,4 +111,4 @@ Wrong-Edit Guard：定位 owning surface、预计文件、相关测试和已有�
 
 仅跨阶段/会话、恢复、正式交接或 Deferred 风险使用 `ccdawn-completion-summary`；已知残留才 cleanup。同一任务 PR 后按 `PR_OPEN / PR_MERGED / PR_CLOSED_UNMERGED` 路由 `ccdawn-development-cleanup`；仅验证 base 吸收 published head 后收尾本地资源，远程分支删除仍单独授权。
 
-用户可见内容默认中文，保留代码、命令、路径、错误原文、API/协议、skill 名和枚举。每个阶段只给短 checkpoint；正文最后一行（Next Action）写 `下一步建议: <一个具体动作>`，只有自然闸门才给选项。
+用户可见内容默认中文：先说结果和必要依据；内部路由、枚举和账本不直接展示。复杂概念会改变用户判断或操作时，首次出现用一句话解释；技术字面量保持原样。checkpoint 要短；正文末行（Next Action）写 `下一步建议: <一个具体动作>`，仅自然闸门给选项。
