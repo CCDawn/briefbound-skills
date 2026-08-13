@@ -12,7 +12,7 @@
 CCDawn is a Chinese-first collection of 30 Agent Skills for Codex and Grok Build, covering intent alignment, dynamic routing, peer collaboration and opt-in autonomous closure across existing threads, lightweight development, code-structure guards, performance engineering, cleanup, code review, UI design, and AI research workflows.
 
 - Users describe the task normally. They do not need to invoke `/brt` or memorize a workflow.
-- [`ccdawn-brt`](skills/engineering/ccdawn-brt/SKILL.md) proceeds immediately when intent is clear and starts a focused discussion only when ambiguity could materially change the result.
+- [`ccdawn-brt`](skills/engineering/ccdawn-brt/SKILL.md) proceeds immediately when intent is clear. When discussion is needed, it leads with the result, uses plain language, and explains only complex concepts that affect a decision or action.
 - Simple work stays simple. Durable plans, embedded task graphs, and compact TDD appear only when the risk justifies them.
 
 **English** | [简体中文](README.md)
@@ -21,7 +21,7 @@ CCDawn is a Chinese-first collection of 30 Agent Skills for Codex and Grok Build
 
 ![BRT moving from intent alignment to routing, implementation, and verification](assets/brt-demo.gif)
 
-This is an illustrative workflow: the user describes the task normally; BRT inspects available context, discusses only decisions that change the result, and hands the aligned task to the most specific skill. After alignment, it can discover existing same-project peer threads when mutual help would reduce duplicate work, conflict, or integration rework.
+This is an illustrative workflow: the user describes the task normally; BRT inspects available context, discusses only decisions that change the result, and hands the aligned task to the most specific skill. User-facing updates stay focused on the conclusion, supporting evidence, and next action rather than internal routing enums or process ledgers. After alignment, BRT can discover useful same-project peer threads.
 
 ## Quick Start
 
@@ -79,6 +79,7 @@ Run `py -3 scripts\run_brt_routing_eval.py` after installation for a low-cost, r
 | Problem | CCDawn approach |
 | --- | --- |
 | The request is incomplete | Inspect available evidence, then discuss only decisions that change the result |
+| Agent updates are dense with jargon | Lead with the result, use plain language, and explain a complex term only when it affects the user's decision or action |
 | Many skills exist but routing is manual | BRT selects the most specific owner and can combine multiple intents |
 | Installed GitHub, browser, Figma, or artifact tools are ignored | BRT routes to currently available capabilities while CCDawn retains intent and acceptance ownership |
 | Small changes trigger heavyweight process | Scale workflow weight per subtask and prefer direct implementation plus verification |
@@ -89,10 +90,12 @@ Run `py -3 scripts\run_brt_routing_eval.py` after installation for a low-cost, r
 | Multi-thread work stalls after a conflict | One opt-in enables a recoverable loop that resumes paused peers and verifies integration into local `main` |
 | Finished features leave temporary files and stale branches | Clean only known attributable residue or resources covered by an explicit cleanup request |
 | Research experiments get treated like software tests | Separate research, score loops, rigor review, and deterministic software TDD |
+| Score optimization keeps tuning nearby parameters | Freeze a comparable protocol, then switch deliberately among exploiting positive signals, exploring different mechanisms, and diagnosing uncertainty; prune hopeless candidates early |
+| Creative output looks polished but generic | Route by creative phase, use one method by default, reject obvious ideas, and return a few concrete mechanisms with failure modes and first steps |
 
 ## Featured Skills
 
-- [`ccdawn-brt`](skills/engineering/ccdawn-brt/SKILL.md): intent inference, collaborative alignment, routing, and workflow-weight control.
+- [`ccdawn-brt`](skills/engineering/ccdawn-brt/SKILL.md): intent inference, plain-language alignment, routing, and workflow-weight control.
 - [`ccdawn-autonomous-collaboration-loop`](skills/engineering/ccdawn-autonomous-collaboration-loop/SKILL.md): one opt-in drives peer completion, conflict recovery, verified local-main integration, and cleanup without repeated gates.
 - [`ccdawn-multi-agent-orchestration`](skills/engineering/ccdawn-multi-agent-orchestration/SKILL.md): low-noise peer negotiation across existing same-project threads; it creates no subagents and transfers no task ownership.
 - [`ccdawn-thread-coordination`](skills/engineering/ccdawn-thread-coordination/SKILL.md): shared progress, conflict, discussion, pause/resume, and fast-merge coordination for same-project agents.
@@ -107,6 +110,9 @@ Run `py -3 scripts\run_brt_routing_eval.py` after installation for a low-cost, r
 - [`ccdawn-ui-review`](skills/engineering/ccdawn-ui-review/SKILL.md): findings-first review of existing interfaces or isolated previews without replacing user approval.
 - [`ccdawn-design-system`](skills/engineering/ccdawn-design-system/SKILL.md): shared token, theme, component API, variant, and Figma-to-code governance.
 - [`ccdawn-ai-research-loop`](skills/research/ccdawn-ai-research-loop/SKILL.md): baseline reproduction, hypotheses, experiments, ablations, and research synthesis.
+- [`ccdawn-score-loop`](skills/competition/ccdawn-score-loop/SKILL.md): adaptive candidate search under a frozen comparison protocol, with early pruning and evidence-based baseline replacement.
+- [`ccdawn-huawei-nslb-score-loop`](skills/competition/ccdawn-huawei-nslb-score-loop/SKILL.md): live-state Huawei NSLB adapter for solver search, packaging, workers, and online-score calibration when needed.
+- [`ccdawn-creative-toolbox`](skills/creative/ccdawn-creative-toolbox/SKILL.md): phase-routed ideation that defaults to one method and returns a few specific, testable ideas with honest failure modes.
 - [`ccdawn-feature-reuse-research`](skills/engineering/ccdawn-feature-reuse-research/SKILL.md): reuse research for complex feature decisions.
 
 ## Skill Catalog

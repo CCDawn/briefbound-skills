@@ -12,7 +12,7 @@
 30 个中文优先 Agent Skills，支持 Codex 与 Grok Build，覆盖意图对齐、动态路由、多会话平级协作与自动闭环、轻量开发、代码结构守卫、性能工程、开发清理、代码审查、UI 设计和 AI 研究工作流。
 
 - 用户正常说需求即可，不需要主动输入 `/brt` 或记忆流程命令。
-- [`ccdawn-brt`](skills/engineering/ccdawn-brt/SKILL.md) 会在意图明确时直接推进，在高影响歧义出现时集中讨论并给出推荐。
+- [`ccdawn-brt`](skills/engineering/ccdawn-brt/SKILL.md) 会在意图明确时直接推进；需要讨论时先说结果、使用通俗中文，并只解释会影响判断或操作的复杂概念。
 - 简单任务直接实现和验证；只有真实风险存在时才升级到规划、内嵌任务图或紧凑 TDD。
 
 [English](README.en.md) | **简体中文**
@@ -21,7 +21,7 @@
 
 ![BRT 从意图对齐到自动路由、实施与验证的演示](assets/brt-demo.gif)
 
-这是一个流程示例：用户只需正常表达需求；BRT 会先查证可用上下文，只讨论会改变结果的问题，然后把已对齐的任务交给最具体的 Skill。
+这是一个流程示例：用户只需正常表达需求；BRT 会先查证可用上下文，只讨论会改变结果的问题，然后把已对齐的任务交给最具体的 Skill。用户看到的是简短结论、必要依据和下一步，而不是内部路由枚举或流程账本。
 
 ## 快速体验
 
@@ -70,6 +70,7 @@ sh ./install.sh
 | 常见问题 | CCDawn 的处理方式 |
 | --- | --- |
 | 用户没有写完整规格 | 先读取可查证上下文，再讨论真正会改变结果的问题 |
+| Agent 汇报术语多、难评估 | 先说结果，默认使用通俗短句；复杂概念只有影响决定时才主动解释 |
 | Skill 很多但不会自动选 | BRT 选择最具体 owner，并可动态组合多个意图 |
 | 已安装 GitHub、浏览器、Figma 或文档工具却不会用 | BRT 按当前可用能力直接路由，CCDawn owner 只保留目标与验收 |
 | 简单修改被流程拖慢 | 按子任务风险控制重量，默认优先直接实现和验证 |
@@ -81,10 +82,12 @@ sh ./install.sh
 | 多会话冲突后链路容易停住 | 用户确认一次后，自动协作闭环可接管失活协调、恢复暂停任务并验证合入本地 `main` |
 | 功能完成后残留临时文件和旧分支 | 仅在已知产生残留或用户要求时清理有归属证据的本地资源 |
 | AI 研究和普通开发混用流程 | 分离研究实验、评分循环、严谨性审查和软件 TDD |
+| 评分优化只会重复调相邻参数 | 固定可比协议后，在利用正向信号、探索不同机制和诊断不确定性之间主动切换，并尽早淘汰无望候选 |
+| 创意输出模板很完整但想法普通 | 按创意阶段默认只选一个方法，先过滤显而易见的答案，再给少量具体机制、失败方式和可执行第一步 |
 
 ## 精选 Skill
 
-- [`ccdawn-brt`](skills/engineering/ccdawn-brt/SKILL.md)：默认适配层，负责意图理解、讨论式对齐、路由和流程重量控制。
+- [`ccdawn-brt`](skills/engineering/ccdawn-brt/SKILL.md)：默认适配层，负责意图理解、通俗对齐、路由和流程重量控制。
 - [`ccdawn-autonomous-collaboration-loop`](skills/engineering/ccdawn-autonomous-collaboration-loop/SKILL.md)：用户确认一次后，持续驱动现有会话完成各自任务、恢复冲突并验证合入本地 `main`。
 - [`ccdawn-multi-agent-orchestration`](skills/engineering/ccdawn-multi-agent-orchestration/SKILL.md)：连接同项目现有平级会话，让各 Agent 保留原任务，通过低噪声协商减少重复、冲突和集成返工。
 - [`ccdawn-thread-coordination`](skills/engineering/ccdawn-thread-coordination/SKILL.md)：共享同项目 Agent 进度，协调冲突、讨论、暂停恢复与快速合并。
@@ -99,6 +102,9 @@ sh ./install.sh
 - [`ccdawn-design-system`](skills/engineering/ccdawn-design-system/SKILL.md)：治理跨组件 token、主题、variants、共享组件和 Figma/code 一致性。
 - [`ccdawn-frontend-engineering`](skills/engineering/ccdawn-frontend-engineering/SKILL.md)：消费已批准或明确跳过预览的界面契约，实施生产代码并做运行时验证。
 - [`ccdawn-ai-research-loop`](skills/research/ccdawn-ai-research-loop/SKILL.md)：复现 baseline，推进假设、实验、消融与研究方向收敛。
+- [`ccdawn-score-loop`](skills/competition/ccdawn-score-loop/SKILL.md)：固定比较协议后主动选择利用、探索或诊断候选，用早停和代表性评价决定是否替换当前最好方案。
+- [`ccdawn-huawei-nslb-score-loop`](skills/competition/ccdawn-huawei-nslb-score-loop/SKILL.md)：从当前 NSLB 项目读取 baseline、hash 和线上反馈，按需调用 solver 搜索、打包与校准工具。
+- [`ccdawn-creative-toolbox`](skills/creative/ccdawn-creative-toolbox/SKILL.md)：按生成、扩展、选择、解卡、颠覆、精炼、整理或命名阶段选择一个方法，输出少量可尝试的非套路方案。
 - [`ccdawn-feature-reuse-research`](skills/engineering/ccdawn-feature-reuse-research/SKILL.md)：为复杂功能评估项目内外可复用方案。
 
 ## 懒人安装
@@ -122,7 +128,7 @@ sh ./install.sh
 6. 使用安装脚本默认可逆停用安装器识别的完整 Superpowers 自动发现入口集，保留原目录和内容，不要删除。
 7. 允许安装器在 ~/.codex/AGENTS.md 中安装受管的 CCDawn BRT 激活块；必须保留用户已有规则，并确保可单独卸载。
 8. 最后用中文汇报：仓库位置、安装目录、安装了哪些 skills、BRT 激活状态、冲突入口处理、验证是否通过、是否需要重启 Codex。
-9. 重点提醒我：最重要入口是 ccdawn-brt；用户正常说需求即可。意图明确时直接推进；意图不清且误解会返工时，BRT 要先说明当前理解和依据，一次集中讨论 2-4 个高影响问题并给出推荐。需求对齐后，若原生 thread 能力可用，BRT 会发现同项目现有平级会话；只在各自任务受益或能减少全局冲突/返工时协作，不创建子 Agent、不转移任务 owner。需要持续自动开发、冲突恢复和本地 main 集成时，BRT 只询问一次是否开启 ccdawn-autonomous-collaboration-loop。
+9. 重点提醒我：最重要入口是 ccdawn-brt；用户正常说需求即可。意图明确时直接推进；有高影响分叉时先查证，再用简短通俗的话说明理解、依据、具体建议、替代结果和误解风险。复杂术语只在影响判断或操作时解释。需求对齐后，若原生 thread 能力可用，BRT 会发现同项目现有平级会话；只在各自任务受益或能减少全局冲突/返工时协作，不创建子 Agent、不转移任务 owner。需要持续自动开发、冲突恢复和本地 main 集成时，BRT 只询问一次是否开启 ccdawn-autonomous-collaboration-loop。
 
 如果遇到 Git、Python、网络、权限问题，只问我一个最关键的阻塞问题。
 ```
@@ -436,6 +442,8 @@ Grok Build 安装后可用 `grok inspect --json` 确认 `ccdawn-brt` 的 source 
 - `先审查一下这个项目结构`
 - `我要加一个复杂编辑器功能`
 - `这个 benchmark 分数退化了，帮我分析并继续优化`
+- `连续几个相邻参数都没提升，换一种搜索方向继续优化`
+- `这个产品点子太普通，给我三个机制真正不同、今天能试的方向`
 - `帮我把这个目标拆成可验证的执行计划`
 - `帮我给这个仓库初始化项目记忆`
 - `另一个会话也在改这些文件，协调一下并在完成后通知它恢复`
@@ -445,6 +453,7 @@ BRT 会根据意图置信度控制交流成本：
 - 需求明确：直接执行或路由，不为了展示流程而追问。
 - 需求存在多种合理解释：先读取可查证的上下文，再用一条消息集中讨论 2-4 个会改变结果的问题。
 - 讨论时 agent 会用通俗话说明它理解的结果、判断依据和具体建议；用户可以回复 `按建议`、`按推荐`，也可以只指出需要修改的编号。
+- 简单结果不套模板；复杂术语只有在影响用户判断或操作时才用一句话解释。
 - 信息足够后立即继续，不重复确认已经对齐的内容；只有缺少不可替代输入时才单独询问阻塞问题。
 - 对齐后的非简单项目任务会在原生 thread 能力可用时静默发现同项目会话；只有双方原任务都能受益或全局冲突/返工会降低时才建立平级协作。
 
