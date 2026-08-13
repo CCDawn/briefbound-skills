@@ -1,6 +1,0 @@
-interface:
-  display_name: "CCDawn 目标循环"
-  short_description: "运行有明确边界、证据标准、停止条件与连续决策机制的开放目标"
-  default_prompt: "使用 $ccdawn-goal-loop 只承接用户明确要求的开放式持续迭代；继承已对齐目标与约束，按新证据连续选择下一动作，不逐轮复述合同或写 ledger。"
-
-

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Briefbound 实施规划"
+  short_description: "仅为真实设计分叉、高风险顺序或跨边界交接生成可复用实施方案。"
+  default_prompt: "使用 $briefbound-planning：生成最小可实施方案并默认由当前 owner 连续实施；只有存在独立交付、owner、依赖、风险或验证边界时，才在同一方案内加入 TASK_GRAPH。"

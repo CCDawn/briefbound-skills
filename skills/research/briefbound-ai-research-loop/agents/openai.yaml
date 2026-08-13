@@ -1,0 +1,4 @@
+interface:
+  display_name: "Briefbound AI 研究循环"
+  short_description: "AI 研究工程的基线复现、实验迭代、证据综合与方向收敛"
+  default_prompt: "使用 $briefbound-ai-research-loop 建立可信 baseline，运行最小充分实验，并从多轮证据中决定继续、分支、转向或停止。"

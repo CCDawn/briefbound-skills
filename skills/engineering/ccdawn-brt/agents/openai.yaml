@@ -1,6 +1,0 @@
-interface:
-  display_name: "CCDawn BRT 意图路由"
-  short_description: "中文意图理解与动态路由：低置信度主动讨论，高置信度直接推进"
-  default_prompt: "使用 $ccdawn-brt：先推断并验证真实意图；明确时直接推进，有高影响分叉时用简短通俗的话说明理解、依据和建议，确认后再路由和执行。"
-
-

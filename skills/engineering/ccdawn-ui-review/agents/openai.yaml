@@ -1,4 +1,0 @@
-interface:
-  display_name: "CCDawn UI 审查"
-  short_description: "审查现有界面的用户体验、视觉层级、响应式、无障碍与运行状态"
-  default_prompt: "使用 $ccdawn-ui-review 审查当前界面或隔离预览，给出可执行 findings 和预审建议，但不替用户批准。"

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Briefbound Bug 审查"
+  short_description: "紧凑完成 bug 根因定位、最小修复、回归检查与证据验证闭环"
+  default_prompt: "使用 $briefbound-bug-review：先复现或建立最窄证据链，确认根因后在授权边界内最小修复并验证；只有深层来源才加 root-cause-tracing，不展开固定调试仪式。"

@@ -1,4 +1,0 @@
-interface:
-  display_name: "CCDawn PR 审查"
-  short_description: "按需求、运行证据与回归风险审查 PR、diff 和合并准备度"
-  default_prompt: "使用 $ccdawn-pr-review 用中文审查指定 PR 或 diff，按严重度给出 findings、证据和合并准备度；不要修改代码。"

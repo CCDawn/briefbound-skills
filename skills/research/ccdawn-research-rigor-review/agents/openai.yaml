@@ -1,4 +1,0 @@
-interface:
-  display_name: "CCDawn 研究严谨性审查"
-  short_description: "AI 研究结论晋升前的证据链、方法质量与适用范围审查"
-  default_prompt: "使用 $ccdawn-research-rigor-review 审查研究结论与证据链，给出接受、限定、拒绝或阻塞判定。"

@@ -1,4 +1,0 @@
-interface:
-  display_name: "CCDawn 代码结构守卫"
-  short_description: "在开发中识别文件职责膨胀，只在维护收益明确时进行最小拆分"
-  default_prompt: "使用 $ccdawn-code-structure-guard 检查目标代码的职责边界，并在必要时完成最小、可验证的结构拆分。"

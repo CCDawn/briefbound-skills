@@ -1,13 +1,13 @@
 # Codex 一键安装提示词
 
-把下面任意一版提示词复制到新的 Codex 会话里，就可以让 Codex 从 GitHub 安装 CCDawn skill 包。
+把下面任意一版提示词复制到新的 Codex 会话里，就可以让 Codex 从 GitHub 安装 Briefbound skill 包。
 
 大多数情况用“普通版”即可。如果你希望 Codex 严格限制操作范围，只做安装相关动作，就用“强约束版”。
 
 ## 普通版
 
 ```text
-请帮我一键安装 CCDawn 的 Codex skills 技能包。
+请帮我一键安装 Briefbound 的 Codex skills 技能包。
 
 仓库地址：https://github.com/CCDawn/codex-skills.git
 
@@ -18,9 +18,10 @@
 4. 先运行安装演练，再执行正式安装。
 5. 安装后验证 live skills 是否可用。
 6. 使用安装脚本默认可逆停用安装器识别的完整 Superpowers 自动发现入口集；保留原目录和内容，不要删除。
-7. 允许安装器在 ~/.codex/AGENTS.md 中安装带边界标记的 CCDawn BRT 激活块；保留已有规则，并确保该区段可以单独移除。
-8. 最后用中文汇报：仓库位置、安装目录、安装了哪些 skills、BRT 激活状态、冲突入口处理、验证是否通过、是否需要重启 Codex。
-9. 重点提醒我：最重要入口是 ccdawn-brt；安装后用户正常说需求即可。BRT 会自动完成意图对齐和下游路由；需求对齐后若原生 thread 能力可用，还会发现同项目现有平级会话。只有各自任务受益或能减少全局冲突/返工时才协作，不创建子 Agent、不转移任务 owner。
+7. 允许安装器在 ~/.codex/AGENTS.md 中安装带边界标记的 Briefbound Router 激活块；保留已有规则，并确保该区段可以单独移除。
+8. 如果存在旧 `ccdawn-*` live skill，先验证对应的新 `briefbound-*` 副本，再让安装器移除通过归属校验的旧副本；不要保留旧别名，也不要删除无法证明归属的目录。
+9. 最后用中文汇报：仓库位置、安装目录、安装了哪些 skills、Briefbound Router 激活状态、旧副本迁移、冲突入口处理、验证是否通过、是否需要重启 Codex。
+10. 重点提醒我：最重要入口是 briefbound-router；安装后用户正常说需求即可。Briefbound Router 会自动完成意图对齐和下游路由；需求对齐后若原生 thread 能力可用，还会发现同项目现有平级会话。只有各自任务受益或能减少全局冲突/返工时才协作，不创建子 Agent、不转移任务 owner。
 
 如果遇到 Git、Python、网络、权限问题，只问我一个最关键的阻塞问题。
 ```
@@ -28,19 +29,20 @@
 ## 强约束版
 
 ```text
-你现在负责一键安装 CCDawn Codex skills 技能包。
+你现在负责一键安装 Briefbound Codex skills 技能包。
 
 Repo:
 https://github.com/CCDawn/codex-skills.git
 
 目标:
-- 安装整个 skill 包，不是只安装 ccdawn-brt。
+- 安装整个 skill 包，不是只安装 briefbound-router。
 - 只安装到当前用户的 Codex live skills 目录：~/.codex/skills。
 - 不要安装到 ~/.agents/skills、~/.claude/skills，除非我明确要求。
 - 不要修改任何用户项目代码。
-- 只允许创建/更新本地 codex-skills 仓库、~/.codex/skills 下的安装目录，以及 ~/.codex/AGENTS.md 中带 CCDawn 边界标记的受管激活区段；不得改动该文件的其他规则。
-- 安装完成后明确告诉我：ccdawn-brt 是最重要入口；选择它之后用户正常说需求即可，其它 skill 通常由 BRT 自动路由。
-- 可逆停用安装器识别的完整 Superpowers 入口集，只允许把对应 `SKILL.md` 重命名为 `SKILL.md.ccdawn-disabled`，不得删除目录或内容。
+- 只允许创建/更新本地 codex-skills 仓库、~/.codex/skills 下的安装目录，以及 ~/.codex/AGENTS.md 中带 Briefbound 边界标记的受管激活区段；不得改动该文件的其他规则。
+- 安装完成后明确告诉我：briefbound-router 是最重要入口；选择它之后用户正常说需求即可，其它 skill 通常由 Briefbound Router 自动路由。
+- 旧 `ccdawn-*` live skill 只能在对应的新副本验证通过且 frontmatter 归属一致后移除；不保留旧别名，不删除无法验证归属的目录。
+- 可逆停用安装器识别的完整 Superpowers 入口集，只允许把对应 `SKILL.md` 重命名为 `SKILL.md.briefbound-disabled`，不得删除目录或内容。
 
 执行步骤:
 1. 识别当前系统、shell、Git、Python 是否可用。
@@ -48,12 +50,12 @@ https://github.com/CCDawn/codex-skills.git
 3. 进入仓库根目录。
 4. 先运行安装演练：
    - Windows 优先用：powershell -ExecutionPolicy Bypass -File .\install.ps1 -DryRun
-   - 如果不适用，Windows 用：py -3 scripts\install_codex_library.py --dry-run --process-skill-conflicts disable --brt-activation install
-   - macOS/Linux 用：python3 scripts/install_codex_library.py --dry-run --process-skill-conflicts disable --brt-activation install
+   - 如果不适用，Windows 用：py -3 scripts\install_codex_library.py --dry-run --process-skill-conflicts disable --router-activation install
+   - macOS/Linux 用：python3 scripts/install_codex_library.py --dry-run --process-skill-conflicts disable --router-activation install
 5. 正式安装到 Codex：
    - Windows 优先用：powershell -ExecutionPolicy Bypass -File .\install.ps1
-   - 如果不适用，Windows 用：py -3 scripts\install_codex_library.py --agent codex --process-skill-conflicts disable --brt-activation install
-   - macOS/Linux 用：python3 scripts/install_codex_library.py --agent codex --process-skill-conflicts disable --brt-activation install
+   - 如果不适用，Windows 用：py -3 scripts\install_codex_library.py --agent codex --process-skill-conflicts disable --router-activation install
+   - macOS/Linux 用：python3 scripts/install_codex_library.py --agent codex --process-skill-conflicts disable --router-activation install
 6. 安装后验证：
    - Windows 优先用：powershell -ExecutionPolicy Bypass -File .\install.ps1 -VerifyOnly
    - 如果不适用，Windows 用：py -3 scripts\install_codex_library.py --verify-only
@@ -63,12 +65,13 @@ https://github.com/CCDawn/codex-skills.git
    - 仓库路径
    - 安装目标路径
    - 安装/验证命令
-   - 已安装 skill 数量和关键 skill，例如 ccdawn-brt
-   - 最重要入口：ccdawn-brt；选择它之后用户正常说需求即可，其它 skill 是下游能力，通常由 BRT 自动路由
+   - 已安装 skill 数量和关键 skill，例如 briefbound-router
+   - 最重要入口：briefbound-router；选择它之后用户正常说需求即可，其它 skill 是下游能力，通常由 Briefbound Router 自动路由
    - 验证结果
-   - ~/.codex/AGENTS.md 中 BRT 受管激活区段的状态，以及 `--brt-activation remove` 卸载命令
+   - ~/.codex/AGENTS.md 中 Briefbound Router 受管激活区段的状态，以及 `--router-activation remove` 卸载命令
    - 是否需要重启 Codex 或新开会话
    - 哪些 Superpowers 入口已被可逆停用，以及恢复命令
+   - 哪些旧 skill 副本已迁移或因归属不明而保留
 
 失败处理:
 - 不要猜测成功。
@@ -89,7 +92,7 @@ powershell -ExecutionPolicy Bypass -File .\install.ps1
 powershell -ExecutionPolicy Bypass -File .\install.ps1 -VerifyOnly
 ```
 
-安装后重启 Codex 或新开会话，让客户端重新加载本地 skills。建议把 `ccdawn-brt` 作为主入口；之后用户正常说需求即可，BRT 会自动判断是否需要路由到其它 skill。
+安装后重启 Codex 或新开会话，让客户端重新加载本地 skills。建议把 `briefbound-router` 作为主入口；之后用户正常说需求即可，Briefbound Router 会自动判断是否需要路由到其它 skill。
 
 Grok Build 使用原生目录和全局规则：
 

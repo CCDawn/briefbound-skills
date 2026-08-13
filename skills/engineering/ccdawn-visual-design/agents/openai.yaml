@@ -1,4 +1,0 @@
-interface:
-  display_name: "CCDawn 视觉设计"
-  short_description: "建立符合产品语境的品牌表达、视觉方向、动效语言与可实施界面规范"
-  default_prompt: "使用 $ccdawn-visual-design 建立视觉方向；先制作隔离网页供用户预审，批准后再正式落地并完成浏览器验收。"

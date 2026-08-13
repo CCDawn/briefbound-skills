@@ -10,7 +10,7 @@
 
 <!-- 填写实际运行的命令和结果。不要只写“测试通过”。 -->
 
-- [ ] `python scripts/validate_ccdawn_skills.py --warnings-as-errors`
+- [ ] `python scripts/validate_briefbound_skills.py --warnings-as-errors`
 - [ ] `python scripts/install_codex_library.py --dry-run`
 - [ ] 如修改 Skill 行为，已检查 live copy 或提供前向验证证据
 

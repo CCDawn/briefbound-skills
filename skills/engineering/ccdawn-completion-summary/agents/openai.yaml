@@ -1,4 +1,0 @@
-interface:
-  display_name: "CCDawn 完成总结"
-  short_description: "跨阶段、跨会话、正式交接或 PR 前的持久化完成证据汇总。"
-  default_prompt: "使用 $ccdawn-completion-summary：仅在普通 owner 收口不足以支持跨阶段、恢复、正式交接或 PR 准备时，基于新鲜证据汇总完成状态、缺口、风险和 Route Out。"

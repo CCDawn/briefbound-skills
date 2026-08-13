@@ -6,7 +6,7 @@ const sharp = require("sharp");
 
 const repoRoot = path.resolve(__dirname, "..");
 const outputDir = path.join(repoRoot, "assets");
-const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), "ccdawn-media-"));
+const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), "briefbound-media-"));
 
 const colors = {
   background: "#101216",
@@ -70,9 +70,9 @@ function socialPreviewHtml() {
   <body>
     <main class="page">
       <section class="left">
-        <div class="eyebrow mono">CCDawn / Agent Skills</div>
-        <h1>让 Codex <span>先理解你</span><br>再决定怎么做</h1>
-        <p class="subtitle">中文优先的意图对齐、动态路由与轻量开发工作流。</p>
+        <div class="eyebrow mono">Briefbound / Agent Skills</div>
+        <h1>约定内自主推进<br><span>约定变化主动商量</span></h1>
+        <p class="subtitle">Bound to the brief. Free to build.</p>
         <div class="signals">
           <div class="signal">意图对齐</div>
           <div class="signal">动态路由</div>
@@ -80,14 +80,14 @@ function socialPreviewHtml() {
         </div>
       </section>
       <section class="right">
-        <div class="route-label mono">BRT ROUTE</div>
+        <div class="route-label mono">BRIEFBOUND ROUTE</div>
         <div class="route">
           <div class="route-step"><div class="index mono">01</div><div><strong>用户正常表达需求</strong><small>无需记忆命令或流程</small></div></div>
-          <div class="route-step primary"><div class="index mono">02</div><div><strong>BRT 理解与校准</strong><small>只讨论会改变结果的问题</small></div></div>
+          <div class="route-step primary"><div class="index mono">02</div><div><strong>Briefbound Router 理解与校准</strong><small>只讨论会改变结果的问题</small></div></div>
           <div class="route-step"><div class="index mono">03</div><div><strong>最具体 Skill 接管</strong><small>按子任务风险控制流程重量</small></div></div>
           <div class="route-step"><div class="index mono">04</div><div><strong>实施并验证结果</strong><small>用新鲜证据收口</small></div></div>
         </div>
-        <div class="meta"><b>21 Skills</b> · Chinese-first · OpenAI Codex</div>
+        <div class="meta"><b>30 Skills</b> · Chinese-first · Codex & Grok</div>
       </section>
     </main>
   </body>
@@ -96,11 +96,11 @@ function socialPreviewHtml() {
 
 const demoFrames = [
   {
-    stage: "BRT / 01",
+    stage: "BRIEFBOUND / 01",
     accent: colors.lime,
     title: "一个模糊但真实的请求",
     lead: "用户不需要先写完整规格。",
-    lines: ["正常说出问题", "BRT 负责判断是否需要追问"],
+    lines: ["正常说出问题", "Briefbound 判断是否需要追问"],
   },
   {
     stage: "USER / 02",
@@ -163,7 +163,7 @@ const demoFrames = [
     accent: colors.lime,
     title: "对齐 → 路由 → 实施 → 验证",
     lead: "让高能力模型发挥推理能力，只在真正需要时增加约束。",
-    lines: ["github.com/CCDawn/codex-skills", "最重要入口：ccdawn-brt"],
+    lines: ["github.com/CCDawn/codex-skills", "最重要入口：briefbound-router"],
   },
 ];
 
@@ -195,7 +195,7 @@ function demoFrameHtml(frame, index) {
   <body>
     <main class="page">
       <header class="header">
-        <div class="brand">CCDawn Codex Skills</div>
+        <div class="brand">Briefbound Agent Skills</div>
         <div class="stage mono">${frame.stage}</div>
       </header>
       <section class="content">
@@ -218,7 +218,11 @@ function demoFrameHtml(frame, index) {
 
 async function main() {
   fs.mkdirSync(outputDir, { recursive: true });
-  const browser = await chromium.launch({ headless: true });
+  const launchOptions = { headless: true };
+  if (process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE) {
+    launchOptions.executablePath = process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE;
+  }
+  const browser = await chromium.launch(launchOptions);
 
   try {
     const socialPage = await browser.newPage({ viewport: { width: 1280, height: 640 }, deviceScaleFactor: 1 });
@@ -245,15 +249,15 @@ async function main() {
         dither: 0.6,
         keepDuplicateFrames: true,
       })
-      .toFile(path.join(outputDir, "brt-demo.gif"));
+      .toFile(path.join(outputDir, "briefbound-demo.gif"));
 
     await sharp(framePaths, { join: { across: 2, animated: false, shim: 12, background: colors.background } })
       .png()
-      .toFile(path.join(tempDir, "brt-demo-contact.png"));
+      .toFile(path.join(tempDir, "briefbound-demo-contact.png"));
 
     console.log(`Generated ${path.relative(repoRoot, outputDir)}\\social-preview.png`);
-    console.log(`Generated ${path.relative(repoRoot, outputDir)}\\brt-demo.gif`);
-    console.log(`Contact sheet ${path.join(tempDir, "brt-demo-contact.png")}`);
+    console.log(`Generated ${path.relative(repoRoot, outputDir)}\\briefbound-demo.gif`);
+    console.log(`Contact sheet ${path.join(tempDir, "briefbound-demo-contact.png")}`);
   } finally {
     await browser.close();
   }

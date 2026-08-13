@@ -10,7 +10,7 @@ param(
     [string]$ProcessSkillConflicts = "disable",
 
     [ValidateSet("warn", "install", "remove", "ignore")]
-    [string]$BrtActivation = "install",
+    [string]$RouterActivation = "install",
 
     [switch]$List,
     [switch]$DryRun,
@@ -26,7 +26,7 @@ $installerArgs = @(
     $installer,
     "--agent", $Agent,
     "--process-skill-conflicts", $ProcessSkillConflicts,
-    "--brt-activation", $BrtActivation
+    "--router-activation", $RouterActivation
 )
 if ($HomeDir) {
     $installerArgs += @("--home", $HomeDir)

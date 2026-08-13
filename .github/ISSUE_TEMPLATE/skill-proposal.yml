@@ -1,5 +1,5 @@
 name: Skill 建议
-description: 建议新增、替换或改进一个 CCDawn Skill
+description: 建议新增、替换或改进一个 Briefbound Skill
 title: "[Skill] "
 body:
   - type: textarea
@@ -40,6 +40,6 @@ body:
         - 优化现有 Skill
         - 新增 Skill
         - 替换或吸收外部 Skill
-        - 调整 BRT 路由
+        - 调整 Briefbound Router 路由
     validations:
       required: true

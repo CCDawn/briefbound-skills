@@ -1,5 +1,0 @@
-interface:
-  display_name: "CCDawn 项目记忆"
-  short_description: "按需维护项目记忆、协作 registry 与 HTML 总览"
-  default_prompt: "使用 $ccdawn-dawn-agent-html-memory 用中文按需读取、初始化或同步 .docs/project-memory、live coordination registry 与 HTML 总览；普通开发不要自动启用。"
-

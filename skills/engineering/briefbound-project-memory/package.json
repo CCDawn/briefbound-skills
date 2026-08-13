@@ -1,0 +1,16 @@
+{
+  "name": "briefbound-project-memory",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Project-local HTML memory dashboard skill bootstrap helpers.",
+  "scripts": {
+    "install:codex": "python ./scripts/install_codex_memory.py"
+  },
+  "bin": {
+    "agent-html-memory-init": "./bin/agent-html-memory-init.js",
+    "agent-html-memory-sync": "./bin/agent-html-memory-sync.js",
+    "agent-html-memory-capture": "./bin/agent-html-memory-capture.js",
+    "agent-html-memory-guard": "./bin/agent-html-memory-guard.js",
+    "agent-html-memory-coordinate": "./bin/agent-html-memory-coordinate.js"
+  }
+}

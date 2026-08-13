@@ -2,4 +2,4 @@ blank_issues_enabled: true
 contact_links:
   - name: 使用说明
     url: https://github.com/CCDawn/codex-skills#快速体验
-    about: 先查看安装方式、BRT 入口和完整 Skill 目录。
+    about: 先查看安装方式、Briefbound Router 主入口和完整 Skill 目录。

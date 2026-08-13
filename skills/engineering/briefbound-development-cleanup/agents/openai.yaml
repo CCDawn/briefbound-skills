@@ -1,0 +1,4 @@
+interface:
+  display_name: "Briefbound 开发清理"
+  short_description: "清理开发残留，并安全收尾本任务进程、分支、worktree 与 claim"
+  default_prompt: "使用 $briefbound-development-cleanup 审计开发残留、task-owned runtime 与 PR 生命周期：只停止已证明属于本任务的精确进程树；PR 未合并时保留恢复现场，确认 base 已吸收 published head 后安全收尾同任务本地分支、worktree 和 claim。"

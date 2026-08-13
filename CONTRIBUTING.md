@@ -15,14 +15,14 @@ Good additions include:
 
 ## Repository growth rules
 
-- One skill lives under `skills/<bucket>/<ccdawn-skill-name>/` with its own `SKILL.md`.
+- One skill lives under `skills/<bucket>/<briefbound-skill-name>/` with its own `SKILL.md`.
 - The folder name must match the `name` field in `SKILL.md`. Treat mismatches as a bug, not a style issue.
 - If you modify an existing skill, update the nearest examples or references in the same change when behavior or positioning changes.
 - This repository ships a lightweight `.claude-plugin/plugin.json` manifest that indexes the promoted skills.
 - Keep reusable behavior in the skill, its scripts, and its references. The plugin layer should stay thin and declarative.
 - The formal local install targets for published skills are:
-  - `~/.codex/skills/<ccdawn-skill-name>` as a real directory for runtime loading
-  - `~/.agents/skills/<ccdawn-skill-name>` only when you explicitly need an extra local catalog copy
+  - `~/.codex/skills/<briefbound-skill-name>` as a real directory for runtime loading
+  - `~/.agents/skills/<briefbound-skill-name>` only when you explicitly need an extra local catalog copy
   Installing the same skill into both locations can produce duplicate slash-command entries in Codex. Do not rely on symlinks or junctions as the default install shape.
 
 ## Skill guidelines

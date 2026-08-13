@@ -1,0 +1,4 @@
+interface:
+  display_name: "Briefbound 华为 NSLB 评分循环"
+  short_description: "读取 NSLB 当前状态，自适应搜索 solver 候选并校准线上反馈"
+  default_prompt: "使用 $briefbound-huawei-nslb-score-loop 读取项目当前 baseline、hash 和评价协议，再选择邻近优化、换机制探索或诊断，按需完成筛选、打包与线上反馈校准。"

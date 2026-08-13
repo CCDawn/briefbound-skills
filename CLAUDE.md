@@ -11,8 +11,8 @@ Every skill in `engineering/` or `research/` must have:
 Published skills in this repository must also follow the live-install rules:
 
 - the skill folder name must match the `name` field in `SKILL.md`
-- the default local install target is `~/.codex/skills/<ccdawn-skill-name>`
-- use `~/.agents/skills/<ccdawn-skill-name>` only when you explicitly need an extra local catalog copy
+- the default local install target is `~/.codex/skills/<briefbound-skill-name>`
+- use `~/.agents/skills/<briefbound-skill-name>` only when you explicitly need an extra local catalog copy
 - installing the same skill into both `.codex/skills` and `.agents/skills` can produce duplicate slash-command entries
 - the default install shape is a real directory, not a symlink or junction
 - after updating a skill, validate the installed live Codex copy before treating the change as done

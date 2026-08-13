@@ -1,0 +1,4 @@
+interface:
+  display_name: "Briefbound 精简审查"
+  short_description: "审查当前 diff 中可删除或收缩的非必要复杂度。"
+  default_prompt: "使用 $briefbound-simplification-review 只读审查指定变更中的过度设计和非必要复杂度，用中文给出证据化删减建议，不修改文件。"

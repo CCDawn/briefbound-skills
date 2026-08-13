@@ -22,16 +22,16 @@ jobs:
           python-version: "3.12"
 
       - name: Compile helper scripts
-        run: python -m compileall -q scripts skills/engineering/ccdawn-dawn-agent-html-memory/scripts
+        run: python -m compileall -q scripts skills/engineering/briefbound-project-memory/scripts
 
       - name: Test multi-agent coordination helpers
-        run: python -m unittest discover -s skills/engineering/ccdawn-dawn-agent-html-memory/tests -p "test_*.py" -v
+        run: python -m unittest discover -s skills/engineering/briefbound-project-memory/tests -p "test_*.py" -v
 
       - name: Test package helpers
         run: python -m unittest discover -s tests -p "test_*.py" -v
 
-      - name: Validate CCDawn skills
-        run: python scripts/validate_ccdawn_skills.py --warnings-as-errors
+      - name: Validate Briefbound skills
+        run: python scripts/validate_briefbound_skills.py --warnings-as-errors
 
       - name: Verify installation plan
         run: python scripts/install_codex_library.py --dry-run

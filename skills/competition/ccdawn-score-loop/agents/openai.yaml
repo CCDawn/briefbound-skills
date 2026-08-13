@@ -1,4 +1,0 @@
-interface:
-  display_name: "CCDawn Score 评分循环"
-  short_description: "按当前证据主动搜索候选，尽早淘汰，并决定是否替换最佳方案"
-  default_prompt: "使用 $ccdawn-score-loop 冻结可比协议，按 EXPLOIT、EXPLORE 或 DIAGNOSE 选择候选，执行最小筛选和代表性评价，再用通俗中文说明是否替换当前最好方案。"

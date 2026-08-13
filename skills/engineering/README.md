@@ -1,26 +1,26 @@
 # Engineering Skills
 
-- **[ccdawn-brt](./ccdawn-brt/SKILL.md)** - Capability-aware entrypoint that trusts model reasoning and adds only the constraints, artifacts, and routes that prevent concrete errors.
-- **[ccdawn-autonomous-collaboration-loop](./ccdawn-autonomous-collaboration-loop/SKILL.md)** - Opt-in closed loop that keeps peer threads progressing, recovers coordination, integrates verified work into local main, and closes residue without repeated gates.
-- **[ccdawn-ui-design](./ccdawn-ui-design/SKILL.md)** - UI/UX owner that previews high-impact interaction and responsive outcomes before production changes.
-- **[ccdawn-visual-design](./ccdawn-visual-design/SKILL.md)** - Brand and visual direction owner with isolated webpage preview approval before implementation.
-- **[ccdawn-ui-review](./ccdawn-ui-review/SKILL.md)** - Findings-first review of existing UI or isolated previews without replacing explicit user approval.
-- **[ccdawn-design-system](./ccdawn-design-system/SKILL.md)** - Cross-consumer design token, theme, component API, variant, and Figma-to-code governance with staged migration.
-- **[ccdawn-frontend-engineering](./ccdawn-frontend-engineering/SKILL.md)** - Production frontend owner for approved or explicitly preview-exempt UI contracts and runtime evidence.
-- **[ccdawn-performance-engineering](./ccdawn-performance-engineering/SKILL.md)** - Evidence-driven profiling and minimal optimization for explicit performance goals, regressions, hot paths, and resource budgets; routine features stay with their current owner.
-- **[ccdawn-code-structure-guard](./ccdawn-code-structure-guard/SKILL.md)** - Lightweight STAY/CHECK/SPLIT guard that prevents multi-responsibility giant files without mechanical line-count splitting.
-- **[ccdawn-dawn-agent-html-memory](./ccdawn-dawn-agent-html-memory/SKILL.md)** - Opt-in durable cross-session decisions and handoffs; it does not own the active execution loop.
-- **[ccdawn-multi-agent-orchestration](./ccdawn-multi-agent-orchestration/SKILL.md)** - Peer negotiation among existing same-project Codex threads so each finishes its own task with less duplication, conflict, and integration rework.
-- **[ccdawn-thread-coordination](./ccdawn-thread-coordination/SKILL.md)** - Same-project Agent progress, conflict, discussion, pause/resume, and fast-merge coordination.
-- **[ccdawn-development-cleanup](./ccdawn-development-cleanup/SKILL.md)** - Cleanup only for known residue, merged local branches, disposable worktrees, completed claims, or explicit cleanup requests.
-- **[ccdawn-feature-reuse-research](./ccdawn-feature-reuse-research/SKILL.md)** - Reuse research only when external or in-project candidates can materially change a complex feature plan.
-- **[ccdawn-planning](./ccdawn-planning/SKILL.md)** - Implementation planning after aligned requirements.
-- **[ccdawn-bdd-tdd-development](./ccdawn-bdd-tdd-development/SKILL.md)** - Compact TDD for already-defined new behavior or high-risk implementation contracts; it does not re-own diagnosed bugs.
-- **[ccdawn-completion-summary](./ccdawn-completion-summary/SKILL.md)** - Compact cross-session handoff and formal evidence packages, never a default completion stage.
-- **[ccdawn-pr-review](./ccdawn-pr-review/SKILL.md)** - Explicit PR, branch, commit-range, or diff review against requirements, evidence, regression risk, and merge readiness.
-- **[ccdawn-project-review](./ccdawn-project-review/SKILL.md)** - Repository, architecture, technical debt, test gap, and project health review.
-- **[ccdawn-simplification-review](./ccdawn-simplification-review/SKILL.md)** - On-demand diff review focused on evidence-backed removal of unnecessary complexity.
-- **[ccdawn-simplification-audit](./ccdawn-simplification-audit/SKILL.md)** - On-demand repository audit for dependency bloat, dead flexibility, duplicate paths, and removable abstractions.
-- **[ccdawn-bug-review](./ccdawn-bug-review/SKILL.md)** - End-to-end bug owner for root-cause diagnosis, bounded repair, optional internal test anchors, and verification.
-- **[ccdawn-evaluation](./ccdawn-evaluation/SKILL.md)** - CCDawn evaluation adapter used only after checking more specific review, debug, planning, verification, feedback, or goal skills.
-- **[ccdawn-goal-loop](./ccdawn-goal-loop/SKILL.md)** - Explicit open-ended iteration policy, not a wrapper for finite implementation or ordinary continuation.
+- **[briefbound-router](./briefbound-router/SKILL.md)** - Capability-aware entrypoint that trusts model reasoning and adds only the constraints, artifacts, and routes that prevent concrete errors.
+- **[briefbound-autonomous-collaboration-loop](./briefbound-autonomous-collaboration-loop/SKILL.md)** - Opt-in closed loop that keeps peer threads progressing, recovers coordination, integrates verified work into local main, and closes residue without repeated gates.
+- **[briefbound-ui-design](./briefbound-ui-design/SKILL.md)** - UI/UX owner that previews high-impact interaction and responsive outcomes before production changes.
+- **[briefbound-visual-design](./briefbound-visual-design/SKILL.md)** - Brand and visual direction owner with isolated webpage preview approval before implementation.
+- **[briefbound-ui-review](./briefbound-ui-review/SKILL.md)** - Findings-first review of existing UI or isolated previews without replacing explicit user approval.
+- **[briefbound-design-system](./briefbound-design-system/SKILL.md)** - Cross-consumer design token, theme, component API, variant, and Figma-to-code governance with staged migration.
+- **[briefbound-frontend-engineering](./briefbound-frontend-engineering/SKILL.md)** - Production frontend owner for approved or explicitly preview-exempt UI contracts and runtime evidence.
+- **[briefbound-performance-engineering](./briefbound-performance-engineering/SKILL.md)** - Evidence-driven profiling and minimal optimization for explicit performance goals, regressions, hot paths, and resource budgets; routine features stay with their current owner.
+- **[briefbound-code-structure-guard](./briefbound-code-structure-guard/SKILL.md)** - Lightweight STAY/CHECK/SPLIT guard that prevents multi-responsibility giant files without mechanical line-count splitting.
+- **[briefbound-project-memory](./briefbound-project-memory/SKILL.md)** - Opt-in durable cross-session decisions and handoffs; it does not own the active execution loop.
+- **[briefbound-multi-agent-orchestration](./briefbound-multi-agent-orchestration/SKILL.md)** - Peer negotiation among existing same-project Codex threads so each finishes its own task with less duplication, conflict, and integration rework.
+- **[briefbound-thread-coordination](./briefbound-thread-coordination/SKILL.md)** - Same-project Agent progress, conflict, discussion, pause/resume, and fast-merge coordination.
+- **[briefbound-development-cleanup](./briefbound-development-cleanup/SKILL.md)** - Cleanup only for known residue, merged local branches, disposable worktrees, completed claims, or explicit cleanup requests.
+- **[briefbound-feature-reuse-research](./briefbound-feature-reuse-research/SKILL.md)** - Reuse research only when external or in-project candidates can materially change a complex feature plan.
+- **[briefbound-planning](./briefbound-planning/SKILL.md)** - Implementation planning after aligned requirements.
+- **[briefbound-bdd-tdd-development](./briefbound-bdd-tdd-development/SKILL.md)** - Compact TDD for already-defined new behavior or high-risk implementation contracts; it does not re-own diagnosed bugs.
+- **[briefbound-completion-summary](./briefbound-completion-summary/SKILL.md)** - Compact cross-session handoff and formal evidence packages, never a default completion stage.
+- **[briefbound-pr-review](./briefbound-pr-review/SKILL.md)** - Explicit PR, branch, commit-range, or diff review against requirements, evidence, regression risk, and merge readiness.
+- **[briefbound-project-review](./briefbound-project-review/SKILL.md)** - Repository, architecture, technical debt, test gap, and project health review.
+- **[briefbound-simplification-review](./briefbound-simplification-review/SKILL.md)** - On-demand diff review focused on evidence-backed removal of unnecessary complexity.
+- **[briefbound-simplification-audit](./briefbound-simplification-audit/SKILL.md)** - On-demand repository audit for dependency bloat, dead flexibility, duplicate paths, and removable abstractions.
+- **[briefbound-bug-review](./briefbound-bug-review/SKILL.md)** - End-to-end bug owner for root-cause diagnosis, bounded repair, optional internal test anchors, and verification.
+- **[briefbound-evaluation](./briefbound-evaluation/SKILL.md)** - Briefbound evaluation adapter used only after checking more specific review, debug, planning, verification, feedback, or goal skills.
+- **[briefbound-goal-loop](./briefbound-goal-loop/SKILL.md)** - Explicit open-ended iteration policy, not a wrapper for finite implementation or ordinary continuation.

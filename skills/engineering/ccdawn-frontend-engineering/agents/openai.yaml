@@ -1,4 +1,0 @@
-interface:
-  display_name: "CCDawn 前端工程"
-  short_description: "将已对齐的界面契约实现为响应式、无障碍且可验证的生产级前端代码"
-  default_prompt: "使用 $ccdawn-frontend-engineering 消费已批准的界面契约；缺少必要预览批准时先回设计 owner，批准后再实现并验证。"

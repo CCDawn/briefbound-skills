@@ -1,4 +1,0 @@
-interface:
-  display_name: "CCDawn 紧凑 BDD/TDD"
-  short_description: "以最少 RED/GREEN 证据完成高风险行为子任务。"
-  default_prompt: "使用 $ccdawn-bdd-tdd-development 只对预期明确且需要测试先行的高风险实现契约执行紧凑 TDD；普通复杂度或已诊断 bug 不触发，默认不派子代理。"

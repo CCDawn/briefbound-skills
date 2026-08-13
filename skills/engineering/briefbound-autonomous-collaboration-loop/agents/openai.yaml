@@ -1,0 +1,4 @@
+interface:
+  display_name: "Briefbound 自动协作开发闭环"
+  short_description: "确认一次后持续协调多会话开发、冲突恢复与本地 main 集成"
+  default_prompt: "使用 $briefbound-autonomous-collaboration-loop 持续驱动现有同项目会话完成各自任务、自动协商冲突并验证合入本地 main。"

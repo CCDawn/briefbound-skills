@@ -1,4 +1,0 @@
-interface:
-  display_name: "CCDawn 项目审查"
-  short_description: "证据化审查项目架构、技术债、测试缺口、维护性和高风险模块"
-  default_prompt: "使用 $ccdawn-project-review 用中文审查当前项目或子系统，按风险列出架构问题、技术债、测试缺口、证据和可连续推进的下一步路由。"

@@ -3,7 +3,7 @@
     "id": "explicit-p99-target",
     "prompt": "把消息时间线在一万条消息下的 p99 渲染延迟降到 100ms 内，先测 baseline 再优化。",
     "expected_level": "PROFILE",
-    "expected_primary": "ccdawn-performance-engineering",
+    "expected_primary": "briefbound-performance-engineering",
     "measurement_required": true,
     "user_gate": false
   },
@@ -11,7 +11,7 @@
     "id": "measured-memory-regression",
     "prompt": "这个版本导入十万条记录时峰值内存从 400MB 涨到 1.2GB，请定位并修复回归。",
     "expected_level": "PROFILE",
-    "expected_primary": "ccdawn-performance-engineering",
+    "expected_primary": "briefbound-performance-engineering",
     "measurement_required": true,
     "user_gate": false
   },
@@ -19,7 +19,7 @@
     "id": "new-hot-path-feature",
     "prompt": "给每条实时事件增加投影计算，这条链路每秒处理五万条事件，需要避免降低吞吐。",
     "expected_level": "PROFILE",
-    "expected_primary": "ccdawn-performance-engineering",
+    "expected_primary": "briefbound-performance-engineering",
     "measurement_required": true,
     "user_gate": false
   },
@@ -59,7 +59,7 @@
     "id": "performance-pr-review",
     "prompt": "审查这个声称吞吐提升 30% 的 PR，并复核 benchmark 是否可比较。",
     "expected_level": "PROFILE",
-    "expected_primary": "ccdawn-pr-review",
+    "expected_primary": "briefbound-pr-review",
     "measurement_required": true,
     "user_gate": false
   }

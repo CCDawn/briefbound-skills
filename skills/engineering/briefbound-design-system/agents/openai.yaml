@@ -1,0 +1,4 @@
+interface:
+  display_name: "Briefbound 设计系统"
+  short_description: "治理跨组件设计令牌、变体、主题及设计代码事实源一致性"
+  default_prompt: "使用 $briefbound-design-system 只治理已证明跨多个消费者的 token、主题或组件契约，并迁移足以证明契约的代表性消费者，不扩张成页面重设计。"

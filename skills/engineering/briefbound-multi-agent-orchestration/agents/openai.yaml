@@ -1,0 +1,4 @@
+interface:
+  display_name: "Briefbound 多会话 Agent 协作"
+  short_description: "让同项目平级会话协商分工、交换证据并减少冲突与熵增"
+  default_prompt: "使用 $briefbound-multi-agent-orchestration 协调同项目现有平级会话，让各 Agent 完成自己的任务，同时通过最少必要交流减少重复工作、冲突和集成返工。"

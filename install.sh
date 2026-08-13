@@ -14,5 +14,5 @@ fi
 
 exec "$PYTHON" "$SCRIPT_DIR/scripts/install_codex_library.py" \
   --process-skill-conflicts disable \
-  --brt-activation install \
+  --router-activation install \
   "$@"

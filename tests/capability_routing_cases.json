@@ -1,14 +1,14 @@
 [
-  {"id":"github-ci","prompt":"修复这个 PR 失败的 GitHub Actions checks","preferred":"github:gh-fix-ci","fallback":"ccdawn-bug-review"},
-  {"id":"github-comments","prompt":"处理这个 PR 尚未解决的 review comments","preferred":"github:gh-address-comments","fallback":"ccdawn-pr-review"},
-  {"id":"github-publish","prompt":"提交当前修改、推送分支并创建 draft PR","preferred":"github:yeet","fallback":"ccdawn-brt"},
-  {"id":"browser-control","prompt":"打开应用页面并在浏览器里操作验证","preferred":"browser:control-in-app-browser","fallback":"ccdawn-brt"},
-  {"id":"openai-docs","prompt":"查最新 Codex API 官方用法","preferred":"openai-docs","fallback":"ccdawn-brt"},
-  {"id":"figma-design","prompt":"把当前页面生成到 Figma","preferred":"figma:figma-generate-design","fallback":"ccdawn-ui-design"},
-  {"id":"image-generation","prompt":"为这个官网生成并落地一张产品主视觉图","preferred":"imagegen","fallback":"ccdawn-visual-design"},
-  {"id":"word-document","prompt":"生成并排版一份 Word 交付报告","preferred":"documents:documents","fallback":"ccdawn-brt"},
-  {"id":"pdf-artifact","prompt":"生成并检查这份 PDF 报告的版面","preferred":"pdf:pdf","fallback":"ccdawn-brt"},
-  {"id":"spreadsheet-artifact","prompt":"创建并验证这个 Excel 分析工作簿","preferred":"spreadsheets:Spreadsheets","fallback":"ccdawn-brt"},
-  {"id":"slides-artifact","prompt":"制作并检查一份项目汇报 PPT","preferred":"presentations:Presentations","fallback":"ccdawn-brt"},
-  {"id":"sites-project","prompt":"构建并发布这个带 .openai/hosting.json 的网站","preferred":"sites:sites-building","fallback":"ccdawn-frontend-engineering"}
+  {"id":"github-ci","prompt":"修复这个 PR 失败的 GitHub Actions checks","preferred":"github:gh-fix-ci","fallback":"briefbound-bug-review"},
+  {"id":"github-comments","prompt":"处理这个 PR 尚未解决的 review comments","preferred":"github:gh-address-comments","fallback":"briefbound-pr-review"},
+  {"id":"github-publish","prompt":"提交当前修改、推送分支并创建 draft PR","preferred":"github:yeet","fallback":"briefbound-router"},
+  {"id":"browser-control","prompt":"打开应用页面并在浏览器里操作验证","preferred":"browser:control-in-app-browser","fallback":"briefbound-router"},
+  {"id":"openai-docs","prompt":"查最新 Codex API 官方用法","preferred":"openai-docs","fallback":"briefbound-router"},
+  {"id":"figma-design","prompt":"把当前页面生成到 Figma","preferred":"figma:figma-generate-design","fallback":"briefbound-ui-design"},
+  {"id":"image-generation","prompt":"为这个官网生成并落地一张产品主视觉图","preferred":"imagegen","fallback":"briefbound-visual-design"},
+  {"id":"word-document","prompt":"生成并排版一份 Word 交付报告","preferred":"documents:documents","fallback":"briefbound-router"},
+  {"id":"pdf-artifact","prompt":"生成并检查这份 PDF 报告的版面","preferred":"pdf:pdf","fallback":"briefbound-router"},
+  {"id":"spreadsheet-artifact","prompt":"创建并验证这个 Excel 分析工作簿","preferred":"spreadsheets:Spreadsheets","fallback":"briefbound-router"},
+  {"id":"slides-artifact","prompt":"制作并检查一份项目汇报 PPT","preferred":"presentations:Presentations","fallback":"briefbound-router"},
+  {"id":"sites-project","prompt":"构建并发布这个带 .openai/hosting.json 的网站","preferred":"sites:sites-building","fallback":"briefbound-frontend-engineering"}
 ]
