@@ -67,6 +67,38 @@
     ]
   },
   {
+    "id": "alignment-visitor-pass-bulk-extension",
+    "prompt": "优化访客通行证管理页的批量延期流程。请先结合当前项目说明跟我对齐，再决定由哪个 skill 负责；本轮只测试路由，不修改文件。",
+    "smoke": false,
+    "workspace_files": {
+      "product-context.md": "# 访客通行证管理页现状\n\n- 页面已有通行证表格、筛选和单张延期。\n- 后端已有 `POST /visitor-passes/bulk-extend`，返回逐张成功/失败结果，并要求新到期时间不得超过访客预约结束时间。\n- 尚未确定批量选择是当前页还是筛选结果、部分失败如何呈现、超过预约上限时采用截断还是拒绝。\n- 本轮目标是先形成交互契约和隔离预览，不修改生产页面。\n"
+    },
+    "expected_skill_reads": ["ccdawn-brt"],
+    "forbidden_skill_reads": ["ccdawn-ui-design", "ccdawn-frontend-engineering", "ccdawn-planning"],
+    "min_commands": 2,
+    "max_commands": 5,
+    "expected_final_any": ["批量延期", "推荐", "按推荐"],
+    "expected_final_all": ["推荐"],
+    "min_questions": 1,
+    "max_questions": 4,
+    "require_recommendation": true,
+    "require_wrong_decision_impact": true,
+    "require_wait_for_calibration": true,
+    "forbidden_final_any": ["已经修改", "直接开始实现"],
+    "timeout_seconds": 120,
+    "followups": [
+      {
+        "prompt": "按推荐。继续，但仍只测试路由、不修改文件；请继承刚才校准的契约，读取并选择负责形成页面交互契约的最具体 skill，说明下一产出，不要重新询问已确认内容。",
+        "expected_skill_reads": ["ccdawn-ui-design"],
+        "forbidden_skill_reads": ["ccdawn-frontend-engineering", "ccdawn-planning"],
+        "max_commands": 5,
+        "expected_final_any": ["ccdawn-ui-design", "交互契约", "预览"],
+        "expected_final_all": ["ccdawn-ui-design"],
+        "forbidden_final_any": ["重新确认", "再次选择", "等待校准", "已经修改"]
+      }
+    ]
+  },
+  {
     "id": "incomplete-continuation-health-check",
     "prompt": "继续优化前端。上一轮没有确定目标页面、验收证据或具体交互；当前仅测试路由，不修改文件。",
     "smoke": false,

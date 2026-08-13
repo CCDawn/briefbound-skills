@@ -19,7 +19,7 @@ class RoutingEvalTests(unittest.TestCase):
             [
                 'warning that is not JSON',
                 '{"type":"item.started","item":{"id":"cmd-1","type":"command_execution","command":"Get-Content C:\\\\Users\\\\me\\\\.codex\\\\skills\\\\ccdawn-brt\\\\SKILL.md"}}',
-                '{"type":"item.completed","item":{"id":"cmd-1","type":"command_execution","command":"Get-Content C:\\\\Users\\\\me\\\\.codex\\\\skills\\\\ccdawn-brt\\\\SKILL.md","exit_code":0,"status":"completed"}}',
+                '{"type":"item.completed","item":{"id":"cmd-1","type":"command_execution","command":"Get-Content C:\\\\Users\\\\me\\\\.codex\\\\skills\\\\ccdawn-brt\\\\SKILL.md","aggregated_output":"---\\nname: ccdawn-brt\\n---\\n# BRT\\n","exit_code":0,"status":"completed"}}',
                 '{"type":"item.completed","item":{"id":"msg-1","type":"agent_message","text":"当前理解与建议"}}',
             ]
         )
@@ -35,6 +35,7 @@ class RoutingEvalTests(unittest.TestCase):
             '{"type":"item.completed","item":{"id":"cmd-1","type":"command_execution",'
             '"command":"Get-Content C:\\\\\\\\Users\\\\\\\\me\\\\\\\\.codex\\\\\\\\skills'
             '\\\\\\\\ccdawn-project-review\\\\\\\\SKILL.md","exit_code":0,'
+            '"aggregated_output":"---\\nname: ccdawn-project-review\\n---\\n",'
             '"status":"completed"}}'
         )
 
@@ -51,6 +52,20 @@ class RoutingEvalTests(unittest.TestCase):
                 '"command":"Get-Content C:\\\\Users\\\\me\\\\.codex\\\\skills\\\\ccdawn-brt\\\\SKILL.md",'
                 '"exit_code":-1,"status":"failed"}}',
             ]
+        )
+
+        _, skill_reads, _ = ROUTING_EVAL.parse_events(stream)
+
+        self.assertEqual(skill_reads, [])
+
+    def test_parse_events_does_not_count_skill_paths_from_file_listing(self) -> None:
+        stream = (
+            '{"type":"item.completed","item":{"id":"cmd-1","type":"command_execution",'
+            '"command":"rg --files -g skills/**/ccdawn-ui-design/SKILL.md '
+            '-g skills/**/ccdawn-frontend-engineering/SKILL.md",'
+            '"aggregated_output":"skills/engineering/ccdawn-ui-design/SKILL.md\\n'
+            'skills/engineering/ccdawn-frontend-engineering/SKILL.md\\n",'
+            '"exit_code":0,"status":"completed"}}'
         )
 
         _, skill_reads, _ = ROUTING_EVAL.parse_events(stream)
@@ -286,7 +301,8 @@ class RoutingEvalTests(unittest.TestCase):
                 '{"type":"thread.started","thread_id":"019f-test-thread"}',
                 '{"type":"item.completed","item":{"id":"cmd-1","type":"command_execution",'
                 '"command":"Get-Content C:\\\\Users\\\\me\\\\.codex\\\\skills'
-                '\\\\ccdawn-brt\\\\SKILL.md","exit_code":0,"status":"completed"}}',
+                '\\\\ccdawn-brt\\\\SKILL.md","aggregated_output":"---\\nname: ccdawn-brt\\n---\\n",'
+                '"exit_code":0,"status":"completed"}}',
                 '{"type":"item.completed","item":{"id":"msg-1","type":"agent_message",'
                 '"text":"推荐先对齐；请回复按推荐。"}}',
             ]
@@ -296,7 +312,8 @@ class RoutingEvalTests(unittest.TestCase):
                 '{"type":"thread.started","thread_id":"019f-test-thread"}',
                 '{"type":"item.completed","item":{"id":"cmd-2","type":"command_execution",'
                 '"command":"Get-Content C:\\\\Users\\\\me\\\\.codex\\\\skills'
-                '\\\\ccdawn-ui-design\\\\SKILL.md","exit_code":0,"status":"completed"}}',
+                '\\\\ccdawn-ui-design\\\\SKILL.md","aggregated_output":"---\\nname: ccdawn-ui-design\\n---\\n",'
+                '"exit_code":0,"status":"completed"}}',
                 '{"type":"item.completed","item":{"id":"msg-2","type":"agent_message",'
                 '"text":"选择 ccdawn-ui-design 形成交互契约。"}}',
             ]

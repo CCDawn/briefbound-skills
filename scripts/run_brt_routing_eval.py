@@ -15,6 +15,10 @@ SKILL_READ_RE = re.compile(
     r"(?:^|[\\/]+)(?P<name>ccdawn-[a-z0-9-]+)[\\/]+SKILL\.md",
     re.IGNORECASE,
 )
+SKILL_NAME_RE = re.compile(
+    r"^\s*name:\s*[\"']?(?P<name>ccdawn-[a-z0-9-]+)[\"']?\s*$",
+    re.IGNORECASE | re.MULTILINE,
+)
 WRONG_DECISION_SUBJECTS = ("错判", "误判", "选错", "错误决策")
 WRONG_DECISION_EFFECTS = (
     "影响",
@@ -96,6 +100,7 @@ def child_environment(source: dict[str, str] | None = None) -> dict[str, str]:
 def parse_events(text: str) -> tuple[list[dict], list[str], str]:
     events: list[dict] = []
     commands: dict[str, str] = {}
+    command_outputs: dict[str, str] = {}
     successful_command_ids: set[str] = set()
     last_message = ""
 
@@ -118,14 +123,22 @@ def parse_events(text: str) -> tuple[list[dict], list[str], str]:
             commands[command_id] = str(item.get("command", ""))
             if event.get("type") == "item.completed" and item.get("exit_code") == 0:
                 successful_command_ids.add(command_id)
+                command_outputs[command_id] = str(item.get("aggregated_output", ""))
         elif item.get("type") == "agent_message" and item.get("text"):
             last_message = str(item["text"])
 
-    skill_reads = {
-        match.group("name").lower()
-        for command_id in successful_command_ids
-        for match in SKILL_READ_RE.finditer(commands.get(command_id, ""))
-    }
+    skill_reads: set[str] = set()
+    for command_id in successful_command_ids:
+        command = commands.get(command_id, "")
+        output_names = {
+            match.group("name").lower()
+            for match in SKILL_NAME_RE.finditer(command_outputs.get(command_id, ""))
+        }
+        skill_reads.update(
+            name
+            for match in SKILL_READ_RE.finditer(command)
+            if (name := match.group("name").lower()) in output_names
+        )
     return events, sorted(skill_reads), last_message
 
 
