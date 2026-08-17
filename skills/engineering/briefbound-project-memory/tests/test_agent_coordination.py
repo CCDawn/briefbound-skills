@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import os
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -65,6 +66,65 @@ def run_coordination(
         text=True,
         env=environment,
     )
+
+
+def run_script(name: str, project: Path, *args: str, check: bool = True) -> subprocess.CompletedProcess[str]:
+    return subprocess.run(
+        [sys.executable, str(SCRIPT_DIR / name), str(project), *args],
+        check=check,
+        capture_output=True,
+        text=True,
+    )
+
+
+def run_sync(project: Path, *args: str, check: bool = True) -> subprocess.CompletedProcess[str]:
+    return run_script("sync_project_memory.py", project, *args, check=check)
+
+
+def run_render(project: Path, *args: str, check: bool = True) -> subprocess.CompletedProcess[str]:
+    return run_script("render_overview.py", project, *args, check=check)
+
+
+def run_capture(project: Path, *args: str, check: bool = True) -> subprocess.CompletedProcess[str]:
+    return run_script("capture_note.py", project, *args, check=check)
+
+
+def init_memory_root(seed: Path) -> Path:
+    seed.mkdir()
+    subprocess.run(
+        [
+            sys.executable,
+            str(SCRIPT_DIR / "init_project_memory.py"),
+            str(seed),
+            "--skip-agents-rules",
+        ],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    return seed / ".docs" / "project-memory"
+
+
+def lane_fixture(lane_id: str, issues: list[dict]) -> dict:
+    return {
+        "id": lane_id,
+        "title": lane_id.replace("-", " ").title(),
+        "owner": "shared-session",
+        "focus": "",
+        "phase": "Active",
+        "health": "green",
+        "lastUpdated": "2026-08-17T00:00:00Z",
+        "modules": [],
+        "decisions": [],
+        "issues": issues,
+        "todos": [],
+        "techNotes": [],
+        "recentUpdates": [],
+    }
+
+
+def lane_bytes(external_root: Path, lane_id: str) -> bytes:
+    return (external_root / "lanes" / f"{lane_id}.json").read_bytes()
 
 
 class AgentCoordinationTests(unittest.TestCase):
@@ -1813,6 +1873,208 @@ class AgentCoordinationTests(unittest.TestCase):
             self.assertIn("Active agents: 1", index)
             self.assertNotIn("thread-secret", dashboard)
             self.assertNotIn("C:/secret/worktree", dashboard)
+
+    def test_explicit_memory_root_sync_updates_summary_resolves_issue_and_keeps_legacy_tree_unchanged(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            external_root = init_memory_root(Path(temp) / "seed")
+            project = Path(temp) / "project"
+            project.mkdir()
+            lane_path = external_root / "lanes" / "backend.json"
+            lane_path.write_text(
+                json.dumps(
+                    lane_fixture(
+                        "backend",
+                        [
+                            {"title": "Fix auth bug", "status": "open", "severity": "high"},
+                            {"title": "Fix auth bug", "status": "resolved"},
+                            {"title": "Other issue", "status": "open"},
+                        ],
+                    )
+                ),
+                encoding="utf-8",
+            )
+
+            result = run_sync(
+                project,
+                "--memory-root",
+                str(external_root),
+                "--lane",
+                "backend",
+                "--focus",
+                "external hardening",
+                "--summary-phase",
+                "Hardening",
+                "--summary-focus",
+                "External root sync",
+                "--summary-health",
+                "yellow",
+                "--update",
+                "hardened external sync",
+                "--resolve-issue",
+                "Fix auth bug",
+                "--resolve-note",
+                "root cause fixed",
+            )
+            self.assertEqual(0, result.returncode, result.stderr)
+
+            lane = json.loads(lane_path.read_text(encoding="utf-8"))
+            self.assertEqual("external hardening", lane["focus"])
+            self.assertEqual(
+                [],
+                [item for item in lane["issues"] if item["title"] == "Fix auth bug" and item["status"] == "open"],
+            )
+            updated = next(
+                item
+                for item in lane["issues"]
+                if item["title"] == "Fix auth bug" and item["status"] == "resolved" and item.get("resolvedAt")
+            )
+            self.assertEqual("root cause fixed", updated["resolution"])
+            self.assertEqual("open", next(item for item in lane["issues"] if item["title"] == "Other issue")["status"])
+
+            memory = json.loads((external_root / "memory.json").read_text(encoding="utf-8"))
+            self.assertEqual("Hardening", memory["summary"]["currentPhase"])
+            self.assertEqual("External root sync", memory["summary"]["focus"])
+            self.assertEqual("yellow", memory["summary"]["health"])
+            self.assertTrue((external_root / "INDEX.md").exists())
+            self.assertTrue((external_root / "overview.html").exists())
+            external_index = (external_root / "INDEX.md").read_text(encoding="utf-8")
+            external_overview = (external_root / "overview.html").read_text(encoding="utf-8")
+            self.assertNotIn(".docs/project-memory", external_index)
+            self.assertNotIn("../../PROJECT_MEMORY.html", external_index)
+            self.assertNotIn(".docs/project-memory", external_overview)
+            self.assertNotIn(
+                "Open <code>PROJECT_MEMORY.html</code> from the project root for the stable shortcut.",
+                external_overview,
+            )
+            self.assertFalse((project / ".docs").exists())
+            self.assertFalse((project / "PROJECT_MEMORY.html").exists())
+
+    def test_explicit_memory_root_missing_or_uninitialized_fails_without_creating_it(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            project = Path(temp) / "project"
+            project.mkdir()
+            missing = Path(temp) / "missing-root"
+
+            result = run_sync(project, "--memory-root", str(missing), "--lane", "backend", check=False)
+            self.assertNotEqual(0, result.returncode)
+            self.assertIn("Memory root does not exist", result.stderr)
+            self.assertFalse(missing.exists())
+            self.assertFalse((project / ".docs").exists())
+
+            partial = Path(temp) / "partial-root"
+            partial.mkdir()
+            (partial / "memory.json").write_text("{}", encoding="utf-8")
+            result = run_sync(project, "--memory-root", str(partial), "--lane", "backend", check=False)
+            self.assertNotEqual(0, result.returncode)
+            self.assertIn("not initialized", result.stderr)
+            self.assertFalse((partial / "inbox.json").exists())
+            self.assertFalse((partial / "lanes").exists())
+            self.assertFalse((project / ".docs").exists())
+
+    def test_explicit_memory_root_zero_or_duplicate_issue_matches_fail_without_changes(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            external_root = init_memory_root(Path(temp) / "seed")
+            project = Path(temp) / "project"
+            project.mkdir()
+            lane_path = external_root / "lanes" / "backend.json"
+
+            def snapshot() -> dict[str, bytes]:
+                return {
+                    "lane": lane_bytes(external_root, "backend"),
+                    "memory": (external_root / "memory.json").read_bytes(),
+                    "inbox": (external_root / "inbox.json").read_bytes(),
+                    "index": (external_root / "INDEX.md").read_bytes(),
+                    "overview": (external_root / "overview.html").read_bytes(),
+                }
+
+            lane_path.write_text(
+                json.dumps(lane_fixture("backend", [{"title": "Auth bug", "status": "open"}])),
+                encoding="utf-8",
+            )
+            archive_dir = external_root / "archive"
+            if archive_dir.exists():
+                shutil.rmtree(archive_dir)
+            before = snapshot()
+            zero = run_sync(
+                project,
+                "--memory-root",
+                str(external_root),
+                "--lane",
+                "backend",
+                "--resolve-issue",
+                "Missing title",
+                check=False,
+            )
+            self.assertNotEqual(0, zero.returncode)
+            self.assertIn("exactly one", zero.stderr)
+            self.assertFalse(archive_dir.exists())
+            self.assertEqual(before, snapshot())
+
+            lane_path.write_text(
+                json.dumps(
+                    lane_fixture(
+                        "backend",
+                        [
+                            {"title": "Auth bug", "status": "open"},
+                            {"title": "Auth bug", "status": "open"},
+                        ],
+                    )
+                ),
+                encoding="utf-8",
+            )
+            if archive_dir.exists():
+                shutil.rmtree(archive_dir)
+            before = snapshot()
+            duplicate = run_sync(
+                project,
+                "--memory-root",
+                str(external_root),
+                "--lane",
+                "backend",
+                "--resolve-issue",
+                "Auth bug",
+                check=False,
+            )
+            self.assertNotEqual(0, duplicate.returncode)
+            self.assertIn("exactly one", duplicate.stderr)
+            self.assertFalse(archive_dir.exists())
+            self.assertEqual(before, snapshot())
+
+    def test_explicit_memory_root_capture_and_render_write_only_external_root(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            external_root = init_memory_root(Path(temp) / "seed")
+            project = Path(temp) / "project"
+            project.mkdir()
+
+            captured = run_capture(
+                project,
+                "--memory-root",
+                str(external_root),
+                "--title",
+                "Auth breadcrumb",
+                "--details",
+                "token rotation needed",
+            )
+            self.assertEqual(0, captured.returncode, captured.stderr)
+            inbox = json.loads((external_root / "inbox.json").read_text(encoding="utf-8"))
+            self.assertEqual("Auth breadcrumb", inbox["captures"][0]["title"])
+            self.assertFalse((project / ".docs").exists())
+
+            rendered = run_render(project, "--memory-root", str(external_root))
+            self.assertEqual(0, rendered.returncode, rendered.stderr)
+            self.assertTrue((external_root / "INDEX.md").exists())
+            self.assertTrue((external_root / "overview.html").exists())
+            external_index = (external_root / "INDEX.md").read_text(encoding="utf-8")
+            external_overview = (external_root / "overview.html").read_text(encoding="utf-8")
+            self.assertNotIn(".docs/project-memory", external_index)
+            self.assertNotIn("../../PROJECT_MEMORY.html", external_index)
+            self.assertNotIn(".docs/project-memory", external_overview)
+            self.assertNotIn(
+                "Open <code>PROJECT_MEMORY.html</code> from the project root for the stable shortcut.",
+                external_overview,
+            )
+            self.assertFalse((project / ".docs").exists())
+            self.assertFalse((project / "PROJECT_MEMORY.html").exists())
 
 
 if __name__ == "__main__":

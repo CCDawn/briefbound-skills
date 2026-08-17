@@ -15,7 +15,8 @@ from memory_model import (
     ensure_directories,
     ensure_lane,
     load_json,
-    load_lane,
+    project_memory_dir,
+    require_memory_root,
     save_lane,
     slugify_lane,
     titleize_lane,
@@ -28,12 +29,37 @@ from render_overview import refresh_outputs
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Sync project memory after meaningful development work.")
     parser.add_argument("project_root", help="Path to the target project root.")
+    parser.add_argument(
+        "--memory-root",
+        default=None,
+        help="Explicit initialized memory root for migrated repositories. When set, all lane, "
+        "memory, inbox, index, and overview writes target this root instead of "
+        ".docs/project-memory and no root PROJECT_MEMORY.html shortcut is written.",
+    )
     parser.add_argument("--lane", default=None, help="Stable lane id for the responsibility area, such as backend-auth.")
     parser.add_argument("--lane-title", default=None, help="Optional human-readable lane title.")
     parser.add_argument("--owner", default=None, help="Optional current session or owner label.")
     parser.add_argument("--focus", default=None, help="Current lane focus.")
     parser.add_argument("--phase", default=None, help="Current lane phase.")
     parser.add_argument("--health", default=None, choices=["green", "yellow", "red"], help="Current lane health.")
+    parser.add_argument("--summary-phase", default=None, help="Update the global summary currentPhase.")
+    parser.add_argument("--summary-focus", default=None, help="Update the global summary focus.")
+    parser.add_argument(
+        "--summary-health",
+        default=None,
+        choices=["green", "yellow", "red"],
+        help="Update the global summary health.",
+    )
+    parser.add_argument(
+        "--resolve-issue",
+        default=None,
+        help="Resolve exactly one open issue in the current lane by exact title. Zero or multiple matches fail before writes.",
+    )
+    parser.add_argument(
+        "--resolve-note",
+        default=None,
+        help="Optional resolution note recorded on the resolved issue.",
+    )
     parser.add_argument("--update", default=None, help="Short recent update summary for this task.")
     parser.add_argument("--capture-title", default=None, help="Optional inbox capture title to promote.")
     parser.add_argument("--promote-captures", action="store_true", help="Promote all inbox captures into the current lane and clear inbox.")
@@ -72,9 +98,12 @@ def resolve_lane_id(args: argparse.Namespace) -> str:
     return slugify_lane(seed)
 
 
-def sync_memory(project_root: Path, args: argparse.Namespace) -> None:
-    ensure_directories(project_root)
-    memory_dir = project_root / ".docs" / "project-memory"
+def sync_memory(project_root: Path, args: argparse.Namespace, memory_root: Path | None = None) -> None:
+    if memory_root is not None:
+        memory_root = require_memory_root(memory_root)
+    else:
+        ensure_directories(project_root)
+    memory_dir = project_memory_dir(project_root, memory_root)
     memory_path = memory_dir / "memory.json"
     profile_path = memory_dir / "profile.json"
     inbox_path = memory_dir / "inbox.json"
@@ -85,10 +114,14 @@ def sync_memory(project_root: Path, args: argparse.Namespace) -> None:
 
     lane_id = resolve_lane_id(args)
     lane_title = args.lane_title or (titleize_lane(lane_id) if args.lane or args.focus or args.update else "General Work")
-    lane = ensure_lane(project_root, lane_id, title=lane_title, owner=args.owner, focus=args.focus)
-    if (project_root / ".docs" / "project-memory" / "lanes" / f"{lane_id}.json").exists():
-        lane = load_lane(project_root, lane_id)
-        lane = ensure_lane(project_root, lane_id, title=lane_title, owner=args.owner, focus=args.focus)
+    lane = ensure_lane(
+        project_root,
+        lane_id,
+        title=lane_title,
+        owner=args.owner,
+        focus=args.focus,
+        memory_root=memory_root,
+    )
 
     now = utc_now()
     lane["lastUpdated"] = now
@@ -100,6 +133,31 @@ def sync_memory(project_root: Path, args: argparse.Namespace) -> None:
         lane["phase"] = args.phase
     if args.health:
         lane["health"] = args.health
+
+    if args.resolve_issue:
+        matches = [
+            item
+            for item in lane.get("issues", [])
+            if item.get("title") == args.resolve_issue and item.get("status") != "resolved"
+        ]
+        if len(matches) != 1:
+            raise SystemExit(
+                f"Expected exactly one open issue titled {args.resolve_issue!r} in lane {lane_id}; "
+                f"found {len(matches)}. No memory was written."
+            )
+        issue = matches[0]
+        issue["status"] = "resolved"
+        issue["resolvedAt"] = now
+        if args.resolve_note:
+            issue["resolution"] = args.resolve_note
+
+    summary = memory.setdefault("summary", {})
+    if args.summary_phase is not None:
+        summary["currentPhase"] = args.summary_phase
+    if args.summary_focus is not None:
+        summary["focus"] = args.summary_focus
+    if args.summary_health is not None:
+        summary["health"] = args.summary_health
 
     registry = None
     coordination = None
@@ -199,9 +257,9 @@ def sync_memory(project_root: Path, args: argparse.Namespace) -> None:
             remaining_captures.append(capture)
 
     inbox["captures"] = remaining_captures
-    save_lane(project_root, lane)
+    save_lane(project_root, lane, memory_root=memory_root)
     memory.setdefault("summary", {})
-    refresh_outputs(project_root, memory, profile)
+    refresh_outputs(project_root, memory, profile, memory_root=memory_root)
     write_json(memory_path, memory)
     write_json(inbox_path, inbox)
     if coordination is not None:
@@ -214,8 +272,10 @@ def sync_memory(project_root: Path, args: argparse.Namespace) -> None:
 def main() -> int:
     args = parse_args()
     project_root = Path(args.project_root).resolve()
-    sync_memory(project_root, args)
-    print(f"Synced project memory at {project_root / '.docs' / 'project-memory'}")
+    memory_root = Path(args.memory_root).resolve() if args.memory_root else None
+    sync_memory(project_root, args, memory_root)
+    memory_dir = project_memory_dir(project_root, memory_root)
+    print(f"Synced project memory at {memory_dir}")
     return 0
 
 

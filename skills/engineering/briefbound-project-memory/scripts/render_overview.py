@@ -10,6 +10,7 @@ from memory_model import (
     list_lanes,
     load_json,
     project_memory_dir,
+    require_memory_root,
     update_memory_lane_index,
     write_json,
     write_shortcut,
@@ -263,7 +264,7 @@ def project_counts(memory: dict, lanes: list[dict]) -> dict:
     }
 
 
-def render_index(memory: dict, profile: dict, lanes: list[dict]) -> str:
+def render_index(memory: dict, profile: dict, lanes: list[dict], *, external: bool = False) -> str:
     resolved_profile = effective_profile(profile)
     project = memory.get("project", {})
     summary = memory.get("summary", {})
@@ -275,6 +276,16 @@ def render_index(memory: dict, profile: dict, lanes: list[dict]) -> str:
     open_coordination = len(
         [item for item in collaboration.get("coordinations", []) if item.get("state") != "resolved"]
     )
+    files = [
+        "- [overview.html](./overview.html)",
+        "- [memory.json](./memory.json)",
+        "- [profile.json](./profile.json)",
+        "- [inbox.json](./inbox.json)",
+        "- [lanes/](./lanes/)",
+        "- [archive/](./archive/)",
+    ]
+    if not external:
+        files.append("- [../../PROJECT_MEMORY.html](../../PROJECT_MEMORY.html)")
     return f"""# Project Memory Index
 
 ## Overview
@@ -291,13 +302,7 @@ def render_index(memory: dict, profile: dict, lanes: list[dict]) -> str:
 
 ## Files
 
-- [overview.html](./overview.html)
-- [memory.json](./memory.json)
-- [profile.json](./profile.json)
-- [inbox.json](./inbox.json)
-- [lanes/](./lanes/)
-- [archive/](./archive/)
-- [../../PROJECT_MEMORY.html](../../PROJECT_MEMORY.html)
+{chr(10).join(files)}
 
 ## Active Counts
 
@@ -1166,7 +1171,7 @@ def render_metric(label: str, value: object, note: str) -> str:
     """
 
 
-def render_html(memory: dict, profile: dict, lanes: list[dict]) -> str:
+def render_html(memory: dict, profile: dict, lanes: list[dict], *, external: bool = False) -> str:
     resolved_profile = effective_profile(profile)
     project = memory.get("project", {})
     summary = memory.get("summary", {})
@@ -1226,7 +1231,14 @@ def render_html(memory: dict, profile: dict, lanes: list[dict]) -> str:
             ordered_sections.append(section)
 
     body_sections = "".join(render_section(section, memory, resolved_profile, lanes, section_layouts) for section in ordered_sections)
-    footer = """
+    if external:
+        footer = """
+    <div class="footer">
+      Generated from <code>memory.json</code>, <code>profile.json</code>, and per-lane JSON files under the resolved external memory root.
+    </div>
+    """
+    else:
+        footer = """
     <div class="footer">
       Generated from <code>.docs/project-memory/memory.json</code>, <code>profile.json</code>, and per-lane JSON files.
       Open <code>PROJECT_MEMORY.html</code> from the project root for the stable shortcut.
@@ -1235,32 +1247,54 @@ def render_html(memory: dict, profile: dict, lanes: list[dict]) -> str:
     return html_page(title, hero + f'<div class="dashboard-grid">{body_sections}</div>' + footer, theme, density_tokens)
 
 
-def refresh_outputs(project_root: Path, memory: dict | None = None, profile: dict | None = None) -> tuple[dict, dict, list[dict]]:
-    memory_dir = project_memory_dir(project_root)
+def refresh_outputs(
+    project_root: Path,
+    memory: dict | None = None,
+    profile: dict | None = None,
+    memory_root: Path | None = None,
+) -> tuple[dict, dict, list[dict]]:
+    if memory_root is not None:
+        memory_root = require_memory_root(memory_root)
+    memory_dir = project_memory_dir(project_root, memory_root)
     memory = memory or load_json(memory_dir / "memory.json")
     profile = profile or load_json(memory_dir / "profile.json")
-    lanes = list_lanes(project_root)
+    lanes = list_lanes(project_root, memory_root)
     update_memory_lane_index(memory, lanes)
     render_memory = deepcopy(memory)
     if coordination_registry_path(project_root).exists():
         render_memory["_coordination"] = public_snapshot(load_coordination_registry(project_root))
-    (memory_dir / "overview.html").write_text(render_html(render_memory, profile, lanes), encoding="utf-8")
-    (memory_dir / "INDEX.md").write_text(render_index(render_memory, profile, lanes), encoding="utf-8")
-    write_shortcut(project_root, memory.get("project", {}).get("name", project_root.name))
+    (memory_dir / "overview.html").write_text(
+        render_html(render_memory, profile, lanes, external=memory_root is not None), encoding="utf-8"
+    )
+    (memory_dir / "INDEX.md").write_text(
+        render_index(render_memory, profile, lanes, external=memory_root is not None), encoding="utf-8"
+    )
+    if memory_root is None:
+        write_shortcut(project_root, memory.get("project", {}).get("name", project_root.name))
     return memory, profile, lanes
 
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Render the static overview HTML for a project memory dashboard.")
     parser.add_argument("project_root", help="Path to the target project root.")
+    parser.add_argument(
+        "--memory-root",
+        default=None,
+        help="Explicit initialized memory root for migrated repositories. Writes INDEX.md and "
+        "overview.html only under this root and skips the project-root PROJECT_MEMORY.html shortcut.",
+    )
     return parser.parse_args()
 
 
 def main() -> int:
     args = parse_args()
     project_root = Path(args.project_root).resolve()
-    memory_dir = project_memory_dir(project_root)
-    memory, _, _ = refresh_outputs(project_root)
+    memory_root = Path(args.memory_root).resolve() if args.memory_root else None
+    memory_dir = project_memory_dir(project_root, memory_root)
+    if memory_root is not None:
+        memory_root = require_memory_root(memory_root)
+        memory_dir = memory_root
+    memory, _, _ = refresh_outputs(project_root, memory_root=memory_root)
     write_json(memory_dir / "memory.json", memory)
     print(f"Rendered {memory_dir / 'overview.html'}")
     return 0

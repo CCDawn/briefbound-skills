@@ -24,16 +24,34 @@ def write_json(path: Path, data: dict) -> None:
     path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
 
-def project_memory_dir(project_root: Path) -> Path:
+def resolve_memory_dir(project_root: Path, memory_root: Path | None = None) -> Path:
+    if memory_root is not None:
+        return memory_root
     return project_root / ".docs" / "project-memory"
 
 
-def lanes_dir(project_root: Path) -> Path:
-    return project_memory_dir(project_root) / "lanes"
+def project_memory_dir(project_root: Path, memory_root: Path | None = None) -> Path:
+    return resolve_memory_dir(project_root, memory_root)
 
 
-def ensure_directories(project_root: Path) -> tuple[Path, Path]:
-    memory_dir = project_memory_dir(project_root)
+def lanes_dir(project_root: Path, memory_root: Path | None = None) -> Path:
+    return resolve_memory_dir(project_root, memory_root) / "lanes"
+
+
+def require_memory_root(memory_root: Path) -> Path:
+    resolved = memory_root.resolve()
+    if not resolved.is_dir():
+        raise SystemExit(f"Memory root does not exist: {resolved}")
+    for name in ("memory.json", "profile.json", "lanes"):
+        if not (resolved / name).exists():
+            raise SystemExit(f"Memory root is not initialized (missing {name}): {resolved}")
+    if not (resolved / "lanes").is_dir():
+        raise SystemExit(f"Memory root lanes is not a directory: {resolved}")
+    return resolved
+
+
+def ensure_directories(project_root: Path, memory_root: Path | None = None) -> tuple[Path, Path]:
+    memory_dir = resolve_memory_dir(project_root, memory_root)
     memory_dir.mkdir(parents=True, exist_ok=True)
     lane_dir = memory_dir / "lanes"
     lane_dir.mkdir(exist_ok=True)
@@ -51,8 +69,8 @@ def titleize_lane(lane_id: str) -> str:
     return lane_id.replace("-", " ").title()
 
 
-def lane_path(project_root: Path, lane_id: str) -> Path:
-    return lanes_dir(project_root) / f"{lane_id}.json"
+def lane_path(project_root: Path, lane_id: str, memory_root: Path | None = None) -> Path:
+    return lanes_dir(project_root, memory_root) / f"{lane_id}.json"
 
 
 def default_lane(lane_id: str, title: str | None = None, owner: str | None = None, focus: str | None = None) -> dict:
@@ -75,17 +93,17 @@ def default_lane(lane_id: str, title: str | None = None, owner: str | None = Non
     return lane
 
 
-def load_lane(project_root: Path, lane_id: str) -> dict:
-    path = lane_path(project_root, lane_id)
+def load_lane(project_root: Path, lane_id: str, memory_root: Path | None = None) -> dict:
+    path = lane_path(project_root, lane_id, memory_root)
     return load_json(path, default_lane(lane_id))
 
 
-def save_lane(project_root: Path, lane: dict) -> None:
-    write_json(lane_path(project_root, lane["id"]), lane)
+def save_lane(project_root: Path, lane: dict, memory_root: Path | None = None) -> None:
+    write_json(lane_path(project_root, lane["id"], memory_root), lane)
 
 
-def list_lanes(project_root: Path) -> list[dict]:
-    lane_dir = lanes_dir(project_root)
+def list_lanes(project_root: Path, memory_root: Path | None = None) -> list[dict]:
+    lane_dir = lanes_dir(project_root, memory_root)
     if not lane_dir.exists():
         return []
     lanes = []
@@ -105,8 +123,8 @@ def list_lanes(project_root: Path) -> list[dict]:
     return lanes
 
 
-def ensure_lane(project_root: Path, lane_id: str, title: str | None = None, owner: str | None = None, focus: str | None = None) -> dict:
-    lane = load_lane(project_root, lane_id)
+def ensure_lane(project_root: Path, lane_id: str, title: str | None = None, owner: str | None = None, focus: str | None = None, memory_root: Path | None = None) -> dict:
+    lane = load_lane(project_root, lane_id, memory_root)
     lane["id"] = lane_id
     lane.setdefault("title", title or titleize_lane(lane_id))
     if title:

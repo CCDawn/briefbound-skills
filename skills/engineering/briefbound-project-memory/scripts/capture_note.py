@@ -5,6 +5,8 @@ import json
 from datetime import datetime, timezone
 from pathlib import Path
 
+from memory_model import require_memory_root
+
 
 def utc_now() -> str:
     return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
@@ -29,6 +31,12 @@ def csv_or_none(value: str | None) -> list[str]:
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Capture a quick project-memory note into inbox.json.")
     parser.add_argument("project_root", help="Path to the target project root.")
+    parser.add_argument(
+        "--memory-root",
+        default=None,
+        help="Explicit initialized memory root for migrated repositories. Writes inbox.json only "
+        "under this root instead of .docs/project-memory.",
+    )
     parser.add_argument("--title", required=True, help="Short title for the captured note.")
     parser.add_argument("--details", required=True, help="The raw finding, observation, or breadcrumb to record.")
     parser.add_argument("--lane", default=None, help="Optional responsibility lane hint, such as backend-auth.")
@@ -42,7 +50,8 @@ def parse_args() -> argparse.Namespace:
 def main() -> int:
     args = parse_args()
     project_root = Path(args.project_root).resolve()
-    inbox_path = project_root / ".docs" / "project-memory" / "inbox.json"
+    memory_root = require_memory_root(Path(args.memory_root)) if args.memory_root else None
+    inbox_path = memory_root / "inbox.json" if memory_root else project_root / ".docs" / "project-memory" / "inbox.json"
     inbox = load_json(inbox_path)
     capture = {
         "timestamp": utc_now(),

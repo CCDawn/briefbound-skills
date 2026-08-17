@@ -1,6 +1,6 @@
 ---
 name: briefbound-project-memory
-description: Use when the user or project rules explicitly request project-local memory/dashboard initialization or updates, or when an existing `.docs/project-memory/` is needed for cross-session recovery, durable decisions, blockers, parallel-agent coordination, or formal handoff; do not auto-initialize or sync it for ordinary development.
+description: Use when the user or project rules explicitly request project-local memory/dashboard initialization or updates, when an existing `.docs/project-memory/` or a resolved external `activePaths.memory` root is needed for cross-session recovery, durable decisions, blockers, parallel-agent coordination, or formal handoff; do not auto-initialize or sync it for ordinary development.
 license: MIT
 ---
 
@@ -8,7 +8,7 @@ license: MIT
 
 ## 目标
 
-按需维护 `.docs/project-memory/` 和 HTML 总览，并为同项目 Agent 提供不入 Git 的 live coordination registry。memory 只保存会改变未来行动的事实；普通开发不自动初始化、同步或渲染。
+按需维护 `.docs/project-memory/`（未迁移仓库）或 `activePaths.memory` 解析出的外部 memory root（已迁移仓库），并生成 HTML 总览，为同项目 Agent 提供不入 Git 的 live coordination registry。memory 只保存会改变未来行动的事实；普通开发不自动初始化、同步或渲染。
 
 ## Briefbound task contract
 
@@ -33,6 +33,16 @@ license: MIT
 - `SYNC`：只写本轮 durable delta，不记录完整对话、旁白或普通测试日志。
 
 现有 `.docs/project-memory` 存在时先读规则和索引；无目录且未触发 INIT 时直接返回原 owner。
+
+## 已迁移仓库（外部 memory root）
+
+已迁移仓库先解析 `activePaths.memory` 得到已初始化的外部 memory 根，再把 `--memory-root <根>` 传给 `sync_project_memory.py`、`render_overview.py` 和 `capture_note.py`。外部模式只读写该根下的 lane JSON、memory.json、inbox.json、INDEX.md 与 overview.html，绝不写 `.docs/project-memory` 或根级 `PROJECT_MEMORY.html`；根缺失或未初始化（缺 memory.json/profile.json/lanes/）时直接失败，不创建任意目录。
+
+```powershell
+py -3 <skill-root>\scripts\sync_project_memory.py <project-root> --memory-root <activePaths.memory> --lane <lane> --update "<delta>"
+```
+
+legacy `.docs/project-memory` 模式仅用于未迁移仓库：不传 `--memory-root`，行为保持向后兼容。`sync_project_memory.py` 还支持 `--summary-phase`、`--summary-focus`、`--summary-health` 更新全局 summary，以及 `--resolve-issue <精确标题>` 配合可选 `--resolve-note` 精确解决当前 lane 中恰好一条未解决 issue；零条或多条匹配在写入前失败。
 
 Memory 不接管执行循环。自动闭环由 `briefbound-autonomous-collaboration-loop` 持有，memory 只提供可恢复状态载体；当前动作和短期续接留在 Briefbound runtime。只有已确认决定、跨会话 blocker、正式 handoff 或会改变未来行动的验证结论才写入，不为每个 task、测试或 checkpoint 重写并渲染。
 
