@@ -6,6 +6,7 @@
   {"id":"openai-docs","prompt":"查最新 Codex API 官方用法","preferred":"openai-docs","fallback":"briefbound-router"},
   {"id":"figma-design","prompt":"把当前页面生成到 Figma","preferred":"figma:figma-generate-design","fallback":"briefbound-ui-design"},
   {"id":"image-generation","prompt":"为这个官网生成并落地一张产品主视觉图","preferred":"imagegen","fallback":"briefbound-visual-design"},
+  {"id":"structured-diagram","prompt":"生成一张带真实节点关系的系统架构图并导出 PNG","preferred":"briefbound-diagram-design","fallback":"briefbound-diagram-design"},
   {"id":"word-document","prompt":"生成并排版一份 Word 交付报告","preferred":"documents:documents","fallback":"briefbound-router"},
   {"id":"pdf-artifact","prompt":"生成并检查这份 PDF 报告的版面","preferred":"pdf:pdf","fallback":"briefbound-router"},
   {"id":"spreadsheet-artifact","prompt":"创建并验证这个 Excel 分析工作簿","preferred":"spreadsheets:Spreadsheets","fallback":"briefbound-router"},

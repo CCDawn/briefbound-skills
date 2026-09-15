@@ -46,7 +46,7 @@ Briefbound 对齐意图、选择 owner 并推进验证。结果明确时直接�
 - AI/ML 研究：`briefbound-ai-research-loop`；单条 metric lane：`briefbound-score-loop`；重要 claim：`briefbound-research-rigor-review`。
 - 多会话协商：`briefbound-multi-agent-orchestration`；单次冲突：`briefbound-thread-coordination`；自动本地集成：`briefbound-autonomous-collaboration-loop`；残留：`briefbound-development-cleanup`。
 - 真实设计分叉：`briefbound-planning`；无专项 owner 的评价：`briefbound-evaluation`。
-- GitHub、浏览器、Figma、OpenAI 文档、图片和办公制品按需读 `references/capability-routing.md`。
+- 专用工具、文件制品、结构化图解及复杂汇报配图按需读 `references/capability-routing.md`。
 
 无法仲裁才读 `references/routing-practice.md`。以本轮 Available skills 为准；未安装 skill 不能成为 owner。
 
@@ -96,8 +96,7 @@ BDD/TDD 按子任务判断，只给确定性行为回归或重大契约风险；
 高能力模型可内部完成局部规划、依赖排序和自审；同一 owner 且无自然闸门时可折叠对齐、实现和验证。
 
 - **Skill Budget**：默认一个 primary owner；support skill 只有补充独有知识、工具或独立证据时才加载。
-- artifact 仅在审阅、交接、恢复或高风险决策复用时生成；调用下游前说清其防止的错误和使用者，否则跳过。
-- 内部从 1-3 个相关视角检查需求覆盖、误改范围和验证；没有 finding 不输出矩阵。
+- artifact 只在后续会复用时生成；否则跳过。
 
 Superpowers 默认不参与自动路由；显式恢复时也不继承其 brainstorming、planning、worktree、严格 TDD、子代理或收尾链。当前协作不创建子 Agent；只连接已有同项目平级会话。
 

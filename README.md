@@ -107,6 +107,7 @@ sh ./install.sh
 - [`briefbound-score-loop`](skills/competition/briefbound-score-loop/SKILL.md)：固定比较协议后主动选择利用、探索或诊断候选，用早停和代表性评价决定是否替换当前最好方案。
 - [`briefbound-huawei-nslb-score-loop`](skills/competition/briefbound-huawei-nslb-score-loop/SKILL.md)：从当前 NSLB 项目读取 baseline、hash 和线上反馈，按需调用 solver 搜索、打包与校准工具。
 - [`briefbound-creative-toolbox`](skills/creative/briefbound-creative-toolbox/SKILL.md)：按生成、扩展、选择、解卡、颠覆、精炼、整理或命名阶段选择一个方法，输出少量可尝试的非套路方案。
+- [`briefbound-diagram-design`](skills/creative/briefbound-diagram-design/SKILL.md)：生成和重绘架构、流程、时序及数据图解；复杂汇报中图能显著降低理解成本时，主动生成中文总览图。
 - [`briefbound-feature-reuse-research`](skills/engineering/briefbound-feature-reuse-research/SKILL.md)：为复杂功能评估项目内外可复用方案。
 
 ## 懒人安装
@@ -236,6 +237,9 @@ sh ./install.sh
 
 ### 创意工具
 
+- **`briefbound-diagram-design`**
+  结构化图解 owner。按语义和内容选择图类型，支持 Mermaid、draw.io、Excalidraw 重绘，生成自包含 HTML/SVG 并按需导出 PNG；调研、审查或跨阶段汇报通过图解价值门禁时，会主动作为 support 生成一张中文总览图。
+
 - **`briefbound-creative-toolbox`**
   先判断用户是在生成、扩展、选择、解卡、颠覆、精炼、整理还是命名，再默认只用一个最合适的方法，产出少量具体候选、真实失败方式和可执行第一步。
 
@@ -276,6 +280,7 @@ skills/
   creative/
     README.md
     briefbound-creative-toolbox/
+    briefbound-diagram-design/
   engineering/
     README.md
     briefbound-project-memory/

@@ -21,6 +21,7 @@
 | 评价流程、方案、skill、输出质量，且无更具体 owner | `briefbound-evaluation` | MICRO/COMPACT | 证据化判断与高 ROI 建议 |
 | 新建或重定 UI/UX、信息层级、交互模型、响应式或无障碍决策 | `briefbound-ui-design` | FAST/COMPACT | 必要时先交付隔离预览，再形成可实施 UI 契约 |
 | 品牌表达、视觉方向、字体、色彩、构图、图像或动效语言 | `briefbound-visual-design` | COMPACT | 必要时先交付隔离预览，再形成语境化视觉契约 |
+| 架构、流程、时序、ER/UML、定量图表或 Mermaid/draw.io/Excalidraw 重绘 | `briefbound-diagram-design` | FAST/COMPACT | 可编辑 HTML/SVG、所需 PNG、保真说明与结构/视觉验收 |
 | 已获 `APPROVED` 或有依据的 `PREVIEW_SKIPPED`，需要组件、状态、响应式和无障碍生产实现 | `briefbound-frontend-engineering` | FAST/COMPACT | 前端代码与浏览器运行证据 |
 | 审查已有页面、隔离预览、截图、UI 流程、视觉回归、响应式或无障碍 | `briefbound-ui-review` | COMPACT | findings、预审建议与浏览器证据 |
 | 跨组件 token、主题、variants、共享组件 API 或 Figma/code 一致性 | `briefbound-design-system` | COMPACT/FULL | 系统契约、渐进迁移与消费者证据 |
