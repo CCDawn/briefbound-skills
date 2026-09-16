@@ -36,22 +36,14 @@ ROUTER_ACTIVATION_END = "<!-- Briefbound Router activation: end -->"
 LEGACY_ROUTER_ACTIVATION_START = "<!-- CCDawn BRT activation: start -->"
 LEGACY_ROUTER_ACTIVATION_END = "<!-- CCDawn BRT activation: end -->"
 ROUTER_ACTIVATION_BLOCK = f"""{ROUTER_ACTIVATION_START}
-## Briefbound Router Default Routing
+## Briefbound Router Entry Rules
 
-- Before the first tool call or skill choice, check `Desired Result / Owning Surface / Acceptance Evidence / Highest-impact Fork`.
-- For `MISSING_CONTEXT`, make one narrow read-only probe. For uncertainty or an unresolved behavior-changing `PRODUCT_FORK`, load `briefbound-router`, give one compact recommendation/alignment turn, and wait for calibration. Revalidate `continue`/`确认`/`按建议`/`按推荐`; if new evidence changes behavior, scope, data/API, compatibility, security, or acceptance, stop affected writes and realign.
-- An unresolved `PRODUCT_FORK` enters `ALIGNMENT_PENDING`: only narrow read-only discovery and Briefbound alignment are allowed; do not load a downstream implementation or planning owner and do not write. After `按推荐` or a correction, enter `CALIBRATED`, update the contract, recompute the owner from the accepted result, and load the most specific skill without re-asking confirmed items.
-- Select the most specific owner, preserve existing in-scope permission, and proceed until a natural gate.
-- Before the first write, scope expansion, or merge, run available project `preflight`. Plans are development writes; ordinary development on primary `main/master` must move to a task worktree; integration requires an active claim and clean target.
-- Keep local efficiency and structure checks with the current owner. Load `briefbound-performance-engineering` only for `PROFILE` risks and `briefbound-code-structure-guard` only for real `SPLIT` risks; do not benchmark routine work or split by line count alone.
-- On Windows, if `python`/`py` hits the WindowsApps alias, try the bundled runtime before a broader search.
-- At the start of nontrivial development, when at least one concrete lane is safely delegable, proactively ask the user once both whether to use subagents and which concrete subagent roles to invoke. Present a concise recommended set with each role's purpose and write scope; do not ask again when the user has already authorized both delegation and roles, and do not launch any unapproved role.
-- After the user authorizes subagents, maximize useful parallelism: run independent lanes concurrently when ownership, write paths, dependencies, and acceptance are separable; keep shared-file edits and sequential dependencies with one owner, and have the primary agent independently review, integrate, and verify all results.
-- When proposing code-implementation roles, recommend the `DeepSeek V4 Flash execution agent` (served through Reasonix; technical tool ID `reasonix_executor`) if a clean isolated Git worktree can be supplied. If the user selects it, give `delegate_task` an outcome contract, acceptance criteria, allowed paths, and exact permitted commands; use bounded `task_status` waits, then `task_result`, and have Codex independently inspect the diff and scope and rerun tests. Keep ordinary subagents for research, review, non-Git work, and multi-agent collaboration.
-- For nontrivial same-project work, do bounded peer discovery. Route one-off coordination to `briefbound-thread-coordination`, sustained collaboration to `briefbound-multi-agent-orchestration`, and enable `briefbound-autonomous-collaboration-loop` only after user confirmation; new threads and remote actions remain separately authorized.
-- On `MERGE_READY`, dirty-target, or PR closeout, load the owning coordination/cleanup skill and follow its current ownership and recovery gates; remote branch deletion remains separately authorized.
-- Do not auto-load generic frameworks or subagent workflows unless explicitly requested or uniquely required.
-- Keep user-visible output Chinese-first unless the user requests another language. Lead with the result, stay concise, and use plain language. Explain a complex term in one sentence when it changes the user's decision or action; do not expose internal routing ledgers or unexplained enums.
+- Intent gate: a clear goal plus an execution verb (fix/add/change/remove/tune) is permission to act. When the goal, write surface, and acceptance are clear or safely recoverable, proceed directly without asking for extra confirmation.
+- Grade uncertainty instead of stopping by default: for low- or medium-risk unknowns, state the assumption and continue. Only a high-impact fork (behavior-changing product decision, irreversible or user-facing change, security, or data loss) gets one compact recommendation-and-alignment turn, then wait for calibration.
+- Ask only questions whose answers change the approach, batched into one round. Zero questions is legitimate when intent and scope are already clear; never re-ask what task or project memory already answered.
+- Delegation: Briefbound itself creates no subagents. If the runtime provides delegation tools, dispatch independent, parallelizable work directly without asking; keep trivial or single-owner work with the current agent, never block work on a delegation decision, and never invent tool names.
+- For cross-skill routing, load `briefbound-router` and follow its gates.
+- Keep user-visible output Chinese-first unless the user requests another language. Lead with the result, stay concise, and use plain language; do not expose internal routing ledgers or unexplained enums.
 {ROUTER_ACTIVATION_END}"""
 
 

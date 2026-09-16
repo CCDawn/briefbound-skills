@@ -21,7 +21,7 @@
 7. 允许安装器在 ~/.codex/AGENTS.md 中安装带边界标记的 Briefbound Router 激活块；保留已有规则，并确保该区段可以单独移除。
 8. 如果存在旧 `ccdawn-*` live skill，先验证对应的新 `briefbound-*` 副本，再让安装器移除通过归属校验的旧副本；不要保留旧别名，也不要删除无法证明归属的目录。
 9. 最后用中文汇报：仓库位置、安装目录、安装了哪些 skills、Briefbound Router 激活状态、旧副本迁移、冲突入口处理、验证是否通过、是否需要重启 Codex。
-10. 重点提醒我：最重要入口是 briefbound-router；安装后用户正常说需求即可。Briefbound Router 会自动完成意图对齐和下游路由；需求对齐后若原生 thread 能力可用，还会发现同项目现有平级会话。只有各自任务受益或能减少全局冲突/返工时才协作，不创建子 Agent、不转移任务 owner。
+10. 重点提醒我：最重要入口是 briefbound-router；安装后用户正常说需求即可。目标清楚即行动许可，直接推进；低/中风险不确定时先声明假设再继续，只有高影响分叉（改变行为的产策决定、不可逆或用户可见面、安全、数据损失）才用一轮紧凑的建议/对齐并等待校准；只提答案会改变走向的问题，一轮集中提出。Briefbound 自身不创建子 Agent；若运行时提供委派工具，独立可并行的工作可直接派发、无需请示；平级会话协作不转移任务 owner。
 
 如果遇到 Git、Python、网络、权限问题，只问我一个最关键的阻塞问题。
 ```
@@ -40,7 +40,7 @@ https://github.com/CCDawn/codex-skills.git
 - 不要安装到 ~/.agents/skills、~/.claude/skills，除非我明确要求。
 - 不要修改任何用户项目代码。
 - 只允许创建/更新本地 codex-skills 仓库、~/.codex/skills 下的安装目录，以及 ~/.codex/AGENTS.md 中带 Briefbound 边界标记的受管激活区段；不得改动该文件的其他规则。
-- 安装完成后明确告诉我：briefbound-router 是最重要入口；选择它之后用户正常说需求即可，其它 skill 通常由 Briefbound Router 自动路由。
+- 安装完成后明确告诉我：briefbound-router 是最重要入口；选择它之后用户正常说需求即可，目标清楚直接推进，低/中风险不确定先声明假设再继续，只有高影响分叉才用一轮紧凑建议并等待校准；其它 skill 通常由 Briefbound Router 自动路由。
 - 旧 `ccdawn-*` live skill 只能在对应的新副本验证通过且 frontmatter 归属一致后移除；不保留旧别名，不删除无法验证归属的目录。
 - 可逆停用安装器识别的完整 Superpowers 入口集，只允许把对应 `SKILL.md` 重命名为 `SKILL.md.briefbound-disabled`，不得删除目录或内容。
 
@@ -66,7 +66,7 @@ https://github.com/CCDawn/codex-skills.git
    - 安装目标路径
    - 安装/验证命令
    - 已安装 skill 数量和关键 skill，例如 briefbound-router
-   - 最重要入口：briefbound-router；选择它之后用户正常说需求即可，其它 skill 是下游能力，通常由 Briefbound Router 自动路由
+   - 最重要入口：briefbound-router；选择它之后用户正常说需求即可，目标清楚直接推进，低/中风险不确定先声明假设再继续，只有高影响分叉才用一轮紧凑建议并等待校准；其它 skill 是下游能力，通常由 Briefbound Router 自动路由
    - 验证结果
    - ~/.codex/AGENTS.md 中 Briefbound Router 受管激活区段的状态，以及 `--router-activation remove` 卸载命令
    - 是否需要重启 Codex 或新开会话

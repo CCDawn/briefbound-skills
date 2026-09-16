@@ -50,42 +50,40 @@ class RouterActivationTests(unittest.TestCase):
         self.assertNotIn(INSTALLER.LEGACY_ROUTER_ACTIVATION_START, migrated)
         self.assertEqual(INSTALLER.router_activation_state(self.agents_path), "active")
 
-    def test_activation_blocks_broad_work_when_intent_is_uncertain(self) -> None:
+    def test_activation_block_pins_unified_entry_rules(self) -> None:
         block = INSTALLER.ROUTER_ACTIVATION_BLOCK
-        self.assertIn("Before the first tool call", block)
-        self.assertIn("Desired Result", block)
-        self.assertIn("MISSING_CONTEXT", block)
-        self.assertIn("PRODUCT_FORK", block)
-        self.assertIn("wait for calibration", block)
-        self.assertIn("stop affected writes and realign", block)
-        self.assertIn("most specific owner", block)
-        self.assertIn("project `preflight`", block)
-        self.assertIn("primary `main/master`", block)
-        self.assertIn("active claim and clean target", block)
-        self.assertIn("briefbound-performance-engineering", block)
-        self.assertIn("briefbound-code-structure-guard", block)
-        self.assertIn("subagent roles", block)
-        self.assertIn("reasonix_executor", block)
-        self.assertIn("bounded peer discovery", block)
-        self.assertIn("briefbound-multi-agent-orchestration", block)
-        self.assertIn("briefbound-autonomous-collaboration-loop", block)
-        self.assertIn("remote actions remain separately authorized", block)
-        self.assertIn("MERGE_READY", block)
-        self.assertIn("remote branch deletion", block)
-        self.assertIn("Do not auto-load generic frameworks", block)
+        self.assertIn("permission to act", block)
+        self.assertIn("state the assumption and continue", block)
+        self.assertIn("high-impact fork", block)
+        self.assertIn("Zero questions", block)
+        self.assertIn("creates no subagents", block)
+        self.assertIn("dispatch independent, parallelizable work directly without asking", block)
+        self.assertIn("never invent tool names", block)
+        self.assertIn("load `briefbound-router` and follow its gates", block)
         self.assertIn("Chinese-first", block)
         self.assertIn("Lead with the result", block)
-        self.assertIn("plain language", block)
-        self.assertIn("Explain a complex term", block)
+        self.assertIn("stay concise", block)
         self.assertIn("unexplained enums", block)
+        calibration_lines = [
+            line for line in block.splitlines() if "wait for calibration" in line
+        ]
+        self.assertEqual(len(calibration_lines), 1)
+        self.assertIn("high-impact fork", calibration_lines[0])
+        self.assertLessEqual(len(block.strip().splitlines()), 14)
 
-    def test_activation_defers_downstream_owner_until_calibrated(self) -> None:
+    def test_activation_block_excludes_retired_routing_tools_and_prompts(self) -> None:
+        block = INSTALLER.ROUTER_ACTIVATION_BLOCK
+        for banned in ("reasonix_executor", "delegate_task", "opencode", "proactively ask", "2-4"):
+            self.assertNotIn(banned, block)
+
+    def test_activation_defers_cross_skill_gates_to_router(self) -> None:
         block = INSTALLER.ROUTER_ACTIVATION_BLOCK
 
-        self.assertIn("ALIGNMENT_PENDING", block)
-        self.assertIn("do not load a downstream implementation or planning owner", block)
-        self.assertIn("CALIBRATED", block)
-        self.assertIn("recompute the owner", block)
+        self.assertIn("For cross-skill routing", block)
+        self.assertIn("briefbound-router", block)
+        self.assertIn("follow its gates", block)
+        self.assertIn("If the runtime provides delegation tools", block)
+        self.assertIn("never block work on a delegation decision", block)
 
     def test_remove_deletes_only_managed_block(self) -> None:
         self.agents_path.parent.mkdir(parents=True)

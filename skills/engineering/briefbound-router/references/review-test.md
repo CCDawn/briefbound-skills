@@ -4,7 +4,7 @@ Read this file when Briefbound Router needs a Review Matrix, evidence quality ch
 
 ## Review Matrix
 
-Choose 2-4 perspectives from the current risk, not from a fixed role checklist:
+Choose the perspectives the current risk demands, not a fixed role checklist:
 
 - Core user: visible behavior, failure path, expectation mismatch.
 - Maintainer: complexity, ownership, future change cost.

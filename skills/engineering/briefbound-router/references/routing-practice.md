@@ -17,10 +17,12 @@
 | 性能目标/回归或热路径测量 | `briefbound-performance-engineering` | PROFILE | baseline、瓶颈、before/after |
 | 多职责巨型文件、结构妨碍导航/测试/协作，或明确要求职责拆分 | `briefbound-code-structure-guard` | FAST/COMPACT | STAY/CHECK/SPLIT 与最小结构修改 |
 | 审 PR、diff、branch、commit、merge readiness | `briefbound-pr-review` | COMPACT | findings-first 审阅结论 |
+| 源码学习、项目拆解 | `briefbound-project-dissection` | COMPACT | 教学报告与 diagram-design 配图 |
 | 审整仓、架构、技术债、测试体系、接手摸底 | `briefbound-project-review` | COMPACT | 风险排序 findings 与执行队列 |
 | 评价流程、方案、skill、输出质量，且无更具体 owner | `briefbound-evaluation` | MICRO/COMPACT | 证据化判断与高 ROI 建议 |
 | 新建或重定 UI/UX、信息层级、交互模型、响应式或无障碍决策 | `briefbound-ui-design` | FAST/COMPACT | 必要时先交付隔离预览，再形成可实施 UI 契约 |
 | 品牌表达、视觉方向、字体、色彩、构图、图像或动效语言 | `briefbound-visual-design` | COMPACT | 必要时先交付隔离预览，再形成语境化视觉契约 |
+| 架构、流程、时序、ER/UML、定量图表或 Mermaid/draw.io/Excalidraw 重绘 | `briefbound-diagram-design` | FAST/COMPACT | 可编辑 HTML/SVG、所需 PNG、保真说明与结构/视觉验收 |
 | 已获 `APPROVED` 或有依据的 `PREVIEW_SKIPPED`，需要组件、状态、响应式和无障碍生产实现 | `briefbound-frontend-engineering` | FAST/COMPACT | 前端代码与浏览器运行证据 |
 | 审查已有页面、隔离预览、截图、UI 流程、视觉回归、响应式或无障碍 | `briefbound-ui-review` | COMPACT | findings、预审建议与浏览器证据 |
 | 跨组件 token、主题、variants、共享组件 API 或 Figma/code 一致性 | `briefbound-design-system` | COMPACT/FULL | 系统契约、渐进迁移与消费者证据 |
@@ -37,7 +39,7 @@
 | 多会话进度、冲突、暂停恢复、讨论或合并 | `briefbound-thread-coordination` | COMPACT | registry 状态或协调闭环 |
 | 用户/项目明确要求 memory、dashboard、跨会话恢复 | `briefbound-project-memory` | FAST/COMPACT | 持久 delta 或恢复上下文 |
 | 已知存在临时产物、旧 branch/worktree/claim，或用户明确要求清理 | `briefbound-development-cleanup` | FAST/COMPACT | CLEAN/DEFERRED/BLOCKED |
-| 当前 diff/PR 是否过度设计 | `briefbound-simplification-review` | COMPACT | 可删与保留判断 |
+| 当前 diff/PR 是否过度设计 | `briefbound-simplification-audit` | COMPACT | 可删与保留判断 |
 | 整仓/子系统冗余复杂度与依赖膨胀 | `briefbound-simplification-audit` | COMPACT | 排序后的精简队列 |
 
 系统或插件 skill 仅在本轮 Available skills 中真实存在且比 Briefbound fallback 更具体时使用，例如官方文档、浏览器、GitHub、PDF、表格或图像工具。候选安装资料属于 `github-skill-candidates.md`，不属于运行时路由表。

@@ -13,6 +13,7 @@
 | 操作或检查 in-app Browser | `browser:control-in-app-browser` | 工具 owner；UI/bug owner 保留行为判断与最终结论 |
 | OpenAI API、Codex、ChatGPT 使用与最新官方说明 | `openai-docs` | primary；只采用官方来源 |
 | 生成或编辑位图资产 | `imagegen` | primary；UI/Visual owner 提供用途和验收边界 |
+| 架构/流程/时序/数据图解及 Mermaid、draw.io、Excalidraw 重绘 | `briefbound-diagram-design` | 独立制图 primary；报告/PPT 内图解 support；PNG 格式本身不触发 imagegen，用户指定的工具优先 |
 | Figma 通用读写 | `figma:figma-use` | 每次 `use_figma` 前置；按任务叠加下面一个最具体 Figma skill |
 | 代码页面生成 Figma 设计 | `figma:figma-generate-design` | 与 `figma:figma-use` 配合，不路由普通前端实现 |
 | Figma 设计系统/组件库 | `figma:figma-generate-library` | Design System 判断契约，Figma skill 执行制品写入 |
@@ -26,6 +27,7 @@
 
 ## 组合规则
 
+- **汇报主动配图**：调研/审查/分析/跨阶段汇报若涉及至少三个关联组件、阶段或角色，或重点是流程、时序、数据流、依赖、因果、状态及数值比较，且图能降低理解成本，则加 `briefbound-diagram-design` support；事实充分时直接生成一张中文总览图。简单状态、单结论、短列表、重复表达或用户拒图时跳过；不编造，删减改变结论则先校准。
 - 专项工具拥有“如何操作”，Briefbound owner 拥有“做什么、范围、判断和验收”。同一动作只设一个 primary；工具只是支撑时不重复输出第二份流程。
 - PR + UI 运行验证：`briefbound-pr-review` primary，Browser/UI Review 最多一个 support。CI 修复请求则 `github:gh-fix-ci` primary。
 - UI 设计并实现仍由 UI/Visual owner 贯穿；Browser、Figma、Imagegen 是按需能力，不产生新阶段。

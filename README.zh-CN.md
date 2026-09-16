@@ -3,7 +3,7 @@
 [![Release](https://img.shields.io/github/v/release/CCDawn/codex-skills?display_name=tag)](https://github.com/CCDawn/codex-skills/releases)
 [![Validate](https://github.com/CCDawn/codex-skills/actions/workflows/validate.yml/badge.svg)](https://github.com/CCDawn/codex-skills/actions/workflows/validate.yml)
 [![License](https://img.shields.io/github/license/CCDawn/codex-skills)](LICENSE)
-[![Skills](https://img.shields.io/badge/skills-30-2f81f7)](#完整-skill-目录)
+[![Skills](https://img.shields.io/badge/skills-32-2f81f7)](#完整-skill-目录)
 [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-compatible-1f883d)](https://agentskills.io/)
 [![skills.sh](https://skills.sh/b/CCDawn/codex-skills)](https://skills.sh/CCDawn/codex-skills)
 
@@ -11,10 +11,10 @@
 
 **约定内自主推进，约定变化主动商量。**
 
-30 个中文优先 Agent Skills，支持 Codex 与 Grok Build，覆盖意图对齐、动态路由、多会话平级协作与自动闭环、轻量开发、代码结构守卫、性能工程、开发清理、代码审查、UI 设计和 AI 研究工作流。
+32 个中文优先 Agent Skills，支持 Codex 与 Grok Build，覆盖意图对齐、动态路由、多会话平级协作与自动闭环、轻量开发、代码结构守卫、性能工程、开发清理、代码审查、UI 设计和 AI 研究工作流。
 
 - 用户正常说需求即可，不需要主动调用 `briefbound-router` 或记忆流程命令。
-- [`briefbound-router`](skills/engineering/briefbound-router/SKILL.md) 会在意图明确时直接推进；需要讨论时先说结果、使用通俗中文，并只解释会影响判断或操作的复杂概念。
+- [`briefbound-router`](skills/engineering/briefbound-router/SKILL.md) 会在意图明确时直接推进；低/中风险不确定时先声明假设再继续，只有高影响分叉才用一轮紧凑的建议/对齐并等待校准；讨论时先说结果、使用通俗中文，并只解释会影响判断或操作的复杂概念。
 - 简单任务直接实现和验证；只有真实风险存在时才升级到规划、内嵌任务图或紧凑 TDD。
 
 [English](README.en.md) | **简体中文**
@@ -130,7 +130,7 @@ sh ./install.sh
 6. 使用安装脚本默认可逆停用安装器识别的完整 Superpowers 自动发现入口集，保留原目录和内容，不要删除。
 7. 允许安装器在 ~/.codex/AGENTS.md 中安装受管的 Briefbound Router 激活块；必须保留用户已有规则，并确保可单独卸载。
 8. 最后用中文汇报：仓库位置、安装目录、安装了哪些 skills、Briefbound Router 激活状态、冲突入口处理、验证是否通过、是否需要重启 Codex。
-9. 重点提醒我：最重要入口是 briefbound-router；用户正常说需求即可。意图明确时直接推进；有高影响分叉时先查证，再用简短通俗的话说明理解、依据、具体建议、替代结果和误解风险。复杂术语只在影响判断或操作时解释。需求对齐后，若原生 thread 能力可用，Briefbound Router 会发现同项目现有平级会话；只在各自任务受益或能减少全局冲突/返工时协作，不创建子 Agent、不转移任务 owner。需要持续自动开发、冲突恢复和本地 main 集成时，Briefbound Router 只询问一次是否开启 briefbound-autonomous-collaboration-loop。
+9. 重点提醒我：最重要入口是 briefbound-router；用户正常说需求即可。目标清楚即行动许可，直接推进；低/中风险不确定时先声明假设再继续，只有高影响分叉（改变行为的产策决定、不可逆或用户可见面、安全、数据损失）才用一轮紧凑的建议/对齐并等待校准。只提答案会改变走向的问题，一轮集中提出；意图和范围清楚时零提问也合法。复杂术语只在影响判断或操作时解释。Briefbound 自身不创建子 Agent；若运行时提供委派工具，独立可并行的工作可直接派发、无需请示，琐碎或单一 owner 的工作留在当前会话；平级会话协作不转移任务 owner。需要持续自动开发、冲突恢复和本地 main 集成时，Briefbound Router 只询问一次是否开启 briefbound-autonomous-collaboration-loop。
 
 如果遇到 Git、Python、网络、权限问题，只问我一个最关键的阻塞问题。
 ```
@@ -144,13 +144,13 @@ sh ./install.sh
 ### 工程流程
 
 - **`briefbound-router`**
-  Briefbound 最重要入口 skill。目标明确时直接推进；有高影响分叉时先查证，再用简短通俗的话说明理解、依据、建议、替代做法的结果和理解有误可能带来的问题。复杂术语只在必要时解释。
+  Briefbound 最重要入口 skill。目标清楚即行动许可，直接推进；低/中风险不确定时先声明假设再继续，只有高影响分叉才用一轮紧凑的建议/对齐并等待校准。只提答案会改变走向的问题。复杂术语只在必要时解释。
 
 - **`briefbound-autonomous-collaboration-loop`**
   用户明确开启后，持续协调同项目现有会话完成各自任务，普通冲突自动协商，最大冲突只暂停重叠面，并由可接管的 owner 恢复任务、验证合入本地 `main` 和安全收尾。
 
 - **`briefbound-multi-agent-orchestration`**
-  Briefbound Router 对齐并发现双向协作价值后的多会话协议。它不创建子 Agent 或派发任务；各平级 Agent 继续完成自己的原任务，只协商共享契约、依赖、冲突和集成责任。
+  Briefbound Router 对齐并发现双向协作价值后的多会话协议。它协调现有平级会话而不转移任务 owner；各平级 Agent 继续完成自己的原任务，只协商共享契约、依赖、冲突和集成责任。
 
 - **`briefbound-thread-coordination`**
   同一项目多会话协调 owner。用跨 worktree 的 live registry 共享任务、scope 和 checkpoint；通过收敛讨论、暂停握手和 merge order 减少冲突与回归。
@@ -173,6 +173,9 @@ sh ./install.sh
 - **`briefbound-frontend-engineering`**
   前端生产实现 owner，只消费用户已批准或有依据跳过预览的界面契约，负责组件、状态、响应式和无障碍实现，并使用真实浏览器证据收口。
 
+- **`briefbound-diagram-design`**
+  结构化图解 owner：把架构、流程、时序、ER/UML、定量数据做成可编辑的 HTML/SVG/PNG，支持 Mermaid、draw.io、Excalidraw 导入；报告内配图以 support 身份参与，不抢内容 owner。
+
 - **`briefbound-feature-reuse-research`**
   只在复用候选会实质改变复杂功能的架构、依赖或实现范围时调研现有项目、库、标准、示例和项目内模块。
 
@@ -190,6 +193,9 @@ sh ./install.sh
 
 - **`briefbound-project-review`**
   项目审查 skill，用来审查整个仓库、架构、技术债、测试缺口、可维护性、接手状态和项目健康。
+
+- **`briefbound-project-dissection`**
+  项目拆解教学：从真实数据结构和入口追到业务结果，解释设计取舍与失效边界，并给出阅读路线；不做风险优先的项目审查。
 
 - **`briefbound-simplification-review`**
   当前 diff 的精简审查 skill，用来寻找可删除代码、原生/标准库替代、无效抽象和不必要依赖；不替代正确性审查。
@@ -289,12 +295,14 @@ skills/
     briefbound-ui-review/
     briefbound-design-system/
     briefbound-frontend-engineering/
+    briefbound-diagram-design/
     briefbound-feature-reuse-research/
     briefbound-planning/
     briefbound-bdd-tdd-development/
     briefbound-completion-summary/
     briefbound-pr-review/
     briefbound-project-review/
+    briefbound-project-dissection/
     briefbound-simplification-review/
     briefbound-simplification-audit/
     briefbound-bug-review/
@@ -455,7 +463,7 @@ Grok Build 安装后可用 `grok inspect --json` 确认 `briefbound-router` 的 
 Briefbound Router 会根据意图置信度控制交流成本：
 
 - 需求明确：直接执行或路由，不为了展示流程而追问。
-- 需求存在多种合理解释：先读取可查证的上下文，再用一条消息集中讨论 2-4 个会改变结果的问题。
+- 需求存在多种合理解释：先读取可查证的上下文；低/中风险不确定时声明假设后继续，只有会改变走向的高影响分叉才用一条消息集中提出并等待校准。
 - 讨论时 agent 会用通俗话说明它理解的结果、判断依据和具体建议；用户可以回复 `按建议`、`按推荐`，也可以只指出需要修改的编号。
 - 简单结果不套模板；复杂术语只有在影响用户判断或操作时才用一句话解释。
 - 信息足够后立即继续，不重复确认已经对齐的内容；只有缺少不可替代输入时才单独询问阻塞问题。

@@ -25,7 +25,7 @@ Briefbound 对齐意图、选择 owner 并推进验证。结果明确时直接�
 
 `PRODUCT_FORK` 进入 `ALIGNMENT_PENDING`：只读 probe/Briefbound Router 对齐，不加载开发/planning owner、不写入。用户“按推荐”或纠正后进入 `CALIBRATED`，更新契约并重选/读取 owner，不重问已确认项。
 
-- agent 先给具体建议，不让用户重写需求；一次集中提出 2-4 个高影响问题，说明建议、替代结果和误解风险。
+- agent 先给具体建议，不让用户重写需求；只提出答案会改变走向的问题，一轮集中提出，意图与范围已清楚时零提问。
 - 主动暴露最可能造成误改的分叉；不得静默替用户决定产品行为，也不得询问本地证据已经回答的问题。
 - 不强制套字段。对齐时用通俗话说明理解、依据、建议、替代结果和误解风险，末尾邀请回复“按建议”“按推荐”或直接纠错。
 - 自然闸门：意图/范围变化、不可安全恢复的失败、高风险/破坏性/权限/迁移/发布、冲突或真实取舍。
@@ -38,15 +38,16 @@ Briefbound 对齐意图、选择 owner 并推进验证。结果明确时直接�
 
 扫描最多 3 个候选，选能直接产生下一证据的最具体 owner。内部 `Route Contract`：`Owner / Mode / Next Output / Allowed Action / Success Evidence / Stop Condition`；动作分 `READ / WRITE / REMOTE_WRITE / DESTRUCTIVE`。
 
+- 项目学习：`briefbound-project-dissection`；完整报告联动图解。
 - bug/失败测试：`briefbound-bug-review`；PR/diff：`briefbound-pr-review`；整仓/架构：`briefbound-project-review`。
 - UI/UX 与交互：`briefbound-ui-design`；品牌视觉：`briefbound-visual-design`；生产前端：`briefbound-frontend-engineering`；界面审查：`briefbound-ui-review`；token/主题/组件治理：`briefbound-design-system`。
 - 请求包含前端写入时，若最终界面尚未获用户确认，先读取 `references/ui-preview-approval.md`，判定 `PREVIEW_REQUIRED / PREVIEW_SKIPPED`。`PREVIEW_REQUIRED` 必须先交付隔离网页并等待用户 `APPROVED / REVISE / ABANDON`；批准前不得修改正式 UI owning surface。
-- 当前 diff 过度设计：`briefbound-simplification-review`；整仓冗余治理：`briefbound-simplification-audit`。
+- diff 过度设计：`briefbound-simplification-review`；整仓冗余治理：`briefbound-simplification-audit`，按请求限定范围。
 - 开发中出现多职责巨型文件、难导航/测试或反复结构冲突：`briefbound-code-structure-guard`；行数本身不触发拆分。
 - AI/ML 研究：`briefbound-ai-research-loop`；单条 metric lane：`briefbound-score-loop`；重要 claim：`briefbound-research-rigor-review`。
 - 多会话协商：`briefbound-multi-agent-orchestration`；单次冲突：`briefbound-thread-coordination`；自动本地集成：`briefbound-autonomous-collaboration-loop`；残留：`briefbound-development-cleanup`。
-- 真实设计分叉：`briefbound-planning`；无专项 owner 的评价：`briefbound-evaluation`。
-- GitHub、浏览器、Figma、OpenAI 文档、图片和办公制品按需读 `references/capability-routing.md`。
+- 真实设计分叉：`briefbound-planning`；无专项 owner 的评价：`briefbound-evaluation`，通用评价也可按需读 `references/evaluation.md`。
+- 专用工具、文件制品、结构化图解及复杂汇报配图按需读 `references/capability-routing.md`。
 
 无法仲裁才读 `references/routing-practice.md`。以本轮 Available skills 为准；未安装 skill 不能成为 owner。
 
@@ -89,15 +90,14 @@ BDD/TDD 按子任务判断，只给确定性行为回归或重大契约风险；
 
 多会话 pause 会产生 `resumePendingAgentIds`；owner 只有在 coordination resolve 且恢复债务清零后结束，失活先路由 `briefbound-thread-coordination` 接管。
 
-长任务、恢复、跨阶段 handoff 或持久状态才读取 `references/runtime.md`；普通 `FAST_PATH/COMPACT_FLOW` 不加载。
+开放目标、长任务、恢复、正式交接或持久状态才读取 `references/runtime.md`；普通 `FAST_PATH/COMPACT_FLOW` 不加载。
 
 ## 能力感知与阶段折叠
 
 高能力模型可内部完成局部规划、依赖排序和自审；同一 owner 且无自然闸门时可折叠对齐、实现和验证。
 
 - **Skill Budget**：默认一个 primary owner；support skill 只有补充独有知识、工具或独立证据时才加载。
-- artifact 仅在审阅、交接、恢复或高风险决策复用时生成；调用下游前说清其防止的错误和使用者，否则跳过。
-- 内部从 1-3 个相关视角检查需求覆盖、误改范围和验证；没有 finding 不输出矩阵。
+- artifact 只在后续会复用时生成；否则跳过。
 
 Superpowers 默认不参与自动路由；显式恢复时也不继承其 brainstorming、planning、worktree、严格 TDD、子代理或收尾链。当前协作不创建子 Agent；只连接已有同项目平级会话。
 
@@ -109,6 +109,6 @@ Wrong-Edit Guard：定位 owning surface、预计文件、相关测试和已有�
 
 首次写入、scope 扩大或合并前运行 `preflight --write-kind`；规划文档属于 development 写入，须先隔离。无 registry 仍检查 Git。根 `main/master` 的 `development` 收到 `ISOLATION_REQUIRED` 后转 task worktree；`mechanical` 显式声明；`integration` 需有效 claim 且 clean。`OVERLAP` 进入 Silent Conflict Triage，仅不可拆且立即覆盖/回归时暂停。
 
-仅跨阶段/会话、恢复、正式交接或 Deferred 风险使用 `briefbound-completion-summary`；已知残留才 cleanup。同一任务 PR 后按 `PR_OPEN / PR_MERGED / PR_CLOSED_UNMERGED` 路由 `briefbound-development-cleanup`；仅验证 base 吸收 published head 后收尾本地资源，远程分支删除仍单独授权。
+跨阶段恢复、正式交接或 Deferred 风险使用 `briefbound-completion-summary`，并按 `references/runtime.md` 收口；已知残留才 cleanup。同一任务 PR 后按 `PR_OPEN / PR_MERGED / PR_CLOSED_UNMERGED` 路由 `briefbound-development-cleanup`；仅验证 base 吸收 published head 后收尾本地资源，远程分支删除仍单独授权。
 
-用户可见内容默认中文：先说结果和必要依据；内部路由、枚举和账本不直接展示。复杂概念会改变用户判断或操作时，首次出现用一句话解释；技术字面量保持原样。checkpoint 要短；正文末行（Next Action）写 `下一步建议: <一个具体动作>`，仅自然闸门给选项。
+用户可见内容默认中文：先说结果和必要依据；内部路由、枚举和账本不直接展示。复杂概念会改变用户判断或操作时，首次出现用一句话解释；技术字面量保持原样。checkpoint 要短；存在自然闸门时，末行（Next Action）给一条明确的下一步建议；否则声明继续推进已授权工作，不交回可自行完成的建议。

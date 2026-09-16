@@ -3,16 +3,16 @@
 [![Release](https://img.shields.io/github/v/release/CCDawn/codex-skills?display_name=tag)](https://github.com/CCDawn/codex-skills/releases)
 [![Validate](https://github.com/CCDawn/codex-skills/actions/workflows/validate.yml/badge.svg)](https://github.com/CCDawn/codex-skills/actions/workflows/validate.yml)
 [![License](https://img.shields.io/github/license/CCDawn/codex-skills)](LICENSE)
-[![Skills](https://img.shields.io/badge/skills-30-2f81f7)](#skill-catalog)
+[![Skills](https://img.shields.io/badge/skills-32-2f81f7)](#skill-catalog)
 [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-compatible-1f883d)](https://agentskills.io/)
 [![skills.sh](https://skills.sh/b/CCDawn/codex-skills)](https://skills.sh/CCDawn/codex-skills)
 
 **Bound to the brief. Free to build.**
 
-Briefbound is a Chinese-first collection of 30 Agent Skills for Codex and Grok Build, covering intent alignment, dynamic routing, peer collaboration and opt-in autonomous closure across existing threads, lightweight development, code-structure guards, performance engineering, cleanup, code review, UI design, and AI research workflows.
+Briefbound is a Chinese-first collection of 32 Agent Skills for Codex and Grok Build, covering intent alignment, dynamic routing, peer collaboration and opt-in autonomous closure across existing threads, lightweight development, code-structure guards, performance engineering, cleanup, code review, UI design, and AI research workflows.
 
 - Users describe the task normally. They do not need to invoke `briefbound-router` or memorize a workflow.
-- [`briefbound-router`](skills/engineering/briefbound-router/SKILL.md) proceeds immediately when intent is clear. When discussion is needed, it leads with the result, uses plain language, and explains only complex concepts that affect a decision or action.
+- [`briefbound-router`](skills/engineering/briefbound-router/SKILL.md) proceeds immediately when intent is clear; for low- and medium-risk uncertainty it states its assumption and continues, and only a high-impact fork gets one compact alignment turn that waits for calibration. It leads with the result, uses plain language, and explains only complex concepts that affect a decision or action.
 - Simple work stays simple. Durable plans, embedded task graphs, and compact TDD appear only when the risk justifies them.
 
 **English** | [简体中文](README.md)
@@ -99,7 +99,7 @@ Run `py -3 scripts\run_briefbound_routing_eval.py` after installation for a low-
 
 - [`briefbound-router`](skills/engineering/briefbound-router/SKILL.md): intent inference, plain-language alignment, routing, and workflow-weight control.
 - [`briefbound-autonomous-collaboration-loop`](skills/engineering/briefbound-autonomous-collaboration-loop/SKILL.md): one opt-in drives peer completion, conflict recovery, verified local-main integration, and cleanup without repeated gates.
-- [`briefbound-multi-agent-orchestration`](skills/engineering/briefbound-multi-agent-orchestration/SKILL.md): low-noise peer negotiation across existing same-project threads; it creates no subagents and transfers no task ownership.
+- [`briefbound-multi-agent-orchestration`](skills/engineering/briefbound-multi-agent-orchestration/SKILL.md): low-noise peer negotiation across existing same-project threads; peers keep and finish their own tasks, so collaboration never transfers task ownership.
 - [`briefbound-thread-coordination`](skills/engineering/briefbound-thread-coordination/SKILL.md): shared progress, conflict, discussion, pause/resume, and fast-merge coordination for same-project agents.
 - [`briefbound-development-cleanup`](skills/engineering/briefbound-development-cleanup/SKILL.md): post-development residue and safe merged local branch, worktree, and claim cleanup.
 - [`briefbound-bug-review`](skills/engineering/briefbound-bug-review/SKILL.md): evidence-driven diagnosis, bounded repair, and verification.
@@ -129,11 +129,13 @@ Run `py -3 scripts\run_briefbound_routing_eval.py` after installation for a low-
 - [`briefbound-bug-review`](skills/engineering/briefbound-bug-review/SKILL.md)
 - [`briefbound-pr-review`](skills/engineering/briefbound-pr-review/SKILL.md)
 - [`briefbound-project-review`](skills/engineering/briefbound-project-review/SKILL.md)
+- [`briefbound-project-dissection`](skills/engineering/briefbound-project-dissection/SKILL.md)
 - [`briefbound-performance-engineering`](skills/engineering/briefbound-performance-engineering/SKILL.md)
 - [`briefbound-code-structure-guard`](skills/engineering/briefbound-code-structure-guard/SKILL.md)
 - [`briefbound-ui-design`](skills/engineering/briefbound-ui-design/SKILL.md)
 - [`briefbound-visual-design`](skills/engineering/briefbound-visual-design/SKILL.md)
 - [`briefbound-frontend-engineering`](skills/engineering/briefbound-frontend-engineering/SKILL.md)
+- [`briefbound-diagram-design`](skills/engineering/briefbound-diagram-design/SKILL.md)
 - [`briefbound-ui-review`](skills/engineering/briefbound-ui-review/SKILL.md)
 - [`briefbound-design-system`](skills/engineering/briefbound-design-system/SKILL.md)
 - [`briefbound-feature-reuse-research`](skills/engineering/briefbound-feature-reuse-research/SKILL.md)
