@@ -17,6 +17,7 @@ from memory_model import (
     load_json,
     project_memory_dir,
     require_memory_root,
+    resolve_and_lock_memory_dir,
     save_lane,
     slugify_lane,
     titleize_lane,
@@ -273,6 +274,8 @@ def main() -> int:
     args = parse_args()
     project_root = Path(args.project_root).resolve()
     memory_root = Path(args.memory_root).resolve() if args.memory_root else None
+    # Migration gate: fail closed on legacy writes when a completed migration marker exists.
+    resolve_and_lock_memory_dir(project_root, args.memory_root)
     sync_memory(project_root, args, memory_root)
     memory_dir = project_memory_dir(project_root, memory_root)
     print(f"Synced project memory at {memory_dir}")

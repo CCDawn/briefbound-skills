@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 import re
 from copy import deepcopy
 from datetime import datetime, timezone
@@ -8,6 +9,11 @@ from pathlib import Path
 
 
 LANE_SECTIONS = ("modules", "decisions", "issues", "todos", "techNotes", "recentUpdates")
+
+MIGRATION_MARKER_NAME = "project-memory-migration.json"
+_PROJECTS_HOME_ENV = "VIBELUTION_PROJECTS_HOME"
+
+_memory_root_override: Path | None = None
 
 
 def utc_now() -> str:
@@ -24,9 +30,76 @@ def write_json(path: Path, data: dict) -> None:
     path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
 
+def set_memory_root_override(memory_root: str | os.PathLike[str]) -> None:
+    global _memory_root_override
+    _memory_root_override = Path(os.path.expandvars(str(memory_root))).expanduser().resolve()
+
+
+def clear_memory_root_override() -> None:
+    global _memory_root_override
+    _memory_root_override = None
+
+
+def _projects_home() -> Path:
+    raw = str(os.environ.get(_PROJECTS_HOME_ENV) or "").strip()
+    if raw:
+        return Path(os.path.expandvars(raw)).expanduser().resolve()
+    local_app_data = str(os.environ.get("LOCALAPPDATA") or "").strip()
+    base = Path(local_app_data) if local_app_data else Path.home() / "AppData" / "Local"
+    return (base / "Vibelution" / "projects").resolve()
+
+
+def _same_path(left: Path, right: Path) -> bool:
+    return os.path.normcase(str(left.resolve())) == os.path.normcase(str(right.resolve()))
+
+
+def _completed_migration_target(legacy_dir: Path) -> Path | None:
+    home = _projects_home()
+    if not home.is_dir():
+        return None
+    for marker_path in home.glob(f"*/{MIGRATION_MARKER_NAME}"):
+        try:
+            marker = json.loads(marker_path.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            continue
+        if marker.get("status") != "completed":
+            continue
+        for source in marker.get("sources", []):
+            source_root = source.get("sourceRoot")
+            if not source_root:
+                continue
+            if _same_path(Path(source_root), legacy_dir):
+                target = str(marker.get("targetRoot") or "").strip()
+                return Path(target) if target else marker_path.parent / "memory"
+    return None
+
+
+def resolve_and_lock_memory_dir(project_root: Path, memory_root: str | None = None) -> Path:
+    """Resolve the writable memory dir for this process.
+
+    Fails closed when the legacy `.docs/project-memory` location has a completed
+    migration marker: the caller must pass the active memory root explicitly.
+    """
+    root = Path(project_root).expanduser().resolve()
+    legacy_dir = root / ".docs" / "project-memory"
+    if memory_root:
+        set_memory_root_override(memory_root)
+        return project_memory_dir(root)
+    migrated_target = _completed_migration_target(legacy_dir)
+    if migrated_target is not None:
+        raise RuntimeError(
+            f"Refusing to write legacy project memory at {legacy_dir}: a completed "
+            f"migration marker points at {migrated_target}. Re-run with "
+            f"--memory-root <active memory dir>."
+        )
+    return project_memory_dir(root)
+
+
 def resolve_memory_dir(project_root: Path, memory_root: Path | None = None) -> Path:
     if memory_root is not None:
         return memory_root
+    if _memory_root_override is not None:
+        return _memory_root_override
     return project_root / ".docs" / "project-memory"
 
 

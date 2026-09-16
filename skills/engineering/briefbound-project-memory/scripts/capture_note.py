@@ -5,7 +5,7 @@ import json
 from datetime import datetime, timezone
 from pathlib import Path
 
-from memory_model import require_memory_root
+from memory_model import project_memory_dir, require_memory_root, resolve_and_lock_memory_dir
 
 
 def utc_now() -> str:
@@ -51,7 +51,11 @@ def main() -> int:
     args = parse_args()
     project_root = Path(args.project_root).resolve()
     memory_root = require_memory_root(Path(args.memory_root)) if args.memory_root else None
-    inbox_path = memory_root / "inbox.json" if memory_root else project_root / ".docs" / "project-memory" / "inbox.json"
+    # Migration gate: fail closed on legacy writes when a completed migration marker exists.
+    resolve_and_lock_memory_dir(project_root, args.memory_root)
+    memory_dir = project_memory_dir(project_root, memory_root)
+    memory_dir.mkdir(parents=True, exist_ok=True)
+    inbox_path = memory_dir / "inbox.json"
     inbox = load_json(inbox_path)
     capture = {
         "timestamp": utc_now(),

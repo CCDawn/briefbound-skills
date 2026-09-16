@@ -1,4 +1,4 @@
 interface:
-  display_name: "Briefbound 精简审计"
-  short_description: "审计仓库中可删除、替换、合并或收缩的非必要结构与依赖复杂度"
-  default_prompt: "使用 $briefbound-simplification-audit 只读审计指定仓库或子系统，用中文给出按风险排序的证据化精简队列，不修改文件。"
+  display_name: "Briefbound 精简审查"
+  short_description: "按当前变更或整仓范围识别可删除、合并与替换的复杂度，并给出验证条件"
+  default_prompt: "使用 $briefbound-simplification-audit 审查指定 diff 或仓库的非必要复杂度，用中文给出有证据的删减建议与保留理由。"

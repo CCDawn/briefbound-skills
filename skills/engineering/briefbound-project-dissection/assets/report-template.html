@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{REPO_NAME}} · 项目拆解</title>
+<style>
+body{max-width:1080px;margin:40px auto;padding:0 24px;color:#202938;background:#fafafa;font:16px/1.75 "Microsoft YaHei","Noto Sans SC",sans-serif}
+h1,h2{line-height:1.35}section{margin:32px 0}figure{margin:20px 0;padding:16px;background:white;border:1px solid #dce0e7;border-radius:12px;overflow:auto}
+svg{display:block;max-width:100%;height:auto}pre{overflow:auto}code{overflow-wrap:anywhere}a{color:#2458a6}figcaption,.meta{color:#536176;font-size:14px}
+</style>
+</head>
+<body>
+<h1>{{REPO_NAME}} · 项目拆解</h1>
+<p class="meta">{{VERSION_AND_SCOPE}}</p>
+<section><h2>30 秒概览</h2>{{OVERVIEW}}</section>
+<section><h2>架构总览</h2><figure>{{ARCHITECTURE_SVG}}<figcaption>{{ARCHITECTURE_EVIDENCE}}</figcaption></figure></section>
+<section><h2>主链路走读</h2><figure>{{FLOW_SVG}}<figcaption>{{FLOW_EVIDENCE}}</figcaption></figure>{{SOURCE_WALKTHROUGH}}</section>
+<section><h2>模块与设计取舍</h2>{{MODULES_AND_TRADEOFFS}}</section>
+<section><h2>阅读路线</h2>{{READING_ROUTE}}</section>
+<section><h2>未确认与未覆盖</h2>{{UNCONFIRMED_AND_UNREAD}}</section>
+<section><h2>证据附录</h2>{{EVIDENCE}}</section>
+</body>
+</html>

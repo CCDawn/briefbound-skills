@@ -11,6 +11,7 @@ from memory_model import (
     load_json,
     project_memory_dir,
     require_memory_root,
+    resolve_and_lock_memory_dir,
     update_memory_lane_index,
     write_json,
     write_shortcut,
@@ -1290,10 +1291,11 @@ def main() -> int:
     args = parse_args()
     project_root = Path(args.project_root).resolve()
     memory_root = Path(args.memory_root).resolve() if args.memory_root else None
-    memory_dir = project_memory_dir(project_root, memory_root)
     if memory_root is not None:
         memory_root = require_memory_root(memory_root)
-        memory_dir = memory_root
+    # Migration gate: fail closed on legacy writes when a completed migration marker exists.
+    resolve_and_lock_memory_dir(project_root, args.memory_root)
+    memory_dir = project_memory_dir(project_root, memory_root)
     memory, _, _ = refresh_outputs(project_root, memory_root=memory_root)
     write_json(memory_dir / "memory.json", memory)
     print(f"Rendered {memory_dir / 'overview.html'}")

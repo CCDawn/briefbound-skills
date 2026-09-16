@@ -237,6 +237,97 @@ class AgentCoordinationTests(unittest.TestCase):
                 [item["id"] for item in registry["agents"]],
             )
 
+    def test_parallel_root_labels_get_distinct_thread_bound_identities(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            project = Path(temp) / "project"
+            codex_home = Path(temp) / "codex-home"
+            project.mkdir()
+
+            first = json.loads(
+                run_coordination(
+                    project,
+                    codex_home,
+                    "join",
+                    "--agent",
+                    "/root",
+                    "--thread-id",
+                    "thread-top-level-a",
+                    "--task",
+                    "First top-level task",
+                    "--json",
+                ).stdout
+            )
+            second = json.loads(
+                run_coordination(
+                    project,
+                    codex_home,
+                    "join",
+                    "--agent",
+                    "/root",
+                    "--thread-id",
+                    "thread-top-level-b",
+                    "--task",
+                    "Second top-level task",
+                    "--json",
+                ).stdout
+            )
+            registry = json.loads(
+                run_coordination(
+                    project,
+                    codex_home,
+                    "status",
+                    "--include-completed",
+                    "--json",
+                ).stdout
+            )
+
+            self.assertNotEqual(first["id"], second["id"])
+            self.assertTrue(second["id"].startswith("agent-thread-"))
+            self.assertEqual(
+                {
+                    "thread-top-level-a": first["id"],
+                    "thread-top-level-b": second["id"],
+                },
+                {item["threadId"]: item["id"] for item in registry["agents"]},
+            )
+
+    def test_explicit_agent_identity_cannot_be_rebound_to_another_thread(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            project = Path(temp) / "project"
+            codex_home = Path(temp) / "codex-home"
+            project.mkdir()
+
+            run_coordination(
+                project,
+                codex_home,
+                "join",
+                "--agent",
+                "/root",
+                "--agent-id",
+                "agent-root-legacy",
+                "--thread-id",
+                "thread-top-level-a",
+                "--task",
+                "First top-level task",
+            )
+            rebound = run_coordination(
+                project,
+                codex_home,
+                "join",
+                "--agent",
+                "/root",
+                "--agent-id",
+                "agent-root-legacy",
+                "--thread-id",
+                "thread-top-level-b",
+                "--task",
+                "Second top-level task",
+                check=False,
+            )
+
+            self.assertNotEqual(0, rebound.returncode)
+            self.assertIn("already bound to thread", rebound.stderr)
+
     def test_update_completed_closes_owned_claims(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
             project = Path(temp) / "project"
@@ -2075,6 +2166,41 @@ class AgentCoordinationTests(unittest.TestCase):
             )
             self.assertFalse((project / ".docs").exists())
             self.assertFalse((project / "PROJECT_MEMORY.html").exists())
+
+    def test_init_refuses_to_overwrite_initialized_memory_by_default(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            project = Path(temp) / "project"
+            project.mkdir()
+            first = run_script("init_project_memory.py", project, "--skip-agents-rules")
+            self.assertEqual(0, first.returncode, first.stderr)
+            memory_path = project / ".docs" / "project-memory" / "memory.json"
+            inbox_path = project / ".docs" / "project-memory" / "inbox.json"
+            captured = run_capture(project, "--title", "Keep me", "--details", "precious breadcrumb")
+            self.assertEqual(0, captured.returncode, captured.stderr)
+            memory_before = memory_path.read_bytes()
+
+            refused = run_script("init_project_memory.py", project, "--skip-agents-rules", check=False)
+            self.assertNotEqual(0, refused.returncode)
+            self.assertIn("already initialized", refused.stderr)
+            self.assertIn("--force", refused.stderr)
+            self.assertEqual(memory_before, memory_path.read_bytes())
+            inbox = json.loads(inbox_path.read_text(encoding="utf-8"))
+            self.assertEqual("Keep me", inbox["captures"][0]["title"])
+
+    def test_init_force_overwrites_memory_and_resets_inbox(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            project = Path(temp) / "project"
+            project.mkdir()
+            run_script("init_project_memory.py", project, "--skip-agents-rules")
+            run_capture(project, "--title", "Wipe me", "--details", "stale breadcrumb")
+
+            forced = run_script("init_project_memory.py", project, "--skip-agents-rules", "--force")
+            self.assertEqual(0, forced.returncode, forced.stderr)
+            memory_dir = project / ".docs" / "project-memory"
+            inbox = json.loads((memory_dir / "inbox.json").read_text(encoding="utf-8"))
+            self.assertEqual([], inbox["captures"])
+            memory = json.loads((memory_dir / "memory.json").read_text(encoding="utf-8"))
+            self.assertEqual("Initialized shared project memory", memory["recentUpdates"][0]["title"])
 
 
 if __name__ == "__main__":

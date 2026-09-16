@@ -3,7 +3,7 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
-from memory_model import ensure_directories, utc_now, write_json
+from memory_model import ensure_directories, project_memory_dir, resolve_and_lock_memory_dir, utc_now, write_json
 from profile_model import (
     DASHBOARD_PRESET_CHOICES,
     DENSITY_CHOICES,
@@ -54,6 +54,16 @@ def build_memory(project_name: str, project_type: str) -> dict:
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Initialize a project memory dashboard.")
     parser.add_argument("project_root", help="Path to the target project root.")
+    parser.add_argument(
+        "--memory-root",
+        default=None,
+        help="Active memory dir for storage-migrated repos; required when legacy .docs/project-memory has a completed migration marker.",
+    )
+    parser.add_argument(
+        "--force",
+        action="store_true",
+        help="Overwrite existing memory.json/profile.json and reset inbox.json captures at the target memory dir.",
+    )
     parser.add_argument(
         "--project-type",
         default="general",
@@ -115,6 +125,16 @@ def inject_agents_rules(project_root: Path) -> None:
 def main() -> int:
     args = parse_args()
     project_root = Path(args.project_root).resolve()
+    # Migration gate: fail closed on legacy writes when a completed migration marker exists.
+    resolve_and_lock_memory_dir(project_root, args.memory_root)
+    memory_dir = project_memory_dir(project_root)
+    memory_path = memory_dir / "memory.json"
+    if memory_path.exists() and not args.force:
+        raise SystemExit(
+            f"Project memory is already initialized at {memory_path}; refusing to overwrite "
+            "existing memory.json/profile.json or reset inbox.json captures. "
+            "Re-run with --force to overwrite."
+        )
     memory_dir, _ = ensure_directories(project_root)
 
     project_name = args.project_name or project_root.name

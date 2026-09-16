@@ -69,6 +69,11 @@ def canonical_agent_id(label: str) -> str:
     return normalized if normalized.startswith("agent-") else f"agent-{normalized}"
 
 
+def thread_bound_agent_id(thread_id: str) -> str:
+    digest = hashlib.sha256(thread_id.strip().encode("utf-8")).hexdigest()[:16]
+    return f"agent-thread-{digest}"
+
+
 def resolve_agent_id(
     registry: dict,
     requested_agent_id: str | None,
@@ -100,6 +105,22 @@ def resolve_agent_id(
                     }
                 ],
             )
+        if requested_agent_id:
+            occupied = next(
+                (item for item in registry.get("agents", []) if item.get("id") == requested_agent_id),
+                None,
+            )
+            occupied_thread_id = str(occupied.get("threadId") or "") if occupied else ""
+            if occupied_thread_id and occupied_thread_id != thread_id:
+                raise CoordinationConflict(
+                    f"Agent identity {requested_agent_id} is already bound to thread {occupied_thread_id}; "
+                    "use the exact thread-bound identity instead of reusing a logical agent label."
+                )
+            return requested_agent_id
+        candidate = canonical_agent_id(label)
+        occupied = next((item for item in registry.get("agents", []) if item.get("id") == candidate), None)
+        occupied_thread_id = str(occupied.get("threadId") or "") if occupied else ""
+        return thread_bound_agent_id(thread_id) if occupied_thread_id and occupied_thread_id != thread_id else candidate
     return requested_agent_id or canonical_agent_id(label)
 
 
@@ -392,6 +413,11 @@ def register_agent(
         raise ValueError(f"Unsupported agent state: {state}")
     now = utc_now()
     existing = next((item for item in registry.setdefault("agents", []) if item.get("id") == agent_id), None)
+    if existing is not None and thread_id and existing.get("threadId") and existing["threadId"] != thread_id:
+        raise CoordinationConflict(
+            f"Agent identity {agent_id} is already bound to thread {existing['threadId']}; "
+            "do not overwrite it with a different thread."
+        )
     if existing is not None and existing.get("state") == "paused" and state not in {None, "paused"}:
         raise CoordinationConflict("Paused agents must use resume so yielded scopes are rechecked.")
     effective_state = state or (existing.get("state") if existing else "active")
@@ -1055,6 +1081,54 @@ def cancel_resume_obligation(
         coordination["recoveryState"] = "closed"
         coordination["closedAt"] = now
     add_event(registry, "resume-obligation-cancelled", owner_agent_id, reason, coordination_id)
+    return coordination
+
+
+def expire_resume_obligation(
+    registry: dict,
+    coordination_id: str,
+    owner_agent_id: str,
+    target_agent_id: str,
+    evidence: str,
+) -> dict:
+    """Close a resolved resume debt only after its peer has become stale."""
+    if not evidence.strip():
+        raise CoordinationConflict("Expiring resume debt requires fresh transport evidence.")
+    coordination = find_coordination(registry, coordination_id)
+    if coordination.get("ownerAgentId") != owner_agent_id:
+        raise CoordinationConflict(f"Only the coordination owner can expire resume debt in {coordination_id}.")
+    if coordination.get("state") != "resolved":
+        raise CoordinationConflict(f"Resolve coordination before expiring resume debt: {coordination_id}")
+    if target_agent_id not in coordination.get("resumePendingAgentIds", []):
+        raise CoordinationConflict(f"Agent has no resume obligation in {coordination_id}: {target_agent_id}")
+
+    target = find_agent(registry, target_agent_id)
+    if target.get("state") != "stale":
+        raise CoordinationConflict("Resume debt can expire only after the target agent is stale.")
+    now = utc_now()
+    coordination["resumePendingAgentIds"] = [
+        item for item in coordination.get("resumePendingAgentIds", []) if item != target_agent_id
+    ]
+    coordination.setdefault("expiredResumeAgents", []).append(
+        {"agentId": target_agent_id, "evidence": evidence, "expiredAt": now}
+    )
+    coordination["updatedAt"] = now
+    target.update({"state": "stale", "coordinationId": "", "blocker": evidence, "updatedAt": now})
+    for claim in registry.get("claims", []):
+        if (
+            claim.get("agentId") == target_agent_id
+            and claim.get("status") == "yielded"
+            and claim.get("coordinationId") == coordination_id
+        ):
+            claim["status"] = "released"
+            claim["releaseReason"] = "transport expired"
+            claim["updatedAt"] = now
+    if coordination["resumePendingAgentIds"]:
+        coordination["recoveryState"] = "resume-pending"
+    else:
+        coordination["recoveryState"] = "closed"
+        coordination["closedAt"] = now
+    add_event(registry, "resume-obligation-expired", owner_agent_id, evidence, coordination_id)
     return coordination
 
 

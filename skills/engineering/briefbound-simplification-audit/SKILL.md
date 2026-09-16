@@ -1,63 +1,41 @@
 ---
 name: briefbound-simplification-audit
-description: Use when the user explicitly requests a repository/subsystem simplification audit, dependency-bloat review, or ranked removal plan, or when concrete evidence makes structural complexity the primary investigation; do not substitute it for ordinary project health review.
+description: Use when the user asks to simplify a diff, PR, repository or subsystem, remove unnecessary abstractions or dependencies, or rank deletion candidates; choose change-only or repository scope explicitly. Not a routine correctness review.
 license: MIT
 ---
 
-# Briefbound 精简审计
+# Briefbound 精简审查
 
-## 目标
-
-只读审计仓库或子系统中的可移除复杂度，形成按价值和风险排序的精简队列。它补充项目健康审查，不替代 `briefbound-project-review`。
+找出可移除的复杂度，以证据说明删什么、为什么、如何保持必要行为；不把“更少代码”当成唯一目标。
 
 ## Briefbound task contract
 
-- Context Boundary: 仓库/子系统范围、入口与依赖、已知架构约束、生成代码/第三方代码排除范围。
-- Output Contract: 证据化复杂度 findings、保留项、精简候选队列和后续 owner。
-- Allowed Action: 只读；不修改文件、不卸载依赖、不移动分支、不改 index。
-- Success Evidence: 每个候选都有路径/引用/依赖或调用证据，并说明收益、风险和验证要求。
-- Stop Condition: 审计范围不明、缺少源码/依赖证据、建议涉及行为或架构取舍、或问题主要属于正确性/安全/性能。
-- Route Out: `briefbound-project-review`、`briefbound-performance-engineering`、`briefbound-planning`、对应开发 owner、`briefbound-router` 或 BLOCKED。
+- Context Boundary: 明确 diff/base-head 或仓库/子系统，已接受行为、实际消费者与必要约束。
+- Output Contract: 按收益排序的删减建议、保留理由、最小替代与验证条件。
+- Allowed Action: 只读审查；用户已授权修复时，把建议交给具体开发 owner 实施，不因此再索要相同许可。
+- Success Evidence: 每项有具体位置、调用/依赖或 diff 证据，以及收益、风险和可验证行为。
+- Stop Condition: 范围不明、真实取舍未确认、缺调用证据，或主要问题属于正确性、安全、性能。
+- Route Out: 正确性转 briefbound-pr-review 或 briefbound-project-review；已授权变更转当前开发 owner；真实设计分歧转 briefbound-router；性能测量转 briefbound-performance-engineering。
 
 ## 统一调用契约
 
-- 只处理 Briefbound task contract 范围；不匹配时回 `briefbound-router` 或更具体 owner，复合任务不吞其他 owner。
-- 用户可见内容默认中文，完成只报状态、产出、证据和剩余风险；代码、命令、路径、错误原文、API/协议、skill 名和枚举保留原样；Route Out 仅以 Briefbound task contract 为准，末行写 `下一步建议: <一个具体动作>`。
+用户可见内容默认中文；Route Out 仅以 Briefbound task contract 为准。末行 `下一步建议: <一个具体动作>`，且限于决策类建议（推荐方向、优先级或需用户拍板的选项），不把可自行完成的执行步骤包装成建议交回。不为常规开发附加精简阶段。
 
-## 审计规则
+## 范围
 
-1. 先定位入口、依赖清单和高变更/高耦合区域，不为“全面”盲扫全仓。
-2. 重点检查：重复依赖、标准库/平台已有能力、单实现接口、单产品工厂、只转发的 wrapper、废弃 flag/config、并存的 legacy 路径、重复事实源和跨文件样板。
-3. 排除生成代码、vendored/third-party 代码、迁移期间明确保留的兼容层，以及安全、无障碍、数据恢复和真实平台适配约束。
-4. 每项区分“确认可删”“需 probe”“架构取舍”；证据不足不能写成确定结论。
-5. 正确性、测试、安全和总体健康交 `briefbound-project-review`；需实测的性能问题交 `briefbound-performance-engineering`；实施方案交 `briefbound-planning`。
+- 当前变更：先定位 base/head、已接受需求和 diff，只追踪证明消费者/影响所必需的上下文；不将历史技术债混为当前 PR 问题。
+- 整仓/子系统：从入口、依赖和用户怀疑的重复区域取证，检查实际消费者；证据足够后停止，不为全面而扫描无关模块。
 
-优先级：`P1 高收益`、`P2 中收益`、`P3 低收益`、`需证据`。
+只有用户目标需要才同时做两种范围，并分别标注来源。
 
-## 输出
+## 检查与取舍
 
-```text
-精简审计:
-- 结论: LEAN / OPPORTUNITIES_FOUND / NEEDS_EVIDENCE / BLOCKED
-- 范围与排除项: ...
+优先找重复逻辑、无调用代码、单调用转发、无真实扩展需求的抽象、并存的旧配置/事实源，以及标准库或现有成熟实现能替代的自建代码。删除前查调用、测试、配置与外部契约；不能仅凭名称、行数或未见调用就认定无用。
 
-Findings:
-- P1/P2/P3/需证据: [位置] 复杂度来源；证据；最小替代；收益；风险。
+保留有证据的安全、无障碍、数据恢复、迁移和平台约束；不要为了删减吞掉错误或破坏已接受行为。生成/第三方代码不做机械重构；依赖去留仍可按实际使用证据评估。用户要求清理旧接口时清理其消费者，不新增兼容壳。
 
-保留项:
-- 必须存在的复杂度及原因。
+每项给出位置、具体重复/闲置证据、最小替代、收益、风险和验证条件；证据不足标待确认。没有可删项就说明保留理由，不凑 findings。按用户价值、依赖顺序和验证成本排序；只有实测才报净减行数、依赖数或性能收益。
 
-精简队列:
-- 1. ... [SAFE_DIRECT / PLAN_THEN_EXECUTE / DEFERRED / BLOCKED]；验证条件...
+已授权的低风险项交当前 owner 连续实施并独立验证；真正改变需求或外部契约的项先对齐。
 
-组合路由:
-- 项目健康/正确性/安全 -> briefbound-project-review
-- 性能测量 -> briefbound-performance-engineering
-- 多项结构调整 -> briefbound-planning
-
-下一步建议: <一个具体动作>
-```
-
-只在可复现计数后报告精确净减行数或依赖数，不拿外部 benchmark 冒充当前仓库收益。
-
-本 skill 的复杂度视角借鉴 [Ponytail](https://github.com/DietrichGebert/ponytail)（MIT），并按 Briefbound 的中文输出、证据和 owner 契约重新组织。
+复杂度检查视角借鉴 [Ponytail](https://github.com/DietrichGebert/ponytail)（MIT）。

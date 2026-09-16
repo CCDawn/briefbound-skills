@@ -1,4 +1,4 @@
 interface:
   display_name: "Briefbound 会话协调"
-  short_description: "同步同项目会话，仲裁文件、进程、数据目录冲突并协调本地合并"
-  default_prompt: "使用 $briefbound-thread-coordination 用中文同步当前项目各 Codex 会话的 owner、进度和 blocker；按需仲裁文件、runtime 进程及 data root 归属，组织讨论、暂停/恢复冲突任务，并用最新 Git 与测试证据协调合并。"
+  short_description: "用受控 relay 协调同项目会话的所有权、冲突、依赖与本地合并"
+  default_prompt: "使用 $briefbound-thread-coordination 核验同项目 Codex 会话；仅在 BRT_TRUSTED_RELAY_V1 身份、agreement 和权限门禁通过后发送高价值消息，并以 Git 与测试证据协调冲突和本地合并。"

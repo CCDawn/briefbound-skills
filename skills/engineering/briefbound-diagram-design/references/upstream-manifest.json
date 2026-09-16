@@ -1,0 +1,1399 @@
+{
+  "repository": "https://github.com/cathrynlavery/diagram-design",
+  "commit": "ce9344c52cb9be811de187bf2a6d58c712c9c9fe",
+  "version": "2.6.23",
+  "files": [
+    {
+      "source": "skills/diagram-design/references/animation.md",
+      "destination": "references/animation.md",
+      "source_sha256": "24ce83341aee976680cb69d43b2afab40efcfa97edcd394e5b17183eb58fc94a",
+      "sha256": "42facb2fb344b06f9af7219dabf6bca169c8a2e80c738b5ebf50284e686d91fd"
+    },
+    {
+      "source": "skills/diagram-design/references/import-drawio.md",
+      "destination": "references/import-drawio.md",
+      "source_sha256": "2615ba8efb300ecc498df72223a91c6c712411efb38892fc779b583ad8b7b4ce",
+      "sha256": "7a81cf5043c54937ac651a964f7e3cf07f9cdc1bff141e380f8506e65524d2f6"
+    },
+    {
+      "source": "skills/diagram-design/references/import-excalidraw.md",
+      "destination": "references/import-excalidraw.md",
+      "source_sha256": "02168ea7793a0fab546e84c410f2c946336f1088fa3c9c301504aec81d34dad4",
+      "sha256": "0f7f4ba8e3b45e0758458796ce6530b8fabdf957a989287a13efffb6388d09dd"
+    },
+    {
+      "source": "skills/diagram-design/references/import-mermaid.md",
+      "destination": "references/import-mermaid.md",
+      "source_sha256": "86d4229aeffb125d4db08bf2cc12bf031dbc73fdc6584fa880a20effb4cad262",
+      "sha256": "655c34e4e1f08e77da424eda811e723ff183104596aaf82adab31595605a9d68"
+    },
+    {
+      "source": "skills/diagram-design/references/output-spec.md",
+      "destination": "references/output-spec.md",
+      "source_sha256": "303cb7d2db0b6b29f663d5d952a84d51c51ea589324c0b2e0e6b9aad76ffb5f2",
+      "sha256": "03a21a030d12d9ca81ab57e6d94a92871b51bc938873b6a9a85bc72740d2130c"
+    },
+    {
+      "source": "skills/diagram-design/references/primitive-annotation.md",
+      "destination": "references/primitive-annotation.md",
+      "source_sha256": "f78cac0af423ead9b74926fa669e9227efc21f15d0f51ea46bc93e79c55a121a",
+      "sha256": "f78cac0af423ead9b74926fa669e9227efc21f15d0f51ea46bc93e79c55a121a"
+    },
+    {
+      "source": "skills/diagram-design/references/primitive-icons.md",
+      "destination": "references/primitive-icons.md",
+      "source_sha256": "bb4a97f27c1bff90107ce54429c89196eba971af982998a9bf4214a0c7570f06",
+      "sha256": "e918844089183556f6c59d1d515137d790f326a6a78d014f968b7c01e9b2dc26"
+    },
+    {
+      "source": "skills/diagram-design/references/primitive-sketchy.md",
+      "destination": "references/primitive-sketchy.md",
+      "source_sha256": "8859f0d70c10f46f59817cb348346e7fb9e1609b70a4a513d297b8c850c866a4",
+      "sha256": "8859f0d70c10f46f59817cb348346e7fb9e1609b70a4a513d297b8c850c866a4"
+    },
+    {
+      "source": "skills/diagram-design/references/primitive-terminal.md",
+      "destination": "references/primitive-terminal.md",
+      "source_sha256": "7b52c2fb229c822a60b0061caa64ae6a68aacd4f1c22a1a98d1d0eaaa2333b55",
+      "sha256": "1713c39414955d2288dff0b60a3296a41569c9dedc1ff9717edcd13e5eff4366"
+    },
+    {
+      "source": "skills/diagram-design/references/semantic-patterns.md",
+      "destination": "references/semantic-patterns.md",
+      "source_sha256": "1c64afedfe245b73b842876f7dadaa9c64d9f196a9ffd4f3d48a120d8911fa69",
+      "sha256": "1f75dab245208fee419e0de89e92b8e77e2b8a6ac40ca0e2b51dd849bce59982"
+    },
+    {
+      "source": "skills/diagram-design/references/style-guide.md",
+      "destination": "references/style-guide.md",
+      "source_sha256": "7bc931f3b80e2704f4554f522bb03886b70a4a6389735ede9aff3087420f6238",
+      "sha256": "ee40064fb6e240d483bce5e88d5212c53e5445155784e1ffb65c8c1c48bd1e31"
+    },
+    {
+      "source": "skills/diagram-design/references/type-architecture.md",
+      "destination": "references/type-architecture.md",
+      "source_sha256": "cb5672b5c69cbe24a0b18d144f8b2e4507a124ebb0dbc0bc898ceafb27612caa",
+      "sha256": "cb5672b5c69cbe24a0b18d144f8b2e4507a124ebb0dbc0bc898ceafb27612caa"
+    },
+    {
+      "source": "skills/diagram-design/references/type-bar.md",
+      "destination": "references/type-bar.md",
+      "source_sha256": "a6ab12ffe6fed07652f47924deefa14e9010f161db26daa90d918db16e353d9d",
+      "sha256": "23d7b1e1e99d1af9b2ac060cab3a2cbfb818190a1fea00c643db0e0f73d31454"
+    },
+    {
+      "source": "skills/diagram-design/references/type-data-flow.md",
+      "destination": "references/type-data-flow.md",
+      "source_sha256": "ad1cd8358c9360663200f5100a199e57e43a4e6702982752220ad423127941e8",
+      "sha256": "0d44a1a57d8e8e74ae5754e821f8d47d8c3c184b03d5b85c5569391107f0e1b2"
+    },
+    {
+      "source": "skills/diagram-design/references/type-db-schema.md",
+      "destination": "references/type-db-schema.md",
+      "source_sha256": "433f2ede171453ccbc1e6e8d0be4846fa5fb88bb499e8ba7e6db02d066a06c46",
+      "sha256": "433f2ede171453ccbc1e6e8d0be4846fa5fb88bb499e8ba7e6db02d066a06c46"
+    },
+    {
+      "source": "skills/diagram-design/references/type-dependency.md",
+      "destination": "references/type-dependency.md",
+      "source_sha256": "b6262d5337b3184aeb83f503627a665a9108b62a42e5ef2d6549c4167220fa6c",
+      "sha256": "b6262d5337b3184aeb83f503627a665a9108b62a42e5ef2d6549c4167220fa6c"
+    },
+    {
+      "source": "skills/diagram-design/references/type-deployment.md",
+      "destination": "references/type-deployment.md",
+      "source_sha256": "d3d33ff53bb8bdb7b15bcc3b23d1009ee68b40638588dd054d0ab993fb480fd5",
+      "sha256": "d3d33ff53bb8bdb7b15bcc3b23d1009ee68b40638588dd054d0ab993fb480fd5"
+    },
+    {
+      "source": "skills/diagram-design/references/type-dp-integration.md",
+      "destination": "references/type-dp-integration.md",
+      "source_sha256": "0b85e3b883e97e1a86e50d2e50eb73bc3fb4b70e2e3132e93356956ccc68a64f",
+      "sha256": "f33a182403474e036aaaac4ef9361855fe448b92e93ef3ab62bd215dce7c0f1a"
+    },
+    {
+      "source": "skills/diagram-design/references/type-dp-security-matrix.md",
+      "destination": "references/type-dp-security-matrix.md",
+      "source_sha256": "209f4870ec19d90eff1ab80ecfe0062f3a5075c3b666b1a3a900a27260ba8832",
+      "sha256": "4949b7609d3cb939aa8663ad311202d4179d8af5ef6711749f9f9f574e820b3b"
+    },
+    {
+      "source": "skills/diagram-design/references/type-er.md",
+      "destination": "references/type-er.md",
+      "source_sha256": "0f4a718b202edec593e4555e0353a4080d4be6d98328209db083898f2f01302c",
+      "sha256": "0f4a718b202edec593e4555e0353a4080d4be6d98328209db083898f2f01302c"
+    },
+    {
+      "source": "skills/diagram-design/references/type-fishbone.md",
+      "destination": "references/type-fishbone.md",
+      "source_sha256": "d2f1c043fd40f5a20305bcc8b835b852b77a26b77516c3bbd813abf70dfa4f20",
+      "sha256": "d2f1c043fd40f5a20305bcc8b835b852b77a26b77516c3bbd813abf70dfa4f20"
+    },
+    {
+      "source": "skills/diagram-design/references/type-flowchart.md",
+      "destination": "references/type-flowchart.md",
+      "source_sha256": "c2af5e2b849255ae4859125db7b101b74bfb9b201204725c1e83fac51a98ebab",
+      "sha256": "c2af5e2b849255ae4859125db7b101b74bfb9b201204725c1e83fac51a98ebab"
+    },
+    {
+      "source": "skills/diagram-design/references/type-gantt.md",
+      "destination": "references/type-gantt.md",
+      "source_sha256": "83a84cdd4b2880debd9e602f1d27ffc54197a6c783eb46228711641956f858ee",
+      "sha256": "83a84cdd4b2880debd9e602f1d27ffc54197a6c783eb46228711641956f858ee"
+    },
+    {
+      "source": "skills/diagram-design/references/type-high-level.md",
+      "destination": "references/type-high-level.md",
+      "source_sha256": "86e9e681189b013752edc512a8efb651e67aba52e9ddfbfe46d1fc117f1d5248",
+      "sha256": "9e19ebdca90f014ba28df2057773884a2948fe3ca08e6f8066ee35d05dc51fdd"
+    },
+    {
+      "source": "skills/diagram-design/references/type-it-state.md",
+      "destination": "references/type-it-state.md",
+      "source_sha256": "744e18db2ddf29e501af903ef79deafb1500f546611137d27cd14fe8ccbb77db",
+      "sha256": "7063d9182833f0514381fc2212f241c9c11596303d3a51636aa7e4775cae4168"
+    },
+    {
+      "source": "skills/diagram-design/references/type-journey.md",
+      "destination": "references/type-journey.md",
+      "source_sha256": "135501cef58abd6c716746248a5bfd163e56b68d9f314516bb8f60d26a895256",
+      "sha256": "135501cef58abd6c716746248a5bfd163e56b68d9f314516bb8f60d26a895256"
+    },
+    {
+      "source": "skills/diagram-design/references/type-kanban.md",
+      "destination": "references/type-kanban.md",
+      "source_sha256": "e64138a2629db2bf1de6aa4f4979088777a08c1426ef122c57f200aae20fc7eb",
+      "sha256": "e64138a2629db2bf1de6aa4f4979088777a08c1426ef122c57f200aae20fc7eb"
+    },
+    {
+      "source": "skills/diagram-design/references/type-layers.md",
+      "destination": "references/type-layers.md",
+      "source_sha256": "393a65464f1189a2244c989a7448a8be5446d5932c907bbdba57d10997729534",
+      "sha256": "393a65464f1189a2244c989a7448a8be5446d5932c907bbdba57d10997729534"
+    },
+    {
+      "source": "skills/diagram-design/references/type-line.md",
+      "destination": "references/type-line.md",
+      "source_sha256": "85a09e3fdd3be20d07181e115434f32462fd738a9a1fa091d880e76c406643df",
+      "sha256": "60e8a21502e9b871b528f13f8250e5c9aee03a6c955eed5eaf21b5fbc076a140"
+    },
+    {
+      "source": "skills/diagram-design/references/type-loop.md",
+      "destination": "references/type-loop.md",
+      "source_sha256": "c7e98b8eda1e6d6904920f4d96310745deb0651920e9d531c8f40e54304ab60d",
+      "sha256": "9801fdbf44786a48db6b71910e42f0c9db7805170dce6dd32188dbcc147f4131"
+    },
+    {
+      "source": "skills/diagram-design/references/type-medallion.md",
+      "destination": "references/type-medallion.md",
+      "source_sha256": "a1af03521adb53431766a559e05c984ee07871fd3cf495cf63146999f56f6f42",
+      "sha256": "69a0703467973e785303faaa1107ba8f1a36d959b1c7a9ae18b9f00d11265a21"
+    },
+    {
+      "source": "skills/diagram-design/references/type-nested.md",
+      "destination": "references/type-nested.md",
+      "source_sha256": "e8c61323d96cd085e52750e90a989f9ad321600da6814b8926502b4484aced31",
+      "sha256": "e8c61323d96cd085e52750e90a989f9ad321600da6814b8926502b4484aced31"
+    },
+    {
+      "source": "skills/diagram-design/references/type-org-chart.md",
+      "destination": "references/type-org-chart.md",
+      "source_sha256": "9905c67d6cf884f4537b9f86f893e6a90b4dc4134ff8bf8ce6187d151efbd6ab",
+      "sha256": "9905c67d6cf884f4537b9f86f893e6a90b4dc4134ff8bf8ce6187d151efbd6ab"
+    },
+    {
+      "source": "skills/diagram-design/references/type-polar.md",
+      "destination": "references/type-polar.md",
+      "source_sha256": "51fd08897a65f4ae2fe0c28b5e3afdd4867633fb960e3107551e49f4f9d1e97c",
+      "sha256": "bc494bb10cd3dbb55b6b64c835d9315856de480ebb377a542e310fb895ae84b3"
+    },
+    {
+      "source": "skills/diagram-design/references/type-process.md",
+      "destination": "references/type-process.md",
+      "source_sha256": "8b149deb5393d5b6eaefdd525ef65143caf763283f3b668ce301bd3b0b808815",
+      "sha256": "7e659dceb54ddd7fef0ae1cf2e52dad2ee241dd625b872bfe27e604386de0a69"
+    },
+    {
+      "source": "skills/diagram-design/references/type-pyramid.md",
+      "destination": "references/type-pyramid.md",
+      "source_sha256": "a07536682478832fbf552aaa066dc827eaa1a072c538766387c8b900ae7add38",
+      "sha256": "a07536682478832fbf552aaa066dc827eaa1a072c538766387c8b900ae7add38"
+    },
+    {
+      "source": "skills/diagram-design/references/type-quadrant.md",
+      "destination": "references/type-quadrant.md",
+      "source_sha256": "2346caba0370beaf8b33efd5d9a3e24f3d555b7160a3d523d9d07a37ce6c353a",
+      "sha256": "2346caba0370beaf8b33efd5d9a3e24f3d555b7160a3d523d9d07a37ce6c353a"
+    },
+    {
+      "source": "skills/diagram-design/references/type-radar.md",
+      "destination": "references/type-radar.md",
+      "source_sha256": "8379b0313afbfdbb5a641c98f8ac6668419b4add6cea0749a646365fad02c1d3",
+      "sha256": "8379b0313afbfdbb5a641c98f8ac6668419b4add6cea0749a646365fad02c1d3"
+    },
+    {
+      "source": "skills/diagram-design/references/type-sankey.md",
+      "destination": "references/type-sankey.md",
+      "source_sha256": "bcc39b963fa4f340c7654204fa0c6c0a248a0b42b1669ebeb2375381d8013a2c",
+      "sha256": "bcc39b963fa4f340c7654204fa0c6c0a248a0b42b1669ebeb2375381d8013a2c"
+    },
+    {
+      "source": "skills/diagram-design/references/type-scatter.md",
+      "destination": "references/type-scatter.md",
+      "source_sha256": "b89fc3d4777c5a09a82d889aaf1592ebf6fa7bc71877458c6b39c32778e690e6",
+      "sha256": "a448017c457fc797f52ca2e241b939fe88dc79d08cfab2f5b2dc73c7edc1624f"
+    },
+    {
+      "source": "skills/diagram-design/references/type-sequence.md",
+      "destination": "references/type-sequence.md",
+      "source_sha256": "21c3ef9a491068e871aae99f035883d3c982255df97db1effaf0c3301f562865",
+      "sha256": "94abb3519511fbd1e12ada2ad94d15f6b400a42c87b8e3cf8d1b930e9a253772"
+    },
+    {
+      "source": "skills/diagram-design/references/type-state.md",
+      "destination": "references/type-state.md",
+      "source_sha256": "7fed5690161e6f75d510cf89d1e989885b2d900fdadca5116e7f5b49ad8529a5",
+      "sha256": "7fed5690161e6f75d510cf89d1e989885b2d900fdadca5116e7f5b49ad8529a5"
+    },
+    {
+      "source": "skills/diagram-design/references/type-story-map.md",
+      "destination": "references/type-story-map.md",
+      "source_sha256": "ee49c426397c3e5234fb544ea1394f7c8879610fea897da3b636891e3affb4c4",
+      "sha256": "ee49c426397c3e5234fb544ea1394f7c8879610fea897da3b636891e3affb4c4"
+    },
+    {
+      "source": "skills/diagram-design/references/type-swimlane.md",
+      "destination": "references/type-swimlane.md",
+      "source_sha256": "4b689b9dd72078dc76fd2fbb1eb6c0bf0304fee667ae7cd56fab5f19b535f250",
+      "sha256": "4b689b9dd72078dc76fd2fbb1eb6c0bf0304fee667ae7cd56fab5f19b535f250"
+    },
+    {
+      "source": "skills/diagram-design/references/type-timeline.md",
+      "destination": "references/type-timeline.md",
+      "source_sha256": "9102e61347b17b303eafad52d4f8941d507faf889d9316ed0325e5e0f0ba01ca",
+      "sha256": "9102e61347b17b303eafad52d4f8941d507faf889d9316ed0325e5e0f0ba01ca"
+    },
+    {
+      "source": "skills/diagram-design/references/type-tree.md",
+      "destination": "references/type-tree.md",
+      "source_sha256": "e45c0bb3c4667f57eb8592b01325c7860859d2a9569a0441f62ead0bd7d70a0d",
+      "sha256": "e45c0bb3c4667f57eb8592b01325c7860859d2a9569a0441f62ead0bd7d70a0d"
+    },
+    {
+      "source": "skills/diagram-design/references/type-treemap.md",
+      "destination": "references/type-treemap.md",
+      "source_sha256": "bec1ad60a0a9e0889c03a40e7e2e32082a2deb16be65b8bf251cbaf1e10401ba",
+      "sha256": "bec1ad60a0a9e0889c03a40e7e2e32082a2deb16be65b8bf251cbaf1e10401ba"
+    },
+    {
+      "source": "skills/diagram-design/references/type-uml-class.md",
+      "destination": "references/type-uml-class.md",
+      "source_sha256": "8cc0bc8f77a38da58110287c1b112043be9751389ef45772fe607eae9aa77ecd",
+      "sha256": "8cc0bc8f77a38da58110287c1b112043be9751389ef45772fe607eae9aa77ecd"
+    },
+    {
+      "source": "skills/diagram-design/references/type-venn.md",
+      "destination": "references/type-venn.md",
+      "source_sha256": "f8d5d4f0506160e0502f932140306b12d25adea1d1f6f319fb38c2345b0c6b42",
+      "sha256": "f8d5d4f0506160e0502f932140306b12d25adea1d1f6f319fb38c2345b0c6b42"
+    },
+    {
+      "source": "skills/diagram-design/references/type-wardley.md",
+      "destination": "references/type-wardley.md",
+      "source_sha256": "aa93eb728a022b85f38de69c1d287752f91c487b05c50396ee21e769162900a9",
+      "sha256": "aa93eb728a022b85f38de69c1d287752f91c487b05c50396ee21e769162900a9"
+    },
+    {
+      "source": "skills/diagram-design/references/type-waterfall.md",
+      "destination": "references/type-waterfall.md",
+      "source_sha256": "1079c0915c7e651d8556369aebed180154afb05799192c7eebaf442f7c16f8e1",
+      "sha256": "1079c0915c7e651d8556369aebed180154afb05799192c7eebaf442f7c16f8e1"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-architecture-dark.html",
+      "destination": "assets/example-architecture-dark.html",
+      "source_sha256": "3767f518519dc7b6fc98066cc76c70937446ea9e71e380cf7c6064dc6ed6f5ba",
+      "sha256": "3767f518519dc7b6fc98066cc76c70937446ea9e71e380cf7c6064dc6ed6f5ba"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-architecture-full.html",
+      "destination": "assets/example-architecture-full.html",
+      "source_sha256": "84425acb29b181a165e8c07fad268304f77223a92797a7f58679f51c3dd47502",
+      "sha256": "84425acb29b181a165e8c07fad268304f77223a92797a7f58679f51c3dd47502"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-architecture.html",
+      "destination": "assets/example-architecture.html",
+      "source_sha256": "03716fdb0a4ad641c30a5267b14a4c573d699f0f31ab3d8a0ba4e2b74ad56177",
+      "sha256": "03716fdb0a4ad641c30a5267b14a4c573d699f0f31ab3d8a0ba4e2b74ad56177"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-bar-dark.html",
+      "destination": "assets/example-bar-dark.html",
+      "source_sha256": "fb96534eff0910a006dabca940d71aeb1019076abfbe9a020758747c2e2cbb0a",
+      "sha256": "17175ed34c9588f3d5902ed97f5718a47d8c17fbad4326056f47d2131d060304"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-bar-full.html",
+      "destination": "assets/example-bar-full.html",
+      "source_sha256": "0095ec6576fff513fee6a731d6eba7fbd9e4726a3e8f6ac183407c0b69a36f58",
+      "sha256": "0095ec6576fff513fee6a731d6eba7fbd9e4726a3e8f6ac183407c0b69a36f58"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-bar.html",
+      "destination": "assets/example-bar.html",
+      "source_sha256": "1bbd708cdca419c137160056ed9862532a3402ba65d9335bae1be0aef90c7abb",
+      "sha256": "1bbd708cdca419c137160056ed9862532a3402ba65d9335bae1be0aef90c7abb"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-beeswarm-dark.html",
+      "destination": "assets/example-beeswarm-dark.html",
+      "source_sha256": "597cf05ad582eb0dbe8040949c6f164096ce84631e6d3ba85d5fbf778d2b1dc7",
+      "sha256": "597cf05ad582eb0dbe8040949c6f164096ce84631e6d3ba85d5fbf778d2b1dc7"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-beeswarm-full.html",
+      "destination": "assets/example-beeswarm-full.html",
+      "source_sha256": "b9c6db9d3cbae523d16ac476d37e7996d034d00835218ce8888c373396f2e702",
+      "sha256": "b9c6db9d3cbae523d16ac476d37e7996d034d00835218ce8888c373396f2e702"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-beeswarm.html",
+      "destination": "assets/example-beeswarm.html",
+      "source_sha256": "ddd5c2adc0a9aaf46673b4e3e3207619808d00b719090fe14353d5bf816ccd31",
+      "sha256": "ddd5c2adc0a9aaf46673b4e3e3207619808d00b719090fe14353d5bf816ccd31"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-bubble-dark.html",
+      "destination": "assets/example-bubble-dark.html",
+      "source_sha256": "e5297625f2a81cebcd63250dcd7455f5c84160da501354f530dfcf59baf0ab9e",
+      "sha256": "e5297625f2a81cebcd63250dcd7455f5c84160da501354f530dfcf59baf0ab9e"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-bubble-full.html",
+      "destination": "assets/example-bubble-full.html",
+      "source_sha256": "21c83751d106234c8ec450c97d0681a9d680f8e1bea3ab06473696dbd262c42b",
+      "sha256": "21c83751d106234c8ec450c97d0681a9d680f8e1bea3ab06473696dbd262c42b"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-bubble.html",
+      "destination": "assets/example-bubble.html",
+      "source_sha256": "a507ae84a0a6d03c329e8a26cf5e9de9c77aa21c74d9ce25379af2019f7cd18a",
+      "sha256": "a507ae84a0a6d03c329e8a26cf5e9de9c77aa21c74d9ce25379af2019f7cd18a"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-bump-dark.html",
+      "destination": "assets/example-bump-dark.html",
+      "source_sha256": "c6982966a1c775a0d3b176a21f1a86193453ca9550a7c8c00db6ca4f38d4e757",
+      "sha256": "c6982966a1c775a0d3b176a21f1a86193453ca9550a7c8c00db6ca4f38d4e757"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-bump-full.html",
+      "destination": "assets/example-bump-full.html",
+      "source_sha256": "80976313d11eb5c20148143ce2df4ec3fe2340c917965244d8ee959293e35d79",
+      "sha256": "80976313d11eb5c20148143ce2df4ec3fe2340c917965244d8ee959293e35d79"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-bump.html",
+      "destination": "assets/example-bump.html",
+      "source_sha256": "5c3b46f8d1d0db041cf524ea87a1147f37d1ff2f69ca3b9a4963ae4a8f514756",
+      "sha256": "5c3b46f8d1d0db041cf524ea87a1147f37d1ff2f69ca3b9a4963ae4a8f514756"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-data-flow-dark.html",
+      "destination": "assets/example-data-flow-dark.html",
+      "source_sha256": "68144451031cc5c6d56dbb15b6532f24efc2bac4e3dfc9c5e9b8177d539777d8",
+      "sha256": "68144451031cc5c6d56dbb15b6532f24efc2bac4e3dfc9c5e9b8177d539777d8"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-data-flow-full.html",
+      "destination": "assets/example-data-flow-full.html",
+      "source_sha256": "bf4db055606bd5f15e64e0da67c8f2023b8cbea6a27a4bca2be24dbe12f6245a",
+      "sha256": "bf4db055606bd5f15e64e0da67c8f2023b8cbea6a27a4bca2be24dbe12f6245a"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-data-flow.html",
+      "destination": "assets/example-data-flow.html",
+      "source_sha256": "511788f809b9d674e2f92568955e5fc0c5f5f7a3960eaa0049e136ec93957add",
+      "sha256": "511788f809b9d674e2f92568955e5fc0c5f5f7a3960eaa0049e136ec93957add"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-datalake-dark.html",
+      "destination": "assets/example-datalake-dark.html",
+      "source_sha256": "98ed93bddc4d2112c3bd886aa2aa469c4f592a034eb39d2d3056033dc75d810d",
+      "sha256": "8aec26f6369720015fb6c9666ecc5798b2b72cdc4bd294d362942acd53d89d70"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-datalake-full.html",
+      "destination": "assets/example-datalake-full.html",
+      "source_sha256": "c84e13615eeb5d1cee261e485831a180752ef905f9a6252be3cf3b85415073cf",
+      "sha256": "4bbfc528f7484e078c860060bc2c25f3ea39e9b09f64fb88c2ad36364852c12f"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-datalake.html",
+      "destination": "assets/example-datalake.html",
+      "source_sha256": "a6d9fbf97952ef55f41c531ef1d32d4ba46a6bdb1fc1664997e0b8f51926c9f9",
+      "sha256": "2a974e2991b6a516f73128f307106e21842f3e0db7cfcc08765a365da53688dd"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-db-schema-dark.html",
+      "destination": "assets/example-db-schema-dark.html",
+      "source_sha256": "40d12080e78a1ce39f5d6858f9e02562b8f4ec0bffe303ab8d4fc473db561024",
+      "sha256": "40d12080e78a1ce39f5d6858f9e02562b8f4ec0bffe303ab8d4fc473db561024"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-db-schema-full.html",
+      "destination": "assets/example-db-schema-full.html",
+      "source_sha256": "a69144b54b23e7e6046234ed31fcc26625147af8a9e0dfeff05f4553c3eba8f6",
+      "sha256": "a69144b54b23e7e6046234ed31fcc26625147af8a9e0dfeff05f4553c3eba8f6"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-db-schema.html",
+      "destination": "assets/example-db-schema.html",
+      "source_sha256": "58d473906c57670fecee29bc55377df5b433549445962204412ebd2c081b76db",
+      "sha256": "58d473906c57670fecee29bc55377df5b433549445962204412ebd2c081b76db"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-dependency-dark.html",
+      "destination": "assets/example-dependency-dark.html",
+      "source_sha256": "7eb7c3d1e90d9dbb49a97f9490184ff1768930847fe86a112f0262513691c035",
+      "sha256": "7eb7c3d1e90d9dbb49a97f9490184ff1768930847fe86a112f0262513691c035"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-dependency-full.html",
+      "destination": "assets/example-dependency-full.html",
+      "source_sha256": "5844a5bfa0eb30e5c7c8d5d23d4a3230ed5fe051e6ca84daf34a5ecb7185ef5b",
+      "sha256": "5844a5bfa0eb30e5c7c8d5d23d4a3230ed5fe051e6ca84daf34a5ecb7185ef5b"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-dependency.html",
+      "destination": "assets/example-dependency.html",
+      "source_sha256": "973f7b5f5ac1746bb018e9ea8de9f6853b5f14ff41173e64abcf9855ea5f353b",
+      "sha256": "973f7b5f5ac1746bb018e9ea8de9f6853b5f14ff41173e64abcf9855ea5f353b"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-deployment-dark.html",
+      "destination": "assets/example-deployment-dark.html",
+      "source_sha256": "7688eec54dde8950375d2bb724438bce6dce18714ed2f99a0a60ffaacb17190a",
+      "sha256": "7688eec54dde8950375d2bb724438bce6dce18714ed2f99a0a60ffaacb17190a"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-deployment-full.html",
+      "destination": "assets/example-deployment-full.html",
+      "source_sha256": "6f6ae188e2c2874a7b6f28943575eff72773950a9ac15dac8b7b3209cfd88cc5",
+      "sha256": "6f6ae188e2c2874a7b6f28943575eff72773950a9ac15dac8b7b3209cfd88cc5"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-deployment.html",
+      "destination": "assets/example-deployment.html",
+      "source_sha256": "6e28f0eee98dd728bfa6b5210b1885caf2b39992fdd06a680e37bbc8863e89b2",
+      "sha256": "6e28f0eee98dd728bfa6b5210b1885caf2b39992fdd06a680e37bbc8863e89b2"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-dp-integration-dark.html",
+      "destination": "assets/example-dp-integration-dark.html",
+      "source_sha256": "8cb30572815bfe86e449bb22266768f6dd52d91725faebd276c7e9de24113749",
+      "sha256": "8cb30572815bfe86e449bb22266768f6dd52d91725faebd276c7e9de24113749"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-dp-integration-full.html",
+      "destination": "assets/example-dp-integration-full.html",
+      "source_sha256": "9fc9f12a662ed1bf3e837c11be1b05df03db7a845ea203846a47b247ab6edf99",
+      "sha256": "9fc9f12a662ed1bf3e837c11be1b05df03db7a845ea203846a47b247ab6edf99"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-dp-integration.html",
+      "destination": "assets/example-dp-integration.html",
+      "source_sha256": "929b6aaefa9a362d4cd18fb1801a57f28d32aa8dd78ba577375a11926ee2cc94",
+      "sha256": "929b6aaefa9a362d4cd18fb1801a57f28d32aa8dd78ba577375a11926ee2cc94"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-dp-security-matrix-dark.html",
+      "destination": "assets/example-dp-security-matrix-dark.html",
+      "source_sha256": "ac5515d7fb1e850249aedf6d39deb848cd9edc02068c6944d37a04ca0fcc995e",
+      "sha256": "ac5515d7fb1e850249aedf6d39deb848cd9edc02068c6944d37a04ca0fcc995e"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-dp-security-matrix-full.html",
+      "destination": "assets/example-dp-security-matrix-full.html",
+      "source_sha256": "9cd7d120e069a9be73a0f98b94282e8e9906f802c49fb1c57e5553479d8033ee",
+      "sha256": "9cd7d120e069a9be73a0f98b94282e8e9906f802c49fb1c57e5553479d8033ee"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-dp-security-matrix.html",
+      "destination": "assets/example-dp-security-matrix.html",
+      "source_sha256": "88d7a3fb9788300082274924f1f95dfd0a5a8b3bfca3fcd91b424cc8caa50044",
+      "sha256": "88d7a3fb9788300082274924f1f95dfd0a5a8b3bfca3fcd91b424cc8caa50044"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-er-dark.html",
+      "destination": "assets/example-er-dark.html",
+      "source_sha256": "c007c14d88a48a8ea30b1144dd4ac392ee7891a2278262e2a6f6836b43aa7fdf",
+      "sha256": "c007c14d88a48a8ea30b1144dd4ac392ee7891a2278262e2a6f6836b43aa7fdf"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-er-full.html",
+      "destination": "assets/example-er-full.html",
+      "source_sha256": "9f43422370cbd751196fd5b8ab802a177d015f739b39064c58f5e7273f56e1c3",
+      "sha256": "9f43422370cbd751196fd5b8ab802a177d015f739b39064c58f5e7273f56e1c3"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-er.html",
+      "destination": "assets/example-er.html",
+      "source_sha256": "aee470dcf37af317f14d21cd9420f6bcb1b65f0fb0047483a42b8afc0cab2774",
+      "sha256": "aee470dcf37af317f14d21cd9420f6bcb1b65f0fb0047483a42b8afc0cab2774"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-fishbone-dark.html",
+      "destination": "assets/example-fishbone-dark.html",
+      "source_sha256": "f884b81b83f7ce40cf85b8aa6c3a55db99b7fb2d38502deff222aaff36d7db47",
+      "sha256": "f884b81b83f7ce40cf85b8aa6c3a55db99b7fb2d38502deff222aaff36d7db47"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-fishbone-full.html",
+      "destination": "assets/example-fishbone-full.html",
+      "source_sha256": "75bfad970d61909fedbf2ede67c3e88057ab46909d7ea7f2c16d3ad2a029aa2e",
+      "sha256": "75bfad970d61909fedbf2ede67c3e88057ab46909d7ea7f2c16d3ad2a029aa2e"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-fishbone.html",
+      "destination": "assets/example-fishbone.html",
+      "source_sha256": "cd7079857240a9f6228804d3492af0add2eb36343798c9e0ef90657f2a246d04",
+      "sha256": "cd7079857240a9f6228804d3492af0add2eb36343798c9e0ef90657f2a246d04"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-flowchart-dark.html",
+      "destination": "assets/example-flowchart-dark.html",
+      "source_sha256": "d61779e1d57f2d5b3b9c01d09f0677251f99acb449ee40e8cb5e3297adaf9de1",
+      "sha256": "d61779e1d57f2d5b3b9c01d09f0677251f99acb449ee40e8cb5e3297adaf9de1"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-flowchart-full.html",
+      "destination": "assets/example-flowchart-full.html",
+      "source_sha256": "0386adeb8ef6327a5ae42f6f1f89f59aa1455fa500ef18b3c656a59f010b8192",
+      "sha256": "0386adeb8ef6327a5ae42f6f1f89f59aa1455fa500ef18b3c656a59f010b8192"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-flowchart.html",
+      "destination": "assets/example-flowchart.html",
+      "source_sha256": "ba0a39df57d5fd4beccebeb51d62028b420371b30793b2658d308df04d571ff3",
+      "sha256": "ba0a39df57d5fd4beccebeb51d62028b420371b30793b2658d308df04d571ff3"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-gantt-dark.html",
+      "destination": "assets/example-gantt-dark.html",
+      "source_sha256": "81016c2956b4cf51d0c2e2b0302ea53c535f3f59a21eae8d4b1a596c448ddb2b",
+      "sha256": "c68a8e6554233cbbe48f330055e555d9a85d45daf214b88044fc27ef51b29070"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-gantt-full.html",
+      "destination": "assets/example-gantt-full.html",
+      "source_sha256": "aab29f4296a7500417c899a445bb7df5f6b785135960e66c5fdfbead27ca475f",
+      "sha256": "aab29f4296a7500417c899a445bb7df5f6b785135960e66c5fdfbead27ca475f"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-gantt.html",
+      "destination": "assets/example-gantt.html",
+      "source_sha256": "607745921006b312ab710c3166036aebeb31a2b7cd40df36713a850a28cb73f3",
+      "sha256": "607745921006b312ab710c3166036aebeb31a2b7cd40df36713a850a28cb73f3"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-high-level-dark.html",
+      "destination": "assets/example-high-level-dark.html",
+      "source_sha256": "49a52a62a30781de7d6ee051cddf9837884a84bb1ce1891eb4dadb4bb82348ae",
+      "sha256": "49a52a62a30781de7d6ee051cddf9837884a84bb1ce1891eb4dadb4bb82348ae"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-high-level-full.html",
+      "destination": "assets/example-high-level-full.html",
+      "source_sha256": "d25bde14ab1ac1d9bf47b1613f864517ce3d88553043192abbc856f69bd0f7b6",
+      "sha256": "d25bde14ab1ac1d9bf47b1613f864517ce3d88553043192abbc856f69bd0f7b6"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-high-level-vertical-dark.html",
+      "destination": "assets/example-high-level-vertical-dark.html",
+      "source_sha256": "492b0b9aebb037bfd10f65b16f2212592407a1731682d7469214225451a58fc6",
+      "sha256": "492b0b9aebb037bfd10f65b16f2212592407a1731682d7469214225451a58fc6"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-high-level-vertical-full.html",
+      "destination": "assets/example-high-level-vertical-full.html",
+      "source_sha256": "3f72c30a5be5a5bd9cde92e366ae1a97cae8473f1d8da2981ffc6d187b5c3dc3",
+      "sha256": "3f72c30a5be5a5bd9cde92e366ae1a97cae8473f1d8da2981ffc6d187b5c3dc3"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-high-level-vertical.html",
+      "destination": "assets/example-high-level-vertical.html",
+      "source_sha256": "fac0ef026d59a5086880087db4162a3ee2e064a8685c0a093b218df737884c02",
+      "sha256": "fac0ef026d59a5086880087db4162a3ee2e064a8685c0a093b218df737884c02"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-high-level.html",
+      "destination": "assets/example-high-level.html",
+      "source_sha256": "33789942cb06be5228ffa6e450602d1f7c9344b7d263fa2674b7ba5e6dd7e788",
+      "sha256": "33789942cb06be5228ffa6e450602d1f7c9344b7d263fa2674b7ba5e6dd7e788"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-import-drawio.html",
+      "destination": "assets/example-import-drawio.html",
+      "source_sha256": "f6b4cc1e49c1a680dbc1914cc2efabe1f6be418f4473019d8358819a8fbf6d63",
+      "sha256": "f6b4cc1e49c1a680dbc1914cc2efabe1f6be418f4473019d8358819a8fbf6d63"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-import-excalidraw.html",
+      "destination": "assets/example-import-excalidraw.html",
+      "source_sha256": "5c247643065004228e3e07061d4435608abc03c5fa4e2c404c6ef2a2d6b9da80",
+      "sha256": "5c247643065004228e3e07061d4435608abc03c5fa4e2c404c6ef2a2d6b9da80"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-import-mermaid.html",
+      "destination": "assets/example-import-mermaid.html",
+      "source_sha256": "10c5623a9f6daf9dccb85f15225a155b721e0ec3304d7769c4bb87290da2664a",
+      "sha256": "10c5623a9f6daf9dccb85f15225a155b721e0ec3304d7769c4bb87290da2664a"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-it-state-dark.html",
+      "destination": "assets/example-it-state-dark.html",
+      "source_sha256": "21363f1e08eadbf4c88940f845dd36f462a60e191064d4d9781dd68c9daad4b5",
+      "sha256": "21363f1e08eadbf4c88940f845dd36f462a60e191064d4d9781dd68c9daad4b5"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-it-state-full.html",
+      "destination": "assets/example-it-state-full.html",
+      "source_sha256": "ed7b2271c358c6046a49c03498384a86fdceda98a1632b235047ee9da9a7b1a0",
+      "sha256": "ed7b2271c358c6046a49c03498384a86fdceda98a1632b235047ee9da9a7b1a0"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-it-state.html",
+      "destination": "assets/example-it-state.html",
+      "source_sha256": "59103bffa775b744828643e361b71f4b80e5ef8a0042abe9ce65c81e3d5dd21e",
+      "sha256": "59103bffa775b744828643e361b71f4b80e5ef8a0042abe9ce65c81e3d5dd21e"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-journey-dark.html",
+      "destination": "assets/example-journey-dark.html",
+      "source_sha256": "c1866ca355d8859d27f6e99d9e2415daf204c313ed4463ae9663ba9e930a9949",
+      "sha256": "c1866ca355d8859d27f6e99d9e2415daf204c313ed4463ae9663ba9e930a9949"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-journey-full.html",
+      "destination": "assets/example-journey-full.html",
+      "source_sha256": "8a8263ed88d245376cc7dd0ec8068f02701b346a5d3127e9bb999406046af7cc",
+      "sha256": "8a8263ed88d245376cc7dd0ec8068f02701b346a5d3127e9bb999406046af7cc"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-journey.html",
+      "destination": "assets/example-journey.html",
+      "source_sha256": "b01e32ff87d63fddf6d1db47155906dd624acc13327856269114f760afc754f0",
+      "sha256": "b01e32ff87d63fddf6d1db47155906dd624acc13327856269114f760afc754f0"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-kanban-dark.html",
+      "destination": "assets/example-kanban-dark.html",
+      "source_sha256": "30809cae8600a1852131362df275d9ab1c6aeedc65d3855caed264d48e19f5dc",
+      "sha256": "30809cae8600a1852131362df275d9ab1c6aeedc65d3855caed264d48e19f5dc"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-kanban-full.html",
+      "destination": "assets/example-kanban-full.html",
+      "source_sha256": "a297c9d5da1ea46c6c3c69ffa49525965208cf2ffebb8031a577075d85a390d1",
+      "sha256": "a297c9d5da1ea46c6c3c69ffa49525965208cf2ffebb8031a577075d85a390d1"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-kanban.html",
+      "destination": "assets/example-kanban.html",
+      "source_sha256": "3b19fb185019e0e341496de095bb1d92bd1fe4705c1502562ef47cb88329b2bb",
+      "sha256": "3b19fb185019e0e341496de095bb1d92bd1fe4705c1502562ef47cb88329b2bb"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-layers-dark.html",
+      "destination": "assets/example-layers-dark.html",
+      "source_sha256": "412df7b0710cf14cd95c1e806e708241bda6b3bc8e1f142107adf857ed6aa7d1",
+      "sha256": "412df7b0710cf14cd95c1e806e708241bda6b3bc8e1f142107adf857ed6aa7d1"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-layers-full.html",
+      "destination": "assets/example-layers-full.html",
+      "source_sha256": "0719489be758a08ad66f2de27d120103c41a51982408e78faffac6b9409c9fbc",
+      "sha256": "0719489be758a08ad66f2de27d120103c41a51982408e78faffac6b9409c9fbc"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-layers.html",
+      "destination": "assets/example-layers.html",
+      "source_sha256": "196f3cd9866d64da9e04323f258534b1a51d1116140c0db2c8e330adb516a809",
+      "sha256": "196f3cd9866d64da9e04323f258534b1a51d1116140c0db2c8e330adb516a809"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-line-dark.html",
+      "destination": "assets/example-line-dark.html",
+      "source_sha256": "552abdcac08788dac5ee7fa419ab854c5e09451b69822eb48935712880382a9d",
+      "sha256": "a9615747b04505d9d3875b70d9e8a85328c362833bf965798456146701015a81"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-line-full.html",
+      "destination": "assets/example-line-full.html",
+      "source_sha256": "f3757327ce4d465a58b8aaf7428a1c4b3472f7422e782b32164f765b82dcdf96",
+      "sha256": "f3757327ce4d465a58b8aaf7428a1c4b3472f7422e782b32164f765b82dcdf96"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-line.html",
+      "destination": "assets/example-line.html",
+      "source_sha256": "83f5e305d6ce509b25371db6f6e73fa6f3982b7a8dbe09451091c0a15f3b1d90",
+      "sha256": "83f5e305d6ce509b25371db6f6e73fa6f3982b7a8dbe09451091c0a15f3b1d90"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-loop-dark.html",
+      "destination": "assets/example-loop-dark.html",
+      "source_sha256": "cab1f56390bd59c6b13317854c0fe32497967ab4e822c004d30eedc3324d27c0",
+      "sha256": "cab1f56390bd59c6b13317854c0fe32497967ab4e822c004d30eedc3324d27c0"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-loop-full.html",
+      "destination": "assets/example-loop-full.html",
+      "source_sha256": "c2effa4d65d8713420c2a9261e7eea4f5273f3f87e7e09398bcc6310655bdb4e",
+      "sha256": "c2effa4d65d8713420c2a9261e7eea4f5273f3f87e7e09398bcc6310655bdb4e"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-loop-terminal.html",
+      "destination": "assets/example-loop-terminal.html",
+      "source_sha256": "93a2f86cca043537bf472973c6c1d51de54d85208ec54cd448c40e3f09aa73e8",
+      "sha256": "93a2f86cca043537bf472973c6c1d51de54d85208ec54cd448c40e3f09aa73e8"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-loop.html",
+      "destination": "assets/example-loop.html",
+      "source_sha256": "b5d0e37b14614ba95d95cdbc5ecdfb84c6c03d7cf664124e029cecb97af340bc",
+      "sha256": "b5d0e37b14614ba95d95cdbc5ecdfb84c6c03d7cf664124e029cecb97af340bc"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-medallion-dark.html",
+      "destination": "assets/example-medallion-dark.html",
+      "source_sha256": "65740eb4e2b1286636fc749bdb528dbab7e03948d104c368667ab1ccf85a46f2",
+      "sha256": "65740eb4e2b1286636fc749bdb528dbab7e03948d104c368667ab1ccf85a46f2"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-medallion-full.html",
+      "destination": "assets/example-medallion-full.html",
+      "source_sha256": "f6ceacd25be82850f65689b07d52b4c9b0e633604e909b13e77ad6468895a688",
+      "sha256": "f6ceacd25be82850f65689b07d52b4c9b0e633604e909b13e77ad6468895a688"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-medallion.html",
+      "destination": "assets/example-medallion.html",
+      "source_sha256": "e88a5b1f1f67a7bf6ad83c5144a7f79973a732f68972ba648ec81968579032eb",
+      "sha256": "e88a5b1f1f67a7bf6ad83c5144a7f79973a732f68972ba648ec81968579032eb"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-nested-dark.html",
+      "destination": "assets/example-nested-dark.html",
+      "source_sha256": "1ff6c0e0dc7f9b321607a4de691a0ac1f5a99cef5b9d2dc0c6e9a75a13473f37",
+      "sha256": "1ff6c0e0dc7f9b321607a4de691a0ac1f5a99cef5b9d2dc0c6e9a75a13473f37"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-nested-full.html",
+      "destination": "assets/example-nested-full.html",
+      "source_sha256": "0efbb94f914d4edde8107df357f0869de0047011562dfc96856c3537c4e1648b",
+      "sha256": "0efbb94f914d4edde8107df357f0869de0047011562dfc96856c3537c4e1648b"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-nested.html",
+      "destination": "assets/example-nested.html",
+      "source_sha256": "17648e5a26604bf678d7cd256ec0d84a54f7f2c6920fb56c030226e6ffc6557a",
+      "sha256": "17648e5a26604bf678d7cd256ec0d84a54f7f2c6920fb56c030226e6ffc6557a"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-org-chart-dark.html",
+      "destination": "assets/example-org-chart-dark.html",
+      "source_sha256": "fd0233be926462fd539b3a953a8abc012fb1f6248b71b658a0a3d194fd4f45e6",
+      "sha256": "fd0233be926462fd539b3a953a8abc012fb1f6248b71b658a0a3d194fd4f45e6"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-org-chart-full.html",
+      "destination": "assets/example-org-chart-full.html",
+      "source_sha256": "a1b5d313f47e6cb26240edd5d696e4dc944b6996bbe92f0be7c0b90836d2631f",
+      "sha256": "a1b5d313f47e6cb26240edd5d696e4dc944b6996bbe92f0be7c0b90836d2631f"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-org-chart.html",
+      "destination": "assets/example-org-chart.html",
+      "source_sha256": "8c4e95ee52d597f28743673ea11f01ecfcf1a230d6f3dfb6d5ad641b770af46c",
+      "sha256": "8c4e95ee52d597f28743673ea11f01ecfcf1a230d6f3dfb6d5ad641b770af46c"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-paved-road-animated.html",
+      "destination": "assets/example-paved-road-animated.html",
+      "source_sha256": "edc92180b5dc86cdec954ba50a81e50ccea4a994b58619819bfdf26ff5651689",
+      "sha256": "edc92180b5dc86cdec954ba50a81e50ccea4a994b58619819bfdf26ff5651689"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-polar-dark.html",
+      "destination": "assets/example-polar-dark.html",
+      "source_sha256": "7c284696cfed61e832dd4dde814840901967cca64bd54a4cddfff7cbeaddb04e",
+      "sha256": "7c284696cfed61e832dd4dde814840901967cca64bd54a4cddfff7cbeaddb04e"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-polar-full.html",
+      "destination": "assets/example-polar-full.html",
+      "source_sha256": "bfd2ec50116c00a9312efe7bfa5dadfe2512de7c27873e15bdecaa044c932bf3",
+      "sha256": "bfd2ec50116c00a9312efe7bfa5dadfe2512de7c27873e15bdecaa044c932bf3"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-polar.html",
+      "destination": "assets/example-polar.html",
+      "source_sha256": "596e2042f18044ef1fa2c2eb849f39fa5c7767b2a17e272617ebd27e10bc86b1",
+      "sha256": "596e2042f18044ef1fa2c2eb849f39fa5c7767b2a17e272617ebd27e10bc86b1"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-policy-trace-animated.html",
+      "destination": "assets/example-policy-trace-animated.html",
+      "source_sha256": "a754efcb4d5d780798d3f386c0a5d68f36b0b12e142bc44603c2d39065daa1e3",
+      "sha256": "a754efcb4d5d780798d3f386c0a5d68f36b0b12e142bc44603c2d39065daa1e3"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-process-dark.html",
+      "destination": "assets/example-process-dark.html",
+      "source_sha256": "5e6ac1365d2e473568ba736975495b9c3509004fb6fca571dedefa8e6cdc5c8e",
+      "sha256": "5e6ac1365d2e473568ba736975495b9c3509004fb6fca571dedefa8e6cdc5c8e"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-process-full.html",
+      "destination": "assets/example-process-full.html",
+      "source_sha256": "d0c0e6df7ae42fa92a1015421fa1cef211847c4037026de2c70d77a5e164a4cc",
+      "sha256": "d0c0e6df7ae42fa92a1015421fa1cef211847c4037026de2c70d77a5e164a4cc"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-process.html",
+      "destination": "assets/example-process.html",
+      "source_sha256": "50ca0b9e6a3e9f5ba8102ff3c6fb87b6a66b1d59f272777b72a97639d4fe2375",
+      "sha256": "50ca0b9e6a3e9f5ba8102ff3c6fb87b6a66b1d59f272777b72a97639d4fe2375"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-pyramid-dark.html",
+      "destination": "assets/example-pyramid-dark.html",
+      "source_sha256": "831bc6531d0b3b0eba1b348722a0b3e4d5548f287f5380ddb7e26d3f5edcb80c",
+      "sha256": "831bc6531d0b3b0eba1b348722a0b3e4d5548f287f5380ddb7e26d3f5edcb80c"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-pyramid-full.html",
+      "destination": "assets/example-pyramid-full.html",
+      "source_sha256": "15306216ab2647d81038cafbb32139fd8e33cff6c1f2407fabbfb9dceb2c2c6e",
+      "sha256": "15306216ab2647d81038cafbb32139fd8e33cff6c1f2407fabbfb9dceb2c2c6e"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-pyramid.html",
+      "destination": "assets/example-pyramid.html",
+      "source_sha256": "d12cf7c4c921f3bbd66026af9ed947ff23acdcf414a4309b59c173377d9bdd80",
+      "sha256": "d12cf7c4c921f3bbd66026af9ed947ff23acdcf414a4309b59c173377d9bdd80"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-quadrant-consultant.html",
+      "destination": "assets/example-quadrant-consultant.html",
+      "source_sha256": "421142d6be52e56315a4b7d02f94a940fe2d7e4d8b506795392b8086c900926c",
+      "sha256": "421142d6be52e56315a4b7d02f94a940fe2d7e4d8b506795392b8086c900926c"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-quadrant-dark.html",
+      "destination": "assets/example-quadrant-dark.html",
+      "source_sha256": "ac1edf5d9c1251a51a93eb82db17fc1820811f1934ec59c1272ea7f89c501465",
+      "sha256": "ac1edf5d9c1251a51a93eb82db17fc1820811f1934ec59c1272ea7f89c501465"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-quadrant-full.html",
+      "destination": "assets/example-quadrant-full.html",
+      "source_sha256": "11208b7d6353a4feed795e2c1539153843dcf2c057da414c73958b68e08b439e",
+      "sha256": "11208b7d6353a4feed795e2c1539153843dcf2c057da414c73958b68e08b439e"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-quadrant.html",
+      "destination": "assets/example-quadrant.html",
+      "source_sha256": "a147cc85f78958da824d53d226067bff687f3e35a64601394c3075f55c675648",
+      "sha256": "a147cc85f78958da824d53d226067bff687f3e35a64601394c3075f55c675648"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-queue-animated.html",
+      "destination": "assets/example-queue-animated.html",
+      "source_sha256": "f42628ce17ae487d0b1ebf2cf29a216a70775f8f305a243e38cb0c44d2efbe0a",
+      "sha256": "cf482cefe8f41c037b40ced8cd24855a9e4b0ea9ba1d3db25dfe97c107c08405"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-radar-dark.html",
+      "destination": "assets/example-radar-dark.html",
+      "source_sha256": "e24eabbc722e67b83ac498407247e1c09d162ff19e047944a323d44594a68258",
+      "sha256": "e24eabbc722e67b83ac498407247e1c09d162ff19e047944a323d44594a68258"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-radar-full.html",
+      "destination": "assets/example-radar-full.html",
+      "source_sha256": "18203b78130ef1200e78afd8e5a574029f560f4064730e2f2661b6d33ff9e1e6",
+      "sha256": "18203b78130ef1200e78afd8e5a574029f560f4064730e2f2661b6d33ff9e1e6"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-radar.html",
+      "destination": "assets/example-radar.html",
+      "source_sha256": "767b6a52116665a75b5895c1bde6d96a6a3277449229ff7e21b33afff9b9fcdf",
+      "sha256": "767b6a52116665a75b5895c1bde6d96a6a3277449229ff7e21b33afff9b9fcdf"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-ridgeline-dark.html",
+      "destination": "assets/example-ridgeline-dark.html",
+      "source_sha256": "b430c4ec58ab69c044cba2eb39e20adbc8769cbd85fb5f41d8c3f75136d62f90",
+      "sha256": "b430c4ec58ab69c044cba2eb39e20adbc8769cbd85fb5f41d8c3f75136d62f90"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-ridgeline-full.html",
+      "destination": "assets/example-ridgeline-full.html",
+      "source_sha256": "9c2631fdd7b5f9df360d18778400212c0fa689685ae1c46d0e65c7279b4a71e6",
+      "sha256": "9c2631fdd7b5f9df360d18778400212c0fa689685ae1c46d0e65c7279b4a71e6"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-ridgeline.html",
+      "destination": "assets/example-ridgeline.html",
+      "source_sha256": "0e6b87dfbbba5e8b246a195d28cdb49a52aeebd4912fb40ffabc4fb752b04821",
+      "sha256": "0e6b87dfbbba5e8b246a195d28cdb49a52aeebd4912fb40ffabc4fb752b04821"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-sankey-dark.html",
+      "destination": "assets/example-sankey-dark.html",
+      "source_sha256": "4c2a4ff17cfba1412aee8b6569e76c1d314d9ce64d6038c99e89505225b9baf1",
+      "sha256": "4c2a4ff17cfba1412aee8b6569e76c1d314d9ce64d6038c99e89505225b9baf1"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-sankey-full.html",
+      "destination": "assets/example-sankey-full.html",
+      "source_sha256": "52949b4f1bcfba7bf89c49542ddf6937fda80be6c10c806366cd056d94732eeb",
+      "sha256": "52949b4f1bcfba7bf89c49542ddf6937fda80be6c10c806366cd056d94732eeb"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-sankey.html",
+      "destination": "assets/example-sankey.html",
+      "source_sha256": "f9196488b04763405fe56a56ed201630ce63aa86c96dcf8ba652d3927093707c",
+      "sha256": "f9196488b04763405fe56a56ed201630ce63aa86c96dcf8ba652d3927093707c"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-scatter-dark.html",
+      "destination": "assets/example-scatter-dark.html",
+      "source_sha256": "d1e48f5da1c729879834b797d871eeeff1222fa270ae6a051d02ec40dda42744",
+      "sha256": "0ef801a4db53d7f1704a54fb4b1d3b70df9d269b3c462a32f158457bf1c2b511"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-scatter-full.html",
+      "destination": "assets/example-scatter-full.html",
+      "source_sha256": "83e8cb8e6d2e788071b3a843c5746ed980675507e41d99b9a3b11beb07b8e6a6",
+      "sha256": "83e8cb8e6d2e788071b3a843c5746ed980675507e41d99b9a3b11beb07b8e6a6"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-scatter.html",
+      "destination": "assets/example-scatter.html",
+      "source_sha256": "576e0061f65b1885cf5fccb794c2827b19fbea66cc14e8284f3fa075ef755d06",
+      "sha256": "576e0061f65b1885cf5fccb794c2827b19fbea66cc14e8284f3fa075ef755d06"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-sequence-dark.html",
+      "destination": "assets/example-sequence-dark.html",
+      "source_sha256": "667d448a51a817fb334d3fae0c6f2ed2ab8a2219e42bb29d97c9e012c2d96a8a",
+      "sha256": "667d448a51a817fb334d3fae0c6f2ed2ab8a2219e42bb29d97c9e012c2d96a8a"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-sequence-full.html",
+      "destination": "assets/example-sequence-full.html",
+      "source_sha256": "e165d6e2fe2fa56538820ab6efa56a7ea79f29d75775bac47ee865483d512c1c",
+      "sha256": "e165d6e2fe2fa56538820ab6efa56a7ea79f29d75775bac47ee865483d512c1c"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-sequence-oauth-dark.html",
+      "destination": "assets/example-sequence-oauth-dark.html",
+      "source_sha256": "8237be551f450082823ba237958d62cf54c9ca1f98ea5e4f1c1eeed68e6613d0",
+      "sha256": "8237be551f450082823ba237958d62cf54c9ca1f98ea5e4f1c1eeed68e6613d0"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-sequence-oauth-full.html",
+      "destination": "assets/example-sequence-oauth-full.html",
+      "source_sha256": "c5e5f5d947c7f99474e4390a4ca2536285ca03e57aa7eae7bcb580c4c955fc2f",
+      "sha256": "c5e5f5d947c7f99474e4390a4ca2536285ca03e57aa7eae7bcb580c4c955fc2f"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-sequence-oauth.html",
+      "destination": "assets/example-sequence-oauth.html",
+      "source_sha256": "700ff6d8a06aa0b04b67520e4def6388f1a334c1a63d9df9edc5f697eeee4a40",
+      "sha256": "700ff6d8a06aa0b04b67520e4def6388f1a334c1a63d9df9edc5f697eeee4a40"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-sequence.html",
+      "destination": "assets/example-sequence.html",
+      "source_sha256": "12dcedc98c28d15f7a455f1266c8d8bd93bebe1ed8f352d89bc20703eaa00fad",
+      "sha256": "12dcedc98c28d15f7a455f1266c8d8bd93bebe1ed8f352d89bc20703eaa00fad"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-slopegraph-dark.html",
+      "destination": "assets/example-slopegraph-dark.html",
+      "source_sha256": "fb1fcd70a4d7e63cb57d39ddedfb54f4840118ec6e9905111a4d263ccc7c62b4",
+      "sha256": "fb1fcd70a4d7e63cb57d39ddedfb54f4840118ec6e9905111a4d263ccc7c62b4"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-slopegraph-full.html",
+      "destination": "assets/example-slopegraph-full.html",
+      "source_sha256": "262b5db6e1c27327e9ff204ec359821fa92700e5883926ac0217d67a6c13c237",
+      "sha256": "262b5db6e1c27327e9ff204ec359821fa92700e5883926ac0217d67a6c13c237"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-slopegraph.html",
+      "destination": "assets/example-slopegraph.html",
+      "source_sha256": "1d0d0d6835e38c1e84e6a8b7cf2a3f0f3c59f70025941b994b844a6048f53af5",
+      "sha256": "1d0d0d6835e38c1e84e6a8b7cf2a3f0f3c59f70025941b994b844a6048f53af5"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-state-dark.html",
+      "destination": "assets/example-state-dark.html",
+      "source_sha256": "d5a29f22ee80fef6fe6f857e767fb0bf4afca8bc8f8cbb478f33286d76f88706",
+      "sha256": "d5a29f22ee80fef6fe6f857e767fb0bf4afca8bc8f8cbb478f33286d76f88706"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-state-full.html",
+      "destination": "assets/example-state-full.html",
+      "source_sha256": "bdcd07a2f12fb3ae0afe34b8f3d9fc455a7fbe02f671b97a7163d35726894017",
+      "sha256": "bdcd07a2f12fb3ae0afe34b8f3d9fc455a7fbe02f671b97a7163d35726894017"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-state.html",
+      "destination": "assets/example-state.html",
+      "source_sha256": "75521144ce5aaf477096f355e86ae2d3301eb136391a6bd0702a844a8fe7ce30",
+      "sha256": "75521144ce5aaf477096f355e86ae2d3301eb136391a6bd0702a844a8fe7ce30"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-story-map-dark.html",
+      "destination": "assets/example-story-map-dark.html",
+      "source_sha256": "0c288216307ff36b43b513445e0e63fa83ed5902695ead17fdd507a470acc6b7",
+      "sha256": "0c288216307ff36b43b513445e0e63fa83ed5902695ead17fdd507a470acc6b7"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-story-map-full.html",
+      "destination": "assets/example-story-map-full.html",
+      "source_sha256": "ba97bf483442959c35e8d64cd36d177d94fff76215ca3e3b44901b5e4f586443",
+      "sha256": "ba97bf483442959c35e8d64cd36d177d94fff76215ca3e3b44901b5e4f586443"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-story-map.html",
+      "destination": "assets/example-story-map.html",
+      "source_sha256": "40f737ca1c2a9f46cd8a3ad1a377faabc1adc546a410ff8395e6622b4e773da1",
+      "sha256": "40f737ca1c2a9f46cd8a3ad1a377faabc1adc546a410ff8395e6622b4e773da1"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-swimlane-dark.html",
+      "destination": "assets/example-swimlane-dark.html",
+      "source_sha256": "1b45aa776b6e9b71249cb244b0ae0ca9ccc341d316d324364a0fad3d51e60d00",
+      "sha256": "1b45aa776b6e9b71249cb244b0ae0ca9ccc341d316d324364a0fad3d51e60d00"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-swimlane-full.html",
+      "destination": "assets/example-swimlane-full.html",
+      "source_sha256": "5c26540db8c18a1b33e32b90b1cf640d6482804b01d45fa87547c2a73a625852",
+      "sha256": "5c26540db8c18a1b33e32b90b1cf640d6482804b01d45fa87547c2a73a625852"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-swimlane.html",
+      "destination": "assets/example-swimlane.html",
+      "source_sha256": "75fc463ad3282dd0faaa4328c6b07f7e853184eeb1edcff2add8f7ed1876ab3b",
+      "sha256": "75fc463ad3282dd0faaa4328c6b07f7e853184eeb1edcff2add8f7ed1876ab3b"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-timeline-dark.html",
+      "destination": "assets/example-timeline-dark.html",
+      "source_sha256": "64bcbb52a88e989b642dee6ef9ca2c47000407430b240760911a062a8e6735a7",
+      "sha256": "64bcbb52a88e989b642dee6ef9ca2c47000407430b240760911a062a8e6735a7"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-timeline-full.html",
+      "destination": "assets/example-timeline-full.html",
+      "source_sha256": "4e9195b6c3eb9d9ff4ee0bb9a19ac166c7098465d80ccf7148af73df4cdcd7f1",
+      "sha256": "4e9195b6c3eb9d9ff4ee0bb9a19ac166c7098465d80ccf7148af73df4cdcd7f1"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-timeline.html",
+      "destination": "assets/example-timeline.html",
+      "source_sha256": "1a58e3824eb2bb89ff6e57439b61c38d6e4c08b187143436f50108d8e60bfc45",
+      "sha256": "1a58e3824eb2bb89ff6e57439b61c38d6e4c08b187143436f50108d8e60bfc45"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-tree-block-decomposition-dark.html",
+      "destination": "assets/example-tree-block-decomposition-dark.html",
+      "source_sha256": "1a862a84bb85391a850e6c6cc5d657dd019a1c2a4efe8e7d05f6045b876856df",
+      "sha256": "1a862a84bb85391a850e6c6cc5d657dd019a1c2a4efe8e7d05f6045b876856df"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-tree-block-decomposition-full.html",
+      "destination": "assets/example-tree-block-decomposition-full.html",
+      "source_sha256": "d844788fe465a807a0091d99e431221fb1fc62b7a6214b8605721870f8b89149",
+      "sha256": "d844788fe465a807a0091d99e431221fb1fc62b7a6214b8605721870f8b89149"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-tree-block-decomposition.html",
+      "destination": "assets/example-tree-block-decomposition.html",
+      "source_sha256": "8fedc41a9e45f45eb13e33d1d4125b8e7f37a9ee6e97c69596c18dfaef628c44",
+      "sha256": "8fedc41a9e45f45eb13e33d1d4125b8e7f37a9ee6e97c69596c18dfaef628c44"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-tree-dark.html",
+      "destination": "assets/example-tree-dark.html",
+      "source_sha256": "43aa056d0761d323cad0bd6205de3083fe7413af4e10639cad5e92c8ed41beac",
+      "sha256": "43aa056d0761d323cad0bd6205de3083fe7413af4e10639cad5e92c8ed41beac"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-tree-full.html",
+      "destination": "assets/example-tree-full.html",
+      "source_sha256": "988fda69a8fc3f043b263c254389adc282394d2a468163dde70fa8b56fc6392b",
+      "sha256": "988fda69a8fc3f043b263c254389adc282394d2a468163dde70fa8b56fc6392b"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-tree.html",
+      "destination": "assets/example-tree.html",
+      "source_sha256": "5de9151661ad9e1b21809d58494390472cdd82ca1ef1ddcde88b6f14e667afcd",
+      "sha256": "5de9151661ad9e1b21809d58494390472cdd82ca1ef1ddcde88b6f14e667afcd"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-treemap-dark.html",
+      "destination": "assets/example-treemap-dark.html",
+      "source_sha256": "43cbbb2ec7c30a71edf5f5436e51dd8369cedb1da80f6e6241b62278ea4e5698",
+      "sha256": "43cbbb2ec7c30a71edf5f5436e51dd8369cedb1da80f6e6241b62278ea4e5698"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-treemap-full.html",
+      "destination": "assets/example-treemap-full.html",
+      "source_sha256": "c0b0569090b69050b7b70592dd7d0d3ad01a41e84ea80d03433cf5c3b35e52a2",
+      "sha256": "c0b0569090b69050b7b70592dd7d0d3ad01a41e84ea80d03433cf5c3b35e52a2"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-treemap.html",
+      "destination": "assets/example-treemap.html",
+      "source_sha256": "95f0dd0e5072bbe327c7a85d1fa71a18cff3ade32240a917c4b672940d151008",
+      "sha256": "95f0dd0e5072bbe327c7a85d1fa71a18cff3ade32240a917c4b672940d151008"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-uml-class-dark.html",
+      "destination": "assets/example-uml-class-dark.html",
+      "source_sha256": "eca2e26603714d4df494532a2a712101321a484cc2d1263f7629b8f0e214357d",
+      "sha256": "eca2e26603714d4df494532a2a712101321a484cc2d1263f7629b8f0e214357d"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-uml-class-full.html",
+      "destination": "assets/example-uml-class-full.html",
+      "source_sha256": "9c9efff3c44878a9f7cf459ed7a1c7fcdd927cfbfb73ef35ac6b0c0c8d7a7671",
+      "sha256": "9c9efff3c44878a9f7cf459ed7a1c7fcdd927cfbfb73ef35ac6b0c0c8d7a7671"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-uml-class.html",
+      "destination": "assets/example-uml-class.html",
+      "source_sha256": "c6c353f4d53c476fc3530f20d09cdb9d4b47a2bd22d0f3c56c807732534a685d",
+      "sha256": "c6c353f4d53c476fc3530f20d09cdb9d4b47a2bd22d0f3c56c807732534a685d"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-venn-dark.html",
+      "destination": "assets/example-venn-dark.html",
+      "source_sha256": "85c6fd7c48e0c4989aebad24862e49d8783386f4cfa3efb27d1e86a724558077",
+      "sha256": "85c6fd7c48e0c4989aebad24862e49d8783386f4cfa3efb27d1e86a724558077"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-venn-full.html",
+      "destination": "assets/example-venn-full.html",
+      "source_sha256": "1dd7525e58092b6a4bf1463fdf0df2914d717e3abcfdbaf04ed0ba3dd814f310",
+      "sha256": "1dd7525e58092b6a4bf1463fdf0df2914d717e3abcfdbaf04ed0ba3dd814f310"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-venn.html",
+      "destination": "assets/example-venn.html",
+      "source_sha256": "86d763a94bc20fb3038cb00b9ef0fedd1e00cd8009df50852eac77d92e3965da",
+      "sha256": "86d763a94bc20fb3038cb00b9ef0fedd1e00cd8009df50852eac77d92e3965da"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-wardley-dark.html",
+      "destination": "assets/example-wardley-dark.html",
+      "source_sha256": "80aff4e268d3775541eca4cf1c1cac918f0895637cd79568d4895e84b9f2046b",
+      "sha256": "80aff4e268d3775541eca4cf1c1cac918f0895637cd79568d4895e84b9f2046b"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-wardley-full.html",
+      "destination": "assets/example-wardley-full.html",
+      "source_sha256": "8a9d56c9e50b57bb990a172822b01361cd4cb57322675fdde40be364e890210b",
+      "sha256": "8a9d56c9e50b57bb990a172822b01361cd4cb57322675fdde40be364e890210b"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-wardley.html",
+      "destination": "assets/example-wardley.html",
+      "source_sha256": "b0ffc8f5bde65a8d77d863f22cd6c0d0211490c059dbcb503798851d1413860a",
+      "sha256": "b0ffc8f5bde65a8d77d863f22cd6c0d0211490c059dbcb503798851d1413860a"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-waterfall-dark.html",
+      "destination": "assets/example-waterfall-dark.html",
+      "source_sha256": "ce4eb6038b09b87eca88b6981a7b43d19f603f480b6e91fb16d5d7c58a9103a6",
+      "sha256": "ce4eb6038b09b87eca88b6981a7b43d19f603f480b6e91fb16d5d7c58a9103a6"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-waterfall-full.html",
+      "destination": "assets/example-waterfall-full.html",
+      "source_sha256": "0fc4fdb8af3cdc49efb75d713303751c3d37c360ac3e27ea282945359ed67f9a",
+      "sha256": "0fc4fdb8af3cdc49efb75d713303751c3d37c360ac3e27ea282945359ed67f9a"
+    },
+    {
+      "source": "skills/diagram-design/assets/example-waterfall.html",
+      "destination": "assets/example-waterfall.html",
+      "source_sha256": "10c4445b0582ddd6644ac734914c3549e9eb39075ee6e258ea78044a43c0ca3d",
+      "sha256": "10c4445b0582ddd6644ac734914c3549e9eb39075ee6e258ea78044a43c0ca3d"
+    },
+    {
+      "source": "skills/diagram-design/assets/icons.html",
+      "destination": "assets/icons.html",
+      "source_sha256": "8e7f54214b31e9152020e012aff18cb97defdec47ac09cee2081499c0bb0eb4f",
+      "sha256": "a0399f3c6d7e14f601d5a9b60a69e292d9e92ccd858ab9c20b5ef3e40764882b"
+    },
+    {
+      "source": "skills/diagram-design/assets/template-dark.html",
+      "destination": "assets/template-dark.html",
+      "source_sha256": "5ce8643786f648a706fd775602ce657c29dc943ad934ce08a2b9a2c43db59501",
+      "sha256": "5ce8643786f648a706fd775602ce657c29dc943ad934ce08a2b9a2c43db59501"
+    },
+    {
+      "source": "skills/diagram-design/assets/template-full.html",
+      "destination": "assets/template-full.html",
+      "source_sha256": "ccd6feb25c934d4cf1af4b3a3d4d0b82c2f18f4a09a50856f1115a3d5e43c66a",
+      "sha256": "ccd6feb25c934d4cf1af4b3a3d4d0b82c2f18f4a09a50856f1115a3d5e43c66a"
+    },
+    {
+      "source": "skills/diagram-design/assets/template-motion.html",
+      "destination": "assets/template-motion.html",
+      "source_sha256": "0b8063b37d4192b6d7de50c43c96ba8ae29208e71795380f1365f856a7764757",
+      "sha256": "0b8063b37d4192b6d7de50c43c96ba8ae29208e71795380f1365f856a7764757"
+    },
+    {
+      "source": "skills/diagram-design/assets/template-terminal.html",
+      "destination": "assets/template-terminal.html",
+      "source_sha256": "6d000bd0308a737afeb1a11f453945d315abeea9d2a9f357fba534590ea391f9",
+      "sha256": "6d000bd0308a737afeb1a11f453945d315abeea9d2a9f357fba534590ea391f9"
+    },
+    {
+      "source": "skills/diagram-design/assets/template.html",
+      "destination": "assets/template.html",
+      "source_sha256": "78097811877b253fdf755867fd66efdb30ac93498f058c9b2c852a0fe333272a",
+      "sha256": "78097811877b253fdf755867fd66efdb30ac93498f058c9b2c852a0fe333272a"
+    },
+    {
+      "source": "skills/diagram-design/scripts/drawio_extract.py",
+      "destination": "scripts/drawio_extract.py",
+      "source_sha256": "302b357688de234e5a46818a25120fd8fe5a58e5c3338f1f027ec269f24424d9",
+      "sha256": "302b357688de234e5a46818a25120fd8fe5a58e5c3338f1f027ec269f24424d9"
+    },
+    {
+      "source": "skills/diagram-design/scripts/excalidraw_extract.py",
+      "destination": "scripts/excalidraw_extract.py",
+      "source_sha256": "1d3e57f7dc80f733fbf950d24872e791acfcd9b900430acf7f41ecaec82abe59",
+      "sha256": "1d3e57f7dc80f733fbf950d24872e791acfcd9b900430acf7f41ecaec82abe59"
+    },
+    {
+      "source": "skills/diagram-design/scripts/mermaid_extract.py",
+      "destination": "scripts/mermaid_extract.py",
+      "source_sha256": "83294bfd3a7471ec272ef55005d889088823cedcb3cfbbae706acf944d2a362b",
+      "sha256": "83294bfd3a7471ec272ef55005d889088823cedcb3cfbbae706acf944d2a362b"
+    },
+    {
+      "source": "skills/diagram-design/scripts/self_check.py",
+      "destination": "scripts/self_check.py",
+      "source_sha256": "b5f798725d4a76693b6d1c2ff5ecfc0aa162c69ffe38cd63c32bb192f49afd13",
+      "sha256": "b5f798725d4a76693b6d1c2ff5ecfc0aa162c69ffe38cd63c32bb192f49afd13"
+    },
+    {
+      "source": "scripts/verify-geometry.py",
+      "destination": "scripts/verify-geometry.py",
+      "source_sha256": "6034b2d1073a3661f0a29578e0a97f4ebe4f1b7c9829b847a1d03be0df3fc99e",
+      "sha256": "f1460edba87c01f99bdbe4d883b14a560ad8c53a26d8605b539dece0497944f9"
+    },
+    {
+      "source": "scripts/verify-block-registry.py",
+      "destination": "scripts/verify-block-registry.py",
+      "source_sha256": "4b44fe0282748260a47ad3f7492d626b95c7f1b67fcc91438e8a1dae2fe1d413",
+      "sha256": "c713cac259e1050ae7781bba36b0ada4275d929648b23502c605ac14652cdcde"
+    },
+    {
+      "source": "scripts/verify-treemap.py",
+      "destination": "scripts/verify-treemap.py",
+      "source_sha256": "8000fe0a23baae2bbb902f1beddef919fab46dfa6e1feac9fbf8692b770d91aa",
+      "sha256": "e10b95fe392171ae1e9fee75cc8672fda8017d9f1786112813599828c437a4f8"
+    },
+    {
+      "source": "scripts/verify-waterfall.py",
+      "destination": "scripts/verify-waterfall.py",
+      "source_sha256": "2d5dca1cdc349625d0b06ebfaaca7345f227f2e5a2ecaa8b9c9dc79c54c0a1c9",
+      "sha256": "4341414a1831f8fa0f056897f7109848730f10822ce0df86c12a9cc1f919afab"
+    },
+    {
+      "source": "scripts/verify-sankey.py",
+      "destination": "scripts/verify-sankey.py",
+      "source_sha256": "8b437979c7617ed96c7ebeb3548ee9d6c3adbf55027c5be7c1098f9245cd6a1f",
+      "sha256": "2db949736a37614dcf2a16258998c33af6125689427183e778e172eba41fa56d"
+    },
+    {
+      "source": "scripts/verify-polar.py",
+      "destination": "scripts/verify-polar.py",
+      "source_sha256": "153ca26e8e6386cedfa6ec702d0fe9d1eabcc0831a7a0da4964cf16701effe2e",
+      "sha256": "153ca26e8e6386cedfa6ec702d0fe9d1eabcc0831a7a0da4964cf16701effe2e"
+    },
+    {
+      "source": "scripts/verify-bubble.py",
+      "destination": "scripts/verify-bubble.py",
+      "source_sha256": "51e57c8a48aa0ee70681334e6ba1039a5151e89610ef30f40f25d53595f0a6b8",
+      "sha256": "4cb2502013c5fd5eec651afa2530f0af6959ccf259886c165dc6a3cfc808ee44"
+    },
+    {
+      "source": "scripts/verify-beeswarm.py",
+      "destination": "scripts/verify-beeswarm.py",
+      "source_sha256": "955541098de712689a49ad53a2199132ff05b24fc17494d5cd8f0579a7056752",
+      "sha256": "ac576913811af93e0d450e3c663e82ab1e845aa55b79d9a1554f4e680b31b5c7"
+    },
+    {
+      "source": "scripts/verify-bump.py",
+      "destination": "scripts/verify-bump.py",
+      "source_sha256": "bdcbeac631ca1a82607c012de42d2a3da76d806c50dc319df453b08ec50fcdbd",
+      "sha256": "b965e88d0388239e77c87cba084e90b6d580d19bf38af7f590296d2b233141a1"
+    },
+    {
+      "source": "scripts/verify-slopegraph.py",
+      "destination": "scripts/verify-slopegraph.py",
+      "source_sha256": "d4c1c34847fa9028278c4ced5c9e3b5222fb3a187385381f92632a3147d7dd10",
+      "sha256": "b2f21126fe630b90ceee21760c7dd14bef8d9cbbd1409f95db4caab4113b0c74"
+    },
+    {
+      "source": "scripts/verify-ridgeline.py",
+      "destination": "scripts/verify-ridgeline.py",
+      "source_sha256": "b2bd660aa4f39a693f6e304ec7217baeb3011ee95e9eb17d8d8a9f51d52d78d3",
+      "sha256": "a655b91ea6fda8ba93d8302a4f151b52727a5689de6e2445d047c8090930e15c"
+    },
+    {
+      "source": "scripts/verify-skin-polarity.py",
+      "destination": "scripts/verify-skin-polarity.py",
+      "source_sha256": "9066f768e6af9418dadd88d44407cc0e77a5d72d3d2f7ede32ea554c338885c3",
+      "sha256": "f5187e3eb234d151aafb2b27e6accae17c9a7e37904ab00f8d15f6f89dd12109"
+    },
+    {
+      "source": "scripts/verify-motion.py",
+      "destination": "scripts/verify-motion.py",
+      "source_sha256": "27f48ca10f53752b2331c183be03fe7f24815748f7ddfd4f261438b845213113",
+      "sha256": "bc6d35d189326f30de5fc9ba594fd7c53dc765af7e2df0e234b0281efcb3b35e"
+    },
+    {
+      "source": "LICENSE",
+      "destination": "LICENSE",
+      "source_sha256": "bb7e12e91fecef43024111123ff784cec6c485585561d8b552557c0173b3ed29",
+      "sha256": "bb7e12e91fecef43024111123ff784cec6c485585561d8b552557c0173b3ed29"
+    },
+    {
+      "source": "THIRD_PARTY_LICENSES.md",
+      "destination": "references/third-party-licenses.md",
+      "source_sha256": "22f5afcea56373e84d7f7eff93d8d4d6e4b81c5375bb1c996e78b91e53fa0b37",
+      "sha256": "5cb2245b322e0a6c33feeb68ededb4ced58646150c9555d9d8433ee2db878fa4"
+    },
+    {
+      "source": "skills/diagram-design/SKILL.md",
+      "destination": "references/design-spec.md",
+      "source_sha256": "145d51086793e47e7fd5d75238daa82090c062e6d781de6cabf3187a5fe26e37",
+      "sha256": "eeb1c01ae297c532952eb29689dd8972b321412dd77d6c4bc777dd5b6607d927"
+    }
+  ]
+}

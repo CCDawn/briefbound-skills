@@ -13,6 +13,7 @@ from coordination_model import (
     cancel_resume_obligation,
     complete_agent,
     create_claim,
+    expire_resume_obligation,
     find_claim_conflicts,
     heartbeat_coordination_owner,
     load_registry,
@@ -361,9 +362,21 @@ def command_check(project_root: Path, args: argparse.Namespace) -> int:
 
 def command_claim(project_root: Path, args: argparse.Namespace) -> int:
     def create(registry: dict) -> dict:
-        agent_id = resolve_agent_id(registry, args.agent_id, args.agent)
+        agent_id = resolve_agent_id(
+            registry,
+            args.agent_id,
+            args.agent,
+            thread_id=args.thread_id,
+        )
         if not any(item.get("id") == agent_id for item in registry.get("agents", [])):
-            register_agent(registry, agent_id, args.agent, task=args.task, scopes=args.scope)
+            register_agent(
+                registry,
+                agent_id,
+                args.agent,
+                thread_id=args.thread_id,
+                task=args.task,
+                scopes=args.scope,
+            )
         return create_claim(
             registry,
             agent_id,
@@ -568,6 +581,24 @@ def command_cancel_resume(project_root: Path, args: argparse.Namespace) -> int:
     return 0
 
 
+def command_expire_resume(project_root: Path, args: argparse.Namespace) -> int:
+    coordination = mutate_registry(
+        project_root,
+        lambda registry: expire_resume_obligation(
+            registry,
+            args.coordination_id,
+            args.agent_id,
+            args.target_agent_id,
+            args.evidence,
+        ),
+    )
+    if args.json:
+        print_json(coordination)
+    else:
+        print(f"Expired resume debt for stale {args.target_agent_id} in {coordination['id']}.")
+    return 0
+
+
 def command_complete(project_root: Path, args: argparse.Namespace) -> int:
     agent = mutate_registry(project_root, lambda registry: complete_agent(registry, args.agent_id, args.summary))
     if args.json:
@@ -660,6 +691,7 @@ def parse_args() -> argparse.Namespace:
     claim.add_argument("--scope", action="append", default=[])
     claim.add_argument("--agent", default="codex-session")
     claim.add_argument("--agent-id", default=None)
+    claim.add_argument("--thread-id", default="")
     claim.add_argument("--task", required=True)
     claim.add_argument("--status", choices=sorted(ACTIVE_CLAIM_STATUSES), default="active")
     claim.add_argument("--ttl-minutes", type=int, default=240)
@@ -745,6 +777,20 @@ def parse_args() -> argparse.Namespace:
     )
     add_json_flag(cancel_resume)
 
+    expire_resume = subparsers.add_parser(
+        "expire-resume",
+        help="Close one stale resume debt after fresh thread transport evidence.",
+    )
+    expire_resume.add_argument("--coordination-id", required=True)
+    expire_resume.add_argument("--agent-id", required=True, help="Current coordination owner.")
+    expire_resume.add_argument("--target-agent-id", required=True)
+    expire_resume.add_argument(
+        "--evidence",
+        required=True,
+        help="Fresh list/read evidence that the stale peer cannot resume safely.",
+    )
+    add_json_flag(expire_resume)
+
     complete = subparsers.add_parser("complete", help="Mark an agent complete and close its claims.")
     complete.add_argument("--agent-id", required=True)
     complete.add_argument("--summary", default="")
@@ -772,6 +818,7 @@ COMMANDS = {
     "heartbeat": command_heartbeat,
     "takeover": command_takeover,
     "cancel-resume": command_cancel_resume,
+    "expire-resume": command_expire_resume,
     "complete": command_complete,
     "prune": command_prune,
 }

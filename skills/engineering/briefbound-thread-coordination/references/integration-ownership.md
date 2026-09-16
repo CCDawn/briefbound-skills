@@ -1,13 +1,13 @@
 # Integration Ownership
 
-仅在出现 `MERGE_READY` 或 integration queue 时读取。
+仅在 accepted agreement 出现 `MERGE_READY` 或 integration queue 时读取。`INTEGRATION_CLAIMED`、`DISCUSSION_REQUEST`、`INTEGRATED` 与 `INTEGRATION_HANDOFF` 均须通过 `BRT_TRUSTED_RELAY_V1` 门禁；消息不替代 Git/registry 证据。
 
 ## 原子认领
 
 所有相关 Agent 只检查一次 `lane=integration/<target-key>`：
 
 - 用户指定 > 有效 integration claim > 首个成功原子认领者。
-- 无有效 claim 时，具备目标分支权限且能开始维护队列的 Agent 应 claim，并发送一次 `INTEGRATION_CLAIMED`，包含 `Agent / Thread / Target / Queue / Lease / Next Checkpoint`。
+- 无有效 claim 时，具备目标分支权限且能开始维护队列的 Agent 应 claim，在自身任务/registry 记录并发送一次 `INTEGRATION_CLAIMED`（`Agent / Thread / Target / Queue / Lease / Next Checkpoint`）。
 - 已有有效 claim 时，其余 Agent只提交 branch/commit/tests/risks；不得自行等待稳定 `main`、重复 rebase/full gate 或合并。
 
 负责人 ACK `MERGE_READY`、维护队列、串行应用交付，在最终 HEAD 运行一次完整 gate。claim 有效期间不启动新的无关实现任务。
@@ -39,4 +39,4 @@ hook/gate 失败分为 `CHANGE_FAILURE / BASELINE_FAILURE / ENVIRONMENT_FAILURE 
 - 只跳过已证明无关的 hook；`--no-verify` 需策略或用户允许，并记录补验责任。
 - 条件提交需 integration owner 补跑 gate/CI；无法提交的 diff 必须有人接管。
 
-无法及时推进时发送 `INTEGRATION_HANDOFF` 并释放 claim，不得静默占位。只有明确释放、租约失活或 Git 已证明义务完成时，其他 Agent 才可 `takeover`。
+无法及时推进时在自身任务/registry 记录并发送一次 `INTEGRATION_HANDOFF`，随后释放 claim，不得静默占位。只有明确释放、租约失活或 Git 已证明义务完成时，其他 Agent 才可 `takeover`。

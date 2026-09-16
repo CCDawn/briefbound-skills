@@ -7,6 +7,7 @@
 - **[briefbound-ui-review](./briefbound-ui-review/SKILL.md)** - Findings-first review of existing UI or isolated previews without replacing explicit user approval.
 - **[briefbound-design-system](./briefbound-design-system/SKILL.md)** - Cross-consumer design token, theme, component API, variant, and Figma-to-code governance with staged migration.
 - **[briefbound-frontend-engineering](./briefbound-frontend-engineering/SKILL.md)** - Production frontend owner for approved or explicitly preview-exempt UI contracts and runtime evidence.
+- **[briefbound-diagram-design](./briefbound-diagram-design/SKILL.md)** - Structured diagram owner that turns architecture, flow, sequence, ER/UML, and quantitative data into editable HTML/SVG/PNG, with Mermaid, draw.io, and Excalidraw import; joins reports as support without taking content ownership.
 - **[briefbound-performance-engineering](./briefbound-performance-engineering/SKILL.md)** - Evidence-driven profiling and minimal optimization for explicit performance goals, regressions, hot paths, and resource budgets; routine features stay with their current owner.
 - **[briefbound-code-structure-guard](./briefbound-code-structure-guard/SKILL.md)** - Lightweight STAY/CHECK/SPLIT guard that prevents multi-responsibility giant files without mechanical line-count splitting.
 - **[briefbound-project-memory](./briefbound-project-memory/SKILL.md)** - Opt-in durable cross-session decisions and handoffs; it does not own the active execution loop.
@@ -19,6 +20,7 @@
 - **[briefbound-completion-summary](./briefbound-completion-summary/SKILL.md)** - Compact cross-session handoff and formal evidence packages, never a default completion stage.
 - **[briefbound-pr-review](./briefbound-pr-review/SKILL.md)** - Explicit PR, branch, commit-range, or diff review against requirements, evidence, regression risk, and merge readiness.
 - **[briefbound-project-review](./briefbound-project-review/SKILL.md)** - Repository, architecture, technical debt, test gap, and project health review.
+- **[briefbound-project-dissection](./briefbound-project-dissection/SKILL.md)** - Source-guided repository dissection teaching with representative execution paths, design tradeoffs, and a reading route; not a risk-first project audit.
 - **[briefbound-simplification-review](./briefbound-simplification-review/SKILL.md)** - On-demand diff review focused on evidence-backed removal of unnecessary complexity.
 - **[briefbound-simplification-audit](./briefbound-simplification-audit/SKILL.md)** - On-demand repository audit for dependency bloat, dead flexibility, duplicate paths, and removable abstractions.
 - **[briefbound-bug-review](./briefbound-bug-review/SKILL.md)** - End-to-end bug owner for root-cause diagnosis, bounded repair, optional internal test anchors, and verification.
