@@ -1,4 +1,0 @@
-interface:
-  display_name: "Briefbound 图解设计"
-  short_description: "生成与重绘结构化图解，并为值得配图的复杂汇报主动生成中文总览"
-  default_prompt: "使用 $briefbound-diagram-design 将真实内容绘成清晰中文图解；复杂汇报中图能显著降低理解成本时，主动生成并验证 HTML、SVG 或 PNG。"
