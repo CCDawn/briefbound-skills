@@ -21,7 +21,7 @@ license: MIT
 
 ## 统一调用契约
 
-只处理 Briefbound task contract 范围；不匹配时回 `briefbound-router` 或更具体 owner。用户可见内容默认中文，只报结论、证据、风险和产出；Route Out 仅以 Briefbound task contract 为准，末行写 `下一步建议: <一个具体动作>`。
+只处理 Briefbound task contract 范围；不匹配时回 `briefbound-router` 或更具体 owner。用户可见内容默认中文，只报结论、证据、风险和产出；Route Out 仅以 Briefbound task contract 为准，末行 `下一步建议: <一个具体动作>`，限于决策类建议，不交回可自行执行的步骤。
 
 ## 审阅流程
 
@@ -45,7 +45,7 @@ license: MIT
 - `P2 SHOULD_FIX`：边界、错误处理、维护性或局部回归风险。
 - `P3 NICE_TO_HAVE`：默认省略；只有能明显降低近期误改或审阅成本时才保留。
 
-每条包含位置、问题、影响、建议和验证条件。纯风格、无行为影响的命名或未被 diff 影响的既有问题不算 finding。没有问题时明确“未发现阻塞性问题”及证据边界。
+每条包含位置、问题、影响、建议和验证条件。纯风格命名或未被 diff 影响的既有问题不算 finding。没有问题时明确“未发现阻塞性问题”及证据边界。
 
 多个问题按依赖和成本排序；用户要求修复时回最具体 owner 连续处理 `SAFE_DIRECT` 项。设计分叉、高风险动作或 BLOCKED 才暂停。
 
@@ -76,4 +76,4 @@ Review feedback（适用时）: OPEN / ADDRESSED / VERIFIED / DEFERRED
 下一步建议: <一个具体动作>
 ```
 
-实际提交、推送、合并和发布仍需对应权限；审阅结论不等于自动执行远程动作。
+提交、推送、合并和发布仍需对应权限；审阅结论不等于自动执行远程动作。

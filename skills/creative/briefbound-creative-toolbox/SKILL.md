@@ -8,7 +8,7 @@ license: MIT
 
 ## 目标
 
-根据用户所处阶段选择一个合适的创意方法，产出少量具体、非显而易见且能继续行动的想法。重点是改变机制或观察角度，不是把普通建议包装成概念卡。
+按用户所处阶段选择一个合适的创意方法，产出少量具体、非显而易见且能继续行动的想法。重点是改变机制或观察角度，不是把普通建议包装成概念卡。
 
 ## Briefbound task contract
 
@@ -17,13 +17,13 @@ license: MIT
 - Allowed Action: 生成、改写、比较和筛选想法；外部调研、实现、资产或代码写入需路由对应 owner。
 - Success Evidence: 每个保留候选绑定当前情境，说明具体机制、适用原因、失败方式和可执行第一步。
 - Stop Condition: 创意阶段仍有高影响歧义、上下文不足以产生具体候选、用户已选择方向，或请求进入实现。
-- Route Out: `briefbound-planning`、`briefbound-feature-reuse-research`、`briefbound-evaluation`、具体实现 owner，或 `briefbound-router`。
+- Route Out: `briefbound-planning`、`briefbound-feature-reuse-research`、具体实现 owner，或 `briefbound-router`。
 
 ## 统一调用契约
 
 - 用户可见内容默认中文，先给可用想法，不汇报内部路由过程；Route Out 仅以 Briefbound task contract 为准。
 - 方法名会帮助复用时才展示，并用一句话解释它如何改变本轮思考；不列一串术语。
-- 默认给 3 个候选，不用空话凑数。末行写 `下一步建议: <一个具体动作>`。
+- 默认给 3 个候选，不用空话凑数。有自然闸门时末行 `下一步建议: <一个具体动作>`，否则继续已授权工作。
 
 ## Method Router
 
@@ -40,7 +40,7 @@ license: MIT
 | `SYNTHESIZE` | 有大量笔记或观察 | 聚类命名 | 找重复结构、异常项和未命名主题 |
 | `NAMING` | 需要命名 | 命名锻造 | 从机制、张力和记忆点生成名称 |
 
-若用户直接指定方法就使用它。只有两个信号确实冲突且单一方法无法处理时，最多组合两个，并说明各自作用。阶段不清且会改变方法时只问一个问题；否则基于当前材料直接开始。
+用户指定方法时直接使用。只有两个信号确实冲突且单一方法无法处理时，最多组合两个，并说明各自作用。阶段不清且会改变方法时只问一个问题；否则基于当前材料直接开始。
 
 需要时才读 `references/full-toolbox.md`。`Perspective Jury` 和 `role-deck.md` 仅用于用户明确要求的深度对抗评估。
 
@@ -81,11 +81,11 @@ license: MIT
    - 第一步: <可执行动作>
 
 我的建议: <一个候选及理由>
-下一步建议: <一个具体动作>
+下一步建议: <闸门动作或继续已授权工作>
 ```
 
-命名任务改为输出 `名称 / 词源或构成 / 传达的机制 / 容易误解之处`；选择任务允许只返回一个明确结论，不硬凑三个新想法。
+命名任务改为输出 `名称 / 词源或构成 / 传达的机制 / 容易误解之处`；选择任务可只返回一个明确结论，不硬凑三个新想法。
 
 ## 方法来源
 
-路由、单方法默认、反显而易见和具体机制优先的设计参考 [NousResearch Hermes Agent 的 Creative Ideation skill](https://github.com/NousResearch/hermes-agent/blob/main/optional-skills/creative/creative-ideation/SKILL.md)（MIT），并按 Briefbound 的中文意图路由和 owner 契约重新组织。
+路由、单方法默认、反显而易见和具体机制优先的设计参考 [NousResearch Hermes Agent 的 Creative Ideation skill](https://github.com/NousResearch/hermes-agent/blob/main/optional-skills/creative/creative-ideation/SKILL.md)（MIT），并按 Briefbound 契约重新组织。

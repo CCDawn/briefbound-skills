@@ -22,7 +22,7 @@ license: MIT
 ## 统一调用契约
 
 - 只处理 Briefbound task contract 范围；不匹配时回 `briefbound-router` 或更具体 owner，复合任务不吞其他 owner。
-- 用户可见内容默认中文，完成只报状态、产出、证据和剩余风险；代码、命令、路径、错误原文、API/协议、skill 名和枚举保留原样；Route Out 仅以 Briefbound task contract 为准，末行写 `下一步建议: <一个具体动作>`。
+- 用户可见内容默认中文，完成只报状态、产出、证据和剩余风险；代码、命令、路径、错误原文、API/协议、skill 名和枚举保留原样；Route Out 仅以 Briefbound task contract 为准，末行 `下一步建议: <一个具体动作>`，且限于决策类建议（推荐方向、优先级或需用户拍板的选项），不把可自行完成的执行步骤包装成建议交回。
 
 ## 审查规则
 
@@ -54,7 +54,7 @@ Findings:
 - 性能测量 -> briefbound-performance-engineering
 - 可直接精简 -> 对应开发 owner
 
-下一步建议: <一个具体动作>
+下一步建议: <决策类建议：方向、优先级或需用户拍板的选项>
 ```
 
 只有实际测量时才给精确净减行数或依赖数；否则使用区间或定性收益。没有可删项时明确说明当前变更已经足够精简。

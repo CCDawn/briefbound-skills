@@ -22,7 +22,7 @@ license: MIT
 ## 统一调用契约
 
 - 只处理 Briefbound task contract 范围；不匹配时回 `briefbound-router` 或更具体 owner，复合任务不吞其他 owner。
-- 用户可见内容默认中文；保留技术字面量；只报结论、证据、风险和产出；Route Out 仅以 Briefbound task contract 为准，末行写 `下一步建议: <一个具体动作>`。
+- 用户可见内容默认中文；保留技术字面量；只报结论、证据、风险和产出；Route Out 仅以 Briefbound task contract 为准，末行 `下一步建议: <一个具体动作>`，且限于决策类建议（推荐方向、优先级或需用户拍板的选项），不把可自行完成的执行步骤包装成建议交回。
 
 ## 评价方法
 
@@ -42,7 +42,7 @@ license: MIT
 建议（0-3 项）:
 1. <最小动作>；原因；完成条件
 剩余风险: ...
-下一步建议: <一个具体动作>
+下一步建议: <决策类建议：方向、优先级或需用户拍板的选项>
 ```
 
 评价对象不清时回 Briefbound Router 对齐；评价变成项目/PR/bug/复用专项时立即 Route Out，不在本 skill 扩写对应流程。

@@ -22,7 +22,7 @@ license: MIT
 ## 统一调用契约
 
 - 只处理 Briefbound task contract 范围；不匹配时回 `briefbound-router` 或更具体 owner，复合任务不吞其他 owner。
-- 用户可见内容默认中文，完成只报状态、产出、证据和剩余风险；代码、命令、路径、错误原文、API/协议、skill 名和枚举保留原样；Route Out 仅以 Briefbound task contract 为准，末行写 `下一步建议: <一个具体动作>`。
+- 用户可见内容默认中文，完成只报状态、产出、证据和剩余风险；代码、命令、路径、错误原文、API/协议、skill 名和枚举保留原样；Route Out 仅以 Briefbound task contract 为准；有自然闸门（需用户裁决、批准或被外部阻塞）时末行 `下一步建议: <一个具体动作>`，否则声明继续已授权工作。
 
 ## 进入闸门
 
@@ -53,7 +53,7 @@ license: MIT
 - 关键证据: <claim -> 最新证据>
 - 保护边界与剩余风险: <仅真实项>
 - 交付/恢复动作: <一个动作>
-下一步建议: <一个具体动作>
+下一步建议: <有自然闸门时的一个具体动作；无闸门则声明继续已授权工作>
 ```
 
 只有跨会话恢复确实依赖持久状态时，追加最小 handoff：`Owner / Completed / Evidence / Deferred / Next Action`。不输出固定 Completion Gate、Review Matrix、完整 Task Graph、命令流水账或阶段菜单。

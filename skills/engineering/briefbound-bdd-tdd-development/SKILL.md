@@ -22,7 +22,7 @@ license: MIT
 ## 统一调用契约
 
 - 只处理 Briefbound task contract 范围；不匹配时回 `briefbound-router` 或更具体 owner，复合任务不吞其他 owner。
-- 用户可见内容默认中文；保留技术字面量；只报产出、证据与风险；Route Out 仅以 Briefbound task contract 为准，末行写 `下一步建议: <一个具体动作>`。
+- 用户可见内容默认中文；保留技术字面量；只报产出、证据与风险；Route Out 仅以 Briefbound task contract 为准；有自然闸门（需用户裁决、批准或被外部阻塞）时末行 `下一步建议: <一个具体动作>`，否则声明继续已授权工作。
 
 ## 模式闸门
 

@@ -22,7 +22,7 @@ license: MIT
 ## 统一调用契约
 
 - 只处理 Briefbound task contract 范围；不匹配时回 `briefbound-router` 或更具体 owner，复合任务不吞其他 owner。
-- 用户可见内容默认中文，完成只报状态、产出、证据和剩余风险；代码、命令、路径、错误原文、API/协议、skill 名和枚举保留原样；Route Out 仅以 Briefbound task contract 为准，末行写 `下一步建议: <一个具体动作>`。
+- 用户可见内容默认中文，完成只报状态、产出、证据和剩余风险；代码、命令、路径、错误原文、API/协议、skill 名和枚举保留原样；Route Out 仅以 Briefbound task contract 为准，末行 `下一步建议: <一个具体动作>`，且限于决策类建议（推荐方向、优先级或需用户拍板的选项），不把可自行完成的执行步骤包装成建议交回。
 
 ## 激活闸门
 
@@ -53,7 +53,7 @@ Smoke/proxy 只用于可运行性、淘汰和排序，不替代正式目标评�
 - 关键缺口或漂移: <仅真实项>
 - Primary owner 与产出:
 - 阶段完成证据:
-下一步建议: <一个具体动作>
+下一步建议: <决策类动作：方向、优先级或需用户拍板的选项>
 ```
 
 跨会话或正式交接时才读取 `references/lifecycle-reference.md` 和 `references/templates.md`；需要校准典型阶段切换时读取 `references/examples.md`。普通推进不输出完整 lifecycle 表、Briefbound gate 或阶段菜单。

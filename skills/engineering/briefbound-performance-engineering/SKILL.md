@@ -22,7 +22,7 @@ license: MIT
 ## 统一调用契约
 
 - 只处理 Briefbound task contract 范围；不匹配时回最具体 owner。用户可见内容默认中文，保留指标、命令、路径、API 和工具名。
-- Route Out 仅以 Briefbound task contract 为准；末行写 `下一步建议: <一个具体动作>`。
+- Route Out 仅以 Briefbound task contract 为准；有自然闸门（需用户裁决、批准或被外部阻塞）时末行 `下一步建议: <一个具体动作>`，否则声明继续已授权工作。
 - 不把性能工程变成固定开发阶段，也不要求用户逐步确认已授权的测量、优化和验证。
 
 ## 三档边界
@@ -62,7 +62,7 @@ Briefbound Router 使用 `FAST / CHECK / PROFILE`：
 - 瓶颈与最小修改: ...
 - After 与取舍: ...
 - 正确性验证/剩余风险: ...
-下一步建议: <一个具体动作>
+下一步建议: <有自然闸门时的一个具体动作；否则声明继续已授权工作>
 ```
 
 只有维护本 skill 或核对来源许可时读取 `references/sources.md`；执行性能任务不加载它。

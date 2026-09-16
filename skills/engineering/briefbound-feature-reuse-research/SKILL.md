@@ -8,9 +8,9 @@ license: MIT
 
 ## 目标
 
-在复杂功能进入方案制定前，先做只读复用研究：搜索相关项目、库、模块、官方示例和成熟实现，评估是否值得复用、改造、只参考，或自研。
+复杂功能在方案制定中遇到外部复用取舍时，做只读复用研究：搜索相关项目、库、模块、官方示例和成熟实现，评估是否值得复用、改造、只参考，或自研。
 
-本 skill 不写代码、不安装依赖、不把外部代码直接复制进项目。它输出一个可交给 `briefbound-planning` 的复用决策。
+本 skill 不写代码、不安装依赖、不复制外部代码进项目；输出可交给 `briefbound-planning` 的复用决策。
 
 ## Briefbound task contract
 
@@ -18,13 +18,13 @@ license: MIT
 - Output Contract: 搜索范围、候选评估、复用决策、Implementation Boundary、Verification Strategy 和 planning handoff。
 - Allowed Action: 只读搜索和只读本地代码/文档检查；不安装依赖、不运行外部代码、不复制外部代码、不扩大用户未确认范围。
 - Success Evidence: 当前项目复用点已查，候选有链接或本地证据，许可证/集成风险已判断，复用决策能作为 `briefbound-planning` 输入。
-- Stop Condition: 无法搜索、许可证不明、需求不清、复用会改变用户未确认范围、需要安装/试跑/复制外部代码。
+- Stop Condition: 研究产出复用决策即止；无法搜索、许可证不明、需求不清或复用会改变用户未确认范围时停止；试用/安装/复制外部代码移交原开发 owner 或按授权继续。
 - Route Out: 原开发 owner、`briefbound-planning`、继续复用研究、`briefbound-router` 或 BLOCKED。
 
 ## 统一调用契约
 
 - 只处理 Briefbound task contract 范围；不匹配时回 `briefbound-router` 或更具体 owner，复合任务不吞其他 owner。
-- 用户可见内容默认中文，完成只报状态、产出、证据和剩余风险；代码、命令、路径、错误原文、API/协议、skill 名和枚举保留原样；Route Out 仅以 Briefbound task contract 为准，末行写 `下一步建议: <一个具体动作>`。
+- 用户可见内容默认中文，完成只报状态、产出、证据和剩余风险；代码、命令、路径、错误原文、API/协议、skill 名和枚举保留原样；Route Out 仅以 Briefbound task contract 为准，末行 `下一步建议: <一个具体动作>`，限于决策类建议，不交回可自行执行的步骤。
 
 ## 进入条件
 
@@ -130,7 +130,7 @@ license: MIT
 
 下一步:
 默认路由：<从 Briefbound task contract 的 Route Out 选择一个>，原因...
-执行规则：决策为 REUSE / ADAPT / REFERENCE_ONLY / BUILD_IN_HOUSE，且实现边界已清楚、无真实设计分叉时，携带决策回原开发 owner 直接实施；只有依赖/架构仍有取舍、迁移或高风险边界时才进入 `briefbound-planning`。只有需要继续搜索、改变用户已确认边界或需求不清时，才列出用户选项。
+执行规则：复用决策与实现边界清楚、且不超出当前授权范围时，携带决策与证据回原开发 owner 直接实施；仅当决策会引入需要用户裁决的依赖/架构取舍、迁移风险或超出授权的用户可见影响时，先做一轮协作校准（说明推荐、排除项、取舍），需要执行契约时才进入 `briefbound-planning`。
 ```
 
 ## 质量门槛
@@ -139,7 +139,7 @@ license: MIT
 - 必须说明被拒绝候选为什么不适合。
 - 许可证不清时不能推荐 `REUSE`。
 - 未检查当前项目已有模块时，不能推荐外部依赖。
-- 不安装、不运行、不复制外部代码；需要试用库时，先进入 `briefbound-planning` 建立执行契约。
-- 如果搜索会花费大量时间，先做 QUICK 研究，再建议是否继续 DEEP 研究。
+- 不安装、不运行、不复制外部代码；需要试用库时移交原开发 owner，需要执行契约时才进入 `briefbound-planning`。
+- 搜索耗时大时先做 QUICK 研究，再建议是否继续 DEEP。
 - 进入原开发 owner 或 `briefbound-planning` 前，必须把 `复用决策` 作为输入，不重复研究。
-- 如果复用决策会引入新依赖、改变架构边界或扩大用户可见结果，先用协作校准说明推荐、排除项和取舍，再进入 planning。
+- 协作校准与进入 `briefbound-planning` 的触发条件，以执行规则为准。

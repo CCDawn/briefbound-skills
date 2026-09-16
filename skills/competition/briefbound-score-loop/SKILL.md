@@ -17,13 +17,13 @@ license: MIT
 - Allowed Action: 在已确认范围内提出并评估候选；不静默改变指标、数据、基线、预算或提交目标。
 - Success Evidence: 精确 baseline/candidate、参数或 diff、命令、数据/seed、主副指标、运行产物和可比性判断。
 - Stop Condition: 协议漂移、指标无法解析、候选重复、预算耗尽、连续结果不再提供新信息、写入冲突或安全边界变化。
-- Route Out: 继续当前 loop、返回 `briefbound-ai-research-loop`、返回 `briefbound-competition-research-lifecycle`、`briefbound-bug-review`、`briefbound-router` 或 BLOCKED。
+- Route Out: 继续当前 loop、返回 `briefbound-ai-research-loop`、`briefbound-bug-review`、`briefbound-router` 或 BLOCKED。
 
 ## 统一调用契约
 
 - 只处理 Briefbound task contract；复合任务不吞其他 owner；Route Out 仅以 Briefbound task contract 为准。
 - 用户可见内容默认中文，先说结论，再给比较依据。默认使用“替换、淘汰、继续观察、暂时无法比较”等通俗说法；必须保留枚举时写成中文结论加括号，例如“替换当前最好方案（`PROMOTE`）”。
-- 复杂指标、代理测试或搜索策略会影响判断时，用一句话解释；不展示内部 trial 账本。末行写 `下一步建议: <一个具体动作>`。
+- 复杂指标、代理测试或搜索策略会影响判断时，用一句话解释；不展示内部 trial 账本。有自然闸门（需用户裁决、批准或被外部阻塞）时末行 `下一步建议: <一个具体动作>`，否则声明继续已授权工作。
 
 ## 实验 owner 独占
 
@@ -87,7 +87,7 @@ license: MIT
 比较: <baseline、candidate、主指标变化和硬约束>
 原因: <机制判断、关键副作用或证据缺口>
 记录: <仅跨会话、线上反馈或可复用教训需要时>
-下一步建议: <一个具体动作>
+下一步建议: <有自然闸门时的一个具体动作；否则声明继续已授权工作>
 ```
 
 ## 方法来源

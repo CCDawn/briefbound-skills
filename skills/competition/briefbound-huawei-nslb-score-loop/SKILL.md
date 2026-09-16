@@ -10,7 +10,7 @@ license: MIT
 
 这是 `briefbound-score-loop` 的 Huawei NSLB 适配层，补充项目识别、工具命令、solver 约束和线上反馈；候选搜索、淘汰和替换仍用通用 score loop。
 
-不得把 skill 内的旧分数、hash 或聊天记忆当成当前事实。最好方案、源码 hash、活跃运行和提交映射须从项目现场读取。
+不得把 skill 内的旧分数、hash 或聊天记忆当成当前事实；最好方案、源码 hash、活跃运行和提交映射从项目现场读取。
 
 ## Briefbound task contract
 
@@ -26,7 +26,7 @@ license: MIT
 - 只处理 Briefbound task contract；Route Out 仅以 Briefbound task contract 为准。
 - 用户可见内容默认中文，先说状态、原因和下一步，不先列 ledger、epoch 或内部枚举。
 - 首次出现代理测试时解释：它是用于快速淘汰候选的小测试，不能代替正式分数。
-- 只有复杂问题需要时才展开 hash、worker、校准或搜索图；末行写 `下一步建议: <一个具体动作>`。
+- 只有复杂问题需要时才展开 hash、worker、校准或搜索图；有自然闸门时末行 `下一步建议: <一个具体动作>`，否则继续已授权工作。
 
 ## Live-State Gate
 
@@ -54,7 +54,7 @@ license: MIT
 
 ## Worker rule
 
-并行收益明确时才创建 worker。worker 只改隔离 workspace，main project 只读；通常只改 `src/Solution.cpp` 的一个机制。先核对 baseline hash，再编译和最小筛选；命中 kill condition 后保留 diff、指标和原因并停止。完成前写有效 `child_result.json`，不能自行替换共享 baseline 或线上最佳。
+并行收益明确时才创建 worker。worker 只改隔离 workspace，main project 只读；通常只改一个机制。先核对 baseline hash，再编译和最小筛选；命中 kill condition 后保留 diff、指标和原因并停止。完成前写有效 `child_result.json`，不能自行替换共享 baseline 或线上最佳。
 
 ## 线上反馈与提交
 
@@ -68,7 +68,7 @@ zip 用短名如 `sub053.zip`；完整元数据写入已有 submission map。恢
 结论: <替换 / 淘汰 / 继续观察 / 暂时无法比较>
 当前依据: <baseline/hash、主指标、硬约束和线上反馈>
 产物: <diff、child_result、提交包或记录；没有则省略>
-下一步建议: <一个具体动作>
+下一步建议: <闸门动作或继续已授权工作>
 ```
 
-仅在跨会话恢复或项目规则要求时更新 `competition-huawei-nslb` memory；普通 QUICK 不为留痕而写 memory。
+仅在跨会话恢复或项目规则要求时更新 `competition-huawei-nslb` memory，不为留痕而写。
