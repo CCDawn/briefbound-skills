@@ -13,7 +13,7 @@
     "require_recommendation": true,
     "require_wrong_decision_impact": true,
     "require_wait_for_calibration": true,
-    "forbidden_final_any": ["审查完成", "已经修改", "行为差异", "错判影响"],
+    "forbidden_final_any": ["审查完成", "已经修改", "不需要等待", "无需确认", "行为差异", "错判影响"],
     "timeout_seconds": 120
   },
   {
@@ -30,7 +30,7 @@
     "require_recommendation": true,
     "require_wrong_decision_impact": true,
     "require_wait_for_calibration": true,
-    "forbidden_final_any": ["已经修改", "直接开始实现", "行为差异", "错判影响"],
+    "forbidden_final_any": ["已经修改", "不需要等待", "无需确认", "直接开始实现", "行为差异", "错判影响"],
     "forbidden_delegation_phrases": ["请完整描述需求", "请选择一个明确目标"],
     "timeout_seconds": 120
   },
@@ -52,7 +52,7 @@
     "require_recommendation": true,
     "require_wrong_decision_impact": true,
     "require_wait_for_calibration": true,
-    "forbidden_final_any": ["已经修改", "直接开始实现", "行为差异", "错判影响"],
+    "forbidden_final_any": ["已经修改", "不需要等待", "无需确认", "直接开始实现", "行为差异", "错判影响"],
     "timeout_seconds": 120,
     "followups": [
       {
@@ -84,7 +84,7 @@
     "require_recommendation": true,
     "require_wrong_decision_impact": true,
     "require_wait_for_calibration": true,
-    "forbidden_final_any": ["已经修改", "直接开始实现", "行为差异", "错判影响"],
+    "forbidden_final_any": ["已经修改", "不需要等待", "无需确认", "直接开始实现", "行为差异", "错判影响"],
     "timeout_seconds": 120,
     "followups": [
       {
@@ -111,7 +111,7 @@
     "require_recommendation": true,
     "require_wrong_decision_impact": true,
     "require_wait_for_calibration": true,
-    "forbidden_final_any": ["直接恢复开发", "已经修改", "行为差异", "错判影响"],
+    "forbidden_final_any": ["直接恢复开发", "已经修改", "不需要等待", "无需确认", "行为差异", "错判影响"],
     "forbidden_delegation_phrases": ["请选择视觉、交互、响应式、性能或无障碍"],
     "timeout_seconds": 120
   },
@@ -224,6 +224,7 @@
     "forbidden_skill_reads": ["briefbound-planning", "briefbound-bdd-tdd-development"],
     "max_commands": 3,
     "expected_final_any": ["FAST_PATH", "FAST", "Mechanical", "机械", "直接"],
+    "max_questions": 0,
     "forbidden_final_any": ["需要确认", "请问", "按推荐"],
     "timeout_seconds": 120
   },
@@ -246,6 +247,7 @@
     "forbidden_skill_reads": ["briefbound-planning", "briefbound-bug-review"],
     "max_commands": 4,
     "expected_final_any": ["直接", "安全恢复", "继续"],
+    "max_questions": 0,
     "forbidden_final_any": ["按推荐", "需要你决定"],
     "timeout_seconds": 120
   },
@@ -257,6 +259,7 @@
     "forbidden_skill_reads": ["briefbound-planning"],
     "max_commands": 4,
     "expected_final_any": ["更新契约", "恢复", "继续"],
+    "max_questions": 0,
     "forbidden_final_any": ["重新确认", "再次选择"],
     "timeout_seconds": 120
   },

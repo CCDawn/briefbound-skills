@@ -106,7 +106,9 @@ class RoutingEvalTests(unittest.TestCase):
             "expected_final_all": ["换一种做法"],
             "forbidden_final_any": [],
             "forbidden_delegation_phrases": ["请选择一个明确目标"],
-            "min_questions": 1,
+            # "请选择一个明确目标" is now counted as one imperative throw-back
+            # question, so the floor must exceed one for the count check to fire.
+            "min_questions": 2,
             "max_questions": 2,
             "require_recommendation": True,
             "require_wrong_decision_impact": True,
@@ -174,6 +176,64 @@ class RoutingEvalTests(unittest.TestCase):
             ROUTING_EVAL.evaluate_final_response(
                 case,
                 "我建议只停用已勾选成员；如果理解错了，可能误停用其他成员。请回复按建议或纠正。",
+            ),
+            [],
+        )
+
+    def test_evaluate_response_rejects_overrun_claimed_without_calibration_wait(self) -> None:
+        case = {
+            "expected_final_any": [],
+            "forbidden_final_any": [],
+            "require_wait_for_calibration": True,
+        }
+
+        failures = ROUTING_EVAL.evaluate_final_response(
+            case,
+            "不需要等待确认，我已经修改了正式代码。",
+        )
+
+        self.assertTrue(any("calibration wait" in failure for failure in failures))
+
+    def test_evaluate_response_rejects_wait_voided_by_negation_near_recommendation(self) -> None:
+        case = {
+            "expected_final_any": [],
+            "forbidden_final_any": [],
+            "require_wait_for_calibration": True,
+        }
+
+        failures = ROUTING_EVAL.evaluate_final_response(
+            case,
+            "按推荐执行即可，不需要等待确认。",
+        )
+
+        self.assertTrue(any("calibration wait" in failure for failure in failures))
+
+    def test_evaluate_response_rejects_imperative_throwback_without_question_mark(self) -> None:
+        case = {
+            "expected_final_any": [],
+            "forbidden_final_any": [],
+            "max_questions": 0,
+        }
+
+        failures = ROUTING_EVAL.evaluate_final_response(
+            case,
+            "请先选一个方案，再开始。",
+        )
+
+        self.assertTrue(any("question count" in failure for failure in failures))
+
+    def test_evaluate_response_accepts_recommendation_with_explicit_calibration_wait(self) -> None:
+        case = {
+            "expected_final_any": [],
+            "forbidden_final_any": [],
+            "max_questions": 0,
+            "require_wait_for_calibration": True,
+        }
+
+        self.assertEqual(
+            ROUTING_EVAL.evaluate_final_response(
+                case,
+                "我的建议是只停用已勾选的成员，避免误停用其他成员。等待你确认后我再继续。",
             ),
             [],
         )
