@@ -10,6 +10,7 @@
                    "./skills/competition/briefbound-score-loop",
                    "./skills/competition/briefbound-huawei-nslb-score-loop",
                    "./skills/creative/briefbound-creative-toolbox",
+                   "./skills/creative/briefbound-diagram-design",
                    "./skills/engineering/briefbound-project-memory",
                    "./skills/engineering/briefbound-multi-agent-orchestration",
                    "./skills/engineering/briefbound-thread-coordination",
