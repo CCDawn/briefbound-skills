@@ -17,8 +17,9 @@
 | 性能目标/回归或热路径测量 | `briefbound-performance-engineering` | PROFILE | baseline、瓶颈、before/after |
 | 多职责巨型文件、结构妨碍导航/测试/协作，或明确要求职责拆分 | `briefbound-code-structure-guard` | FAST/COMPACT | STAY/CHECK/SPLIT 与最小结构修改 |
 | 审 PR、diff、branch、commit、merge readiness | `briefbound-pr-review` | COMPACT | findings-first 审阅结论 |
+| 源码学习、项目拆解 | `briefbound-project-dissection` | COMPACT | 教学报告与 diagram-design 配图 |
 | 审整仓、架构、技术债、测试体系、接手摸底 | `briefbound-project-review` | COMPACT | 风险排序 findings 与执行队列 |
-| 评价流程、方案、skill、输出质量，且无更具体 owner | `briefbound-evaluation` | MICRO/COMPACT | 证据化判断与高 ROI 建议 |
+| 评价流程、方案、skill、输出质量，且无更具体 owner | `briefbound-router` | MICRO/COMPACT | 按需读取 evaluation 参考 |
 | 新建或重定 UI/UX、信息层级、交互模型、响应式或无障碍决策 | `briefbound-ui-design` | FAST/COMPACT | 必要时先交付隔离预览，再形成可实施 UI 契约 |
 | 品牌表达、视觉方向、字体、色彩、构图、图像或动效语言 | `briefbound-visual-design` | COMPACT | 必要时先交付隔离预览，再形成语境化视觉契约 |
 | 架构、流程、时序、ER/UML、定量图表或 Mermaid/draw.io/Excalidraw 重绘 | `briefbound-diagram-design` | FAST/COMPACT | 可编辑 HTML/SVG、所需 PNG、保真说明与结构/视觉验收 |
@@ -30,15 +31,14 @@
 | 已明确的新行为/实现契约需要 RED，或用户明确要求 TDD | `briefbound-bdd-tdd-development` | COMPACT | 紧凑 RED/GREEN 实现 |
 | AI/ML baseline、假设、消融、方向选择 | `briefbound-ai-research-loop` | COMPACT/FULL | 研究闭环或下一实验 |
 | 单条 benchmark/score/baseline promotion lane | `briefbound-score-loop` | COMPACT/FULL | candidate 评估与晋升结论 |
-| Huawei Algorithm Challenge 37 NSLB 项目 score lane | `briefbound-huawei-nslb-score-loop` | COMPACT/FULL | 项目命令与 ledger 适配后的 score loop |
 | 重要研究 claim、反直觉结果、baseline 晋升审查 | `briefbound-research-rigor-review` | COMPACT | ACCEPT/QUALIFY/REJECT |
-| 竞赛/benchmark 全生命周期 | `briefbound-competition-research-lifecycle` | FULL | 阶段契约与下游 owner |
-| 用户明确需要持久目标、反复迭代和 stop condition，且无专项 owner | `briefbound-goal-loop` | COMPACT/FULL | 有界 goal contract 与下一轮证据 |
+| 竞赛/benchmark 全生命周期 | `briefbound-ai-research-loop` | FULL | 按需读取竞赛阶段参考 |
+| 用户明确需要持久目标、反复迭代和 stop condition，且无专项 owner | `briefbound-router` | COMPACT/FULL | runtime 中的目标循环 |
 | 需求已对齐，多个现有同项目会话可通过平级协商互助完成各自任务并共同集成 | `briefbound-multi-agent-orchestration` | COMPACT/FULL | 协作 agreement、各自交付与集成验证 |
 | 多会话进度、冲突、暂停恢复、讨论或合并 | `briefbound-thread-coordination` | COMPACT | registry 状态或协调闭环 |
 | 用户/项目明确要求 memory、dashboard、跨会话恢复 | `briefbound-project-memory` | FAST/COMPACT | 持久 delta 或恢复上下文 |
 | 已知存在临时产物、旧 branch/worktree/claim，或用户明确要求清理 | `briefbound-development-cleanup` | FAST/COMPACT | CLEAN/DEFERRED/BLOCKED |
-| 当前 diff/PR 是否过度设计 | `briefbound-simplification-review` | COMPACT | 可删与保留判断 |
+| 当前 diff/PR 是否过度设计 | `briefbound-simplification-audit` | COMPACT | 可删与保留判断 |
 | 整仓/子系统冗余复杂度与依赖膨胀 | `briefbound-simplification-audit` | COMPACT | 排序后的精简队列 |
 
 系统或插件 skill 仅在本轮 Available skills 中真实存在且比 Briefbound fallback 更具体时使用，例如官方文档、浏览器、GitHub、PDF、表格或图像工具。候选安装资料属于 `github-skill-candidates.md`，不属于运行时路由表。

@@ -17,7 +17,7 @@ license: MIT
 - Allowed Action: 生成、改写、比较和筛选想法；外部调研、实现、资产或代码写入需路由对应 owner。
 - Success Evidence: 每个保留候选绑定当前情境，说明具体机制、适用原因、失败方式和可执行第一步。
 - Stop Condition: 创意阶段仍有高影响歧义、上下文不足以产生具体候选、用户已选择方向，或请求进入实现。
-- Route Out: `briefbound-planning`、`briefbound-feature-reuse-research`、`briefbound-evaluation`、具体实现 owner，或 `briefbound-router`。
+- Route Out: `briefbound-planning`、`briefbound-feature-reuse-research`、具体实现 owner，或 `briefbound-router`。
 
 ## 统一调用契约
 

@@ -17,7 +17,7 @@ license: MIT
 - Allowed Action: 读取目标、调用方和测试；在授权 scope 内提取代码并验证；不重写模块、改变公共行为或全仓扫描。
 - Success Evidence: 目标行为保持，提取单元具有可说明的职责和依赖边界，相关测试/类型/构建检查通过，且没有新增无价值抽象。
 - Stop Condition: 行数是唯一信号、文件仍保持单一内聚职责、拆分会扩大用户范围、缺少行为保护，或需要公共 API/架构取舍。
-- Route Out: 当前开发 owner、`briefbound-planning`、`briefbound-pr-review`、`briefbound-simplification-review`、`briefbound-development-cleanup`、`briefbound-router` 或 BLOCKED。
+- Route Out: 当前开发 owner、`briefbound-planning`、`briefbound-pr-review`、`briefbound-simplification-audit`、`briefbound-development-cleanup`、`briefbound-router` 或 BLOCKED。
 
 ## 统一调用契约
 

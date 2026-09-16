@@ -16,11 +16,10 @@
 - **[briefbound-feature-reuse-research](./briefbound-feature-reuse-research/SKILL.md)** - Reuse research only when external or in-project candidates can materially change a complex feature plan.
 - **[briefbound-planning](./briefbound-planning/SKILL.md)** - Implementation planning after aligned requirements.
 - **[briefbound-bdd-tdd-development](./briefbound-bdd-tdd-development/SKILL.md)** - Compact TDD for already-defined new behavior or high-risk implementation contracts; it does not re-own diagnosed bugs.
-- **[briefbound-completion-summary](./briefbound-completion-summary/SKILL.md)** - Compact cross-session handoff and formal evidence packages, never a default completion stage.
 - **[briefbound-pr-review](./briefbound-pr-review/SKILL.md)** - Explicit PR, branch, commit-range, or diff review against requirements, evidence, regression risk, and merge readiness.
 - **[briefbound-project-review](./briefbound-project-review/SKILL.md)** - Repository, architecture, technical debt, test gap, and project health review.
-- **[briefbound-simplification-review](./briefbound-simplification-review/SKILL.md)** - On-demand diff review focused on evidence-backed removal of unnecessary complexity.
-- **[briefbound-simplification-audit](./briefbound-simplification-audit/SKILL.md)** - On-demand repository audit for dependency bloat, dead flexibility, duplicate paths, and removable abstractions.
+- **[briefbound-simplification-audit](./briefbound-simplification-audit/SKILL.md)** - Evidence-based simplification of a diff/PR or repository, with explicit scope and behavior-preserving removal criteria.
 - **[briefbound-bug-review](./briefbound-bug-review/SKILL.md)** - End-to-end bug owner for root-cause diagnosis, bounded repair, optional internal test anchors, and verification.
-- **[briefbound-evaluation](./briefbound-evaluation/SKILL.md)** - Briefbound evaluation adapter used only after checking more specific review, debug, planning, verification, feedback, or goal skills.
-- **[briefbound-goal-loop](./briefbound-goal-loop/SKILL.md)** - Explicit open-ended iteration policy, not a wrapper for finite implementation or ordinary continuation.
+
+
+- **[briefbound-project-dissection](./briefbound-project-dissection/SKILL.md)** - Source-guided repository learning with design tradeoffs and automatic Chinese architecture/flow diagrams.

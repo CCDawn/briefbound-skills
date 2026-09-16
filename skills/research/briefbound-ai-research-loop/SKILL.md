@@ -1,6 +1,6 @@
 ---
 name: briefbound-ai-research-loop
-description: "Use when AI/ML research engineering needs baseline reproduction, hypothesis-driven experiments, ablations, evaluation design, findings synthesis, research direction selection, plateau recovery, or a reproducible loop from a paper/repository/research question to evidence-backed results."
+description: "Use when AI/ML research engineering needs baseline reproduction, hypothesis-driven experiments, ablations, evaluation design, findings synthesis, research direction selection, plateau recovery, or a reproducible loop from a paper/repository/research question to evidence-backed results, or coordinating cross-stage research competitions and benchmarks."
 license: MIT
 ---
 
@@ -15,7 +15,7 @@ license: MIT
 外层：汇总多轮证据 -> 提炼规律 -> 更新假设组合 -> 继续/分支/转向/停止
 ```
 
-本 skill 是 AI 研究工程的主 owner。`briefbound-score-loop` 只承接一条可量化实验 lane；竞赛规则、提交和 leaderboard 全生命周期仍由 `briefbound-competition-research-lifecycle` 适配。
+本 skill 是 AI 研究工程的主 owner。`briefbound-score-loop` 只承接一条可量化实验 lane；跨阶段竞赛/benchmark 按需读 [竞赛阶段参考](references/competition-lifecycle.md)。
 
 ## Briefbound task contract
 
@@ -24,7 +24,7 @@ license: MIT
 - Allowed Action: 在已锁定的可编辑面和预算内复现、修改、运行、评估和记录；不静默改变数据划分、metric、baseline 或研究目标。
 - Success Evidence: 可复现命令、baseline 指纹、metric 与方差、diff/config、实验 artifact、对照/消融结果以及有来源的研究结论。
 - Stop Condition: baseline 不可信、评价协议漂移、数据泄漏、预算或权限不足、结果不可复现、关键假设无法区分，或继续实验已无新的信息价值。
-- Route Out: `briefbound-score-loop`、`briefbound-feature-reuse-research`、`briefbound-bug-review`、`briefbound-research-rigor-review`、`briefbound-competition-research-lifecycle`、完成交接或 BLOCKED。
+- Route Out: `briefbound-score-loop`、`briefbound-feature-reuse-research`、`briefbound-bug-review`、`briefbound-research-rigor-review`、完成交接或 BLOCKED。
 
 ## 统一调用契约
 
@@ -36,7 +36,7 @@ license: MIT
 - 用户要推进一个 AI/ML 研究问题、复现论文、做消融或从多轮实验中决定方向：本 skill 主责。
 - 用户已经给出明确 baseline、metric 和单个低成本候选：本 owner 可直接比较；只有反复晋升、榜单反馈或持久 score lane 才路由 `briefbound-score-loop`。
 - 主要问题是训练脚本、metric、数据 schema、seed、shape、NaN 或环境的确定性故障：临时路由 `briefbound-bug-review`，修复后返回研究循环。
-- 主要问题是 Kaggle、竞赛规则、提交包或 public leaderboard：由竞赛生命周期主责，本 skill 只承接其研究阶段。
+- 跨阶段竞赛或 benchmark：读取 [竞赛阶段参考](references/competition-lifecycle.md)，统筹规则、数据、证据与提交；单阶段仍由最具体 owner 执行。纯工程问题不启动研究实验。
 - 需要搜索论文、仓库、模型或可复用实现且结果会改变方案：使用 `briefbound-feature-reuse-research`；研究 owner 保留方向决策权。
 
 ## 启动快照

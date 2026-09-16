@@ -1,6 +1,6 @@
 ---
 name: briefbound-project-review
-description: Use when Briefbound workflow needs a Chinese-first review of an entire repository, codebase, architecture, technical debt, test coverage, risk modules, maintainability, onboarding state, or project health before planning, refactoring, takeover, or prioritization.
+description: Use when Briefbound workflow needs a Chinese-first review of an entire repository, codebase, architecture, technical debt, test coverage, risk modules, maintainability, or project health before planning, refactoring, takeover, or prioritization.
 license: MIT
 ---
 
@@ -8,7 +8,7 @@ license: MIT
 
 ## 目标
 
-对整仓或明确子系统做只读、证据化审查，找出最影响完成率、误改率和用户价值的问题。PR/diff 使用 `briefbound-pr-review`，具体 bug 使用 `briefbound-bug-review`。
+对整仓或明确子系统做只读、证据化审查，找出最影响完成率、误改率和用户价值的问题。以理解与学习为目的的项目拆解交 `briefbound-project-dissection`；风险优先的接手审查仍由本 skill 负责。PR/diff 使用 `briefbound-pr-review`，具体 bug 使用 `briefbound-bug-review`。
 
 ## Briefbound task contract
 

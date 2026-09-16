@@ -3,13 +3,13 @@
 [![Release](https://img.shields.io/github/v/release/CCDawn/codex-skills?display_name=tag)](https://github.com/CCDawn/codex-skills/releases)
 [![Validate](https://github.com/CCDawn/codex-skills/actions/workflows/validate.yml/badge.svg)](https://github.com/CCDawn/codex-skills/actions/workflows/validate.yml)
 [![License](https://img.shields.io/github/license/CCDawn/codex-skills)](LICENSE)
-[![Skills](https://img.shields.io/badge/skills-30-2f81f7)](#skill-catalog)
+[![Skills](https://img.shields.io/badge/skills-26-2f81f7)](#skill-catalog)
 [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-compatible-1f883d)](https://agentskills.io/)
 [![skills.sh](https://skills.sh/b/CCDawn/codex-skills)](https://skills.sh/CCDawn/codex-skills)
 
 **Bound to the brief. Free to build.**
 
-Briefbound is a Chinese-first collection of 30 Agent Skills for Codex and Grok Build, covering intent alignment, dynamic routing, peer collaboration and opt-in autonomous closure across existing threads, lightweight development, code-structure guards, performance engineering, cleanup, code review, UI design, and AI research workflows.
+Briefbound is a Chinese-first collection of 26 Agent Skills for Codex and Grok Build, covering intent alignment, dynamic routing, peer collaboration and opt-in autonomous closure across existing threads, lightweight development, code-structure guards, performance engineering, cleanup, code review, UI design, and AI research workflows.
 
 - Users describe the task normally. They do not need to invoke `briefbound-router` or memorize a workflow.
 - [`briefbound-router`](skills/engineering/briefbound-router/SKILL.md) proceeds immediately when intent is clear. When discussion is needed, it leads with the result, uses plain language, and explains only complex concepts that affect a decision or action.
@@ -78,6 +78,8 @@ Run `py -3 scripts\run_briefbound_routing_eval.py` after installation for a low-
 
 ## What Makes It Different
 
+On upgrade, verified retired entrypoints are archived outside skill discovery in the selected runtime's `skill-backups/` after their replacements pass validation. General evaluation, open-ended goals and handoffs use owner/router references; research owns competition-stage coordination, and one simplification skill handles diff and repository scopes.
+
 | Problem | Briefbound approach |
 | --- | --- |
 | The request is incomplete | Inspect available evidence, then discuss only decisions that change the result |
@@ -113,7 +115,6 @@ Run `py -3 scripts\run_briefbound_routing_eval.py` after installation for a low-
 - [`briefbound-design-system`](skills/engineering/briefbound-design-system/SKILL.md): shared token, theme, component API, variant, and Figma-to-code governance.
 - [`briefbound-ai-research-loop`](skills/research/briefbound-ai-research-loop/SKILL.md): baseline reproduction, hypotheses, experiments, ablations, and research synthesis.
 - [`briefbound-score-loop`](skills/competition/briefbound-score-loop/SKILL.md): adaptive candidate search under a frozen comparison protocol, with early pruning and evidence-based baseline replacement.
-- [`briefbound-huawei-nslb-score-loop`](skills/competition/briefbound-huawei-nslb-score-loop/SKILL.md): live-state Huawei NSLB adapter for solver search, packaging, workers, and online-score calibration when needed.
 - [`briefbound-creative-toolbox`](skills/creative/briefbound-creative-toolbox/SKILL.md): phase-routed ideation that defaults to one method and returns a few specific, testable ideas with honest failure modes.
 - [`briefbound-diagram-design`](skills/creative/briefbound-diagram-design/SKILL.md): creates and redraws structured diagrams, and proactively adds a Chinese overview when a substantive report materially benefits from one.
 - [`briefbound-feature-reuse-research`](skills/engineering/briefbound-feature-reuse-research/SKILL.md): reuse research for complex feature decisions.
@@ -129,6 +130,7 @@ Run `py -3 scripts\run_briefbound_routing_eval.py` after installation for a low-
 - [`briefbound-development-cleanup`](skills/engineering/briefbound-development-cleanup/SKILL.md)
 - [`briefbound-bug-review`](skills/engineering/briefbound-bug-review/SKILL.md)
 - [`briefbound-pr-review`](skills/engineering/briefbound-pr-review/SKILL.md)
+- [`briefbound-project-dissection`](skills/engineering/briefbound-project-dissection/SKILL.md): source-guided learning, design tradeoffs and reading routes, with automatic Chinese architecture and execution-flow diagrams.
 - [`briefbound-project-review`](skills/engineering/briefbound-project-review/SKILL.md)
 - [`briefbound-performance-engineering`](skills/engineering/briefbound-performance-engineering/SKILL.md)
 - [`briefbound-code-structure-guard`](skills/engineering/briefbound-code-structure-guard/SKILL.md)
@@ -140,20 +142,14 @@ Run `py -3 scripts\run_briefbound_routing_eval.py` after installation for a low-
 - [`briefbound-feature-reuse-research`](skills/engineering/briefbound-feature-reuse-research/SKILL.md)
 - [`briefbound-planning`](skills/engineering/briefbound-planning/SKILL.md)
 - [`briefbound-bdd-tdd-development`](skills/engineering/briefbound-bdd-tdd-development/SKILL.md)
-- [`briefbound-completion-summary`](skills/engineering/briefbound-completion-summary/SKILL.md)
-- [`briefbound-simplification-review`](skills/engineering/briefbound-simplification-review/SKILL.md)
 - [`briefbound-simplification-audit`](skills/engineering/briefbound-simplification-audit/SKILL.md)
-- [`briefbound-evaluation`](skills/engineering/briefbound-evaluation/SKILL.md)
-- [`briefbound-goal-loop`](skills/engineering/briefbound-goal-loop/SKILL.md)
 - [`briefbound-project-memory`](skills/engineering/briefbound-project-memory/SKILL.md)
 
 ### AI Research and Competition
 
 - [`briefbound-ai-research-loop`](skills/research/briefbound-ai-research-loop/SKILL.md)
 - [`briefbound-research-rigor-review`](skills/research/briefbound-research-rigor-review/SKILL.md)
-- [`briefbound-competition-research-lifecycle`](skills/research/briefbound-competition-research-lifecycle/SKILL.md)
 - [`briefbound-score-loop`](skills/competition/briefbound-score-loop/SKILL.md)
-- [`briefbound-huawei-nslb-score-loop`](skills/competition/briefbound-huawei-nslb-score-loop/SKILL.md)
 
 ### Creativity
 

@@ -8,7 +8,6 @@
                    "./skills/engineering/briefbound-ui-review",
                    "./skills/engineering/briefbound-frontend-engineering",
                    "./skills/competition/briefbound-score-loop",
-                   "./skills/competition/briefbound-huawei-nslb-score-loop",
                    "./skills/creative/briefbound-creative-toolbox",
                    "./skills/creative/briefbound-diagram-design",
                    "./skills/engineering/briefbound-project-memory",
@@ -18,19 +17,15 @@
                    "./skills/engineering/briefbound-feature-reuse-research",
                    "./skills/engineering/briefbound-planning",
                    "./skills/engineering/briefbound-bdd-tdd-development",
-                   "./skills/engineering/briefbound-completion-summary",
                    "./skills/engineering/briefbound-pr-review",
+                   "./skills/engineering/briefbound-project-dissection",
                    "./skills/engineering/briefbound-project-review",
-                   "./skills/engineering/briefbound-simplification-review",
                    "./skills/engineering/briefbound-simplification-audit",
                    "./skills/engineering/briefbound-bug-review",
                    "./skills/engineering/briefbound-performance-engineering",
                    "./skills/engineering/briefbound-code-structure-guard",
-                   "./skills/engineering/briefbound-evaluation",
-                   "./skills/engineering/briefbound-goal-loop",
                    "./skills/research/briefbound-ai-research-loop",
-                   "./skills/research/briefbound-research-rigor-review",
-                   "./skills/research/briefbound-competition-research-lifecycle"
+                   "./skills/research/briefbound-research-rigor-review"
                ],
     "name":  "briefbound-skills"
 }

@@ -17,7 +17,7 @@ license: MIT
 - Allowed Action: 只操作 memory/dashboard 与协调工具；不修改业务代码或伪造 claim、进度和验证。
 - Success Evidence: 来源可追溯，delta 写入正确 lane，索引/HTML/registry 一致且不覆盖并行改动。
 - Stop Condition: 用户/规则未要求、事实源不明、ownership 冲突、脚本缺失、渲染失败或写入会覆盖他人状态。
-- Route Out: 原任务 owner、`briefbound-autonomous-collaboration-loop`、`briefbound-thread-coordination`、`briefbound-completion-summary`、`briefbound-router` 或 BLOCKED。
+- Route Out: 原任务 owner、`briefbound-autonomous-collaboration-loop`、`briefbound-thread-coordination`、`briefbound-router` 或 BLOCKED。
 
 ## 统一调用契约
 

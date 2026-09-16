@@ -1,0 +1,4 @@
+interface:
+  display_name: "Briefbound 项目拆解"
+  short_description: "沿真实代码讲清项目架构、主链路与设计取舍，并自动联动中文图解"
+  default_prompt: "使用 $briefbound-project-dissection 拆解这个仓库，结合代码说明设计取舍与阅读路线，并联动生成中文架构图和主链路图。"

@@ -4,6 +4,7 @@ import re
 import shutil
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
 
 
@@ -27,6 +28,14 @@ SUPERPOWERS_ENTRYPOINTS = (
 DISABLED_SKILL_FILENAME = "SKILL.md.briefbound-disabled"
 LEGACY_DISABLED_SKILL_FILENAME = "SKILL.md.ccdawn-disabled"
 ROUTER_SKILL_NAME = "briefbound-router"
+RETIRED_SKILLS = {
+    "briefbound-huawei-nslb-score-loop": "briefbound-score-loop",
+    "briefbound-evaluation": "briefbound-router",
+    "briefbound-goal-loop": "briefbound-router",
+    "briefbound-completion-summary": "briefbound-router",
+    "briefbound-competition-research-lifecycle": "briefbound-ai-research-loop",
+    "briefbound-simplification-review": "briefbound-simplification-audit"
+}
 LEGACY_SPECIAL_SKILL_NAMES = {
     "briefbound-router": "ccdawn-brt",
     "briefbound-project-memory": "ccdawn-dawn-agent-html-memory",
@@ -522,6 +531,45 @@ def manage_legacy_skill_copies(
             print(f"  {path}: {reason}")
 
 
+def manage_retired_skills(roots: list[Path], selected: list[str], *, apply: bool = False,
+                          dry_run: bool = False) -> bool:
+    """Archive verified retired entrypoints only after their replacements install."""
+    clean = True
+    for root in roots:
+        for name, replacement in RETIRED_SKILLS.items():
+            if replacement not in selected:
+                continue
+            path = root / name
+            if not path.exists() and not path.is_symlink():
+                continue
+            if _legacy_path_kind(path) != "directory" or path.resolve().parent != root.resolve():
+                print(f"Retired skill needs manual inspection (link/outside root): {path}")
+                clean = False
+                continue
+            try:
+                actual = read_skill_name(path)
+            except (OSError, UnicodeError, SystemExit) as exc:
+                print(f"Cannot verify retired skill {path}: {exc}")
+                clean = False
+                continue
+            if actual != name:
+                print(f"Retired path preserved: {path} contains {actual!r}")
+                clean = False
+                continue
+            if dry_run:
+                print(f"Would archive retired skill: {path} -> {replacement}")
+            elif apply:
+                backup_root = root.parent / "skill-backups"
+                backup_root.mkdir(parents=True, exist_ok=True)
+                archive = Path(tempfile.mkdtemp(prefix="retired-", dir=backup_root)) / name
+                shutil.move(str(path), str(archive))
+                print(f"Archived retired skill: {path} -> {archive}")
+            else:
+                print(f"Retired skill still installed: {path}; install {replacement} to migrate.")
+                clean = False
+    return clean
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Install this local skill library into Codex, Grok, optional .agents, and Claude skill directories."
@@ -612,6 +660,7 @@ def main() -> int:
     roots = destination_roots(home, args.agent)
     if args.dry_run:
         print_install_plan(home, roots, selected_skill_names_list)
+        manage_retired_skills(roots, selected_skill_names_list, dry_run=True)
         manage_legacy_skill_copies(roots, selected_skill_names_list, remove=True, dry_run=True)
         if targets_codex(home, roots):
             manage_process_skill_conflicts(home, args.process_skill_conflicts, dry_run=True)
@@ -629,6 +678,8 @@ def main() -> int:
         print("Verified installed skills:")
         for path in installed_skills:
             print(f"  {path}")
+        if not manage_retired_skills(roots, selected_skill_names_list):
+            return 1
         manage_legacy_skill_copies(roots, selected_skill_names_list)
         if targets_codex(home, roots):
             validator = codex_validator_path(home)
@@ -659,6 +710,8 @@ def main() -> int:
     verified_installed_skills = verify_installed_skill_copies(roots, selected_skill_names_list)
     if not verified_installed_skills:
         raise SystemExit("Installed skill verification failed; legacy copies were not removed.")
+    if not manage_retired_skills(roots, selected_skill_names_list, apply=True):
+        raise SystemExit("Retired entrypoints need manual inspection; unverified paths were preserved.")
     manage_legacy_skill_copies(roots, selected_skill_names_list, remove=True)
     if targets_codex(home, roots):
         manage_process_skill_conflicts(home, args.process_skill_conflicts)

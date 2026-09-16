@@ -17,7 +17,7 @@ license: MIT
 - Allowed Action: 在已确认范围内提出并评估候选；不静默改变指标、数据、基线、预算或提交目标。
 - Success Evidence: 精确 baseline/candidate、参数或 diff、命令、数据/seed、主副指标、运行产物和可比性判断。
 - Stop Condition: 协议漂移、指标无法解析、候选重复、预算耗尽、连续结果不再提供新信息、写入冲突或安全边界变化。
-- Route Out: 继续当前 loop、返回 `briefbound-ai-research-loop`、返回 `briefbound-competition-research-lifecycle`、`briefbound-bug-review`、`briefbound-router` 或 BLOCKED。
+- Route Out: 继续当前 loop、返回 `briefbound-ai-research-loop`、`briefbound-bug-review`、`briefbound-router` 或 BLOCKED。
 
 ## 统一调用契约
 

@@ -21,7 +21,6 @@ ROUTER_CORE_MARKERS = [
     "FAST_PATH",
     "COMPACT_FLOW",
     "FULL_FLOW",
-    "briefbound-simplification-review",
     "briefbound-simplification-audit",
     "briefbound-performance-engineering",
     "briefbound-code-structure-guard",
@@ -97,17 +96,13 @@ TOKEN_BUDGETS = {
     "briefbound-router": 2800,
     "briefbound-bug-review": 1200,
     "briefbound-code-structure-guard": 1100,
-    "briefbound-competition-research-lifecycle": 2500,
-    "briefbound-completion-summary": 2400,
     "briefbound-creative-toolbox": 1400,
     "briefbound-project-memory": 1400,
     "briefbound-development-cleanup": 1900,
     "briefbound-design-system": 1500,
-    "briefbound-evaluation": 1000,
     "briefbound-feature-reuse-research": 2100,
     "briefbound-frontend-engineering": 1550,
-    "briefbound-goal-loop": 1100,
-    "briefbound-huawei-nslb-score-loop": 1200,
+    "briefbound-project-dissection": 2000,
     "briefbound-multi-agent-orchestration": 1800,
     "briefbound-performance-engineering": 1500,
     "briefbound-planning": 1850,
@@ -116,7 +111,6 @@ TOKEN_BUDGETS = {
     "briefbound-research-rigor-review": 1600,
     "briefbound-score-loop": 2200,
     "briefbound-simplification-audit": 1000,
-    "briefbound-simplification-review": 1000,
     "briefbound-thread-coordination": 1300,
     "briefbound-ui-design": 2100,
     "briefbound-ui-review": 1350,
@@ -1340,19 +1334,6 @@ def validate_skill(
             if marker not in text:
                 errors.append(f"{label}: experiment/TDD boundary missing marker '{marker}'")
 
-    if name == "briefbound-huawei-nslb-score-loop":
-        for marker in [
-            "不得把 skill 内的旧分数、hash",
-            "## Live-State Gate",
-            "EXPLOIT",
-            "EXPLORE",
-            "DIAGNOSE",
-            "代理测试",
-            "旧 ledger、search graph、attempt cards 和 failed diffs 是可选事实源",
-        ]:
-            if marker not in text:
-                errors.append(f"{label}: live adaptive NSLB contract missing marker '{marker}'")
-
     if name == "briefbound-creative-toolbox":
         for marker in [
             "## Method Router",
@@ -1374,11 +1355,6 @@ def validate_skill(
         for marker in ["## 触发闸门", "## 审查方法", "ACCEPT", "QUALIFY", "REJECT", "BLOCKED"]:
             if marker not in text:
                 errors.append(f"{label}: research rigor gate missing marker '{marker}'")
-
-    if name == "briefbound-competition-research-lifecycle":
-        for marker in ["全项目协调层", "不默认创建 3-6 lanes", "普通 candidate gate 不经过 Rigor Review"]:
-            if marker not in text:
-                errors.append(f"{label}: competition lifecycle ownership boundary missing marker '{marker}'")
 
     if name == "briefbound-thread-coordination":
         thread_contract_text = (
@@ -1491,12 +1467,6 @@ def validate_skill(
                 errors.append(f"{label}: peer collaboration must not restore hierarchical marker '{forbidden}'")
 
     compact_review_contracts = {
-        "briefbound-evaluation": [
-            "无需向用户输出“复用检查”",
-            "没有 finding 不展示矩阵",
-            "最多给 3 个建议",
-            "评价 skill 本身不再复制执行流程",
-        ],
         "briefbound-project-review": [
             "不逐项询问",
             "不默认生成项目地图、矩阵、ledger",
@@ -1534,11 +1504,6 @@ def validate_skill(
             if marker not in text:
                 errors.append(f"{label}: live coordination/memory bridge missing marker '{marker}'")
 
-    if name == "briefbound-goal-loop":
-        for marker in ["用户明确要求持续/反复迭代", "Goal Loop 是控制策略，不是状态存储", "不在每轮询问是否继续"]:
-            if marker not in text:
-                errors.append(f"{label}: goal-loop ownership boundary missing marker '{marker}'")
-
     if name == "briefbound-development-cleanup":
         cleanup_contract_text = (
             text
@@ -1568,11 +1533,7 @@ def validate_skill(
     route_regressions = {
         "briefbound-planning": {
             "required": ["默认 `DIRECT_IMPLEMENTATION`", "在当前方案内使用 `TASK_GRAPH`", "默认连续执行 Critical Path", "只有 Briefbound Router 判为 `PROFILE`"],
-            "forbidden": ["briefbound-task-splitting", "默认路由到 `briefbound-completion-summary`"],
-        },
-        "briefbound-completion-summary": {
-            "required": ["普通 FAST_PATH 和有界 COMPACT_FLOW", "不单独加载本 skill", "无持久状态需求时不生成 Ledger"],
-            "forbidden": ["总结时必须读取并更新账本", "代码写入型工作尚未做清理检查时"],
+            "forbidden": ["briefbound-task-splitting"],
         },
         "briefbound-development-cleanup": {
             "required": ["没有已知候选时直接收口", "禁止 force 删除 dirty worktree"],
@@ -1694,13 +1655,6 @@ def validate_catalog(repo_root: Path, skill_dirs: list[Path], errors: list[str])
             "briefbound-router routing-practice: external install candidates belong in "
             f"github-skill-candidates.md, found {leaked_candidates}"
         )
-
-    huawei_root = repo_root / "skills" / "competition" / "briefbound-huawei-nslb-score-loop"
-    for markdown_path in sorted(huawei_root.rglob("*.md")):
-        if re.search(r"(?i)[A-Z]:\\Users\\", read_text(markdown_path)):
-            errors.append(
-                f"{markdown_path.relative_to(repo_root)}: project adapter must not hard-code a user profile path"
-            )
 
     validate_briefbound_route_references(repo_root, set(skill_names), errors)
     validate_package_routing_cases(repo_root, set(skill_names), errors)
