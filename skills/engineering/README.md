@@ -16,6 +16,7 @@
 - **[briefbound-feature-reuse-research](./briefbound-feature-reuse-research/SKILL.md)** - Reuse research only when external or in-project candidates can materially change a complex feature plan.
 - **[briefbound-planning](./briefbound-planning/SKILL.md)** - Implementation planning after aligned requirements.
 - **[briefbound-plain-talk](./briefbound-plain-talk/SKILL.md)** - Default style layer for user-visible replies: answer first, plain Chinese, no code dumps (cite file:line instead).
+- **[briefbound-readme-optimization](./briefbound-readme-optimization/SKILL.md)** - Evidence-driven README creation/improvement: type-tailored sections, every command and claim traceable to manifests or source.
 - **[briefbound-bdd-tdd-development](./briefbound-bdd-tdd-development/SKILL.md)** - Compact TDD for already-defined new behavior or high-risk implementation contracts; it does not re-own diagnosed bugs.
 - **[briefbound-completion-summary](./briefbound-completion-summary/SKILL.md)** - Compact cross-session handoff and formal evidence packages, never a default completion stage.
 - **[briefbound-pr-review](./briefbound-pr-review/SKILL.md)** - Explicit PR, branch, commit-range, or diff review against requirements, evidence, regression risk, and merge readiness.

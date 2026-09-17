@@ -3,7 +3,7 @@
 [![Release](https://img.shields.io/github/v/release/CCDawn/codex-skills?display_name=tag)](https://github.com/CCDawn/codex-skills/releases)
 [![Validate](https://github.com/CCDawn/codex-skills/actions/workflows/validate.yml/badge.svg)](https://github.com/CCDawn/codex-skills/actions/workflows/validate.yml)
 [![License](https://img.shields.io/github/license/CCDawn/codex-skills)](LICENSE)
-[![Skills](https://img.shields.io/badge/skills-33-2f81f7)](#完整-skill-目录)
+[![Skills](https://img.shields.io/badge/skills-34-2f81f7)](#完整-skill-目录)
 [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-compatible-1f883d)](https://agentskills.io/)
 [![skills.sh](https://skills.sh/b/CCDawn/codex-skills)](https://skills.sh/CCDawn/codex-skills)
 
@@ -11,7 +11,7 @@
 
 **约定内自主推进，约定变化主动商量。**
 
-33 个中文优先 Agent Skills，支持 Codex 与 Grok Build，覆盖意图对齐、动态路由、多会话平级协作与自动闭环、轻量开发、代码结构守卫、性能工程、开发清理、代码审查、UI 设计和 AI 研究工作流。
+34 个中文优先 Agent Skills，支持 Codex 与 Grok Build，覆盖意图对齐、动态路由、多会话平级协作与自动闭环、轻量开发、代码结构守卫、性能工程、开发清理、代码审查、UI 设计和 AI 研究工作流。
 
 - 用户正常说需求即可，不需要主动调用 `briefbound-router` 或记忆流程命令。
 - [`briefbound-router`](skills/engineering/briefbound-router/SKILL.md) 会在意图明确时直接推进；低/中风险不确定时先声明假设再继续，只有高影响分叉才用一轮紧凑的建议/对齐并等待校准；讨论时先说结果、使用通俗中文，并只解释会影响判断或操作的复杂概念。
@@ -96,6 +96,7 @@ sh ./install.sh
 - [`briefbound-development-cleanup`](skills/engineering/briefbound-development-cleanup/SKILL.md)：清理开发残留，并安全收尾已合并本地分支、worktree 和 claim。
 - [`briefbound-bug-review`](skills/engineering/briefbound-bug-review/SKILL.md)：从症状和失败证据定位根因，完成有界修复与验证。
 - [`briefbound-plain-talk`](skills/engineering/briefbound-plain-talk/SKILL.md)：用户可见回复的默认风格层：结论先行、平实中文、不贴代码细节（引用文件:行号）。
+- [`briefbound-readme-optimization`](skills/engineering/briefbound-readme-optimization/SKILL.md)：以仓库清单与源码事实为据，按项目类型生成或增强中文优先 README，逐条可溯源。
 - [`briefbound-performance-engineering`](skills/engineering/briefbound-performance-engineering/SKILL.md)：只在性能目标、回归或关键热路径需要测量时定位瓶颈并验证最小优化。
 - [`briefbound-code-structure-guard`](skills/engineering/briefbound-code-structure-guard/SKILL.md)：在开发中识别多职责巨型文件，只在维护收益明确时执行最小拆分。
 - [`briefbound-pr-review`](skills/engineering/briefbound-pr-review/SKILL.md)：按风险排序审查 PR、diff、分支和合并准备度。
@@ -183,6 +184,7 @@ sh ./install.sh
 
 - **`briefbound-planning`**
 - **`briefbound-plain-talk`**
+- **`briefbound-readme-optimization`**
   只在真实设计分叉、高风险顺序或跨边界交接需要可复用方案时触发；存在独立 owner、依赖或验证边界时在同一方案内生成最小任务图，否则由当前 owner 直接实施。
 
 - **`briefbound-bdd-tdd-development`**
@@ -306,6 +308,7 @@ skills/
     briefbound-feature-reuse-research/
     briefbound-planning/
     briefbound-plain-talk/
+    briefbound-readme-optimization/
     briefbound-bdd-tdd-development/
     briefbound-completion-summary/
     briefbound-pr-review/

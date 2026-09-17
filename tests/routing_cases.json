@@ -66,4 +66,7 @@
 ,
   {"id":"plain-talk-default-style","prompt":"这轮重构到底改了什么？用人话给我讲清楚，别贴代码。","primary":"briefbound-plain-talk","support":[],"forbidden_primary":["briefbound-project-review"]},
   {"id":"plain-talk-supports-dev-work","prompt":"按你说的方案继续修这个 bug，汇报时说人话一点，别甩我一屏代码。","primary":"briefbound-bug-review","support":["briefbound-plain-talk"],"forbidden_primary":["briefbound-plain-talk"]}
+,
+  {"id":"readme-optimization-request","prompt":"帮我优化这个仓库的 README，要能让人不读源码就上手。","primary":"briefbound-readme-optimization","support":[],"forbidden_primary":["briefbound-project-review"]},
+  {"id":"readme-update-does-not-hijack-dev","prompt":"继续实现这个功能，顺手把 README 的安装节更新一下。","primary":"briefbound-frontend-engineering","support":["briefbound-readme-optimization"],"forbidden_primary":["briefbound-readme-optimization"]}
 ]

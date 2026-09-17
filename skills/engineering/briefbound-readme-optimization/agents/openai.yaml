@@ -1,0 +1,4 @@
+interface:
+  display_name: "Briefbound README 优化"
+  short_description: "以仓库事实为据创建或优化中文优先 README，逐条可溯源"
+  default_prompt: "使用 $briefbound-readme-optimization：先读清单文件与目录结构判定项目类型，再按类型骨架生成或增强 README；所有命令与功能描述必须可溯源到清单或源码，输出附逐节变更说明与溯源表。"

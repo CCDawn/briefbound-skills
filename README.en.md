@@ -3,13 +3,13 @@
 [![Release](https://img.shields.io/github/v/release/CCDawn/codex-skills?display_name=tag)](https://github.com/CCDawn/codex-skills/releases)
 [![Validate](https://github.com/CCDawn/codex-skills/actions/workflows/validate.yml/badge.svg)](https://github.com/CCDawn/codex-skills/actions/workflows/validate.yml)
 [![License](https://img.shields.io/github/license/CCDawn/codex-skills)](LICENSE)
-[![Skills](https://img.shields.io/badge/skills-33-2f81f7)](#skill-catalog)
+[![Skills](https://img.shields.io/badge/skills-34-2f81f7)](#skill-catalog)
 [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-compatible-1f883d)](https://agentskills.io/)
 [![skills.sh](https://skills.sh/b/CCDawn/codex-skills)](https://skills.sh/CCDawn/codex-skills)
 
 **Bound to the brief. Free to build.**
 
-Briefbound is a Chinese-first collection of 33 Agent Skills for Codex and Grok Build, covering intent alignment, dynamic routing, peer collaboration and opt-in autonomous closure across existing threads, lightweight development, code-structure guards, performance engineering, cleanup, code review, UI design, and AI research workflows.
+Briefbound is a Chinese-first collection of 34 Agent Skills for Codex and Grok Build, covering intent alignment, dynamic routing, peer collaboration and opt-in autonomous closure across existing threads, lightweight development, code-structure guards, performance engineering, cleanup, code review, UI design, and AI research workflows.
 
 - Users describe the task normally. They do not need to invoke `briefbound-router` or memorize a workflow.
 - [`briefbound-router`](skills/engineering/briefbound-router/SKILL.md) proceeds immediately when intent is clear; for low- and medium-risk uncertainty it states its assumption and continues, and only a high-impact fork gets one compact alignment turn that waits for calibration. It leads with the result, uses plain language, and explains only complex concepts that affect a decision or action.
@@ -103,7 +103,9 @@ Run `py -3 scripts\run_briefbound_routing_eval.py` after installation for a low-
 - [`briefbound-thread-coordination`](skills/engineering/briefbound-thread-coordination/SKILL.md): shared progress, conflict, discussion, pause/resume, and fast-merge coordination for same-project agents.
 - [`briefbound-development-cleanup`](skills/engineering/briefbound-development-cleanup/SKILL.md): post-development residue and safe merged local branch, worktree, and claim cleanup.
 - [`briefbound-bug-review`](skills/engineering/briefbound-bug-review/SKILL.md): evidence-driven diagnosis, bounded repair, and verification.
-- [`briefbound-plain-talk`](skills/engineering/briefbound-plain-talk/SKILL.md): default style layer for user-visible replies: answer first, plain Chinese, no code dumps (cite file:line instead).
+- [`briefbound-plain-talk`](skills/engineering/briefbound-plain-talk/SKILL.md)
+- [`briefbound-readme-optimization`](skills/engineering/briefbound-readme-optimization/SKILL.md): default style layer for user-visible replies: answer first, plain Chinese, no code dumps (cite file:line instead).
+- [`briefbound-readme-optimization`](skills/engineering/briefbound-readme-optimization/SKILL.md): evidence-driven README creation and improvement with type-tailored sections.
 - [`briefbound-performance-engineering`](skills/engineering/briefbound-performance-engineering/SKILL.md): measured bottleneck diagnosis and minimal optimization only for real performance targets, regressions, or hot paths.
 - [`briefbound-code-structure-guard`](skills/engineering/briefbound-code-structure-guard/SKILL.md): lightweight protection against multi-responsibility giant files without mechanical line-count splitting.
 - [`briefbound-pr-review`](skills/engineering/briefbound-pr-review/SKILL.md): risk-ranked PR and diff review with merge-readiness evidence.
@@ -143,6 +145,7 @@ Run `py -3 scripts\run_briefbound_routing_eval.py` after installation for a low-
 - [`briefbound-feature-reuse-research`](skills/engineering/briefbound-feature-reuse-research/SKILL.md)
 - [`briefbound-planning`](skills/engineering/briefbound-planning/SKILL.md)
 - [`briefbound-plain-talk`](skills/engineering/briefbound-plain-talk/SKILL.md)
+- [`briefbound-readme-optimization`](skills/engineering/briefbound-readme-optimization/SKILL.md)
 - [`briefbound-bdd-tdd-development`](skills/engineering/briefbound-bdd-tdd-development/SKILL.md)
 - [`briefbound-completion-summary`](skills/engineering/briefbound-completion-summary/SKILL.md)
 - [`briefbound-simplification-review`](skills/engineering/briefbound-simplification-review/SKILL.md)

@@ -112,6 +112,7 @@ TOKEN_BUDGETS = {
     "briefbound-performance-engineering": 1500,
     "briefbound-planning": 1850,
     "briefbound-plain-talk": 1200,
+    "briefbound-readme-optimization": 1500,
     "briefbound-pr-review": 1500,
     "briefbound-project-review": 1500,
     "briefbound-research-rigor-review": 1600,
