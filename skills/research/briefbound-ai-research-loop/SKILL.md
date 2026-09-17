@@ -25,7 +25,7 @@ license: MIT
 - Success Evidence: 可复现命令、baseline 指纹、metric 与方差、diff/config、实验 artifact、对照/消融结果以及有来源的研究结论。
 - Stop Condition: baseline 不可信、评价协议漂移、数据泄漏、预算或权限不足、结果不可复现、关键假设无法区分，或继续实验已无新的信息价值。
 - Route Out: `briefbound-score-loop`、`briefbound-feature-reuse-research`、`briefbound-bug-review`、`briefbound-research-rigor-review`、完成交接或 BLOCKED。
-- Support 图解：研究综合或结题汇报结构复杂时自动加载 `briefbound-diagram-design` 配图（不夺所有权）；短状态回复不配图。
+- Support 图解：研究汇报复杂时自动加载 `briefbound-diagram-design` 配图（不夺所有权）；短状态不配图。
 
 ## 统一调用契约
 
