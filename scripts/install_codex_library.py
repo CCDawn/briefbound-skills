@@ -43,6 +43,7 @@ ROUTER_ACTIVATION_BLOCK = f"""{ROUTER_ACTIVATION_START}
 - Ask only questions whose answers change the approach, batched into one round. Zero questions is legitimate when intent and scope are already clear; never re-ask what task or project memory already answered.
 - Delegation: Briefbound itself creates no subagents. If the runtime provides delegation tools, dispatch independent, parallelizable work directly without asking; keep trivial or single-owner work with the current agent, never block work on a delegation decision, and never invent tool names.
 - For cross-skill routing, load `briefbound-router` and follow its gates.
+- Support substantive reports or explanations with a diagram from `briefbound-diagram-design` when it materially improves comprehension; short status replies stay text-only.
 - User-visible output is Chinese-first and follows `briefbound-plain-talk` by default: lead with the answer in plain language, no code dumps in replies (cite `file:line` instead), and no internal routing ledgers or unexplained enums.
 {ROUTER_ACTIVATION_END}"""
 

@@ -18,6 +18,7 @@ license: MIT
 - Success Evidence: finding 绑定文件/命令/运行证据、影响、最小动作和验证条件。
 - Stop Condition: 范围不明、对象变成 PR/具体 bug、关键证据缺失、需要写入或高风险决策。
 - Route Out: `briefbound-simplification-audit`、`briefbound-planning`、`briefbound-bug-review`、`briefbound-performance-engineering`、`briefbound-pr-review`、`briefbound-router` 或 BLOCKED。
+- Support 图解：完整审查报告结构复杂时，自动加载当前可用的 `briefbound-diagram-design` 配图（不夺内容所有权），无需另问；短状态回复不配图。
 
 ## 统一调用契约
 

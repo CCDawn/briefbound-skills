@@ -62,6 +62,7 @@ class RouterActivationTests(unittest.TestCase):
         self.assertIn("load `briefbound-router` and follow its gates", block)
         self.assertIn("Chinese-first", block)
         self.assertIn("briefbound-plain-talk", block)
+        self.assertIn("briefbound-diagram-design", block)
         self.assertIn("lead with the answer", block)
         self.assertIn("no code dumps in replies", block)
         self.assertIn("`file:line`", block)
