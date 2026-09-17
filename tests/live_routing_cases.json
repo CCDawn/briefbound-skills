@@ -318,4 +318,29 @@
     "forbidden_final_any": ["已修改"],
     "timeout_seconds": 300
   }
+,
+ {
+  "id": "plain-talk-report-suppresses-code-dump",
+  "prompt": "仅测试输出风格，不修改文件。用人话总结当前 ~/.codex/AGENTS.md 入口块对用户可见回复的要求；不要贴规则原文，也不要出现任何代码块。",
+  "smoke": false,
+  "expected_skill_reads": [],
+  "forbidden_skill_reads": ["briefbound-diagram-design"],
+  "max_commands": 3,
+  "expected_final_any": ["中文"],
+  "max_questions": 0,
+  "forbidden_final_any": ["```", ">>>", "```md"],
+  "timeout_seconds": 120
+ },
+ {
+  "id": "diagram-chain-report-loads-diagram-skill",
+  "prompt": "仅测试链路，不实际生成文件。为这个技能包做一份适合放进评审材料的结构报告，说明你会如何呈现。",
+  "smoke": false,
+  "expected_skill_reads": ["briefbound-diagram-design"],
+  "forbidden_skill_reads": ["briefbound-planning", "briefbound-bdd-tdd-development"],
+  "max_commands": 4,
+  "expected_final_any": ["diagram-design"],
+  "max_questions": 0,
+  "forbidden_final_any": [],
+  "timeout_seconds": 120
+ }
 ]
