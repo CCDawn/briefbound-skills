@@ -111,6 +111,7 @@ TOKEN_BUDGETS = {
     "briefbound-multi-agent-orchestration": 1900,
     "briefbound-performance-engineering": 1500,
     "briefbound-planning": 1850,
+    "briefbound-plain-talk": 1200,
     "briefbound-pr-review": 1500,
     "briefbound-project-review": 1500,
     "briefbound-research-rigor-review": 1600,

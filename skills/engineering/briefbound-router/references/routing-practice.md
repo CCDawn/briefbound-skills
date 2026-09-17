@@ -20,6 +20,7 @@
 | 源码学习、项目拆解 | `briefbound-project-dissection` | COMPACT | 教学报告与 diagram-design 配图 |
 | 审整仓、架构、技术债、测试体系、接手摸底 | `briefbound-project-review` | COMPACT | 风险排序 findings 与执行队列 |
 | 评价流程、方案、skill、输出质量，且无更具体 owner | `briefbound-evaluation` | MICRO/COMPACT | 证据化判断与高 ROI 建议 |
+| 输出风格、说人话、讲重点、少贴代码、回复可读性 | `briefbound-plain-talk` | MICRO | 结论先行的平实回复；任何 owner 的用户可见输出默认受其约束 |
 | 新建或重定 UI/UX、信息层级、交互模型、响应式或无障碍决策 | `briefbound-ui-design` | FAST/COMPACT | 必要时先交付隔离预览，再形成可实施 UI 契约 |
 | 品牌表达、视觉方向、字体、色彩、构图、图像或动效语言 | `briefbound-visual-design` | COMPACT | 必要时先交付隔离预览，再形成语境化视觉契约 |
 | 架构、流程、时序、ER/UML、定量图表或 Mermaid/draw.io/Excalidraw 重绘 | `briefbound-diagram-design` | FAST/COMPACT | 可编辑 HTML/SVG、所需 PNG、保真说明与结构/视觉验收 |

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Briefbound 说人话"
+  short_description: "用户可见回复的默认风格层：结论先行、平实中文、不倒代码细节"
+  default_prompt: "使用 $briefbound-plain-talk：把回复组织成结论先行、平实中文的短结构；代码细节留在文件里，只引用 文件:行号 并用一句话说明差异；数字、条件、承诺、归属原样保留。"

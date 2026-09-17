@@ -63,4 +63,7 @@
   {"id":"diagram-not-for-photo-styling","prompt":"帮我把产品官网的摄影图调亮并统一成品牌色调，保持原有构图。","primary":"briefbound-visual-design","support":[],"forbidden_primary":["briefbound-diagram-design","briefbound-ui-design"]},
   {"id":"project-dissection-teaching","prompt":"带我把这个开源仓库讲透：从入口追一条代表执行链路，解释关键设计取舍，最后给我一条由浅入深的阅读路线。","primary":"briefbound-project-dissection","support":[],"forbidden_primary":["briefbound-project-review","briefbound-pr-review"]},
   {"id":"dissection-not-risk-audit","prompt":"接手前审查这个仓库的架构风险、技术债和测试缺口，按风险排序给出处理建议。","primary":"briefbound-project-review","support":[],"forbidden_primary":["briefbound-project-dissection","briefbound-bug-review"]}
+,
+  {"id":"plain-talk-default-style","prompt":"这轮重构到底改了什么？用人话给我讲清楚，别贴代码。","primary":"briefbound-plain-talk","support":[],"forbidden_primary":["briefbound-project-review"]},
+  {"id":"plain-talk-supports-dev-work","prompt":"按你说的方案继续修这个 bug，汇报时说人话一点，别甩我一屏代码。","primary":"briefbound-bug-review","support":["briefbound-plain-talk"],"forbidden_primary":["briefbound-plain-talk"]}
 ]

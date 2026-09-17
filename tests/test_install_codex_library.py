@@ -61,8 +61,10 @@ class RouterActivationTests(unittest.TestCase):
         self.assertIn("never invent tool names", block)
         self.assertIn("load `briefbound-router` and follow its gates", block)
         self.assertIn("Chinese-first", block)
-        self.assertIn("Lead with the result", block)
-        self.assertIn("stay concise", block)
+        self.assertIn("briefbound-plain-talk", block)
+        self.assertIn("lead with the answer", block)
+        self.assertIn("no code dumps in replies", block)
+        self.assertIn("`file:line`", block)
         self.assertIn("unexplained enums", block)
         calibration_lines = [
             line for line in block.splitlines() if "wait for calibration" in line
