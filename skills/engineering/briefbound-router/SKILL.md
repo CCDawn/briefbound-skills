@@ -46,7 +46,7 @@ Briefbound 对齐意图、选择 owner 并推进验证。结果明确时直接�
 - 开发中出现多职责巨型文件、难导航/测试或反复结构冲突：`briefbound-code-structure-guard`；行数本身不触发拆分。
 - AI/ML 研究：`briefbound-ai-research-loop`；单条 metric lane：`briefbound-score-loop`；重要 claim：`briefbound-research-rigor-review`。
 - 多会话协商：`briefbound-multi-agent-orchestration`；单次冲突：`briefbound-thread-coordination`；自动本地集成：`briefbound-autonomous-collaboration-loop`；残留：`briefbound-development-cleanup`。
-- 真实设计分叉：`briefbound-planning`；无专项 owner 的评价：`briefbound-evaluation`，通用评价也可按需读 `references/evaluation.md`。
+- 真实设计分叉：`briefbound-planning`；无专项 owner 的评价按需读 `references/evaluation.md`。
 - 专用工具、文件制品、结构化图解及复杂汇报配图按需读 `references/capability-routing.md`。
 
 无法仲裁才读 `references/routing-practice.md`。以本轮 Available skills 为准；未安装 skill 不能成为 owner。
@@ -109,6 +109,6 @@ Wrong-Edit Guard：定位 owning surface、预计文件、相关测试和已有�
 
 首次写入、scope 扩大或合并前运行 `preflight --write-kind`；规划文档属于 development 写入，须先隔离。无 registry 仍检查 Git。根 `main/master` 的 `development` 收到 `ISOLATION_REQUIRED` 后转 task worktree；`mechanical` 显式声明；`integration` 需有效 claim 且 clean。`OVERLAP` 进入 Silent Conflict Triage，仅不可拆且立即覆盖/回归时暂停。
 
-跨阶段恢复、正式交接或 Deferred 风险使用 `briefbound-completion-summary`，并按 `references/runtime.md` 收口；已知残留才 cleanup。同一任务 PR 后按 `PR_OPEN / PR_MERGED / PR_CLOSED_UNMERGED` 路由 `briefbound-development-cleanup`；仅验证 base 吸收 published head 后收尾本地资源，远程分支删除仍单独授权。
+跨阶段恢复、正式交接或 Deferred 风险按 `references/runtime.md` 收口；已知残留才 cleanup。同一任务 PR 后按 `PR_OPEN / PR_MERGED / PR_CLOSED_UNMERGED` 路由 `briefbound-development-cleanup`；仅验证 base 吸收 published head 后收尾本地资源，远程分支删除仍单独授权。
 
 用户可见内容默认中文：先说结果和必要依据；内部路由、枚举和账本不直接展示。复杂概念会改变用户判断或操作时，首次出现用一句话解释；技术字面量保持原样。checkpoint 要短；存在自然闸门时，末行（Next Action）给一条明确的下一步建议；否则声明继续推进已授权工作，不交回可自行完成的建议。

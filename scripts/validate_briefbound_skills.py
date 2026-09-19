@@ -98,15 +98,12 @@ TOKEN_BUDGETS = {
     "briefbound-bug-review": 1200,
     "briefbound-code-structure-guard": 1100,
     "briefbound-competition-research-lifecycle": 2500,
-    "briefbound-completion-summary": 2400,
     "briefbound-creative-toolbox": 1400,
     "briefbound-project-memory": 1400,
     "briefbound-development-cleanup": 1900,
     "briefbound-design-system": 1500,
-    "briefbound-evaluation": 1000,
     "briefbound-feature-reuse-research": 2100,
     "briefbound-frontend-engineering": 1550,
-    "briefbound-goal-loop": 1100,
     "briefbound-huawei-nslb-score-loop": 1200,
     "briefbound-multi-agent-orchestration": 1900,
     "briefbound-performance-engineering": 1500,
@@ -1496,12 +1493,6 @@ def validate_skill(
                 errors.append(f"{label}: peer collaboration must not restore hierarchical marker '{forbidden}'")
 
     compact_review_contracts = {
-        "briefbound-evaluation": [
-            "无需向用户输出“复用检查”",
-            "没有 finding 不展示矩阵",
-            "最多给 3 个建议",
-            "评价 skill 本身不再复制执行流程",
-        ],
         "briefbound-project-review": [
             "不逐项询问",
             "不默认生成项目地图、矩阵、ledger",
@@ -1539,11 +1530,6 @@ def validate_skill(
             if marker not in text:
                 errors.append(f"{label}: live coordination/memory bridge missing marker '{marker}'")
 
-    if name == "briefbound-goal-loop":
-        for marker in ["用户明确要求持续/反复迭代", "Goal Loop 是控制策略，不是状态存储", "不在每轮询问是否继续"]:
-            if marker not in text:
-                errors.append(f"{label}: goal-loop ownership boundary missing marker '{marker}'")
-
     if name == "briefbound-development-cleanup":
         cleanup_contract_text = (
             text
@@ -1573,11 +1559,7 @@ def validate_skill(
     route_regressions = {
         "briefbound-planning": {
             "required": ["默认 `DIRECT_IMPLEMENTATION`", "在当前方案内使用 `TASK_GRAPH`", "默认连续执行 Critical Path", "只有 Briefbound Router 判为 `PROFILE`"],
-            "forbidden": ["briefbound-task-splitting", "默认路由到 `briefbound-completion-summary`"],
-        },
-        "briefbound-completion-summary": {
-            "required": ["普通 FAST_PATH 和有界 COMPACT_FLOW", "不单独加载本 skill", "无持久状态需求时不生成 Ledger"],
-            "forbidden": ["总结时必须读取并更新账本", "代码写入型工作尚未做清理检查时"],
+            "forbidden": ["briefbound-task-splitting"],
         },
         "briefbound-development-cleanup": {
             "required": ["没有已知候选时直接收口", "禁止 force 删除 dirty worktree"],

@@ -3,13 +3,13 @@
 [![Release](https://img.shields.io/github/v/release/CCDawn/codex-skills?display_name=tag)](https://github.com/CCDawn/codex-skills/releases)
 [![Validate](https://github.com/CCDawn/codex-skills/actions/workflows/validate.yml/badge.svg)](https://github.com/CCDawn/codex-skills/actions/workflows/validate.yml)
 [![License](https://img.shields.io/github/license/CCDawn/codex-skills)](LICENSE)
-[![Skills](https://img.shields.io/badge/skills-34-2f81f7)](#skill-catalog)
+[![Skills](https://img.shields.io/badge/skills-31-2f81f7)](#skill-catalog)
 [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-compatible-1f883d)](https://agentskills.io/)
 [![skills.sh](https://skills.sh/b/CCDawn/codex-skills)](https://skills.sh/CCDawn/codex-skills)
 
 **Bound to the brief. Free to build.**
 
-Briefbound is a Chinese-first collection of 34 Agent Skills for Codex, Grok Build, ZCode, Claude Code, Cursor, Gemini CLI, and OpenCode, covering intent alignment, dynamic routing, peer collaboration and opt-in autonomous closure across existing threads, lightweight development, code-structure guards, performance engineering, cleanup, code review, UI design, and AI research workflows.
+Briefbound is a Chinese-first collection of 31 Agent Skills for Codex, Grok Build, ZCode, Claude Code, Cursor, Gemini CLI, and OpenCode, covering intent alignment, dynamic routing, peer collaboration and opt-in autonomous closure across existing threads, lightweight development, code-structure guards, performance engineering, cleanup, code review, UI design, and AI research workflows.
 
 - Users describe the task normally. They do not need to invoke `briefbound-router` or memorize a workflow.
 - [`briefbound-router`](skills/engineering/briefbound-router/SKILL.md) proceeds immediately when intent is clear; for low- and medium-risk uncertainty it states its assumption and continues, and only a high-impact fork gets one compact alignment turn that waits for calibration. It leads with the result, uses plain language, and explains only complex concepts that affect a decision or action.
@@ -153,11 +153,8 @@ Run `py -3 scripts\run_briefbound_routing_eval.py` after installation for a low-
 - [`briefbound-plain-talk`](skills/engineering/briefbound-plain-talk/SKILL.md)
 - [`briefbound-readme-optimization`](skills/engineering/briefbound-readme-optimization/SKILL.md)
 - [`briefbound-bdd-tdd-development`](skills/engineering/briefbound-bdd-tdd-development/SKILL.md)
-- [`briefbound-completion-summary`](skills/engineering/briefbound-completion-summary/SKILL.md)
 - [`briefbound-simplification-review`](skills/engineering/briefbound-simplification-review/SKILL.md)
 - [`briefbound-simplification-audit`](skills/engineering/briefbound-simplification-audit/SKILL.md)
-- [`briefbound-evaluation`](skills/engineering/briefbound-evaluation/SKILL.md)
-- [`briefbound-goal-loop`](skills/engineering/briefbound-goal-loop/SKILL.md)
 - [`briefbound-project-memory`](skills/engineering/briefbound-project-memory/SKILL.md)
 
 ### AI Research and Competition

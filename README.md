@@ -3,7 +3,7 @@
 [![Release](https://img.shields.io/github/v/release/CCDawn/codex-skills?display_name=tag)](https://github.com/CCDawn/codex-skills/releases)
 [![Validate](https://github.com/CCDawn/codex-skills/actions/workflows/validate.yml/badge.svg)](https://github.com/CCDawn/codex-skills/actions/workflows/validate.yml)
 [![License](https://img.shields.io/github/license/CCDawn/codex-skills)](LICENSE)
-[![Skills](https://img.shields.io/badge/skills-34-2f81f7)](#完整-skill-目录)
+[![Skills](https://img.shields.io/badge/skills-31-2f81f7)](#完整-skill-目录)
 [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-compatible-1f883d)](https://agentskills.io/)
 [![skills.sh](https://skills.sh/b/CCDawn/codex-skills)](https://skills.sh/CCDawn/codex-skills)
 
@@ -11,7 +11,7 @@
 
 **约定内自主推进，约定变化主动商量。**
 
-34 个中文优先 Agent Skills，支持 Codex、Grok Build、ZCode、Claude Code、Cursor、Gemini CLI 与 OpenCode，覆盖意图对齐、动态路由、多会话平级协作与自动闭环、轻量开发、代码结构守卫、性能工程、开发清理、代码审查、UI 设计和 AI 研究工作流。
+31 个中文优先 Agent Skills，支持 Codex、Grok Build、ZCode、Claude Code、Cursor、Gemini CLI 与 OpenCode，覆盖意图对齐、动态路由、多会话平级协作与自动闭环、轻量开发、代码结构守卫、性能工程、开发清理、代码审查、UI 设计和 AI 研究工作流。
 
 - 用户正常说需求即可，不需要主动调用 `briefbound-router` 或记忆流程命令。
 - [`briefbound-router`](skills/engineering/briefbound-router/SKILL.md) 会在意图明确时直接推进；低/中风险不确定时先声明假设再继续，只有高影响分叉才用一轮紧凑的建议/对齐并等待校准；讨论时先说结果、使用通俗中文，并只解释会影响判断或操作的复杂概念。
@@ -204,9 +204,6 @@ python3 scripts/install_codex_library.py --agent opencode --router-activation in
 - **`briefbound-bdd-tdd-development`**
   仅对预期已明确的新行为或高风险实现契约使用紧凑 TDD；未知根因和 bug 修复仍由 Bug Review 全程持有。
 
-- **`briefbound-completion-summary`**
-  只为跨阶段/会话恢复、正式交接或独立证据包生成紧凑总结；普通实现由当前 owner 直接收口，不生成固定账本。
-
 - **`briefbound-pr-review`**
   PR 审阅阶段 skill，用来把 PR、分支、提交范围或本地 diff 对照已确认需求、任务证据、回归风险和合并准备度进行审查。
 
@@ -231,14 +228,8 @@ python3 scripts/install_codex_library.py --agent opencode --router-activation in
 - **`briefbound-code-structure-guard`**
   对本轮手写源码执行 `STAY/CHECK/SPLIT` 结构闸门；行数只触发检查，只有职责、变化或测试边界可分时才拆分。
 
-- **`briefbound-evaluation`**
-  Briefbound 评估适配器，只在没有更具体的 review、debug、planning、verification、feedback 或 goal skill 承接时使用。
-
 - **`briefbound-project-memory`**
   按用户或项目选择维护跨会话决策、blocker 和正式 handoff；不接管当前执行循环，也不逐 task 同步或渲染。
-
-- **`briefbound-goal-loop`**
-  只处理用户明确要求的开放式持续迭代策略；普通有限任务和“继续完成”仍由当前 owner 连续执行。
 
 ### 研究流程
 
@@ -324,7 +315,6 @@ skills/
     briefbound-plain-talk/
     briefbound-readme-optimization/
     briefbound-bdd-tdd-development/
-    briefbound-completion-summary/
     briefbound-pr-review/
     briefbound-project-review/
     briefbound-project-dissection/
@@ -333,8 +323,6 @@ skills/
     briefbound-bug-review/
     briefbound-performance-engineering/
     briefbound-code-structure-guard/
-    briefbound-evaluation/
-    briefbound-goal-loop/
   research/
     README.md
     briefbound-ai-research-loop/
