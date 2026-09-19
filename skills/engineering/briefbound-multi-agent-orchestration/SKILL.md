@@ -27,7 +27,7 @@ license: MIT
 
 ## 进入闸门
 
-Briefbound Router 已对齐意图并有界发现；至少两个现有独立 Codex task 通过 `BRT_TRUSTED_RELAY_V1` 身份门禁，存在真实互补、依赖、重叠或共同集成面。非空相同 `projectId` 可证明同项目；managed Worktree 缺失该字段时必须解析到相同 `gitCommonDir`。原生子 agent 不是平级会话，不能加入 discovery、agreement、outbox 或 relay。
+Briefbound Router 已对齐意图并有界发现；至少两个现有独立 Codex task 通过 `BRT_TRUSTED_RELAY_V1` 身份门禁，存在真实互补、依赖、重叠或共同集成面。非空相同 `projectId` 可证明同项目；managed Worktree 缺失该字段时必须解析到相同 `gitCommonDir`。原生子 agent 不是平级会话，不能加入 discovery、agreement、outbox 或 relay。需平级多会话原语；缺失时不触发，按 scope 串行降级（见 harness 矩阵）。
 
 首次 proposal 只投递给 idle 目标。双方 fresh 校验平台注入的源 thread ID；接收只表示愿意在自身原始任务/权限内协调，不从 relay 获得新写入、删除、建任务、发布或远程 Git 权限。通过后交接为 `PEER_COLLABORATION_READY`。
 

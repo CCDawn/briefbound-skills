@@ -29,7 +29,7 @@ license: MIT
 
 Briefbound Router 仅在非简单目标确有多会话协作价值时，询问一次明确列出项目、既有参与会话、integration target 和本地集成范围的授权。确认后才可联系这些现有会话、协商、安全开发、验证和限定目标的本地集成，直到完成、取消或自然闸门；泛化“继续/确认”不扩大到创建会话或新的 integration target。
 
-没有合适会话时，只询问一次是否创建。远程 push、PR 或破坏性操作不继承授权。自动循环还必须具备已验证的 `BRT_DIRECT_USER_TURN_V1`；否则保持 `BLOCKED_TRANSPORT`，不得启动跨任务循环或 outbox。
+没有合适会话时，只询问一次是否创建。远程 push、PR 或破坏性操作不继承授权。自动循环还必须具备已验证的 `BRT_DIRECT_USER_TURN_V1`，且运行环境提供平级多会话原语（见 harness 能力矩阵）；任一不满足保持 `BLOCKED_TRANSPORT`，不启动跨任务循环或 outbox。
 
 ## 角色与持久状态
 

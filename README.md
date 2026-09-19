@@ -11,7 +11,7 @@
 
 **约定内自主推进，约定变化主动商量。**
 
-34 个中文优先 Agent Skills，支持 Codex 与 Grok Build，覆盖意图对齐、动态路由、多会话平级协作与自动闭环、轻量开发、代码结构守卫、性能工程、开发清理、代码审查、UI 设计和 AI 研究工作流。
+34 个中文优先 Agent Skills，支持 Codex、Grok Build、ZCode、Claude Code、Cursor、Gemini CLI 与 OpenCode，覆盖意图对齐、动态路由、多会话平级协作与自动闭环、轻量开发、代码结构守卫、性能工程、开发清理、代码审查、UI 设计和 AI 研究工作流。
 
 - 用户正常说需求即可，不需要主动调用 `briefbound-router` 或记忆流程命令。
 - [`briefbound-router`](skills/engineering/briefbound-router/SKILL.md) 会在意图明确时直接推进；低/中风险不确定时先声明假设再继续，只有高影响分叉才用一轮紧凑的建议/对齐并等待校准；讨论时先说结果、使用通俗中文，并只解释会影响判断或操作的复杂概念。
@@ -66,6 +66,20 @@ sh ./install.sh
 ```
 
 默认只安装到 `~/.codex/skills/<briefbound-skill-name>`，不会同时写入 `~/.agents/skills` 造成重复入口。选择 `grok` 时安装到 `~/.grok/skills`；选择 `codex-grok` 时只维护这两个运行时。安装器会在对应的 `AGENTS.md` 中维护可逆的轻量 Briefbound Router 激活块，让普通需求自动进入路由，并保留已有全局规则。高级选项见[安装细节](#安装细节)。
+
+## 多 Harness 安装与能力降级
+
+除 Codex 与 Grok Build 外，安装器同样支持 ZCode、Claude Code、Cursor、Gemini CLI 与 OpenCode：
+
+```bash
+python3 scripts/install_codex_library.py --agent zcode    --router-activation install  # ~/.zcode/skills + ~/.zcode/AGENTS.md
+python3 scripts/install_codex_library.py --agent claude   --router-activation install  # ~/.claude/skills + ~/.claude/CLAUDE.md
+python3 scripts/install_codex_library.py --agent cursor   --router-activation install  # ~/.cursor/skills（激活块手动放项目 AGENTS.md）
+python3 scripts/install_codex_library.py --agent gemini   --router-activation install  # ~/.gemini/skills + ~/.gemini/GEMINI.md
+python3 scripts/install_codex_library.py --agent opencode --router-activation install  # ~/.config/opencode/skills + 同目录 AGENTS.md
+```
+
+技能正文与激活块均为 harness 中立：运行环境能力分级与降级规则见 [`briefbound-router/references/harness-compat.md`](skills/engineering/briefbound-router/references/harness-compat.md)。缺少平级多会话原语（`list_threads` 等，当前仅 Codex App 提供）的 harness 中，多会话协作族技能自动降级为单会话串行处理，不模拟协议；`preflight` 与 coordination registry 以等价 Git 检查替代。Codex App、Grok Build、ZCode、Claude Code、Cursor 的安装已实测验证；Gemini CLI 与 OpenCode 目标按官方目录约定提供，尚未实测。
 
 ## 为什么使用 Briefbound
 
@@ -392,8 +406,12 @@ py -3 scripts\install_codex_library.py --agent codex         # 默认 live Codex
 py -3 scripts\install_codex_library.py --agent grok          # Grok Build 原生目标
 py -3 scripts\install_codex_library.py --agent codex-grok    # 只同步 Codex 与 Grok
 py -3 scripts\install_codex_library.py --agent agents        # 可选本地 catalog 副本
-py -3 scripts\install_codex_library.py --agent claude        # 可选 Claude 全局副本
+py -3 scripts\install_codex_library.py --agent claude        # Claude Code 全局副本
 py -3 scripts\install_codex_library.py --agent codex-agents  # Codex 加 .agents
+py -3 scripts\install_codex_library.py --agent zcode         # ZCode（~/.zcode/skills）
+py -3 scripts\install_codex_library.py --agent cursor        # Cursor（~/.cursor/skills）
+py -3 scripts\install_codex_library.py --agent gemini        # Gemini CLI（~/.gemini/skills）
+py -3 scripts\install_codex_library.py --agent opencode      # OpenCode（~/.config/opencode/skills）
 py -3 scripts\install_codex_library.py --agent all           # 所有支持目标
 ```
 

@@ -9,7 +9,7 @@
 
 **Bound to the brief. Free to build.**
 
-Briefbound is a Chinese-first collection of 34 Agent Skills for Codex and Grok Build, covering intent alignment, dynamic routing, peer collaboration and opt-in autonomous closure across existing threads, lightweight development, code-structure guards, performance engineering, cleanup, code review, UI design, and AI research workflows.
+Briefbound is a Chinese-first collection of 34 Agent Skills for Codex, Grok Build, ZCode, Claude Code, Cursor, Gemini CLI, and OpenCode, covering intent alignment, dynamic routing, peer collaboration and opt-in autonomous closure across existing threads, lightweight development, code-structure guards, performance engineering, cleanup, code review, UI design, and AI research workflows.
 
 - Users describe the task normally. They do not need to invoke `briefbound-router` or memorize a workflow.
 - [`briefbound-router`](skills/engineering/briefbound-router/SKILL.md) proceeds immediately when intent is clear; for low- and medium-risk uncertainty it states its assumption and continues, and only a high-impact fork gets one compact alignment turn that waits for calibration. It leads with the result, uses plain language, and explains only complex concepts that affect a decision or action.
@@ -62,6 +62,12 @@ sh ./install.sh
 ```
 
 The repository installer targets `~/.codex/skills` by default and avoids a duplicate `.agents` catalog. The `grok` target uses `~/.grok/skills`; `codex-grok` maintains only those two runtimes. A reversible Briefbound Router activation block is installed in each selected runtime's `AGENTS.md`, preserving existing rules.
+
+### Multi-harness install and capability degradation
+
+The installer also supports ZCode (`--agent zcode` → `~/.zcode/skills` + `~/.zcode/AGENTS.md`), Claude Code (`--agent claude` → `~/.claude/skills` + `~/.claude/CLAUDE.md`), Cursor (`--agent cursor` → `~/.cursor/skills`; place the activation block into each project's `AGENTS.md` manually), Gemini CLI (`--agent gemini` → `~/.gemini/skills` + `~/.gemini/GEMINI.md`), and OpenCode (`--agent opencode` → `~/.config/opencode/skills` + `~/.config/opencode/AGENTS.md`).
+
+Skill bodies and the activation block are harness-neutral; capability tiers and degradation rules live in [`briefbound-router/references/harness-compat.md`](skills/engineering/briefbound-router/references/harness-compat.md). In harnesses without peer-thread primitives (`list_threads` etc., currently Codex App only), the collaboration skills degrade to single-session serial handling instead of simulating the protocol; `preflight` and the coordination registry fall back to equivalent Git checks. Installs for Codex App, Grok Build, ZCode, Claude Code, and Cursor are verified on real machines; the Gemini CLI and OpenCode targets follow official directory conventions and are not yet verified here.
 
 When upgrading, the installer validates each new `briefbound-*` live copy before removing its verified `ccdawn-*` predecessor and migrates the old activation block in place. Legacy names are not retained as aliases; a same-named directory that fails the frontmatter ownership check is reported and left untouched.
 

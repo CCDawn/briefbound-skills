@@ -45,7 +45,7 @@ license: MIT
 - `git status --short --branch`、相关 diff、untracked/ignored 候选；
 - `git worktree list --porcelain` 和本地分支占用；
 - `git merge-base --is-ancestor <branch-tip> <target>` 或等价吸收证据；
-- coordination registry 中的 Agent/claim 状态；
+- coordination registry 中的 Agent/claim 状态（当前环境无 registry 时跳过此行，以 Git worktree/分支占用为准，见 `briefbound-router` 的 `references/harness-compat.md`）；
 - 项目规则、官方 closeout 命令和 Windows junction/reparse point。
 
 把候选分成四类：

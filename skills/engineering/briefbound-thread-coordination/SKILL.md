@@ -14,7 +14,7 @@ registry/thread 处理冲突、合并；Git 为准。
 
 - Context Boundary: 项目/thread/branch/worktree/scope/claim 及共享 runtime 归属。
 - Output Contract: ownership、决定、验证、恢复债务。
-- Allowed Action: 用 `list_threads`、`read_thread`、`wait_threads`、只读进程/Git 探针；只有 `BRT_TRUSTED_RELAY_V1` validator 返回 `TRUSTED_RELAY_AUTHORIZED` 时才调用 `send_message_to_thread`。不停止未知 owner，创建/归档/远程 Git 另授权。
+- Allowed Action: 用 `list_threads`、`read_thread`、`wait_threads`、只读进程/Git 探针；只有 `BRT_TRUSTED_RELAY_V1` validator 返回 `TRUSTED_RELAY_AUTHORIZED` 时才调用 `send_message_to_thread`。不停止未知 owner，创建/归档/远程 Git 另授权。缺原语则不进入（见 harness 矩阵）。
 - Success Evidence: registry、thread 回执、Git/测试和闭环。
 - Stop Condition: thread 不明、owner 争议、未确认暂停/未授权。
 - Route Out: 原 owner、`briefbound-autonomous-collaboration-loop`、`briefbound-multi-agent-orchestration`、`briefbound-pr-review`、`briefbound-development-cleanup`、`briefbound-project-memory`、`briefbound-router` 或 BLOCKED。

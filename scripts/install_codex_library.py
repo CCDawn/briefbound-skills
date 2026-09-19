@@ -42,6 +42,7 @@ ROUTER_ACTIVATION_BLOCK = f"""{ROUTER_ACTIVATION_START}
 - Grade uncertainty instead of stopping by default: for low- or medium-risk unknowns, state the assumption and continue. Only a high-impact fork (behavior-changing product decision, irreversible or user-facing change, security, or data loss) gets one compact recommendation-and-alignment turn, then wait for calibration.
 - Ask only questions whose answers change the approach, batched into one round. Zero questions is legitimate when intent and scope are already clear; never re-ask what task or project memory already answered.
 - Delegation: Briefbound itself creates no subagents. If the runtime provides delegation tools, dispatch independent, parallelizable work directly without asking; keep trivial or single-owner work with the current agent, never block work on a delegation decision, and never invent tool names.
+- Capability gate: probe runtime capabilities once via `briefbound-router`'s `references/harness-compat.md`; when primitives it lists (peer threads, coordination registry, preflight) are absent in this harness, degrade per that matrix instead of simulating them.
 - For cross-skill routing, load `briefbound-router` and follow its gates.
 - Support substantive reports or explanations with a diagram from `briefbound-diagram-design` when it materially improves comprehension; short status replies stay text-only.
 - User-visible output is Chinese-first and follows `briefbound-plain-talk` by default: lead with the answer in plain language, no code dumps in replies (cite `file:line` instead), and no internal routing ledgers or unexplained enums.
@@ -94,6 +95,14 @@ def destination_roots(home: Path, agent: str) -> list[Path]:
         roots.append(home / ".agents" / "skills")
     if agent in {"grok", "codex-grok", "all"}:
         roots.append(home / ".grok" / "skills")
+    if agent in {"zcode", "all"}:
+        roots.append(home / ".zcode" / "skills")
+    if agent in {"cursor", "all"}:
+        roots.append(home / ".cursor" / "skills")
+    if agent in {"gemini", "all"}:
+        roots.append(home / ".gemini" / "skills")
+    if agent in {"opencode", "all"}:
+        roots.append(home / ".config" / "opencode" / "skills")
     return roots
 
 
@@ -113,12 +122,48 @@ def grok_agents_path(home: Path) -> Path:
     return home / ".grok" / "AGENTS.md"
 
 
+def claude_agents_path(home: Path) -> Path:
+    return home / ".claude" / "CLAUDE.md"
+
+
+def zcode_agents_path(home: Path) -> Path:
+    return home / ".zcode" / "AGENTS.md"
+
+
+def gemini_agents_path(home: Path) -> Path:
+    return home / ".gemini" / "GEMINI.md"
+
+
+def opencode_agents_path(home: Path) -> Path:
+    return home / ".config" / "opencode" / "AGENTS.md"
+
+
 def targets_codex(home: Path, roots: list[Path]) -> bool:
     return codex_skills_root(home) in roots
 
 
 def targets_grok(home: Path, roots: list[Path]) -> bool:
     return grok_skills_root(home) in roots
+
+
+def targets_claude(home: Path, roots: list[Path]) -> bool:
+    return (home / ".claude" / "skills") in roots
+
+
+def targets_zcode(home: Path, roots: list[Path]) -> bool:
+    return (home / ".zcode" / "skills") in roots
+
+
+def targets_cursor(home: Path, roots: list[Path]) -> bool:
+    return (home / ".cursor" / "skills") in roots
+
+
+def targets_gemini(home: Path, roots: list[Path]) -> bool:
+    return (home / ".gemini" / "skills") in roots
+
+
+def targets_opencode(home: Path, roots: list[Path]) -> bool:
+    return (home / ".config" / "opencode" / "skills") in roots
 
 
 def _activation_marker_state(text: str, start_marker: str, end_marker: str) -> str:
@@ -257,6 +302,19 @@ def manage_selected_router_activations(
         manage_router_activation_path(codex_agents_path(home), "Codex", action, dry_run)
     if targets_grok(home, roots):
         manage_router_activation_path(grok_agents_path(home), "Grok", action, dry_run)
+    if targets_claude(home, roots):
+        manage_router_activation_path(claude_agents_path(home), "Claude Code", action, dry_run)
+    if targets_zcode(home, roots):
+        manage_router_activation_path(zcode_agents_path(home), "ZCode", action, dry_run)
+    if targets_gemini(home, roots):
+        manage_router_activation_path(gemini_agents_path(home), "Gemini CLI", action, dry_run)
+    if targets_opencode(home, roots):
+        manage_router_activation_path(opencode_agents_path(home), "OpenCode", action, dry_run)
+    if targets_cursor(home, roots):
+        print(
+            "Note: Cursor has no managed global instruction file; "
+            "copy the Briefbound Router activation block into each project's AGENTS.md if auto-routing is wanted."
+        )
 
 
 def process_skill_conflict_state(home: Path) -> list[tuple[str, str]]:
@@ -517,7 +575,10 @@ def manage_legacy_skill_copies(
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Install this local skill library into Codex, Grok, optional .agents, and Claude skill directories."
+        description=(
+            "Install this local skill library into Codex, Grok, optional .agents, Claude Code, "
+            "ZCode, Cursor, Gemini CLI, and OpenCode skill directories."
+        )
     )
     parser.add_argument(
         "--list",
@@ -542,15 +603,31 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--home",
         default=str(Path.home()),
-        help="Home directory containing .claude, .codex, .grok, and optional .agents (default: current user home).",
+        help=(
+            "Home directory containing .claude, .codex, .grok, .zcode, .cursor, .gemini, "
+            "and optional .agents (default: current user home)."
+        ),
     )
     parser.add_argument(
         "--agent",
-        choices=["claude", "codex", "grok", "agents", "codex-agents", "codex-grok", "all"],
+        choices=[
+            "claude",
+            "codex",
+            "grok",
+            "agents",
+            "codex-agents",
+            "codex-grok",
+            "zcode",
+            "cursor",
+            "gemini",
+            "opencode",
+            "all",
+        ],
         default="codex",
         help=(
             "Which local skill directories to populate (default: codex). "
-            "Use grok for ~/.grok/skills, codex-grok for both runtimes, or codex-agents only when both Codex catalogs are required."
+            "Use grok for ~/.grok/skills, zcode for ~/.zcode/skills, cursor for ~/.cursor/skills, "
+            "gemini for ~/.gemini/skills, opencode for ~/.config/opencode/skills, or all for every target."
         ),
     )
     parser.add_argument(
