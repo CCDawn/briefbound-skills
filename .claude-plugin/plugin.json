@@ -23,6 +23,7 @@
                    "./skills/engineering/briefbound-test-strategy",
                    "./skills/engineering/briefbound-runtime-operations",
                    "./skills/engineering/briefbound-skill-authoring",
+                   "./skills/engineering/briefbound-api-contract",
                    "./skills/engineering/briefbound-pr-review",
                    "./skills/engineering/briefbound-project-review",
                    "./skills/engineering/briefbound-simplification-review",

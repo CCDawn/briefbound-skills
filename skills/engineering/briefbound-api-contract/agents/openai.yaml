@@ -1,0 +1,4 @@
+interface:
+  display_name: "Briefbound API 契约"
+  short_description: "对外契约面的设计与兼容性审查：破坏性判定、版本化与迁移路径"
+  default_prompt: "使用 $briefbound-api-contract 审查契约变更：给出兼容性判定、破坏点清单、版本策略与迁移路径。"

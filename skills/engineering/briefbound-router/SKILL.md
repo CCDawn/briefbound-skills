@@ -38,15 +38,15 @@ Briefbound 对齐意图、选择 owner 并推进验证。结果明确时直接�
 
 扫描最多 3 个候选，选能直接产生下一证据的最具体 owner。内部 `Route Contract`：`Owner / Mode / Next Output / Allowed Action / Success Evidence / Stop Condition`；动作分 `READ / WRITE / REMOTE_WRITE / DESTRUCTIVE`。
 
-- 项目学习：`briefbound-project-dissection`；完整报告联动图解。
+- 项目学习：`briefbound-project-dissection`；报告联动图解。
 - bug/失败测试：`briefbound-bug-review`；PR/diff：`briefbound-pr-review`；整仓/架构：`briefbound-project-review`；部署/运行故障：`briefbound-runtime-operations`。
-- UI/UX 与交互：`briefbound-ui-design`；品牌视觉：`briefbound-visual-design`；生产前端：`briefbound-frontend-engineering`；界面审查：`briefbound-ui-review`；token/主题/组件治理：`briefbound-design-system`。
+- UI/UX：`briefbound-ui-design`；品牌视觉：`briefbound-visual-design`；生产前端：`briefbound-frontend-engineering`；界面审查：`briefbound-ui-review``；token/主题/组件：`briefbound-design-system`。
 - 前端写入且界面未获确认时，读 `references/ui-preview-approval.md` 判定 `PREVIEW_REQUIRED / PREVIEW_SKIPPED`；前者须先交付隔离网页并等 `APPROVED / REVISE / ABANDON`，批准前不得修改正式 UI owning surface。
-- diff 过度设计：`briefbound-simplification-review`；整仓冗余治理：`briefbound-simplification-audit`，按请求限定范围。
+- diff 过度设计：`briefbound-simplification-review`；整仓冗余治理：`briefbound-simplification-audit`。
 - 多职责巨型文件或难导航/测试：`briefbound-code-structure-guard`；测试策略/补测：`briefbound-test-strategy`；行数本身不触发拆分。
 - AI/ML 研究：`briefbound-ai-research-loop`；单条 metric lane：`briefbound-score-loop`；重要 claim：`briefbound-research-rigor-review`。
-- 多会话协商：`briefbound-multi-agent-orchestration`；单次冲突：`briefbound-thread-coordination`；自动本地集成：`briefbound-autonomous-collaboration-loop`；残留：`briefbound-development-cleanup`。
-- 真实设计分叉：`briefbound-planning`；无专项 owner 的评价按需读 `references/evaluation.md`。
+- 多会话协商：`briefbound-multi-agent-orchestration`；单次冲突：`briefbound-thread-coordination`；自动集成：`briefbound-autonomous-collaboration-loop`；残留：`briefbound-development-cleanup`。
+- 真实设计分叉：`briefbound-planning`；对外契约/API/schema：`briefbound-api-contract`；无专项 owner 的评价按需读 `references/evaluation.md`。
 - 专用工具、文件制品、结构化图解及复杂汇报配图按需读 `references/capability-routing.md`；技能包自身增删改：`briefbound-skill-authoring`。
 
 无法仲裁才读 `references/routing-practice.md`。以本轮 Available skills 为准；未安装 skill 不能成为 owner。

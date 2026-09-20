@@ -116,6 +116,7 @@ TOKEN_BUDGETS = {
     "briefbound-test-strategy": 1400,
     "briefbound-runtime-operations": 1450,
     "briefbound-skill-authoring": 1450,
+    "briefbound-api-contract": 1400,
     "briefbound-pr-review": 1500,
     "briefbound-project-review": 1500,
     "briefbound-research-rigor-review": 1600,

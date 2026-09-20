@@ -27,3 +27,4 @@
 - **[briefbound-test-strategy](./briefbound-test-strategy/SKILL.md)** - Risk-driven test strategy owner: backfills, coverage gaps, level selection, and regression selection where every test names the risk it blocks.
 - **[briefbound-runtime-operations](./briefbound-runtime-operations/SKILL.md)** - Deployment and runtime troubleshooting owner: env-vs-code triage, the port/health/business evidence ladder, safe service lifecycle, and rollback.
 - **[briefbound-skill-authoring](./briefbound-skill-authoring/SKILL.md)** - Package maintenance owner for adding, changing, or removing Briefbound skills with every anchor, budget, and validator contract kept green.
+- **[briefbound-api-contract](./briefbound-api-contract/SKILL.md)** - External contract owner: API, schema, event, and CLI surface design with breaking-change verdicts, versioning, and migration paths.

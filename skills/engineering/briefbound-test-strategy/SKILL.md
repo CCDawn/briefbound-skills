@@ -17,7 +17,7 @@ license: MIT
 - Allowed Action: 在授权范围内编写并运行测试；不静默修改被测实现、mock 语义或 CI 阈值。
 - Success Evidence: 每条测试与其防御的风险一一对应；失败注入或等价证据证明测试真的会失败；命令与结果可复现。
 - Stop Condition: 被测行为未定义、关键依赖无法隔离、测试基建缺失且引入需授权，或测试目标与业务目标冲突。
-- Route Out: 新行为 RED 流程 `briefbound-bdd-tdd-development`；bug 修复验证 `briefbound-bug-review`；性能基准 `briefbound-performance-engineering`；已验证残留 `briefbound-development-cleanup`；`briefbound-router` 或 BLOCKED。
+- Route Out: 新行为 RED 流程 `briefbound-bdd-tdd-development`；bug 修复验证 `briefbound-bug-review`；性能基准 `briefbound-performance-engineering`；契约设计 `briefbound-api-contract`；已验证残留 `briefbound-development-cleanup`；`briefbound-router` 或 BLOCKED。
 
 ## 统一调用契约
 

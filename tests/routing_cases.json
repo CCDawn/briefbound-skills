@@ -12,7 +12,7 @@
   {"id":"routine-local-pattern","prompt":"按照项目已有设置表单模式增加一个布尔字段并验证，不新增依赖","primary":"briefbound-frontend-engineering","support":[],"forbidden_primary":["briefbound-feature-reuse-research","briefbound-planning","briefbound-multi-agent-orchestration","briefbound-performance-engineering","briefbound-code-structure-guard"]},
   {"id":"giant-file-structure","prompt":"这个手写服务文件已经超过九百行，同时混合订单校验、持久化和通知三个独立职责；请保持公共行为，按稳定边界做最小拆分并验证","primary":"briefbound-code-structure-guard","support":[],"forbidden_primary":["briefbound-performance-engineering","briefbound-simplification-audit","briefbound-planning"]},
   {"id":"performance-engineering","prompt":"优化消息时间线在一万条消息下的 p99 渲染延迟，先建立 baseline、定位瓶颈，再用相同负载验证收益","primary":"briefbound-performance-engineering","support":[],"forbidden_primary":["briefbound-bug-review","briefbound-planning"]},
-  {"id":"implementation-plan","prompt":"需求已经确认，本地方案也明确，但涉及 API 迁移和回滚，请制定可评审的实施方案","primary":"briefbound-planning","support":[],"forbidden_primary":["briefbound-feature-reuse-research"]},
+  {"id":"implementation-plan","prompt":"需求已经确认，本地方案也明确，但涉及 API 迁移和回滚，请制定可评审的实施方案","primary":"briefbound-planning","support":[],"forbidden_primary":["briefbound-feature-reuse-research","briefbound-api-contract"]},
   {"id":"planning-task-graph","prompt":"方案已确认，三个独立 owner 有依赖产物和不同验收条件，请在实施方案里生成可执行任务图","primary":"briefbound-planning","support":[],"forbidden_primary":["briefbound-bdd-tdd-development"]},
   {"id":"high-risk-tdd","prompt":"新增这个已经定义清楚的跨模块状态契约，先写失败行为测试作为 RED，再最小实现和验证","primary":"briefbound-bdd-tdd-development","support":[],"forbidden_primary":["briefbound-bug-review","briefbound-score-loop"]},
   {"id":"formal-closeout","prompt":"汇总跨三个会话的完成证据、Deferred 风险和 PR 发布准备状态，形成正式交接","primary":"briefbound-router","support":[],"forbidden_primary":["briefbound-development-cleanup","briefbound-planning"]},
@@ -71,5 +71,7 @@
   {"id":"readme-update-does-not-hijack-dev","prompt":"继续实现这个功能，顺手把 README 的安装节更新一下。","primary":"briefbound-frontend-engineering","support":["briefbound-readme-optimization"],"forbidden_primary":["briefbound-readme-optimization"]},
   {"id":"legacy-test-gap","prompt":"这个老服务几乎没有测试，为支付回调和退款两条关键路径补测试，并说明每条测试挡住了什么风险","primary":"briefbound-test-strategy","support":[],"forbidden_primary":["briefbound-bdd-tdd-development","briefbound-performance-engineering"]},
   {"id":"service-502-troubleshoot","prompt":"本地起的服务一直 502，端口在监听但健康接口不通；先分流是环境还是代码问题，恢复访问并留下验证证据","primary":"briefbound-runtime-operations","support":[],"forbidden_primary":["briefbound-bug-review","briefbound-thread-coordination"]},
-  {"id":"skill-package-extension","prompt":"给技能包新增一个技能：写 SKILL.md、登记路由、目录和校验预算，保证校验器通过","primary":"briefbound-skill-authoring","support":[],"forbidden_primary":["briefbound-router","briefbound-readme-optimization"]}
+  {"id":"skill-package-extension","prompt":"给技能包新增一个技能：写 SKILL.md、登记路由、目录和校验预算，保证校验器通过","primary":"briefbound-skill-authoring","support":[],"forbidden_primary":["briefbound-router","briefbound-readme-optimization"]},
+  {"id":"api-breaking-change-review","prompt":"新接口版本要删除两个旧字段并收紧枚举约束，评估对现有客户端的影响，给出兼容性判定和迁移路径","primary":"briefbound-api-contract","support":[],"forbidden_primary":["briefbound-planning","briefbound-pr-review"]},
+  {"id":"contract-test-composite","prompt":"设计订单 v2 接口的破坏性变更，并给出保护旧客户端的契约测试计划","primary":"briefbound-api-contract","support":["briefbound-test-strategy"],"forbidden_primary":["briefbound-planning"]}
 ]
