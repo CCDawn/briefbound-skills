@@ -14,33 +14,34 @@
 | 用户信号 | Primary owner | 默认重量 | 下一产出 |
 |---|---|---|---|
 | 修 bug、异常、失败测试有明确对象 | `briefbound-bug-review` | FAST/COMPACT | 根因状态、最小修复、验证 |
+| 部署/启动/运行故障或部署验证 | `briefbound-runtime-operations` | FAST/COMPACT | 环境/代码分流与三级验证 |
 | 性能目标/回归或热路径测量 | `briefbound-performance-engineering` | PROFILE | baseline、瓶颈、before/after |
 | 多职责巨型文件或明确职责拆分 | `briefbound-code-structure-guard` | FAST/COMPACT | STAY/CHECK/SPLIT 与最小修改 |
-| 测试是主要未知量：存量补测、覆盖缺口、层级选择或回归选择 | `briefbound-test-strategy` | COMPACT | 风险排序的最小决定性测试 |
+| 测试是主要未知量：补测、覆盖缺口或回归选择 | `briefbound-test-strategy` | COMPACT | 风险排序的最小决定性测试 |
 | 审 PR、diff、branch、commit、merge readiness | `briefbound-pr-review` | COMPACT | findings-first 审阅结论 |
 | 源码学习、项目拆解 | `briefbound-project-dissection` | COMPACT | 教学报告与 diagram-design 配图 |
-| 审整仓、架构、技术债、测试体系、接手摸底 | `briefbound-project-review` | COMPACT | 风险排序 findings 与执行队列 |
+| 审整仓、架构、技术债或接手摸底 | `briefbound-project-review` | COMPACT | 风险排序 findings 与执行队列 |
 | 评价流程、方案、skill、输出质量，且无更具体 owner | `briefbound-router` | MICRO/COMPACT | 证据化判断与高 ROI 建议 |
-| 输出风格、说人话、讲重点、少贴代码、回复可读性 | `briefbound-plain-talk` | MICRO | 结论先行的平实回复；任何 owner 的用户可见输出默认受其约束 |
+| 说人话、讲重点、少贴代码、回复可读性 | `briefbound-plain-talk` | MICRO | 结论先行的平实回复；任何 owner 的输出默认受其约束 |
 | 新建或优化仓库 README | `briefbound-readme-optimization` | COMPACT | 证据驱动 README 与溯源表 |
-| 新建或重定 UI/UX、信息层级、交互模型、响应式或无障碍决策 | `briefbound-ui-design` | FAST/COMPACT | 必要时先交付隔离预览，再形成可实施 UI 契约 |
-| 品牌表达、视觉方向、字体、色彩、构图、图像或动效语言 | `briefbound-visual-design` | COMPACT | 必要时先交付隔离预览，再形成语境化视觉契约 |
+| UI/UX、信息层级、交互、响应式或无障碍决策 | `briefbound-ui-design` | FAST/COMPACT | 必要时先交付隔离预览，再形成可实施 UI 契约 |
+| 品牌视觉方向、字体、色彩、构图或动效语言 | `briefbound-visual-design` | COMPACT | 必要时先交付隔离预览，再形成语境化视觉契约 |
 | 架构、流程、ER/UML、定量图表或 Mermaid/draw.io 重绘 | `briefbound-diagram-design` | FAST/COMPACT | 可编辑 HTML/SVG、PNG 与验收 |
 | 已批准或 `PREVIEW_SKIPPED`，生产实现组件、状态与响应式 | `briefbound-frontend-engineering` | FAST/COMPACT | 前端代码与浏览器运行证据 |
 | 审查页面、预览、截图、视觉回归或无障碍 | `briefbound-ui-review` | COMPACT | findings、预审建议与浏览器证据 |
 | 跨组件 token、主题、variants 或 Figma/code 一致性 | `briefbound-design-system` | COMPACT/FULL | 系统契约、渐进迁移与消费者证据 |
-| 复杂功能存在实质性的外部复用决策 | `briefbound-feature-reuse-research` | COMPACT | 复用/借鉴/自建判断 |
+| 复杂功能的外部复用决策 | `briefbound-feature-reuse-research` | COMPACT | 复用/借鉴/自建判断 |
 | 需要真实设计选择、迁移或独立任务图 | `briefbound-planning` | COMPACT/FULL | 最小实施方案；必要时内含 TASK_GRAPH |
-| 已明确的新行为/实现契约需要 RED，或用户明确要求 TDD | `briefbound-bdd-tdd-development` | COMPACT | 紧凑 RED/GREEN 实现 |
+| 已明确的新行为契约需要 RED，或明确要求 TDD | `briefbound-bdd-tdd-development` | COMPACT | 紧凑 RED/GREEN 实现 |
 | AI/ML baseline、假设、消融、方向选择 | `briefbound-ai-research-loop` | COMPACT/FULL | 研究闭环或下一实验 |
 | 单条 benchmark/score/baseline promotion lane | `briefbound-score-loop` | COMPACT/FULL | candidate 评估与晋升结论 |
-| Huawei Algorithm Challenge 37 NSLB 项目 score lane | `briefbound-huawei-nslb-score-loop` | COMPACT/FULL | 项目命令与 ledger 适配后的 score loop |
+| Huawei NSLB 项目 score lane | `briefbound-huawei-nslb-score-loop` | COMPACT/FULL | 项目命令与 ledger 适配后的 score loop |
 | 重要研究 claim、反直觉结果、baseline 晋升审查 | `briefbound-research-rigor-review` | COMPACT | ACCEPT/QUALIFY/REJECT |
 | 竞赛/benchmark 全生命周期 | `briefbound-competition-research-lifecycle` | FULL | 阶段契约与下游 owner |
 | 用户明确需要持久目标、反复迭代和 stop condition，且无专项 owner | `briefbound-router` | COMPACT/FULL | 有界 goal contract 与下一轮证据 |
 | 多个同项目会话平级协商互助并共同集成 | `briefbound-multi-agent-orchestration` | COMPACT/FULL | 协作 agreement、各自交付与集成验证 |
 | 多会话进度、冲突、暂停恢复、讨论或合并 | `briefbound-thread-coordination` | COMPACT | registry 状态或协调闭环 |
-| 用户/项目明确要求 memory、dashboard、跨会话恢复 | `briefbound-project-memory` | FAST/COMPACT | 持久 delta 或恢复上下文 |
+| 明确要求 memory、dashboard 或跨会话恢复 | `briefbound-project-memory` | FAST/COMPACT | 持久 delta 或恢复上下文 |
 | 已知临时产物、旧 branch/worktree/claim 残留或明确清理请求 | `briefbound-development-cleanup` | FAST/COMPACT | CLEAN/DEFERRED/BLOCKED |
 | 当前 diff/PR 是否过度设计 | `briefbound-simplification-audit` | COMPACT | 可删与保留判断 |
 | 整仓/子系统冗余复杂度与依赖膨胀 | `briefbound-simplification-audit` | COMPACT | 排序后的精简队列 |

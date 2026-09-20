@@ -25,3 +25,4 @@
 - **[briefbound-simplification-audit](./briefbound-simplification-audit/SKILL.md)** - On-demand repository audit for dependency bloat, dead flexibility, duplicate paths, and removable abstractions.
 - **[briefbound-bug-review](./briefbound-bug-review/SKILL.md)** - End-to-end bug owner for root-cause diagnosis, bounded repair, optional internal test anchors, and verification.
 - **[briefbound-test-strategy](./briefbound-test-strategy/SKILL.md)** - Risk-driven test strategy owner: backfills, coverage gaps, level selection, and regression selection where every test names the risk it blocks.
+- **[briefbound-runtime-operations](./briefbound-runtime-operations/SKILL.md)** - Deployment and runtime troubleshooting owner: env-vs-code triage, the port/health/business evidence ladder, safe service lifecycle, and rollback.

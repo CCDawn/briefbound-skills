@@ -1,0 +1,4 @@
+interface:
+  display_name: "Briefbound 运行运维"
+  short_description: "部署与运行故障分流、端口-健康-业务三级验证、安全的服务生命周期与回滚"
+  default_prompt: "使用 $briefbound-runtime-operations 分流服务故障并按验证阶梯取证恢复；按端口与命令行确认归属后才停止进程。"

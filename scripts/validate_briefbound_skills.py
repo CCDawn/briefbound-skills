@@ -79,6 +79,7 @@ UNIFIED_CONTRACT_MARKERS = [
 
 DIRECT_WRITE_OWNERS = {
     "briefbound-test-strategy",
+    "briefbound-runtime-operations",
     "briefbound-autonomous-collaboration-loop",
     "briefbound-bdd-tdd-development",
     "briefbound-bug-review",
@@ -112,6 +113,7 @@ TOKEN_BUDGETS = {
     "briefbound-plain-talk": 1200,
     "briefbound-readme-optimization": 1500,
     "briefbound-test-strategy": 1400,
+    "briefbound-runtime-operations": 1450,
     "briefbound-pr-review": 1500,
     "briefbound-project-review": 1500,
     "briefbound-research-rigor-review": 1600,
@@ -1531,6 +1533,18 @@ def validate_skill(
         ]:
             if marker not in text:
                 errors.append(f"{label}: live coordination/memory bridge missing marker '{marker}'")
+
+    if name == "briefbound-runtime-operations":
+        for marker in [
+            "端口监听不等于健康接口通过",
+            "健康接口通过不等于真实业务成功",
+            "按端口与命令行确认归属",
+            "不得广泛结束进程族",
+            "先取证后重启",
+            "不整屏贴日志",
+        ]:
+            if marker not in text:
+                errors.append(f"{label}: runtime operations safety contract missing marker '{marker}'")
 
     if name == "briefbound-development-cleanup":
         cleanup_contract_text = (

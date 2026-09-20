@@ -39,7 +39,7 @@ Briefbound 对齐意图、选择 owner 并推进验证。结果明确时直接�
 扫描最多 3 个候选，选能直接产生下一证据的最具体 owner。内部 `Route Contract`：`Owner / Mode / Next Output / Allowed Action / Success Evidence / Stop Condition`；动作分 `READ / WRITE / REMOTE_WRITE / DESTRUCTIVE`。
 
 - 项目学习：`briefbound-project-dissection`；完整报告联动图解。
-- bug/失败测试：`briefbound-bug-review`；PR/diff：`briefbound-pr-review`；整仓/架构：`briefbound-project-review`。
+- bug/失败测试：`briefbound-bug-review`；PR/diff：`briefbound-pr-review`；整仓/架构：`briefbound-project-review`；部署/运行故障：`briefbound-runtime-operations`。
 - UI/UX 与交互：`briefbound-ui-design`；品牌视觉：`briefbound-visual-design`；生产前端：`briefbound-frontend-engineering`；界面审查：`briefbound-ui-review`；token/主题/组件治理：`briefbound-design-system`。
 - 前端写入且界面未获确认时，读 `references/ui-preview-approval.md` 判定 `PREVIEW_REQUIRED / PREVIEW_SKIPPED`；前者须先交付隔离网页并等 `APPROVED / REVISE / ABANDON`，批准前不得修改正式 UI owning surface。
 - diff 过度设计：`briefbound-simplification-review`；整仓冗余治理：`briefbound-simplification-audit`，按请求限定范围。
