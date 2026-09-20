@@ -6,7 +6,7 @@
   {"id":"evaluate-pr","prompt":"评价这个 PR 的质量、风险和是否值得合并","primary":"briefbound-pr-review","support":[],"forbidden_primary":["briefbound-project-review"]},
   {"id":"project-health","prompt":"接手这个仓库，审查整体架构、技术债、测试体系和高风险模块","primary":"briefbound-project-review","support":[],"forbidden_primary":["briefbound-pr-review","briefbound-bug-review"]},
   {"id":"evaluate-project","prompt":"评价整个项目目前的架构质量、维护风险和优先改进方向","primary":"briefbound-project-review","support":[],"forbidden_primary":["briefbound-pr-review"]},
-  {"id":"generic-evaluation","prompt":"评价这个 skill 的实际效果、冗余和高 ROI 优化点","primary":"briefbound-router","support":[],"forbidden_primary":["briefbound-project-review","briefbound-creative-toolbox"]},
+  {"id":"generic-evaluation","prompt":"评价这个 skill 的实际效果、冗余和高 ROI 优化点","primary":"briefbound-router","support":[],"forbidden_primary":["briefbound-project-review","briefbound-creative-toolbox","briefbound-skill-authoring"]},
   {"id":"reuse-research","prompt":"这个复杂编辑器功能先去 GitHub 和项目内寻找可复用模块，再判断复用、借鉴还是自建","primary":"briefbound-feature-reuse-research","support":[],"forbidden_primary":["briefbound-planning","briefbound-frontend-engineering"]},
   {"id":"reuse-mature-engine","prompt":"项目内没有工作流引擎，现在要增加可视化编排、持久化和回放；先调查 GitHub、官方方案和成熟库是否可复用","primary":"briefbound-feature-reuse-research","support":[],"forbidden_primary":["briefbound-planning","briefbound-frontend-engineering"]},
   {"id":"routine-local-pattern","prompt":"按照项目已有设置表单模式增加一个布尔字段并验证，不新增依赖","primary":"briefbound-frontend-engineering","support":[],"forbidden_primary":["briefbound-feature-reuse-research","briefbound-planning","briefbound-multi-agent-orchestration","briefbound-performance-engineering","briefbound-code-structure-guard"]},
@@ -70,5 +70,6 @@
   {"id":"readme-optimization-request","prompt":"帮我优化这个仓库的 README，要能让人不读源码就上手。","primary":"briefbound-readme-optimization","support":[],"forbidden_primary":["briefbound-project-review"]},
   {"id":"readme-update-does-not-hijack-dev","prompt":"继续实现这个功能，顺手把 README 的安装节更新一下。","primary":"briefbound-frontend-engineering","support":["briefbound-readme-optimization"],"forbidden_primary":["briefbound-readme-optimization"]},
   {"id":"legacy-test-gap","prompt":"这个老服务几乎没有测试，为支付回调和退款两条关键路径补测试，并说明每条测试挡住了什么风险","primary":"briefbound-test-strategy","support":[],"forbidden_primary":["briefbound-bdd-tdd-development","briefbound-performance-engineering"]},
-  {"id":"service-502-troubleshoot","prompt":"本地起的服务一直 502，端口在监听但健康接口不通；先分流是环境还是代码问题，恢复访问并留下验证证据","primary":"briefbound-runtime-operations","support":[],"forbidden_primary":["briefbound-bug-review","briefbound-thread-coordination"]}
+  {"id":"service-502-troubleshoot","prompt":"本地起的服务一直 502，端口在监听但健康接口不通；先分流是环境还是代码问题，恢复访问并留下验证证据","primary":"briefbound-runtime-operations","support":[],"forbidden_primary":["briefbound-bug-review","briefbound-thread-coordination"]},
+  {"id":"skill-package-extension","prompt":"给技能包新增一个技能：写 SKILL.md、登记路由、目录和校验预算，保证校验器通过","primary":"briefbound-skill-authoring","support":[],"forbidden_primary":["briefbound-router","briefbound-readme-optimization"]}
 ]

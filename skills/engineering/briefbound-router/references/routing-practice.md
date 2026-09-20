@@ -24,6 +24,7 @@
 | 评价流程、方案、skill、输出质量，且无更具体 owner | `briefbound-router` | MICRO/COMPACT | 证据化判断与高 ROI 建议 |
 | 说人话、讲重点、少贴代码、回复可读性 | `briefbound-plain-talk` | MICRO | 结论先行的平实回复；任何 owner 的输出默认受其约束 |
 | 新建或优化仓库 README | `briefbound-readme-optimization` | COMPACT | 证据驱动 README 与溯源表 |
+| 技能包自身的技能新增、修改或删除 | `briefbound-skill-authoring` | COMPACT | 契约+锚点同步+校验绿 |
 | UI/UX、信息层级、交互、响应式或无障碍决策 | `briefbound-ui-design` | FAST/COMPACT | 必要时先交付隔离预览，再形成可实施 UI 契约 |
 | 品牌视觉方向、字体、色彩、构图或动效语言 | `briefbound-visual-design` | COMPACT | 必要时先交付隔离预览，再形成语境化视觉契约 |
 | 架构、流程、ER/UML、定量图表或 Mermaid/draw.io 重绘 | `briefbound-diagram-design` | FAST/COMPACT | 可编辑 HTML/SVG、PNG 与验收 |

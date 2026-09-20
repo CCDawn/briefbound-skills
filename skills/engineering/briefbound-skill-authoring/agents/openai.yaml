@@ -1,0 +1,4 @@
+interface:
+  display_name: "Briefbound 技能包维护"
+  short_description: "技能包自身增删改的契约结构、锚点同步、预算纪律与校验流程"
+  default_prompt: "使用 $briefbound-skill-authoring 变更技能包：同步全部锚点，保持预算与 pinned markers，校验器全绿后提交。"
