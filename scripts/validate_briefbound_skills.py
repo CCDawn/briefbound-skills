@@ -78,6 +78,7 @@ UNIFIED_CONTRACT_MARKERS = [
 ]
 
 DIRECT_WRITE_OWNERS = {
+    "briefbound-test-strategy",
     "briefbound-autonomous-collaboration-loop",
     "briefbound-bdd-tdd-development",
     "briefbound-bug-review",
@@ -110,6 +111,7 @@ TOKEN_BUDGETS = {
     "briefbound-planning": 1850,
     "briefbound-plain-talk": 1200,
     "briefbound-readme-optimization": 1500,
+    "briefbound-test-strategy": 1400,
     "briefbound-pr-review": 1500,
     "briefbound-project-review": 1500,
     "briefbound-research-rigor-review": 1600,

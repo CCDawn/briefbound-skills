@@ -1,0 +1,4 @@
+interface:
+  display_name: "Briefbound 测试策略"
+  short_description: "风险驱动的测试层级选择、存量补测、覆盖缺口分析与回归选择"
+  default_prompt: "使用 $briefbound-test-strategy 分析测试缺口并补最小决定性测试；按风险选层级，用失败注入证明测试有效。"

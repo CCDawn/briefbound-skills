@@ -1,7 +1,7 @@
 [
   {"id":"brt-ambiguous-scope","prompt":"把这个项目优化一下，我还没想清楚主要是速度、结构还是界面","primary":"briefbound-router","support":[],"forbidden_primary":["briefbound-planning","briefbound-project-review"]},
   {"id":"bug-repair","prompt":"这个接口升级后一直 500，复现、定位根因并最小修复","primary":"briefbound-bug-review","support":[],"forbidden_primary":["briefbound-project-review","briefbound-router"]},
-  {"id":"bug-with-test-anchor","prompt":"这个状态回归会破坏公共契约，请定位根因、补最小失败测试并修复验证","primary":"briefbound-bug-review","support":[],"forbidden_primary":["briefbound-bdd-tdd-development","briefbound-project-review"]},
+  {"id":"bug-with-test-anchor","prompt":"这个状态回归会破坏公共契约，请定位根因、补最小失败测试并修复验证","primary":"briefbound-bug-review","support":[],"forbidden_primary":["briefbound-bdd-tdd-development","briefbound-project-review","briefbound-test-strategy"]},
   {"id":"pr-review","prompt":"审查 PR #118 的 diff、回归风险、checks 和合并准备度，不改代码","primary":"briefbound-pr-review","support":[],"forbidden_primary":["briefbound-project-review"]},
   {"id":"evaluate-pr","prompt":"评价这个 PR 的质量、风险和是否值得合并","primary":"briefbound-pr-review","support":[],"forbidden_primary":["briefbound-project-review"]},
   {"id":"project-health","prompt":"接手这个仓库，审查整体架构、技术债、测试体系和高风险模块","primary":"briefbound-project-review","support":[],"forbidden_primary":["briefbound-pr-review","briefbound-bug-review"]},
@@ -68,5 +68,6 @@
   {"id":"plain-talk-supports-dev-work","prompt":"按你说的方案继续修这个 bug，汇报时说人话一点，别甩我一屏代码。","primary":"briefbound-bug-review","support":["briefbound-plain-talk"],"forbidden_primary":["briefbound-plain-talk"]}
 ,
   {"id":"readme-optimization-request","prompt":"帮我优化这个仓库的 README，要能让人不读源码就上手。","primary":"briefbound-readme-optimization","support":[],"forbidden_primary":["briefbound-project-review"]},
-  {"id":"readme-update-does-not-hijack-dev","prompt":"继续实现这个功能，顺手把 README 的安装节更新一下。","primary":"briefbound-frontend-engineering","support":["briefbound-readme-optimization"],"forbidden_primary":["briefbound-readme-optimization"]}
+  {"id":"readme-update-does-not-hijack-dev","prompt":"继续实现这个功能，顺手把 README 的安装节更新一下。","primary":"briefbound-frontend-engineering","support":["briefbound-readme-optimization"],"forbidden_primary":["briefbound-readme-optimization"]},
+  {"id":"legacy-test-gap","prompt":"这个老服务几乎没有测试，为支付回调和退款两条关键路径补测试，并说明每条测试挡住了什么风险","primary":"briefbound-test-strategy","support":[],"forbidden_primary":["briefbound-bdd-tdd-development","briefbound-performance-engineering"]}
 ]

@@ -41,9 +41,9 @@ Briefbound 对齐意图、选择 owner 并推进验证。结果明确时直接�
 - 项目学习：`briefbound-project-dissection`；完整报告联动图解。
 - bug/失败测试：`briefbound-bug-review`；PR/diff：`briefbound-pr-review`；整仓/架构：`briefbound-project-review`。
 - UI/UX 与交互：`briefbound-ui-design`；品牌视觉：`briefbound-visual-design`；生产前端：`briefbound-frontend-engineering`；界面审查：`briefbound-ui-review`；token/主题/组件治理：`briefbound-design-system`。
-- 请求包含前端写入时，若最终界面尚未获用户确认，先读取 `references/ui-preview-approval.md`，判定 `PREVIEW_REQUIRED / PREVIEW_SKIPPED`。`PREVIEW_REQUIRED` 必须先交付隔离网页并等待用户 `APPROVED / REVISE / ABANDON`；批准前不得修改正式 UI owning surface。
+- 前端写入且界面未获确认时，读 `references/ui-preview-approval.md` 判定 `PREVIEW_REQUIRED / PREVIEW_SKIPPED`；前者须先交付隔离网页并等 `APPROVED / REVISE / ABANDON`，批准前不得修改正式 UI owning surface。
 - diff 过度设计：`briefbound-simplification-review`；整仓冗余治理：`briefbound-simplification-audit`，按请求限定范围。
-- 开发中出现多职责巨型文件、难导航/测试或反复结构冲突：`briefbound-code-structure-guard`；行数本身不触发拆分。
+- 多职责巨型文件或难导航/测试：`briefbound-code-structure-guard`；测试策略/补测：`briefbound-test-strategy`；行数本身不触发拆分。
 - AI/ML 研究：`briefbound-ai-research-loop`；单条 metric lane：`briefbound-score-loop`；重要 claim：`briefbound-research-rigor-review`。
 - 多会话协商：`briefbound-multi-agent-orchestration`；单次冲突：`briefbound-thread-coordination`；自动本地集成：`briefbound-autonomous-collaboration-loop`；残留：`briefbound-development-cleanup`。
 - 真实设计分叉：`briefbound-planning`；无专项 owner 的评价按需读 `references/evaluation.md`。

@@ -3,7 +3,7 @@
 [![Release](https://img.shields.io/github/v/release/CCDawn/codex-skills?display_name=tag)](https://github.com/CCDawn/codex-skills/releases)
 [![Validate](https://github.com/CCDawn/codex-skills/actions/workflows/validate.yml/badge.svg)](https://github.com/CCDawn/codex-skills/actions/workflows/validate.yml)
 [![License](https://img.shields.io/github/license/CCDawn/codex-skills)](LICENSE)
-[![Skills](https://img.shields.io/badge/skills-31-2f81f7)](#完整-skill-目录)
+[![Skills](https://img.shields.io/badge/skills-32-2f81f7)](#完整-skill-目录)
 [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-compatible-1f883d)](https://agentskills.io/)
 [![skills.sh](https://skills.sh/b/CCDawn/codex-skills)](https://skills.sh/CCDawn/codex-skills)
 
@@ -11,7 +11,7 @@
 
 **约定内自主推进，约定变化主动商量。**
 
-31 个中文优先 Agent Skills，支持 Codex、Grok Build、ZCode、Claude Code、Cursor、Gemini CLI 与 OpenCode，覆盖意图对齐、动态路由、多会话平级协作与自动闭环、轻量开发、代码结构守卫、性能工程、开发清理、代码审查、UI 设计和 AI 研究工作流。
+32 个中文优先 Agent Skills，支持 Codex、Grok Build、ZCode、Claude Code、Cursor、Gemini CLI 与 OpenCode，覆盖意图对齐、动态路由、多会话平级协作与自动闭环、轻量开发、代码结构守卫、性能工程、开发清理、代码审查、UI 设计和 AI 研究工作流。
 
 - 用户正常说需求即可，不需要主动调用 `briefbound-router` 或记忆流程命令。
 - [`briefbound-router`](skills/engineering/briefbound-router/SKILL.md) 会在意图明确时直接推进；低/中风险不确定时先声明假设再继续，只有高影响分叉才用一轮紧凑的建议/对齐并等待校准；讨论时先说结果、使用通俗中文，并只解释会影响判断或操作的复杂概念。
@@ -109,6 +109,7 @@ python3 scripts/install_codex_library.py --agent opencode --router-activation in
 - [`briefbound-thread-coordination`](skills/engineering/briefbound-thread-coordination/SKILL.md)：共享同项目 Agent 进度，协调冲突、讨论、暂停恢复与快速合并。
 - [`briefbound-development-cleanup`](skills/engineering/briefbound-development-cleanup/SKILL.md)：清理开发残留，并安全收尾已合并本地分支、worktree 和 claim。
 - [`briefbound-bug-review`](skills/engineering/briefbound-bug-review/SKILL.md)：从症状和失败证据定位根因，完成有界修复与验证。
+- [`briefbound-test-strategy`](skills/engineering/briefbound-test-strategy/SKILL.md)：按风险选择测试层级，为存量代码补最小决定性测试并做回归选择。
 - [`briefbound-plain-talk`](skills/engineering/briefbound-plain-talk/SKILL.md)：用户可见回复的默认风格层：结论先行、平实中文、不贴代码细节（引用文件:行号）。
 - [`briefbound-readme-optimization`](skills/engineering/briefbound-readme-optimization/SKILL.md)：以仓库清单与源码事实为据，按项目类型生成或增强中文优先 README，逐条可溯源。
 - [`briefbound-performance-engineering`](skills/engineering/briefbound-performance-engineering/SKILL.md)：只在性能目标、回归或关键热路径需要测量时定位瓶颈并验证最小优化。
@@ -203,6 +204,9 @@ python3 scripts/install_codex_library.py --agent opencode --router-activation in
 
 - **`briefbound-bdd-tdd-development`**
   仅对预期已明确的新行为或高风险实现契约使用紧凑 TDD；未知根因和 bug 修复仍由 Bug Review 全程持有。
+
+- **`briefbound-test-strategy`**
+  风险驱动的测试策略 owner：存量补测、覆盖缺口分析、层级选择和回归选择；每条测试绑定它挡住的具体风险，不为覆盖率数字凑数。
 
 - **`briefbound-pr-review`**
   PR 审阅阶段 skill，用来把 PR、分支、提交范围或本地 diff 对照已确认需求、任务证据、回归风险和合并准备度进行审查。
@@ -323,6 +327,7 @@ skills/
     briefbound-bug-review/
     briefbound-performance-engineering/
     briefbound-code-structure-guard/
+    briefbound-test-strategy/
   research/
     README.md
     briefbound-ai-research-loop/
