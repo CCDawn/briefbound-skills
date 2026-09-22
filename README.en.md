@@ -1,11 +1,11 @@
 # Briefbound Agent Skills
 
-[![Release](https://img.shields.io/github/v/release/CCDawn/codex-skills?display_name=tag)](https://github.com/CCDawn/codex-skills/releases)
-[![Validate](https://github.com/CCDawn/codex-skills/actions/workflows/validate.yml/badge.svg)](https://github.com/CCDawn/codex-skills/actions/workflows/validate.yml)
-[![License](https://img.shields.io/github/license/CCDawn/codex-skills)](LICENSE)
+[![Release](https://img.shields.io/github/v/release/CCDawn/briefbound-skills?display_name=tag)](https://github.com/CCDawn/briefbound-skills/releases)
+[![Validate](https://github.com/CCDawn/briefbound-skills/actions/workflows/validate.yml/badge.svg)](https://github.com/CCDawn/briefbound-skills/actions/workflows/validate.yml)
+[![License](https://img.shields.io/github/license/CCDawn/briefbound-skills)](LICENSE)
 [![Skills](https://img.shields.io/badge/skills-35-2f81f7)](#skill-catalog)
 [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-compatible-1f883d)](https://agentskills.io/)
-[![skills.sh](https://skills.sh/b/CCDawn/codex-skills)](https://skills.sh/CCDawn/codex-skills)
+[![skills.sh](https://skills.sh/b/CCDawn/briefbound-skills)](https://skills.sh/CCDawn/briefbound-skills)
 
 **Bound to the brief. Free to build.**
 
@@ -28,14 +28,14 @@ This is an illustrative workflow: the user describes the task normally; Briefbou
 Preview the main entry skill:
 
 ```bash
-gh skill preview CCDawn/codex-skills briefbound-router
+gh skill preview CCDawn/briefbound-skills briefbound-router
 ```
 
 List or install the skills with the Agent Skills CLI:
 
 ```bash
-npx skills add CCDawn/codex-skills --list
-npx skills add CCDawn/codex-skills --skill '*' -g -a codex -y
+npx skills add CCDawn/briefbound-skills --list
+npx skills add CCDawn/briefbound-skills --skill '*' -g -a codex -y
 ```
 
 This installs the skill files but does not modify global `AGENTS.md`. Use the repository installer below when you want Briefbound Router to activate automatically from ordinary requests.
@@ -43,8 +43,8 @@ This installs the skill files but does not modify global `AGENTS.md`. Use the re
 For Briefbound's full installation policy, including dry-run, live-copy validation, and reversible conflict handling:
 
 ```powershell
-git clone https://github.com/CCDawn/codex-skills.git
-Set-Location codex-skills
+git clone https://github.com/CCDawn/briefbound-skills.git
+Set-Location briefbound-skills
 powershell -ExecutionPolicy Bypass -File .\install.ps1
 ```
 
@@ -56,8 +56,8 @@ powershell -ExecutionPolicy Bypass -File .\install.ps1 -Agent codex-grok
 ```
 
 ```bash
-git clone https://github.com/CCDawn/codex-skills.git
-cd codex-skills
+git clone https://github.com/CCDawn/briefbound-skills.git
+cd briefbound-skills
 sh ./install.sh
 ```
 
@@ -113,8 +113,7 @@ Run `py -3 scripts\run_briefbound_routing_eval.py` after installation for a low-
 - [`briefbound-runtime-operations`](skills/engineering/briefbound-runtime-operations/SKILL.md): env-vs-code triage and the port/health/business evidence ladder with safe service lifecycle and rollback.
 - [`briefbound-skill-authoring`](skills/engineering/briefbound-skill-authoring/SKILL.md): package maintenance for adding, changing, or removing skills with every anchor and validator budget kept green.
 - [`briefbound-api-contract`](skills/engineering/briefbound-api-contract/SKILL.md): external contract design with breaking-change verdicts, versioning, and migration paths.
-- [`briefbound-plain-talk`](skills/engineering/briefbound-plain-talk/SKILL.md)
-- [`briefbound-readme-optimization`](skills/engineering/briefbound-readme-optimization/SKILL.md): default style layer for user-visible replies: answer first, plain Chinese, no code dumps (cite file:line instead).
+- [`briefbound-plain-talk`](skills/engineering/briefbound-plain-talk/SKILL.md): default style layer for user-visible replies: answer first, plain Chinese, no code dumps (cite file:line instead).
 - [`briefbound-readme-optimization`](skills/engineering/briefbound-readme-optimization/SKILL.md): evidence-driven README creation and improvement with type-tailored sections.
 - [`briefbound-performance-engineering`](skills/engineering/briefbound-performance-engineering/SKILL.md): measured bottleneck diagnosis and minimal optimization only for real performance targets, regressions, or hot paths.
 - [`briefbound-code-structure-guard`](skills/engineering/briefbound-code-structure-guard/SKILL.md): lightweight protection against multi-responsibility giant files without mechanical line-count splitting.
@@ -153,7 +152,6 @@ Run `py -3 scripts\run_briefbound_routing_eval.py` after installation for a low-
 - [`briefbound-ui-design`](skills/engineering/briefbound-ui-design/SKILL.md)
 - [`briefbound-visual-design`](skills/engineering/briefbound-visual-design/SKILL.md)
 - [`briefbound-frontend-engineering`](skills/engineering/briefbound-frontend-engineering/SKILL.md)
-- [`briefbound-diagram-design`](skills/engineering/briefbound-diagram-design/SKILL.md)
 - [`briefbound-ui-review`](skills/engineering/briefbound-ui-review/SKILL.md)
 - [`briefbound-design-system`](skills/engineering/briefbound-design-system/SKILL.md)
 - [`briefbound-feature-reuse-research`](skills/engineering/briefbound-feature-reuse-research/SKILL.md)

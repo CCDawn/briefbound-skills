@@ -163,7 +163,7 @@ const demoFrames = [
     accent: colors.lime,
     title: "对齐 → 路由 → 实施 → 验证",
     lead: "让高能力模型发挥推理能力，只在真正需要时增加约束。",
-    lines: ["github.com/CCDawn/codex-skills", "最重要入口：briefbound-router"],
+    lines: ["github.com/CCDawn/briefbound-skills", "最重要入口：briefbound-router"],
   },
 ];
 

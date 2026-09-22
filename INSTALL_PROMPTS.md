@@ -9,7 +9,7 @@
 ```text
 请帮我一键安装 Briefbound 的 Codex skills 技能包。
 
-仓库地址：https://github.com/CCDawn/codex-skills.git
+仓库地址：https://github.com/CCDawn/briefbound-skills.git
 
 要求：
 1. 如果本机已有这个仓库，就进入仓库并更新到最新 main；如果没有，就 clone 到一个合适的本地目录。
@@ -32,21 +32,21 @@
 你现在负责一键安装 Briefbound Codex skills 技能包。
 
 Repo:
-https://github.com/CCDawn/codex-skills.git
+https://github.com/CCDawn/briefbound-skills.git
 
 目标:
 - 安装整个 skill 包，不是只安装 briefbound-router。
 - 只安装到当前用户的 Codex live skills 目录：~/.codex/skills。
 - 不要安装到 ~/.agents/skills、~/.claude/skills，除非我明确要求。
 - 不要修改任何用户项目代码。
-- 只允许创建/更新本地 codex-skills 仓库、~/.codex/skills 下的安装目录，以及 ~/.codex/AGENTS.md 中带 Briefbound 边界标记的受管激活区段；不得改动该文件的其他规则。
+- 只允许创建/更新本地 briefbound-skills 仓库、~/.codex/skills 下的安装目录，以及 ~/.codex/AGENTS.md 中带 Briefbound 边界标记的受管激活区段；不得改动该文件的其他规则。
 - 安装完成后明确告诉我：briefbound-router 是最重要入口；选择它之后用户正常说需求即可，目标清楚直接推进，低/中风险不确定先声明假设再继续，只有高影响分叉才用一轮紧凑建议并等待校准；其它 skill 通常由 Briefbound Router 自动路由。
 - 旧 `ccdawn-*` live skill 只能在对应的新副本验证通过且 frontmatter 归属一致后移除；不保留旧别名，不删除无法验证归属的目录。
 - 可逆停用安装器识别的完整 Superpowers 入口集，只允许把对应 `SKILL.md` 重命名为 `SKILL.md.briefbound-disabled`，不得删除目录或内容。
 
 执行步骤:
 1. 识别当前系统、shell、Git、Python 是否可用。
-2. 找一个合适的本地工作目录保存仓库；如果已有 codex-skills 仓库，进入后 git pull；如果没有，从 GitHub clone。
+2. 找一个合适的本地工作目录保存仓库；如果已有 briefbound-skills 仓库，进入后 git pull；如果没有，从 GitHub clone。
 3. 进入仓库根目录。
 4. 先运行安装演练：
    - Windows 优先用：powershell -ExecutionPolicy Bypass -File .\install.ps1 -DryRun
@@ -85,8 +85,8 @@ https://github.com/CCDawn/codex-skills.git
 如果你想自己执行命令，可以使用：
 
 ```powershell
-git clone https://github.com/CCDawn/codex-skills.git
-cd codex-skills
+git clone https://github.com/CCDawn/briefbound-skills.git
+cd briefbound-skills
 powershell -ExecutionPolicy Bypass -File .\install.ps1 -DryRun
 powershell -ExecutionPolicy Bypass -File .\install.ps1
 powershell -ExecutionPolicy Bypass -File .\install.ps1 -VerifyOnly

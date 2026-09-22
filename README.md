@@ -1,11 +1,11 @@
 # Briefbound Agent Skills
 
-[![Release](https://img.shields.io/github/v/release/CCDawn/codex-skills?display_name=tag)](https://github.com/CCDawn/codex-skills/releases)
-[![Validate](https://github.com/CCDawn/codex-skills/actions/workflows/validate.yml/badge.svg)](https://github.com/CCDawn/codex-skills/actions/workflows/validate.yml)
-[![License](https://img.shields.io/github/license/CCDawn/codex-skills)](LICENSE)
+[![Release](https://img.shields.io/github/v/release/CCDawn/briefbound-skills?display_name=tag)](https://github.com/CCDawn/briefbound-skills/releases)
+[![Validate](https://github.com/CCDawn/briefbound-skills/actions/workflows/validate.yml/badge.svg)](https://github.com/CCDawn/briefbound-skills/actions/workflows/validate.yml)
+[![License](https://img.shields.io/github/license/CCDawn/briefbound-skills)](LICENSE)
 [![Skills](https://img.shields.io/badge/skills-35-2f81f7)](#完整-skill-目录)
 [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-compatible-1f883d)](https://agentskills.io/)
-[![skills.sh](https://skills.sh/b/CCDawn/codex-skills)](https://skills.sh/CCDawn/codex-skills)
+[![skills.sh](https://skills.sh/b/CCDawn/briefbound-skills)](https://skills.sh/CCDawn/briefbound-skills)
 
 **Bound to the brief. Free to build.**
 
@@ -30,14 +30,14 @@
 先预览最重要的入口 Skill：
 
 ```powershell
-gh skill preview CCDawn/codex-skills briefbound-router
+gh skill preview CCDawn/briefbound-skills briefbound-router
 ```
 
 使用 Agent Skills CLI 查看或安装：
 
 ```powershell
-npx skills add CCDawn/codex-skills --list
-npx skills add CCDawn/codex-skills --skill '*' -g -a codex -y
+npx skills add CCDawn/briefbound-skills --list
+npx skills add CCDawn/briefbound-skills --skill '*' -g -a codex -y
 ```
 
 这会安装 skill 文件，但不会修改全局 `AGENTS.md`。需要“正常说需求即可自动进入 Briefbound Router”的默认激活能力时，使用下面的仓库安装器。
@@ -45,8 +45,8 @@ npx skills add CCDawn/codex-skills --skill '*' -g -a codex -y
 需要 Briefbound 完整安装策略，包括安装演练、live copy 验证和可逆处理冲突入口时，使用仓库安装器：
 
 ```powershell
-git clone https://github.com/CCDawn/codex-skills.git
-Set-Location codex-skills
+git clone https://github.com/CCDawn/briefbound-skills.git
+Set-Location briefbound-skills
 powershell -ExecutionPolicy Bypass -File .\install.ps1
 ```
 
@@ -60,8 +60,8 @@ powershell -ExecutionPolicy Bypass -File .\install.ps1 -Agent codex-grok
 macOS/Linux：
 
 ```bash
-git clone https://github.com/CCDawn/codex-skills.git
-cd codex-skills
+git clone https://github.com/CCDawn/briefbound-skills.git
+cd briefbound-skills
 sh ./install.sh
 ```
 
@@ -140,7 +140,7 @@ python3 scripts/install_codex_library.py --agent opencode --router-activation in
 ```text
 请帮我一键安装 Briefbound 的 Codex skills 技能包。
 
-仓库地址：https://github.com/CCDawn/codex-skills.git
+仓库地址：https://github.com/CCDawn/briefbound-skills.git
 
 要求：
 1. 如果本机已有这个仓库，就进入仓库并更新到最新 main；如果没有，就 clone 到一个合适的本地目录。
@@ -194,16 +194,17 @@ python3 scripts/install_codex_library.py --agent opencode --router-activation in
 - **`briefbound-frontend-engineering`**
   前端生产实现 owner，只消费用户已批准或有依据跳过预览的界面契约，负责组件、状态、响应式和无障碍实现，并使用真实浏览器证据收口。
 
-- **`briefbound-diagram-design`**
-  结构化图解 owner：把架构、流程、时序、ER/UML、定量数据做成可编辑的 HTML/SVG/PNG，支持 Mermaid、draw.io、Excalidraw 导入；报告内配图以 support 身份参与，不抢内容 owner。
-
 - **`briefbound-feature-reuse-research`**
   只在复用候选会实质改变复杂功能的架构、依赖或实现范围时调研现有项目、库、标准、示例和项目内模块。
 
 - **`briefbound-planning`**
-- **`briefbound-plain-talk`**
-- **`briefbound-readme-optimization`**
   只在真实设计分叉、高风险顺序或跨边界交接需要可复用方案时触发；存在独立 owner、依赖或验证边界时在同一方案内生成最小任务图，否则由当前 owner 直接实施。
+
+- **`briefbound-plain-talk`**
+  用户可见回复的默认风格层：结论先行、平实中文、不贴代码细节（引用文件:行号）。
+
+- **`briefbound-readme-optimization`**
+  以仓库清单与源码事实为据，按项目类型生成或增强中文优先 README，逐条可溯源。
 
 - **`briefbound-bdd-tdd-development`**
   仅对预期已明确的新行为或高风险实现契约使用紧凑 TDD；未知根因和 bug 修复仍由 Bug Review 全程持有。
@@ -325,7 +326,6 @@ skills/
     briefbound-ui-review/
     briefbound-design-system/
     briefbound-frontend-engineering/
-    briefbound-diagram-design/
     briefbound-feature-reuse-research/
     briefbound-planning/
     briefbound-plain-talk/
