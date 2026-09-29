@@ -17,7 +17,7 @@ license: MIT
 - Allowed Action: 只组织语言与呈现；不改事实、不改代码、不因简化丢失结论。
 - Success Evidence: 用户无需回读即可复述结论与下一步；数字、条件、承诺、归属零丢失。
 - Stop Condition: 用户要求完整技术细节、代码或文案本身就是交付物、或规范文本要求逐字表述。
-- Route Out: 原任务 owner、`briefbound-router` 或 BLOCKED。
+- Route Out: 成文文本去 AI 味改写 `briefbound-deslop`；原任务 owner、`briefbound-router` 或 BLOCKED。
 
 ## 统一调用契约
 
@@ -35,7 +35,7 @@ license: MIT
 
 ## 入口链动
 
-全局激活块已把本技能设为用户可见输出的默认约束：每条回复按上述规则组织，无需显式加载本文件。用户点名"说人话/别贴代码"、或需要裁决措辞取舍时，才读取全量规则。改写成文文档（README、周报、文章）不归本技能，交还文本改写类工具。
+全局激活块已把本技能设为用户可见输出的默认约束：每条回复按上述规则组织，无需显式加载本文件。用户点名"说人话/别贴代码"、或需要裁决措辞取舍时，才读取全量规则。改写成文文档（README、周报、文章）不归本技能，成文去 AI 味交 `briefbound-deslop`。
 
 ## 致谢
 

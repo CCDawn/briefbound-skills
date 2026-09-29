@@ -3,7 +3,7 @@
 [![Release](https://img.shields.io/github/v/release/CCDawn/briefbound-skills?display_name=tag)](https://github.com/CCDawn/briefbound-skills/releases)
 [![Validate](https://github.com/CCDawn/briefbound-skills/actions/workflows/validate.yml/badge.svg)](https://github.com/CCDawn/briefbound-skills/actions/workflows/validate.yml)
 [![License](https://img.shields.io/github/license/CCDawn/briefbound-skills)](LICENSE)
-[![Skills](https://img.shields.io/badge/skills-35-2f81f7)](#完整-skill-目录)
+[![Skills](https://img.shields.io/badge/skills-38-2f81f7)](#完整-skill-目录)
 [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-compatible-1f883d)](https://agentskills.io/)
 [![skills.sh](https://skills.sh/b/CCDawn/briefbound-skills)](https://skills.sh/CCDawn/briefbound-skills)
 
@@ -11,7 +11,7 @@
 
 **约定内自主推进，约定变化主动商量。**
 
-35 个中文优先 Agent Skills，支持 Codex、Grok Build、ZCode、Claude Code、Cursor、Gemini CLI 与 OpenCode，覆盖意图对齐、动态路由、多会话平级协作与自动闭环、轻量开发、代码结构守卫、性能工程、开发清理、代码审查、UI 设计和 AI 研究工作流。
+38 个中文优先 Agent Skills，支持 Codex、Grok Build、ZCode、Claude Code、Cursor、Gemini CLI 与 OpenCode，覆盖意图对齐、动态路由、多会话平级协作与自动闭环、轻量开发、代码结构守卫、性能工程、开发清理、代码审查、UI 设计和 AI 研究工作流。
 
 - 用户正常说需求即可，不需要主动调用 `briefbound-router` 或记忆流程命令。
 - [`briefbound-router`](skills/engineering/briefbound-router/SKILL.md) 会在意图明确时直接推进；低/中风险不确定时先声明假设再继续，只有高影响分叉才用一轮紧凑的建议/对齐并等待校准；讨论时先说结果、使用通俗中文，并只解释会影响判断或操作的复杂概念。
@@ -113,7 +113,10 @@ python3 scripts/install_codex_library.py --agent opencode --router-activation in
 - [`briefbound-runtime-operations`](skills/engineering/briefbound-runtime-operations/SKILL.md)：分流部署与运行故障，按端口-健康-业务三级阶梯取证恢复。
 - [`briefbound-skill-authoring`](skills/engineering/briefbound-skill-authoring/SKILL.md)：维护技能包自身，同步契约、路由、目录、用例与校验预算。
 - [`briefbound-api-contract`](skills/engineering/briefbound-api-contract/SKILL.md)：审查对外契约变更，给出兼容性判定、版本化与迁移路径。
+- [`briefbound-release-versioning`](skills/engineering/briefbound-release-versioning/SKILL.md)：把变更组装成可发布版本：semver 判档、changelog 归档、发布前检查与回滚预案。
+- [`briefbound-adr`](skills/engineering/briefbound-adr/SKILL.md)：把已拍板的架构/技术决策落成 MADR 风格 ADR，含备选方案、后果与状态流转。
 - [`briefbound-plain-talk`](skills/engineering/briefbound-plain-talk/SKILL.md)：用户可见回复的默认风格层：结论先行、平实中文、不贴代码细节（引用文件:行号）。
+- [`briefbound-deslop`](skills/engineering/briefbound-deslop/SKILL.md)：把成文中文文本改掉 AI 味：句式、黑话、节奏与标点，事实数字零丢失、保留作者声音。
 - [`briefbound-readme-optimization`](skills/engineering/briefbound-readme-optimization/SKILL.md)：以仓库清单与源码事实为据，按项目类型生成或增强中文优先 README，逐条可溯源。
 - [`briefbound-performance-engineering`](skills/engineering/briefbound-performance-engineering/SKILL.md)：只在性能目标、回归或关键热路径需要测量时定位瓶颈并验证最小优化。
 - [`briefbound-code-structure-guard`](skills/engineering/briefbound-code-structure-guard/SKILL.md)：在开发中识别多职责巨型文件，只在维护收益明确时执行最小拆分。
@@ -203,6 +206,9 @@ python3 scripts/install_codex_library.py --agent opencode --router-activation in
 - **`briefbound-plain-talk`**
   用户可见回复的默认风格层：结论先行、平实中文、不贴代码细节（引用文件:行号）。
 
+- **`briefbound-deslop`**
+  成文中文文本去 AI 味 owner：改写文章、文档、发行说明、周报与论文的句式、黑话、节奏和标点；事实数字零丢失并保留作者声音。对话措辞归 plain-talk，README 面向新读者重构归 readme-optimization。
+
 - **`briefbound-readme-optimization`**
   以仓库清单与源码事实为据，按项目类型生成或增强中文优先 README，逐条可溯源。
 
@@ -220,6 +226,12 @@ python3 scripts/install_codex_library.py --agent opencode --router-activation in
 
 - **`briefbound-api-contract`**
   对外契约面 owner：API、schema、事件与 CLI 参数的设计与兼容性审查，输出破坏性判定、版本化与迁移路径。
+
+- **`briefbound-release-versioning`**
+  发布与版本管理 owner：semver 判档、Keep a Changelog 维护、发布前检查清单、发布说明与回滚预案；部署与运行时操作仍归 runtime-operations。
+
+- **`briefbound-adr`**
+  决策留痕 owner：把已拍板的架构/技术决策写成 MADR 四要素 ADR，维护 supersede 状态流转与决策债务提示；讨论中的方案仍归 planning。
 
 - **`briefbound-pr-review`**
   PR 审阅阶段 skill，用来把 PR、分支、提交范围或本地 diff 对照已确认需求、任务证据、回归风险和合并准备度进行审查。
@@ -329,6 +341,7 @@ skills/
     briefbound-feature-reuse-research/
     briefbound-planning/
     briefbound-plain-talk/
+    briefbound-deslop/
     briefbound-readme-optimization/
     briefbound-bdd-tdd-development/
     briefbound-pr-review/
@@ -343,6 +356,8 @@ skills/
     briefbound-runtime-operations/
     briefbound-skill-authoring/
     briefbound-api-contract/
+    briefbound-release-versioning/
+    briefbound-adr/
   research/
     README.md
     briefbound-ai-research-loop/

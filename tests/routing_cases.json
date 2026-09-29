@@ -74,4 +74,13 @@
   {"id":"skill-package-extension","prompt":"给技能包新增一个技能：写 SKILL.md、登记路由、目录和校验预算，保证校验器通过","primary":"briefbound-skill-authoring","support":[],"forbidden_primary":["briefbound-router","briefbound-readme-optimization"]},
   {"id":"api-breaking-change-review","prompt":"新接口版本要删除两个旧字段并收紧枚举约束，评估对现有客户端的影响，给出兼容性判定和迁移路径","primary":"briefbound-api-contract","support":[],"forbidden_primary":["briefbound-planning","briefbound-pr-review"]},
   {"id":"contract-test-composite","prompt":"设计订单 v2 接口的破坏性变更，并给出保护旧客户端的契约测试计划","primary":"briefbound-api-contract","support":["briefbound-test-strategy"],"forbidden_primary":["briefbound-planning"]}
+,
+  {"id":"release-versioning-cut","prompt":"上个版本以来的功能都合完了，判定这次发版该升哪个版本号、归档 changelog、跑发布前检查并写回滚预案","primary":"briefbound-release-versioning","support":[],"forbidden_primary":["briefbound-runtime-operations","briefbound-pr-review"]},
+  {"id":"deploy-execution-not-release","prompt":"版本 tag 已打好，把服务滚动部署到生产环境并确认健康与回滚入口","primary":"briefbound-runtime-operations","support":[],"forbidden_primary":["briefbound-release-versioning"]},
+  {"id":"adr-settled-decision","prompt":"技术选型刚定案用 Postgres 而不是 Mongo，把这个已拍板决策写成 ADR，记录被否选项和后果","primary":"briefbound-adr","support":[],"forbidden_primary":["briefbound-planning","briefbound-project-memory"]},
+  {"id":"open-discussion-not-adr","prompt":"消息队列还在 RocketMQ 和 Kafka 之间权衡，对比两者的吞吐、运维成本和迁移风险再给我建议","primary":"briefbound-planning","support":[],"forbidden_primary":["briefbound-adr"]}
+,
+  {"id":"deslop-finished-text","prompt":"把这篇要发布的技术博客去掉 AI 味：句式、黑话和标点节奏都收一遍，事实和数字不能动，也别把我原本的语气改没了","primary":"briefbound-deslop","support":[],"forbidden_primary":["briefbound-plain-talk","briefbound-readme-optimization"]},
+  {"id":"reply-wording-not-deslop","prompt":"这条要直接发给合作方的回复太生硬，帮我把措辞改得自然一点，说人话","primary":"briefbound-plain-talk","support":[],"forbidden_primary":["briefbound-deslop"]},
+  {"id":"readme-restructure-not-deslop","prompt":"这个仓库 README 要面向新读者重写，重新组织章节结构和上手路径，让人不读源码就能用起来","primary":"briefbound-readme-optimization","support":[],"forbidden_primary":["briefbound-deslop"]}
 ]

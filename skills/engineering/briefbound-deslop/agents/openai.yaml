@@ -1,0 +1,4 @@
+interface:
+  display_name: "Briefbound 成文去 AI 味"
+  short_description: "改写成文中文的 AI 味句式与黑话，事实与作者声音零丢失"
+  default_prompt: "使用 $briefbound-deslop：先判定文体与豁免（公文/法律/论文固定结构不动），再定改写幅度，按先减后改的顺序处理句式禁令、黑话词表、标点节奏；全程事实、数字、条件、承诺、归属零丢失，同一事物全文一个名字，保留作者声音；交付改写后全文与一句改动说明。"

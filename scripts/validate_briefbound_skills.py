@@ -82,18 +82,29 @@ DIRECT_WRITE_OWNERS = {
     "briefbound-runtime-operations",
     "briefbound-skill-authoring",
     "briefbound-autonomous-collaboration-loop",
+    "briefbound-adr",
+    "briefbound-ai-research-loop",
     "briefbound-bdd-tdd-development",
     "briefbound-bug-review",
     "briefbound-code-structure-guard",
     "briefbound-design-system",
+    "briefbound-deslop",
+    "briefbound-diagram-design",
     "briefbound-frontend-engineering",
     "briefbound-multi-agent-orchestration",
     "briefbound-performance-engineering",
+    "briefbound-project-dissection",
+    "briefbound-project-memory",
+    "briefbound-readme-optimization",
+    "briefbound-release-versioning",
+    "briefbound-score-loop",
     "briefbound-thread-coordination",
     "briefbound-ui-design",
+    "briefbound-visual-design",
 }
 
 TOKEN_BUDGETS = {
+    "briefbound-adr": 1300,
     "briefbound-ai-research-loop": 2200,
     "briefbound-autonomous-collaboration-loop": 2300,
     "briefbound-bdd-tdd-development": 1350,
@@ -105,6 +116,7 @@ TOKEN_BUDGETS = {
     "briefbound-project-memory": 1400,
     "briefbound-development-cleanup": 1900,
     "briefbound-design-system": 1500,
+    "briefbound-deslop": 1750,
     "briefbound-feature-reuse-research": 2100,
     "briefbound-frontend-engineering": 1550,
     "briefbound-huawei-nslb-score-loop": 1200,
@@ -113,6 +125,7 @@ TOKEN_BUDGETS = {
     "briefbound-planning": 1850,
     "briefbound-plain-talk": 1200,
     "briefbound-readme-optimization": 1500,
+    "briefbound-release-versioning": 1760,
     "briefbound-test-strategy": 1400,
     "briefbound-runtime-operations": 1450,
     "briefbound-skill-authoring": 1450,
@@ -131,7 +144,7 @@ TOKEN_BUDGETS = {
 
 ROUTER_REFERENCE_BUDGETS = {
     "collaboration-discovery.md": 900,
-    "routing-practice.md": 2650,
+    "routing-practice.md": 2680,
     "capability-routing.md": 1500,
     "runtime.md": 1800,
     "output-forms.md": 900,
@@ -184,9 +197,9 @@ ROUTER_REFERENCE_REQUIRED_MARKERS = {
 }
 
 ROUTER_PROFILE_BUDGETS = {
-    "alignment": (["SKILL.md", "references/output-forms.md"], 3600),
-    "collaboration": (["SKILL.md", "references/collaboration-discovery.md"], 3500),
-    "routing": (["SKILL.md", "references/routing-practice.md"], 5450),
+    "alignment": (["SKILL.md", "references/output-forms.md"], 4000),
+    "collaboration": (["SKILL.md", "references/collaboration-discovery.md"], 3600),
+    "routing": (["SKILL.md", "references/routing-practice.md"], 6000),
     "long-task": (["SKILL.md", "references/runtime.md"], 4300),
     "maximum": (
         [
@@ -195,7 +208,7 @@ ROUTER_PROFILE_BUDGETS = {
             "references/routing-practice.md",
             "references/runtime.md",
         ],
-        7200,
+        8000,
     ),
 }
 

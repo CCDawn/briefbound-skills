@@ -16,6 +16,7 @@
 - **[briefbound-feature-reuse-research](./briefbound-feature-reuse-research/SKILL.md)** - Reuse research only when external or in-project candidates can materially change a complex feature plan.
 - **[briefbound-planning](./briefbound-planning/SKILL.md)** - Implementation planning after aligned requirements.
 - **[briefbound-plain-talk](./briefbound-plain-talk/SKILL.md)** - Default style layer for user-visible replies: answer first, plain Chinese, no code dumps (cite file:line instead).
+- **[briefbound-deslop](./briefbound-deslop/SKILL.md)** - De-AI-flavors finished Chinese text (articles, docs, release notes, reports): sentence patterns, jargon, rhythm, punctuation; zero fact loss, author voice preserved.
 - **[briefbound-readme-optimization](./briefbound-readme-optimization/SKILL.md)** - Evidence-driven README creation/improvement: type-tailored sections, every command and claim traceable to manifests or source.
 - **[briefbound-bdd-tdd-development](./briefbound-bdd-tdd-development/SKILL.md)** - Compact TDD for already-defined new behavior or high-risk implementation contracts; it does not re-own diagnosed bugs.
 - **[briefbound-pr-review](./briefbound-pr-review/SKILL.md)** - Explicit PR, branch, commit-range, or diff review against requirements, evidence, regression risk, and merge readiness.
@@ -28,3 +29,5 @@
 - **[briefbound-runtime-operations](./briefbound-runtime-operations/SKILL.md)** - Deployment and runtime troubleshooting owner: env-vs-code triage, the port/health/business evidence ladder, safe service lifecycle, and rollback.
 - **[briefbound-skill-authoring](./briefbound-skill-authoring/SKILL.md)** - Package maintenance owner for adding, changing, or removing Briefbound skills with every anchor, budget, and validator contract kept green.
 - **[briefbound-api-contract](./briefbound-api-contract/SKILL.md)** - External contract owner: API, schema, event, and CLI surface design with breaking-change verdicts, versioning, and migration paths.
+- **[briefbound-release-versioning](./briefbound-release-versioning/SKILL.md)** - Release owner: semver bump decision, Keep a Changelog upkeep, pre-release checklist, release notes, and rollback plan; deployment stays with runtime-operations.
+- **[briefbound-adr](./briefbound-adr/SKILL.md)** - Records settled architecture/technology decisions as MADR-style ADRs with supersede transitions and decision-debt nudges; open discussions stay with planning.
