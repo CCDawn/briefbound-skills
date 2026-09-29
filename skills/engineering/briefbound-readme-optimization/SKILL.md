@@ -17,7 +17,7 @@ license: MIT
 - Allowed Action: 读写 README 与文档文件；读取仓库任意文件取证；不执行安装、不改源码语义。
 - Success Evidence: 安装与用法逐条可溯源且与清单一致；章节按类型模板完整；新读者不读源码可完成安装与首次运行。
 - Stop Condition: 仓库无可用事实源、要求与事实冲突、或需要虚构功能才能满足。
-- Route Out: 原任务 owner、`briefbound-diagram-design`（架构配图）、`briefbound-plain-talk`（行文风格）、`briefbound-router` 或 BLOCKED。
+- Route Out: 原任务 owner、`briefbound-diagram-design`（架构配图）、`briefbound-plain-talk`（行文风格）、`briefbound-development-cleanup`（验证后的真实残留）、`briefbound-router` 或 BLOCKED。
 
 ## 统一调用契约
 
@@ -28,7 +28,7 @@ license: MIT
 
 通用顺序：标题+一行描述 → 徽章（可选、不超过 4 枚）→ 简介（是什么/为什么，3 行内）→ 安装 → 使用（可复制命令+最小示例）→ 目录结构（仅复杂仓）→ 贡献（仅开源协作仓）→ 许可证。
 
-- **agent 技能包**：加技能目录（名称+一句话）、安装命令、路由/链动入口说明（参照 briefbound-skills 仓库 README 模式）。
+- **agent 技能包**：加技能目录（名称+一句话）、安装命令、路由/链动入口说明（参照本仓库 README 模式）。
 - **脚本/工具合集**：每个入口脚本一段用法（命令、输入输出、一个示例）；清单中不存在的脚本不写。
 - **网页/应用项目**：加截图位、技术栈表、本地开发步骤。
 - **研究仓库**：加环境、数据、复现命令、结果引用。

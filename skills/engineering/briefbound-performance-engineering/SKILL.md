@@ -1,6 +1,6 @@
 ---
 name: briefbound-performance-engineering
-description: "Use when an explicit performance goal, measurable regression, unresolved hot path, large workload, concurrency/cache/streaming decision, or latency/throughput/CPU/memory/I/O/bundle budget needs profiling and evidence-backed optimization; do not use for routine development, speculative cleanup, or an already-located N+1/local inefficiency whose batch fix and deterministic count verification are clear to the current owner."
+description: "Use when an explicit performance goal, measurable regression, unresolved hot path, large workload, concurrency/cache/streaming decision, or latency/throughput/CPU/memory/I/O/bundle budget needs profiling and evidence-backed optimization; do not use for routine development, speculative cleanup, competition score iteration, or an already-located N+1/local inefficiency whose batch fix and deterministic count verification are clear to the current owner."
 license: MIT
 ---
 

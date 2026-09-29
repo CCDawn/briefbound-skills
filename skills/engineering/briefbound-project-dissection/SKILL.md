@@ -15,7 +15,7 @@ description: Use when the user wants to understand or learn a repository through
 - Allowed Action: 只读目标源码；在任务输出目录生成事实材料、报告与图解。远程源码可克隆到任务临时目录；不安装或运行被调研项目。
 - Success Evidence: 解释与代码位置对应，事实与推断分开，主链路可追溯，图解实际导出并通过检查，未覆盖范围如实披露。
 - Stop Condition: 缺少决定结论的源码、关键关系无法确认、范围扩大或输出格式无法完成。
-- Route Out: 风险审查交 briefbound-project-review；复用选型交 briefbound-feature-reuse-research；图解交 briefbound-diagram-design；目标分歧交 briefbound-router。
+- Route Out: 风险审查交 briefbound-project-review；复用选型交 briefbound-feature-reuse-research；图解交 briefbound-diagram-design；验证后的真实残留转 briefbound-development-cleanup；目标分歧交 briefbound-router。
 
 ## 统一调用契约
 

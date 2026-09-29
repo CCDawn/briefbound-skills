@@ -70,7 +70,7 @@ Briefbound Router 仅在非简单目标确有多会话协作价值时，询问�
 
 ### 5. 集成队列
 
-每个 peer 用 `MERGE_READY` 提交 `Base / Head or Artifact / Changed Scope / Tests / Dependencies / Risks`。`MERGE_READY_RECOVERED` 也必须满足相同证据门。Integration Owner 以 Git 和新鲜测试为事实源：
+每个 peer 用 `MERGE_READY` 入队，完整证据字段规范见 `briefbound-multi-agent-orchestration` 的 `team-protocol.md`。`MERGE_READY_RECOVERED` 也必须满足相同证据门。Integration Owner 以 Git 和新鲜测试为事实源：
 
 首个交付入队时检查一次 `lane=integration/<target-key>`：无 claim 则认领队列并发 `INTEGRATION_CLAIMED`。baseline/dirty main 时进入 `WAITING_FOR_CLEAN_TARGET`，保留证据但不应用、变基或合并；已有负责人则其他 peer 停止合并。Loop Owner 对空缺自行认领或只联系一个合适 peer，不轮询或询问用户。细节交 `briefbound-thread-coordination`。
 

@@ -10,7 +10,7 @@ license: MIT
 
 复杂功能在方案制定中遇到外部复用取舍时，做只读复用研究：搜索相关项目、库、模块、官方示例和成熟实现，评估是否值得复用、改造、只参考，或自研。
 
-本 skill 不写代码、不安装依赖、不复制外部代码进项目；输出可交给 `briefbound-planning` 的复用决策。
+本 skill 不写代码；输出可交给 `briefbound-planning` 的复用决策。
 
 ## Briefbound task contract
 
@@ -101,32 +101,13 @@ license: MIT
 ## 输出契约
 
 ```text
-复用研究:
-- 目标功能:
-- 搜索范围:
-- 当前项目已有复用点:
-- 结论: REUSE / ADAPT / REFERENCE_ONLY / BUILD_IN_HOUSE / BLOCKED
-- 推荐原因:
+复用研究: 目标功能 / 搜索范围 / 当前项目已有复用点 / 结论（REUSE / ADAPT / REFERENCE_ONLY / BUILD_IN_HOUSE / BLOCKED）/ 推荐原因
 
-候选评估:
-- 候选: 名称 / 链接
-  - Fit:
-  - License:
-  - Activity:
-  - Integration Cost:
-  - Adaptation Cost:
-  - Testability:
-  - Project Fit:
-  - Risk:
-  - Verdict: keep / reject；原因...
+候选评估: 每个候选按「候选字段」逐项给出依据，末行 Verdict: keep / reject；原因...
 
 复用决策:
-- Decision:
-- Dependency Impact:
-- Implementation Boundary:
-- Verification Strategy:
-- Rejected Alternatives:
-- Planning Handoff: 进入 briefbound-planning 时必须携带的复用决策、依赖边界、验证策略和 rejected alternatives
+- Decision / Dependency Impact / Implementation Boundary / Verification Strategy / Rejected Alternatives:
+- Planning Handoff: 携带复用决策、依赖边界、验证策略和 rejected alternatives 进入 briefbound-planning
 
 下一步:
 默认路由：<从 Briefbound task contract 的 Route Out 选择一个>，原因...
@@ -136,10 +117,4 @@ license: MIT
 ## 质量门槛
 
 - 必须给链接或本地证据；不能写“可能有库”“应该可以参考”。
-- 必须说明被拒绝候选为什么不适合。
-- 许可证不清时不能推荐 `REUSE`。
-- 未检查当前项目已有模块时，不能推荐外部依赖。
-- 不安装、不运行、不复制外部代码；需要试用库时移交原开发 owner，需要执行契约时才进入 `briefbound-planning`。
-- 搜索耗时大时先做 QUICK 研究，再建议是否继续 DEEP。
-- 进入原开发 owner 或 `briefbound-planning` 前，必须把 `复用决策` 作为输入，不重复研究。
-- 协作校准与进入 `briefbound-planning` 的触发条件，以执行规则为准。
+- 进入原开发 owner 或 `briefbound-planning` 前，必须把 `复用决策` 作为输入，不重复研究；协作校准与进入触发条件以执行规则为准。

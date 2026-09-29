@@ -1,6 +1,6 @@
 ---
 name: briefbound-simplification-audit
-description: Use when the user asks to simplify a diff, PR, repository or subsystem, remove unnecessary abstractions or dependencies, or rank deletion candidates; choose change-only or repository scope explicitly. Not a routine correctness review.
+description: Use when the user asks for a repository- or subsystem-wide redundancy audit, removal of unnecessary abstractions or dependencies, or a ranked deletion queue across the codebase; do not use for a single diff or PR over-design check, which belongs to briefbound-simplification-review.
 license: MIT
 ---
 

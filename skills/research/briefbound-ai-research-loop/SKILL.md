@@ -23,14 +23,14 @@ license: MIT
 - Output Contract: baseline 复现结论、假设组合、实验 lane、证据综合、研究方向决策或可复现交接。
 - Allowed Action: 在已锁定的可编辑面和预算内复现、修改、运行、评估和记录；不静默改变数据划分、metric、baseline 或研究目标。
 - Success Evidence: 可复现命令、baseline 指纹、metric 与方差、diff/config、实验 artifact、对照/消融结果以及有来源的研究结论。
-- Stop Condition: baseline 不可信、评价协议漂移、数据泄漏、预算或权限不足、结果不可复现、关键假设无法区分，或继续实验已无新的信息价值。
-- Route Out: `briefbound-score-loop`、`briefbound-feature-reuse-research`、`briefbound-bug-review`、`briefbound-research-rigor-review`、完成交接或 BLOCKED。
+- Stop Condition: baseline 不可信、评价协议漂移、数据泄漏、预算或权限不足、结果不可复现、关键假设无法区分，或继续实验已无信息价值。
+- Route Out: `briefbound-score-loop`、`briefbound-feature-reuse-research`、`briefbound-bug-review`、`briefbound-research-rigor-review`、`briefbound-development-cleanup`、完成交接或 BLOCKED。
 - Support 图解：研究汇报复杂时自动加载 `briefbound-diagram-design` 配图（不夺所有权）；短状态不配图。
 
 ## 统一调用契约
 
 - 只处理 Briefbound task contract 范围；不匹配时回 `briefbound-router` 或更具体 owner，复合任务不吞其他 owner。
-- 用户可见内容默认中文，完成只报状态、产出、证据和剩余风险；代码、命令、路径、错误原文、API/协议、skill 名和枚举保留原样；Route Out 仅以 Briefbound task contract 为准，末行 `下一步建议: <一个具体动作>`，且限于决策类建议（推荐方向、优先级或需用户拍板的选项），不把可自行完成的执行步骤包装成建议交回。
+- 用户可见内容默认中文，完成只报状态、产出、证据和剩余风险；代码、命令、路径、错误原文、API/协议、skill 名和枚举保留原样；Route Out 仅以 Briefbound task contract 为准，末行 `下一步建议: <一个具体动作>`，且限于决策类建议（推荐方向、优先级或需拍板的选项），不把可自行完成的执行步骤包装成建议交回。
 
 ## 所有权判断
 
