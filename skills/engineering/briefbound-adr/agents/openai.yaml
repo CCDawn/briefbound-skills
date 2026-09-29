@@ -1,0 +1,4 @@
+interface:
+  display_name: "Briefbound ADR 决策记录"
+  short_description: "从会话与 diff 提炼定案，落 MADR 式 ADR 并维护索引与状态流转"
+  default_prompt: "使用 $briefbound-adr：从会话结论与 git diff 提炼本次拍板，按背景、决策、备选方案、后果四要素写入项目 ADR 目录并更新索引；需 supersede 时互链新旧条目，与既有决策冲突时先提示决策债务。"

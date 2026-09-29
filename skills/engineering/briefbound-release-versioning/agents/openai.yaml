@@ -1,0 +1,4 @@
+interface:
+  display_name: "Briefbound 发布与版本管理"
+  short_description: "判定版本号跳档，维护 changelog，发布前检查与回滚预案"
+  default_prompt: "使用 $briefbound-release-versioning：先梳理自上个版本以来的变更与 api-contract 判定结论，再判定 semver 跳档、归档 changelog、逐项跑发布前检查清单，产出发布说明与回滚预案；检查未过即 BLOCKED，不带病发版。"
