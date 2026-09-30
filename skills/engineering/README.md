@@ -20,7 +20,7 @@
 - **[briefbound-readme-optimization](./briefbound-readme-optimization/SKILL.md)** - Evidence-driven README creation/improvement: type-tailored sections, every command and claim traceable to manifests or source.
 - **[briefbound-bdd-tdd-development](./briefbound-bdd-tdd-development/SKILL.md)** - Compact TDD for already-defined new behavior or high-risk implementation contracts; it does not re-own diagnosed bugs.
 - **[briefbound-pr-review](./briefbound-pr-review/SKILL.md)** - Explicit PR, branch, commit-range, or diff review against requirements, evidence, regression risk, and merge readiness.
-- **[briefbound-project-review](./briefbound-project-review/SKILL.md)** - Repository, architecture, technical debt, test gap, and project health review.
+- **[briefbound-project-review](./briefbound-project-review/SKILL.md)** - Repository, architecture, technical debt, test gap, and project health review. Do not use when several listed goals are still unchosen.
 - **[briefbound-project-dissection](./briefbound-project-dissection/SKILL.md)** - Source-guided repository dissection teaching with representative execution paths, design tradeoffs, and a reading route; not a risk-first project audit.
 - **[briefbound-simplification-review](./briefbound-simplification-review/SKILL.md)** - On-demand diff review focused on evidence-backed removal of unnecessary complexity.
 - **[briefbound-simplification-audit](./briefbound-simplification-audit/SKILL.md)** - On-demand repository audit for dependency bloat, dead flexibility, duplicate paths, and removable abstractions.

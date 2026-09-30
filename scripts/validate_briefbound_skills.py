@@ -119,7 +119,6 @@ TOKEN_BUDGETS = {
     "briefbound-deslop": 1750,
     "briefbound-feature-reuse-research": 2100,
     "briefbound-frontend-engineering": 1550,
-    "briefbound-huawei-nslb-score-loop": 1200,
     "briefbound-multi-agent-orchestration": 1900,
     "briefbound-performance-engineering": 1500,
     "briefbound-planning": 1850,
@@ -1368,19 +1367,6 @@ def validate_skill(
             if marker not in text:
                 errors.append(f"{label}: experiment/TDD boundary missing marker '{marker}'")
 
-    if name == "briefbound-huawei-nslb-score-loop":
-        for marker in [
-            "不得把 skill 内的旧分数、hash",
-            "## Live-State Gate",
-            "EXPLOIT",
-            "EXPLORE",
-            "DIAGNOSE",
-            "代理测试",
-            "旧 ledger、search graph、attempt cards 和 failed diffs 是可选事实源",
-        ]:
-            if marker not in text:
-                errors.append(f"{label}: live adaptive NSLB contract missing marker '{marker}'")
-
     if name == "briefbound-creative-toolbox":
         for marker in [
             "## Method Router",
@@ -1717,13 +1703,6 @@ def validate_catalog(repo_root: Path, skill_dirs: list[Path], errors: list[str])
             "briefbound-router routing-practice: external install candidates belong in "
             f"github-skill-candidates.md, found {leaked_candidates}"
         )
-
-    huawei_root = repo_root / "skills" / "competition" / "briefbound-huawei-nslb-score-loop"
-    for markdown_path in sorted(huawei_root.rglob("*.md")):
-        if re.search(r"(?i)[A-Z]:\\Users\\", read_text(markdown_path)):
-            errors.append(
-                f"{markdown_path.relative_to(repo_root)}: project adapter must not hard-code a user profile path"
-            )
 
     validate_briefbound_route_references(repo_root, set(skill_names), errors)
     validate_package_routing_cases(repo_root, set(skill_names), errors)

@@ -20,7 +20,7 @@
 | 测试是主要未知量：补测、覆盖缺口或回归选择 | `briefbound-test-strategy` | COMPACT | 风险排序的最小决定性测试 |
 | 审 PR、diff、branch、commit、merge readiness | `briefbound-pr-review` | COMPACT | findings-first 审阅结论 |
 | 源码学习、项目拆解 | `briefbound-project-dissection` | COMPACT | 教学报告与 diagram-design 配图 |
-| 审整仓、架构或技术债 | `briefbound-project-review` | COMPACT | 风险排序 findings 与执行队列 |
+| 审整仓、架构或技术债；多个目标未选定时不进入 | `briefbound-project-review` | COMPACT | 风险排序 findings 与执行队列 |
 | 评价流程、方案、skill、输出质量，且无更具体 owner | `briefbound-router` | MICRO/COMPACT | 证据化判断与高 ROI 建议 |
 | 说人话、讲重点、少贴代码、回复可读性 | `briefbound-plain-talk` | MICRO | 结论先行的平实回复；各 owner 输出默认受其约束 |
 | 成文中文去 AI 味、收紧文风 | `briefbound-deslop` | COMPACT | 事实零丢失改写与改动说明 |
@@ -40,7 +40,6 @@
 | 已明确的新行为契约需要 RED，或明确要求 TDD | `briefbound-bdd-tdd-development` | COMPACT | 紧凑 RED/GREEN 实现 |
 | AI/ML baseline、假设与消融 | `briefbound-ai-research-loop` | COMPACT/FULL | 研究闭环或下一实验 |
 | 单条 benchmark/score/baseline promotion lane | `briefbound-score-loop` | COMPACT/FULL | candidate 评估与晋升结论 |
-| Huawei NSLB 项目 score lane | `briefbound-huawei-nslb-score-loop` | COMPACT/FULL | 项目命令与 ledger 适配的 score loop |
 | 重要 claim、反直觉结果或晋升审查 | `briefbound-research-rigor-review` | COMPACT | ACCEPT/QUALIFY/REJECT |
 | 竞赛/benchmark 全生命周期 | `briefbound-competition-research-lifecycle` | FULL | 阶段契约与下游 owner |
 | 持久目标、反复迭代、明确 stop condition，且无专项 owner | `briefbound-router` | COMPACT/FULL | 有界 goal contract 与下一轮证据 |

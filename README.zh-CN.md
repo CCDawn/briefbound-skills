@@ -3,7 +3,7 @@
 [![Release](https://img.shields.io/github/v/release/CCDawn/briefbound-skills?display_name=tag)](https://github.com/CCDawn/briefbound-skills/releases)
 [![Validate](https://github.com/CCDawn/briefbound-skills/actions/workflows/validate.yml/badge.svg)](https://github.com/CCDawn/briefbound-skills/actions/workflows/validate.yml)
 [![License](https://img.shields.io/github/license/CCDawn/briefbound-skills)](LICENSE)
-[![Skills](https://img.shields.io/badge/skills-38-2f81f7)](#完整-skill-目录)
+[![Skills](https://img.shields.io/badge/skills-37-2f81f7)](#完整-skill-目录)
 [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-compatible-1f883d)](https://agentskills.io/)
 [![skills.sh](https://skills.sh/b/CCDawn/briefbound-skills)](https://skills.sh/CCDawn/briefbound-skills)
 
@@ -11,7 +11,7 @@
 
 **约定内自主推进，约定变化主动商量。**
 
-38 个中文优先 Agent Skills，支持 Codex、Grok Build、ZCode、Claude Code、Cursor、Gemini CLI 与 OpenCode，覆盖意图对齐、动态路由、多会话平级协作与自动闭环、轻量开发、代码结构守卫、性能工程、开发清理、代码审查、UI 设计和 AI 研究工作流。
+37 个中文优先 Agent Skills，支持 Codex、Grok Build、ZCode、Claude Code、Cursor、Gemini CLI 与 OpenCode，覆盖意图对齐、动态路由、多会话平级协作与自动闭环、轻量开发、代码结构守卫、性能工程、开发清理、代码审查、UI 设计和 AI 研究工作流。
 
 - 用户正常说需求即可，不需要主动调用 `briefbound-router` 或记忆流程命令。
 - [`briefbound-router`](skills/engineering/briefbound-router/SKILL.md) 会在意图明确时直接推进；低/中风险不确定时先声明假设再继续，只有高影响分叉才用一轮紧凑的建议/对齐并等待校准；讨论时先说结果、使用通俗中文，并只解释会影响判断或操作的复杂概念。
@@ -128,7 +128,6 @@ python3 scripts/install_codex_library.py --agent opencode --router-activation in
 - [`briefbound-frontend-engineering`](skills/engineering/briefbound-frontend-engineering/SKILL.md)：消费已批准或明确跳过预览的界面契约，实施生产代码并做运行时验证。
 - [`briefbound-ai-research-loop`](skills/research/briefbound-ai-research-loop/SKILL.md)：复现 baseline，推进假设、实验、消融与研究方向收敛。
 - [`briefbound-score-loop`](skills/competition/briefbound-score-loop/SKILL.md)：固定比较协议后主动选择利用、探索或诊断候选，用早停和代表性评价决定是否替换当前最好方案。
-- [`briefbound-huawei-nslb-score-loop`](skills/competition/briefbound-huawei-nslb-score-loop/SKILL.md)：从当前 NSLB 项目读取 baseline、hash 和线上反馈，按需调用 solver 搜索、打包与校准工具。
 - [`briefbound-creative-toolbox`](skills/creative/briefbound-creative-toolbox/SKILL.md)：按生成、扩展、选择、解卡、颠覆、精炼、整理或命名阶段选择一个方法，输出少量可尝试的非套路方案。
 - [`briefbound-diagram-design`](skills/creative/briefbound-diagram-design/SKILL.md)：生成和重绘架构、流程、时序及数据图解；复杂汇报中图能显著降低理解成本时，主动生成中文总览图。
 - [`briefbound-feature-reuse-research`](skills/engineering/briefbound-feature-reuse-research/SKILL.md)：为复杂功能评估项目内外可复用方案。
@@ -237,7 +236,7 @@ python3 scripts/install_codex_library.py --agent opencode --router-activation in
   PR 审阅阶段 skill，用来把 PR、分支、提交范围或本地 diff 对照已确认需求、任务证据、回归风险和合并准备度进行审查。
 
 - **`briefbound-project-review`**
-  项目审查 skill，用来审查整个仓库、架构、技术债、测试缺口、可维护性、接手状态和项目健康。
+  项目审查 skill，用来审查整个仓库、架构、技术债、测试缺口、可维护性、接手状态和项目健康。用户列出多个目标且尚未选定时不进入。
 
 - **`briefbound-project-dissection`**
   项目拆解教学：从真实数据结构和入口追到业务结果，解释设计取舍与失效边界，并给出阅读路线；不做风险优先的项目审查。
@@ -275,9 +274,6 @@ python3 scripts/install_codex_library.py --agent opencode --router-activation in
 
 - **`briefbound-score-loop`**
   围绕固定评价协议主动选择候选：利用已有正向信号、探索不同机制或先诊断不确定性；用早停筛选和代表性评价决定是否替换当前最好方案。
-
-- **`briefbound-huawei-nslb-score-loop`**
-  Huawei Algorithm Challenge 37 NSLB 的轻量适配层。它从当前项目读取 baseline、hash 和线上反馈，按需调用 solver 搜索、worker、打包与校准工具，不使用写死的旧最佳记录。
 
 ### 创意工具
 
@@ -320,7 +316,6 @@ skills/
   competition/
     README.md
     briefbound-score-loop/
-    briefbound-huawei-nslb-score-loop/
   creative/
     README.md
     briefbound-creative-toolbox/

@@ -3,13 +3,13 @@
 [![Release](https://img.shields.io/github/v/release/CCDawn/briefbound-skills?display_name=tag)](https://github.com/CCDawn/briefbound-skills/releases)
 [![Validate](https://github.com/CCDawn/briefbound-skills/actions/workflows/validate.yml/badge.svg)](https://github.com/CCDawn/briefbound-skills/actions/workflows/validate.yml)
 [![License](https://img.shields.io/github/license/CCDawn/briefbound-skills)](LICENSE)
-[![Skills](https://img.shields.io/badge/skills-38-2f81f7)](#skill-catalog)
+[![Skills](https://img.shields.io/badge/skills-37-2f81f7)](#skill-catalog)
 [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-compatible-1f883d)](https://agentskills.io/)
 [![skills.sh](https://skills.sh/b/CCDawn/briefbound-skills)](https://skills.sh/CCDawn/briefbound-skills)
 
 **Bound to the brief. Free to build.**
 
-Briefbound is a Chinese-first collection of 38 Agent Skills for Codex, Grok Build, ZCode, Claude Code, Cursor, Gemini CLI, and OpenCode, covering intent alignment, dynamic routing, peer collaboration and opt-in autonomous closure across existing threads, lightweight development, code-structure guards, performance engineering, cleanup, code review, UI design, and AI research workflows.
+Briefbound is a Chinese-first collection of 37 Agent Skills for Codex, Grok Build, ZCode, Claude Code, Cursor, Gemini CLI, and OpenCode, covering intent alignment, dynamic routing, peer collaboration and opt-in autonomous closure across existing threads, lightweight development, code-structure guards, performance engineering, cleanup, code review, UI design, and AI research workflows.
 
 - Users describe the task normally. They do not need to invoke `briefbound-router` or memorize a workflow.
 - [`briefbound-router`](skills/engineering/briefbound-router/SKILL.md) proceeds immediately when intent is clear; for low- and medium-risk uncertainty it states its assumption and continues, and only a high-impact fork gets one compact alignment turn that waits for calibration. It leads with the result, uses plain language, and explains only complex concepts that affect a decision or action.
@@ -128,7 +128,6 @@ Run `py -3 scripts\run_briefbound_routing_eval.py` after installation for a low-
 - [`briefbound-design-system`](skills/engineering/briefbound-design-system/SKILL.md): shared token, theme, component API, variant, and Figma-to-code governance.
 - [`briefbound-ai-research-loop`](skills/research/briefbound-ai-research-loop/SKILL.md): baseline reproduction, hypotheses, experiments, ablations, and research synthesis.
 - [`briefbound-score-loop`](skills/competition/briefbound-score-loop/SKILL.md): adaptive candidate search under a frozen comparison protocol, with early pruning and evidence-based baseline replacement.
-- [`briefbound-huawei-nslb-score-loop`](skills/competition/briefbound-huawei-nslb-score-loop/SKILL.md): live-state Huawei NSLB adapter for solver search, packaging, workers, and online-score calibration when needed.
 - [`briefbound-creative-toolbox`](skills/creative/briefbound-creative-toolbox/SKILL.md): phase-routed ideation that defaults to one method and returns a few specific, testable ideas with honest failure modes.
 - [`briefbound-diagram-design`](skills/creative/briefbound-diagram-design/SKILL.md): creates and redraws structured diagrams, and proactively adds a Chinese overview when a substantive report materially benefits from one.
 - [`briefbound-feature-reuse-research`](skills/engineering/briefbound-feature-reuse-research/SKILL.md): reuse research for complex feature decisions.
@@ -175,7 +174,6 @@ Run `py -3 scripts\run_briefbound_routing_eval.py` after installation for a low-
 - [`briefbound-research-rigor-review`](skills/research/briefbound-research-rigor-review/SKILL.md)
 - [`briefbound-competition-research-lifecycle`](skills/research/briefbound-competition-research-lifecycle/SKILL.md)
 - [`briefbound-score-loop`](skills/competition/briefbound-score-loop/SKILL.md)
-- [`briefbound-huawei-nslb-score-loop`](skills/competition/briefbound-huawei-nslb-score-loop/SKILL.md)
 
 ### Creativity
 

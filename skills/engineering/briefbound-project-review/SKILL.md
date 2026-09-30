@@ -1,6 +1,6 @@
 ---
 name: briefbound-project-review
-description: Use when Briefbound workflow needs a Chinese-first review of an entire repository, codebase, architecture, technical debt, test coverage, risk modules, maintainability, or project health before planning, refactoring, takeover, or prioritization.
+description: Use when Briefbound workflow needs a Chinese-first review of an entire repository, codebase, architecture, technical debt, test coverage, risk modules, maintainability, or project health before planning, refactoring, takeover, or prioritization. Do not use when the user has listed several goals and has not chosen among them, such as speed, structure, and interface.
 license: MIT
 ---
 
@@ -8,7 +8,7 @@ license: MIT
 
 ## 目标
 
-对整仓或明确子系统做只读、证据化审查，找出最影响完成率、误改率和用户价值的问题。以理解与学习为目的的项目拆解交 `briefbound-project-dissection`；风险优先的接手审查仍由本 skill 负责。PR/diff 使用 `briefbound-pr-review`，具体 bug 使用 `briefbound-bug-review`。
+对整仓或明确子系统做只读、证据化审查，找出最影响完成率、误改率和用户价值的问题。以理解与学习为目的的项目拆解交 `briefbound-project-dissection`；风险优先的接手审查仍由本 skill 负责。PR/diff 使用 `briefbound-pr-review`，具体 bug 使用 `briefbound-bug-review`。用户列出多个目标且尚未选定，例如速度、结构、界面，停止审查并交回 `briefbound-router` 对齐，不先推荐方向。
 
 ## Briefbound task contract
 
@@ -16,7 +16,7 @@ license: MIT
 - Output Contract: 项目健康结论、风险排序 findings、可连续执行的修复顺序和 Route Out。
 - Allowed Action: 默认只读；不编辑文件、移动分支或修改 index。用户要求修复时由 Briefbound Router 建立执行契约。
 - Success Evidence: finding 绑定文件/命令/运行证据、影响、最小动作和验证条件。
-- Stop Condition: 范围不明、对象变成 PR/具体 bug、关键证据缺失、需要写入或高风险决策。
+- Stop Condition: 范围不明或用户列出多个目标尚未选定、对象变成 PR/具体 bug、关键证据缺失、需要写入或高风险决策。
 - Route Out: `briefbound-simplification-audit`、`briefbound-planning`、`briefbound-bug-review`、`briefbound-performance-engineering`、`briefbound-pr-review`、`briefbound-router` 或 BLOCKED。
 - Support 图解：完整审查报告结构复杂时，自动加载当前可用的 `briefbound-diagram-design` 配图（不夺内容所有权），无需另问；短状态回复不配图。
 
