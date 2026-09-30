@@ -315,7 +315,7 @@
   "max_commands": 3,
   "expected_final_any": ["中文"],
   "max_questions": 0,
-  "forbidden_final_any": ["```", ">>>", "```md"],
+  "forbidden_final_any": ["```", ">>>", "```md", "不仅是", "综上所述"],
   "timeout_seconds": 120
  },
  {

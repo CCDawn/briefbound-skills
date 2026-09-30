@@ -60,13 +60,16 @@ class RouterActivationTests(unittest.TestCase):
         self.assertIn("dispatch independent, parallelizable work directly without asking", block)
         self.assertIn("never invent tool names", block)
         self.assertIn("load `briefbound-router` and follow its gates", block)
-        self.assertIn("Chinese-first", block)
+        self.assertIn("默认中文", block)
         self.assertIn("briefbound-plain-talk", block)
         self.assertIn("briefbound-diagram-design", block)
-        self.assertIn("lead with the answer", block)
-        self.assertIn("no code dumps in replies", block)
+        self.assertIn("先给结论", block)
+        self.assertIn("不仅是", block)
+        self.assertIn("综上所述", block)
+        self.assertIn("不贴代码", block)
         self.assertIn("`file:line`", block)
-        self.assertIn("unexplained enums", block)
+        self.assertIn("未解释的枚举", block)
+        self.assertIn("文件名、命令和数字照写", block)
         calibration_lines = [
             line for line in block.splitlines() if "wait for calibration" in line
         ]

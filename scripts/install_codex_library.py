@@ -45,7 +45,7 @@ ROUTER_ACTIVATION_BLOCK = f"""{ROUTER_ACTIVATION_START}
 - Capability gate: probe runtime capabilities once via `briefbound-router`'s `references/harness-compat.md`; when primitives it lists (peer threads, coordination registry, preflight) are absent in this harness, degrade per that matrix instead of simulating them.
 - For cross-skill routing, load `briefbound-router` and follow its gates.
 - Support substantive reports or explanations with a diagram from `briefbound-diagram-design` when it materially improves comprehension; short status replies stay text-only.
-- User-visible output is Chinese-first and follows `briefbound-plain-talk` by default: lead with the answer in plain language, no code dumps in replies (cite `file:line` instead), and no internal routing ledgers or unexplained enums.
+- 用户可见回复默认中文，并遵循 `briefbound-plain-talk`：先给结论；不写「不仅是……而是……」和「综上所述」；空话换成在做什么；不贴代码，改动只引用 `file:line`；不报内部路由和未解释的枚举；文件名、命令和数字照写。
 {ROUTER_ACTIVATION_END}"""
 
 
