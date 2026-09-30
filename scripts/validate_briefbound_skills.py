@@ -333,6 +333,10 @@ def rel_skill_path(repo_root: Path, skill_dir: Path) -> str:
     return "./" + skill_dir.relative_to(repo_root).as_posix()
 
 
+# The repository name matches the skill-token pattern but is not a packaged skill.
+NON_SKILL_BRIEFBOUND_TOKENS = frozenset({"briefbound-skills"})
+
+
 def validate_briefbound_route_references(
     repo_root: Path,
     skill_names: set[str],
@@ -342,7 +346,7 @@ def validate_briefbound_route_references(
     for markdown_path in sorted((repo_root / "skills").rglob("*.md")):
         text = read_text(markdown_path)
         for referenced_name in sorted(set(re.findall(r"\bbriefbound-[a-z0-9-]+\b", text))):
-            if referenced_name in skill_names:
+            if referenced_name in skill_names or referenced_name in NON_SKILL_BRIEFBOUND_TOKENS:
                 continue
             label = markdown_path.relative_to(repo_root).as_posix()
             references.setdefault(referenced_name, []).append(label)

@@ -4,7 +4,12 @@ Thanks for contributing.
 
 ## What belongs here
 
-This repository is for Codex skills related to research competitions, benchmark projects, evidence synthesis, and paper-readiness workflows.
+This repository publishes Chinese-first Briefbound Agent Skills. Skills live in four buckets:
+
+- `skills/engineering/` for routing, implementation, review, and release workflow
+- `skills/creative/` for ideation and diagrams
+- `skills/competition/` for score-driven solver loops
+- `skills/research/` for experiment loops, lifecycle coordination, and rigor review
 
 Good additions include:
 
@@ -12,6 +17,18 @@ Good additions include:
 - reference files that deepen an existing skill
 - examples showing realistic usage
 - improvements to installation, install prompts, or usage docs
+
+## Validation
+
+The CI validate job rejects the package when this command exits non-zero:
+
+```powershell
+python scripts/validate_briefbound_skills.py --warnings-as-errors
+```
+
+Run it before opening a pull request. The same job also compiles helper scripts, runs `python -m unittest discover -s tests -p "test_*.py"`, runs the `briefbound-project-memory` unit tests, and checks `python scripts/install_codex_library.py --dry-run`.
+
+Skill Markdown may name this repository as `briefbound-skills`. The validator ignores that exact token and still rejects every other unpackaged `briefbound-*` name.
 
 ## Repository growth rules
 
