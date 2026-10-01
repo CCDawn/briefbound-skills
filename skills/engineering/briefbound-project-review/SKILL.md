@@ -8,7 +8,7 @@ license: MIT
 
 ## 目标
 
-对整仓或明确子系统做只读、证据化审查，找出最影响完成率、误改率和用户价值的问题。以理解与学习为目的的项目拆解交 `briefbound-project-dissection`；风险优先的接手审查仍由本 skill 负责。PR/diff 使用 `briefbound-pr-review`，具体 bug 使用 `briefbound-bug-review`。用户列出多个目标且尚未选定，例如速度、结构、界面，停止审查并交回 `briefbound-router` 对齐，不先推荐方向。
+对整仓或明确子系统做只读、证据化审查，找出最影响完成率、误改率和用户价值的问题。以理解与学习为目的的项目拆解交 `briefbound-project-dissection`；风险优先的接手审查仍由本 skill 负责。PR/diff 使用 `briefbound-pr-review`，具体 bug 使用 `briefbound-bug-review`。用户列出多个目标且尚未选定，例如速度、结构、界面，停止审查并交回 `briefbound-router` 对齐，到此结束：不写下一步建议，也不推荐方向。
 
 ## Briefbound task contract
 
@@ -23,7 +23,7 @@ license: MIT
 ## 统一调用契约
 
 - 只处理 Briefbound task contract 范围；不匹配时回 `briefbound-router` 或更具体 owner，复合任务不吞其他 owner。
-- 用户可见内容默认中文；保留技术字面量；只报结论、证据、风险和产出；Route Out 仅以 Briefbound task contract 为准，末行 `下一步建议: <一个具体动作>`，且限于决策类建议（推荐方向、优先级或需用户拍板的选项），不把可自行完成的执行步骤包装成建议交回。
+- 用户可见内容默认中文；保留技术字面量；只报结论、证据、风险和产出；Route Out 仅以 Briefbound task contract 为准。目标尚未选定，或只读审查已停在报告且没有顺序、范围、高风险需要拍板时，到此结束，不写下一步建议。需要拍板时末行才写 `下一步建议: <一个具体动作>`，不把可自行完成的步骤交回。
 
 ## 深度与证据
 
@@ -50,7 +50,7 @@ Telemetry Gap 与已确认问题分开；WATCHLIST 必须写明升级、降级�
 - `DEFERRED`：只记录触发条件。
 - `BLOCKED`：停止并问一个不可约问题。
 
-只有顺序会改变产品取舍、范围或高风险动作时才让用户选择。只读审查请求本轮停在报告；用户说“继续/开始修复/按顺序修”时从第一个非 Deferred/Blocked 项连续推进。
+只有顺序会改变产品取舍、范围或高风险动作时才让用户选择。只读审查请求本轮停在报告；没有这类拍板就不写下一步建议。用户说“继续/开始修复/按顺序修”时从第一个非 Deferred/Blocked 项连续推进。
 
 ## 输出
 
@@ -62,7 +62,7 @@ Findings:
 执行顺序（仅多个后续动作时）:
 1. <动作> [SAFE_DIRECT/PLAN_THEN_EXECUTE/DEFERRED/BLOCKED]
 证据缺口与剩余风险: ...
-下一步建议: <决策类建议：方向、优先级或需用户拍板的选项>
+下一步建议: <仅顺序、范围或高风险需要拍板时写；目标未选定或只读报告无需拍板则省略>
 ```
 
 没有 finding 时明确说明未发现结构性问题，并用一句话说明最重要的未覆盖边界。不默认生成项目地图、矩阵、ledger、完整扫描清单或专项路由清单。
