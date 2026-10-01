@@ -130,7 +130,7 @@ Run `py -3 scripts\run_briefbound_routing_eval.py` after installation for a low-
 - [`briefbound-score-loop`](skills/competition/briefbound-score-loop/SKILL.md): adaptive candidate search under a frozen comparison protocol, with early pruning and evidence-based baseline replacement.
 - [`briefbound-creative-toolbox`](skills/creative/briefbound-creative-toolbox/SKILL.md): phase-routed ideation that defaults to one method and returns a few specific, testable ideas with honest failure modes.
 - [`briefbound-diagram-design`](skills/creative/briefbound-diagram-design/SKILL.md): creates and redraws structured diagrams, and proactively adds a Chinese overview when a substantive report materially benefits from one.
-- [`briefbound-feature-reuse-research`](skills/engineering/briefbound-feature-reuse-research/SKILL.md): reuse research for complex feature decisions.
+- [`briefbound-feature-reuse-research`](skills/engineering/briefbound-feature-reuse-research/SKILL.md): reuse research before writing a capability the project does not already have.
 
 ## Skill Catalog
 

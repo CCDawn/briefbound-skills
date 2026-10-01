@@ -13,7 +13,7 @@
 - **[briefbound-multi-agent-orchestration](./briefbound-multi-agent-orchestration/SKILL.md)** - Peer negotiation among existing same-project Codex threads so each finishes its own task with less duplication, conflict, and integration rework.
 - **[briefbound-thread-coordination](./briefbound-thread-coordination/SKILL.md)** - Same-project Agent progress, conflict, discussion, pause/resume, and fast-merge coordination.
 - **[briefbound-development-cleanup](./briefbound-development-cleanup/SKILL.md)** - Cleanup only for known residue, merged local branches, disposable worktrees, completed claims, or explicit cleanup requests.
-- **[briefbound-feature-reuse-research](./briefbound-feature-reuse-research/SKILL.md)** - Reuse research only when external or in-project candidates can materially change a complex feature plan.
+- **[briefbound-feature-reuse-research](./briefbound-feature-reuse-research/SKILL.md)** - Reuse research before writing a new capability the project does not already implement.
 - **[briefbound-planning](./briefbound-planning/SKILL.md)** - Implementation planning after aligned requirements.
 - **[briefbound-plain-talk](./briefbound-plain-talk/SKILL.md)** - Default style layer for user-visible replies: answer first, plain Chinese, no code dumps (cite file:line instead).
 - **[briefbound-deslop](./briefbound-deslop/SKILL.md)** - De-AI-flavors finished Chinese text (articles, docs, release notes, reports): sentence patterns, jargon, rhythm, punctuation; zero fact loss, author voice preserved.

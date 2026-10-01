@@ -130,7 +130,7 @@ python3 scripts/install_codex_library.py --agent opencode --router-activation in
 - [`briefbound-score-loop`](skills/competition/briefbound-score-loop/SKILL.md)：固定比较协议后主动选择利用、探索或诊断候选，用早停和代表性评价决定是否替换当前最好方案。
 - [`briefbound-creative-toolbox`](skills/creative/briefbound-creative-toolbox/SKILL.md)：按生成、扩展、选择、解卡、颠覆、精炼、整理或命名阶段选择一个方法，输出少量可尝试的非套路方案。
 - [`briefbound-diagram-design`](skills/creative/briefbound-diagram-design/SKILL.md)：生成和重绘架构、流程、时序及数据图解；复杂汇报中图能显著降低理解成本时，主动生成中文总览图。
-- [`briefbound-feature-reuse-research`](skills/engineering/briefbound-feature-reuse-research/SKILL.md)：为复杂功能评估项目内外可复用方案。
+- [`briefbound-feature-reuse-research`](skills/engineering/briefbound-feature-reuse-research/SKILL.md)：新能力还没有本地实现时，写代码前先查项目内和成熟库。
 
 ## 懒人安装
 
@@ -197,7 +197,7 @@ python3 scripts/install_codex_library.py --agent opencode --router-activation in
   前端生产实现 owner，只消费用户已批准或有依据跳过预览的界面契约，负责组件、状态、响应式和无障碍实现，并使用真实浏览器证据收口。
 
 - **`briefbound-feature-reuse-research`**
-  只在复用候选会实质改变复杂功能的架构、依赖或实现范围时调研现有项目、库、标准、示例和项目内模块。
+  新能力在项目里还没有同样实现时，写代码前先查项目内模块、成熟库、标准和官方示例；已有模式、bug 和机械改动不进入。
 
 - **`briefbound-planning`**
   只在真实设计分叉、高风险顺序或跨边界交接需要可复用方案时触发；存在独立 owner、依赖或验证边界时在同一方案内生成最小任务图，否则由当前 owner 直接实施。

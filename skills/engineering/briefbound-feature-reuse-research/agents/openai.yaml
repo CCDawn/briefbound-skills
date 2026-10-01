@@ -1,4 +1,4 @@
 interface:
   display_name: "Briefbound 功能复用调研"
-  short_description: "评估会实质改变架构与范围的外部项目、依赖库和现有模块复用方案"
-  default_prompt: "使用 $briefbound-feature-reuse-research 用中文调研当前复杂功能的真实复用候选，并给出 REUSE、ADAPT、REFERENCE_ONLY 或 BUILD_IN_HOUSE 结论。"
+  short_description: "新能力写代码前先查项目内和成熟库，再决定复用、借鉴或自研"
+  default_prompt: "使用 $briefbound-feature-reuse-research 用中文先查项目内和成熟库，再给出 REUSE、ADAPT、REFERENCE_ONLY 或 BUILD_IN_HOUSE 结论。"

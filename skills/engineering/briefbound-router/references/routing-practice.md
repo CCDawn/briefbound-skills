@@ -32,7 +32,7 @@
 | 已批准或 `PREVIEW_SKIPPED`，生产实现组件、状态与响应式 | `briefbound-frontend-engineering` | FAST/COMPACT | 前端代码与浏览器运行证据 |
 | 审查页面、预览、截图、视觉回归或无障碍 | `briefbound-ui-review` | COMPACT | findings、预审建议与浏览器证据 |
 | 跨组件 token、主题、variants 或 Figma/code 一致性 | `briefbound-design-system` | COMPACT/FULL | 系统契约、渐进迁移与消费者证据 |
-| 复杂功能的外部复用决策 | `briefbound-feature-reuse-research` | COMPACT | 复用/借鉴/自建判断 |
+| 新能力尚无本地实现 | `briefbound-feature-reuse-research` | COMPACT | 复用/借鉴/自建判断 |
 | 需要真实设计选择、迁移或独立任务图 | `briefbound-planning` | COMPACT/FULL | 最小实施方案；必要时内含 TASK_GRAPH |
 | 对外 API/schema/事件契约设计与兼容性 | `briefbound-api-contract` | COMPACT | BREAKING 判定与迁移路径 |
 | 发版、changelog、semver 判档或回滚预案 | `briefbound-release-versioning` | COMPACT | 版本判定、归档块、检查与回滚 |

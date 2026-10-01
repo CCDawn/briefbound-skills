@@ -68,12 +68,7 @@ Briefbound 对齐意图、选择 owner 并推进验证。结果明确时直接�
 
 ## 最小充分方案
 
-按首个充分层级停止：`NO_BUILD -> PROJECT_REUSE -> STANDARD_NATIVE -> INSTALLED_DEPENDENCY -> MINIMAL_BUILD`。先查最窄本地复用；外部候选会改变路径、依赖、成本或风险时才用 `briefbound-feature-reuse-research`：
-
-- 成熟引擎/标准类复杂能力、重要新依赖、跨模块子系统，或项目内无稳定模式；
-- 用户明确要求外部复用，或 QUICK 搜索可显著避免高成本自研。
-
-文件多不触发。普通 CRUD、样式、小 bug、机械改动和已有模式直接实施。
+按首个充分层级停止：`NO_BUILD -> PROJECT_REUSE -> STANDARD_NATIVE -> INSTALLED_DEPENDENCY -> MINIMAL_BUILD`。新能力没有同样的本地实现时，写代码前用 `briefbound-feature-reuse-research` 做 QUICK。已有模式、CRUD、样式、小 bug、机械改动，以及用户要求从零实现，直接实施。
 
 自动精简默认 `AUTO`：简单任务 `LITE`，非平凡实现 `FULL`，用户目标是删减时 `ULTRA`。不得删除用户要求、信任边界、安全、数据保护、无障碍、兼容或迁移约束。
 

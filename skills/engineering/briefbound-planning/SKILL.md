@@ -39,7 +39,7 @@ license: MIT
 
 1. 继承 Briefbound Router 的可观察结果、非目标、约束和成功证据，不重新发明需求。
 2. 只读检查会改变方案的文件、接口、状态、测试、日志和项目规则。
-3. 先考虑项目内复用和平台原生能力；只有外部候选会实质改变架构、依赖或成本时才进入 `briefbound-feature-reuse-research`。
+3. 先查项目内和平台原生；新能力没有同样实现时用 `briefbound-feature-reuse-research` 做 QUICK，已有模式不进入。
 4. 选择最小充分路径，说明影响文件、关键行为/数据流、实施顺序、保护边界和验证方式。
 5. 只有 Briefbound Router 判为 `PROFILE` 才携带主指标、负载、baseline/测量和停止目标；`FAST/CHECK` 不增加性能章节。
 6. 只有真实取舍才给 2-3 个方案；否则给一个推荐路径。
