@@ -4,18 +4,18 @@ description: Use when the user asks for a repository- or subsystem-wide redundan
 license: MIT
 ---
 
-# Briefbound 精简审查
+# Briefbound 精简审计
 
 找出可移除的复杂度，以证据说明删什么、为什么、如何保持必要行为；不把“更少代码”当成唯一目标。
 
 ## Briefbound task contract
 
-- Context Boundary: 明确 diff/base-head 或仓库/子系统，已接受行为、实际消费者与必要约束。
+- Context Boundary: 明确的仓库或子系统，已接受行为、实际消费者与必要约束。单个 diff 或 PR 不进入。
 - Output Contract: 按收益排序的删减建议、保留理由、最小替代与验证条件。
 - Allowed Action: 只读审查；用户已授权修复时，把建议交给具体开发 owner 实施，不因此再索要相同许可。
-- Success Evidence: 每项有具体位置、调用/依赖或 diff 证据，以及收益、风险和可验证行为。
-- Stop Condition: 范围不明、真实取舍未确认、缺调用证据，或主要问题属于正确性、安全、性能。
-- Route Out: 正确性转 briefbound-pr-review 或 briefbound-project-review；已授权变更转当前开发 owner；真实设计分歧转 briefbound-router；性能测量转 briefbound-performance-engineering。
+- Success Evidence: 每项有具体位置、调用或依赖证据，以及收益、风险和可验证行为。
+- Stop Condition: 范围不明、对象是单个 diff 或 PR、真实取舍未确认、缺调用证据，或主要问题属于正确性、安全、性能。
+- Route Out: 单个 diff 或 PR 转 briefbound-simplification-review；正确性转 briefbound-pr-review 或 briefbound-project-review；已授权变更转当前开发 owner；真实设计分歧转 briefbound-router；性能测量转 briefbound-performance-engineering。
 
 ## 统一调用契约
 
@@ -23,10 +23,9 @@ license: MIT
 
 ## 范围
 
-- 当前变更：先定位 base/head、已接受需求和 diff，只追踪证明消费者/影响所必需的上下文；不将历史技术债混为当前 PR 问题。
-- 整仓/子系统：从入口、依赖和用户怀疑的重复区域取证，检查实际消费者；证据足够后停止，不为全面而扫描无关模块。
+单个 diff 或 PR 的过度设计交 `briefbound-simplification-review`，本技能不接。
 
-只有用户目标需要才同时做两种范围，并分别标注来源。
+整仓或明确子系统：从入口、依赖和用户怀疑的重复区域取证，检查实际消费者；证据足够后停止，不为全面而扫描无关模块。
 
 ## 检查与取舍
 
